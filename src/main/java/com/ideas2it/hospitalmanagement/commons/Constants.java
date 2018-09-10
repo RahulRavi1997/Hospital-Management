@@ -11,6 +11,7 @@ public final class Constants {
 
     private Constants() {
     }
+    public static final String ID_NOT_NULL = "Input Id is Null.";
     public static final String LOGGER_PROPERTIES_LOCATION =
             "log4j.xml";
     public static final String HIBERNATE_CONFIG_FILE =
@@ -28,4 +29,18 @@ public final class Constants {
     public static final String INDEX_PATH = "/WEB-INF/views/index.jsp";
     public static final String SIGNIN_EMAIL = "signinEmail";
     public static final String DATABASE_FAILURE = "Database Connection Error has Occured";
+    
+    public static final String PHYSICIAN_ADDITION_EXCEPTION = 
+            "Error while adding a physician- Name:%s %s\n";
+    public static final String PHYSICIAN_SEARCH_EXCEPTION = 
+            "Error while searching physician id %d\n";
+    public static final String PHYSICIAN_DELETE_EXCEPTION = 
+            "Error while deleting physician id %d\n";
+    public static final String PHYSICIAN_EDIT_EXCEPTION = 
+            "Error while modifying physician id %d\n";
+    public static final String PHYSICIAN_DISPLAY_EXCEPTION = 
+            "Error while displaying physicians\n";
+    public static final String PHYSICIAN_RESTORE_EXCEPTION = 
+            "Error while restoring physician id %d\n";
+
 }
