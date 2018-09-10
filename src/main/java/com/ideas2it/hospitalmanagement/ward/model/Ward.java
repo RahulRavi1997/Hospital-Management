@@ -1,3 +1,4 @@
+package com.ideas2it.hospitalmanagement.ward.model;
 /**
  * <p>
  * Consist of all the details regarding the ward which contains bed number and 

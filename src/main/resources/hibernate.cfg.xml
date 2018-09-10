@@ -13,10 +13,8 @@
         <property name="connection.release_mode">auto</property>
         <property name="connection.show_sql">true</property>
 
-    <mapping resource="address.hbm.xml"/>
-    <mapping resource="employee.hbm.xml"/>
-    <mapping resource="project.hbm.xml"/>
-    <mapping resource="client.hbm.xml"/>
+   
     <mapping resource="user.hbm.xml"/>
+    <mapping resource="ward.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
