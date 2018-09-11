@@ -8,6 +8,8 @@ import com.ideas2it.hospitalmanagement.ward.dao.WardDao;
 import com.ideas2it.hospitalmanagement.genericdao.GenericDao;
 import com.ideas2it.hospitalmanagement.logger.Logger;
 
+import com.ideas2it.hospitalmanagement.ward.common.Constants;
+
 /**
  * <p>
  * WardDAOImpl class takes of creation,updation and retrieval of wards.
@@ -24,8 +26,8 @@ public class WardDaoImpl extends GenericDao implements WardDao{
         try {
             return (null != super.save(ward));
         } catch (ApplicationException e) {
-            Logger.error("Ward could not be added", e);
-            throw new ApplicationException("Ward could not be added", e);
+            Logger.error(Constants.WARD_NOT_ADDED, e);
+            throw new ApplicationException(Constants.WARD_NOT_ADDED, e);
         }
     }
     
@@ -36,8 +38,8 @@ public class WardDaoImpl extends GenericDao implements WardDao{
         try {
             return super.update(ward);
         } catch (ApplicationException e) {
-            Logger.error("Ward could not be updated", e );
-            throw new ApplicationException("Ward could not be updated", e);
+            Logger.error(Constants.WARD_NOT_UPDATED, e );
+            throw new ApplicationException(Constants.WARD_NOT_UPDATED, e);
         }
     }
     
@@ -48,8 +50,8 @@ public class WardDaoImpl extends GenericDao implements WardDao{
         try {
             return super.getByAttribute(ward.getClass(),attributeName,attributeValue);
         } catch (ApplicationException e) {
-            Logger.error("Ward could not be retrieved", e);
-            throw new ApplicationException("Ward could not be retrieved", e);
+            Logger.error(Constants.WARD_NOT_RETRIEVED, e);
+            throw new ApplicationException(Constants.WARD_NOT_RETRIEVED, e);
         }
     }
     
@@ -60,9 +62,9 @@ public class WardDaoImpl extends GenericDao implements WardDao{
 
         try {
             return super.getAll(Ward.class);
-        } catch (ApplicationException e) {
-            Logger.error("Wards could not be retrieved", e);
-            throw new ApplicationException("Wards could not be retrieved", e);
+        } catch (ApplicationException e) { 
+            Logger.error(Constants.WARDS_NOT_RETRIEVED, e);
+            throw new ApplicationException(Constants.WARDS_NOT_RETRIEVED, e);
         }
     }
 }

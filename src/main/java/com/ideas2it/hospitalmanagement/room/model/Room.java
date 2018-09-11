@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import com.ideas2it.hospitalmanagement.bed.model.Bed;
+
 public class Room {
 	
 	private Integer roomNumber;

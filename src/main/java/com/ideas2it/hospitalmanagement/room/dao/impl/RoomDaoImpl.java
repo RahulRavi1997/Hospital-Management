@@ -2,6 +2,7 @@ package com.ideas2it.hospitalmanagement.room.dao.impl;
 
 
 import com.ideas2it.hospitalmanagement.room.dao.RoomDao;
+import com.ideas2it.hospitalmanagement.room.common.Constants;
 import com.ideas2it.hospitalmanagement.room.model.Room;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.genericdao.GenericDao;
@@ -22,8 +23,8 @@ public class RoomDaoImpl extends GenericDao implements RoomDao{
         try {
             return (null != super.save(room));
         } catch (ApplicationException e) {
-            Logger.error("Room could not be added", e);
-            throw new ApplicationException("Room could not be added", e);
+            Logger.error(Constants.ROOM_NOT_ADDED, e);
+            throw new ApplicationException(Constants.ROOM_NOT_ADDED, e);
         }
     }
  }
