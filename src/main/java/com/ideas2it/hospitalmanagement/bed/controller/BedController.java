@@ -1,31 +1,34 @@
 package com.ideas2it.hospitalmanagement.bed.controller;
 
-import java.security.Principal;
-import java.util.Collection;
-
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.ideas2it.hospitalmanagement.bed.model.Bed;
+import com.ideas2it.hospitalmanagement.bed.service.BedService;
+import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 
 public class BedController {
 	
-	   @RequestMapping(value = "/userInfo", method = RequestMethod.Post)
-	    public String userInfo(Model model, Principal principal) {
-	        model.addAttribute("email",principal.getName());
-	        Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>)SecurityContextHolder.getContext().getAuthentication().getAuthorities();
-	        if (authorities.iterator().next().toString().equals("ROLE_ADMIN")) {
-	            return "admin";
-	        } else if (authorities.iterator().next().toString().equals("ROLE_DOCTOR")) {
-	            return "doctor";
-	        } else if (authorities.iterator().next().toString().equals("ROLE_NURSE")) {
-	            return "nurse";
-	        } else if (authorities.iterator().next().toString().equals("ROLE_RECEPTIONIST")) {
-	            return "receptionist";
-	        } else {
-	            return "accessDenied";
-	        }
+	   private static BedService bedService;
+
+	    public  void setBedService(BedService bedService) {
+	        this.bedService = bedService;
+
 	    }
+
+	   @RequestMapping(value = "/assignBed", method = RequestMethod.POST)
+	   public  ModelAndView assignBed(@ModelAttribute("Bed") Bed bed, @RequestParam("visitId") int visitId)  { 
+		   try {
+               ModelAndView mav = new ModelAndView("AssignBed.jsp");
+		       bed.setVisitId(visitId);
+		       bedService.updateBed(bed);
+               mav.addObject("beds" , bedService.retrieveBeds());
+               return mav;
+	       } catch (ApplicationException e) {
+	    	
+	       }
 	
 }

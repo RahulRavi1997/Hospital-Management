@@ -5,6 +5,7 @@ import com.ideas2it.hospitalmanagement.bed.model.Bed;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.genericdao.GenericDao;
 import com.ideas2it.hospitalmanagement.logger.Logger;
+import com.ideas2it.hospitalmanagement.ward.model.Ward;
 
 import java.util.List;
 
@@ -20,9 +21,9 @@ public class BedDaoImpl extends GenericDao implements BedDao{
     /**
      *  {@inheritDoc}
      */
-    public List<Bed> displayAllBedsByStatus(String status) throws ApplicationException {
+    public List<Bed> displayAllBeds() throws ApplicationException {
          try {
-             return super.getAllByAttribute(Bed.class, "Status", status);
+             return super.getAll(Bed.class);
          } catch (ApplicationException e) {
              Logger.error("Beds could not be retrieved", e);
              throw new ApplicationException("Beds could not be retrieved", e);
@@ -39,5 +40,19 @@ public class BedDaoImpl extends GenericDao implements BedDao{
              Logger.error("Bed could not be added", e);
              throw new ApplicationException("Bed could not be added", e);
          }
+    }
+    
+    
+    
+    /**
+     *  {@inheritDoc}
+     */
+    public boolean updateBed(Bed bed) throws ApplicationException {
+        try {
+            return super.update(bed);
+        } catch (ApplicationException e) {
+            Logger.error("Ward could not be updated", e );
+            throw new ApplicationException("Ward could not be updated", e);
+        }
     }
 }

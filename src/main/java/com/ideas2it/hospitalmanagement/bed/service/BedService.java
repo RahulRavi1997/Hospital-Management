@@ -14,7 +14,7 @@ public interface BedService {
 	 * @param status
 	 * @return     list of bed which are free.
 	 */
-	public List<Bed> retrieveBedsByStatus(String status) throws ApplicationException;
+	public List<Bed> retrieveBeds() throws ApplicationException;
 	
 	
 	/**
@@ -25,5 +25,7 @@ public interface BedService {
 	 */
 	public Bed createBed(Bed bed) throws ApplicationException;
 	
+	public Bed updateBed(Bed bed) throws ApplicationException;
+
 	
 }

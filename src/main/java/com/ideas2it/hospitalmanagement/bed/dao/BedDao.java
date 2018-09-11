@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ideas2it.hospitalmanagement.bed.model.Bed;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
+import com.ideas2it.hospitalmanagement.ward.model.Ward;
 
 /**
  * <p>
@@ -34,5 +35,9 @@ public interface BedDao {
      *  
      *  @return List<Bed>                     List of bed objects
      */
-    public List<Bed> displayAllBedsByStatus(String status) throws ApplicationException;
+    public List<Bed> displayAllBeds() throws ApplicationException;
+    
+    
+    public boolean updateBed(Bed bed) throws ApplicationException;
+
 }

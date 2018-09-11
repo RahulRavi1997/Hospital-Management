@@ -22,14 +22,21 @@ public class BedServiceImpl implements BedService {
    /**
     * {@inheritDoc}
     */
-	public List<Bed> retrieveBedsByStatus(String status) throws ApplicationException {
-		return bedDao.displayAllBedsByStatus(status);
+	public List<Bed> retrieveBeds() throws ApplicationException {
+		return bedDao.displayAllBeds();
 	}
     
 	/**
 	 * {@inheritDoc}
 	 */
 	public Bed createBed(Bed bed) throws ApplicationException {
+		return bedDao.createBed(bed);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public Bed updateBed(Bed bed) throws ApplicationException {
 		return bedDao.createBed(bed);
 		
 		
