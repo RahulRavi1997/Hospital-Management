@@ -30,7 +30,8 @@ public final class Constants {
     public static final String INDEX_PATH = "/WEB-INF/views/index.jsp";
     public static final String SIGNIN_EMAIL = "signinEmail";
     public static final String DATABASE_FAILURE = "Database Connection Error has Occured";
-    
+    public static final String ADMIN = "ADMIN";
+
     public static final String PHYSICIAN_ADDITION_EXCEPTION = 
             "Error while adding a physician- Name:%s %s\n";
     public static final String PHYSICIAN_SEARCH_EXCEPTION = 

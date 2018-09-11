@@ -6,13 +6,13 @@
 <hibernate-configuration>
     <session-factory>
         <property name="dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
-        <property name="connection.url">jdbc:mysql://localhost/Emp?useSSL=false</property>
+        <property name="connection.url">jdbc:mysql://localhost/Hms?useSSL=false</property>
         <property name="connection.username">root</property>
         <property name="connection.password">password</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="connection.release_mode">auto</property>
         <property name="connection.show_sql">true</property>
-
+        <property name="hbm2ddl.auto">update</property>
   <!--
     <mapping resource="address.hbm.xml"/>
     <mapping resource="physician.hbm.xml"/>
