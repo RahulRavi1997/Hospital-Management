@@ -48,16 +48,14 @@ public class PatientController {
      * This method returns the value as ModelAndView Class Object contains the
      * Model having the Patient object with List as Address Object.
      * </p>
-     * @param model Model Object for which the Patient object is added. 
      * @return ModelAndView Object which redirects to the Create Patient Page.
      */
     @RequestMapping(value = Constants.CREATE_PATIENT, method = RequestMethod.GET)
-    public ModelAndView getPatientDetailsFromUser(Model model) {
+    public ModelAndView getPatientDetailsFromUser() {
 
     	Patient patient = new Patient();
-        model.addAttribute(Constants.PATIENT, patient);
         return new ModelAndView(Constants.CREATE_PATIENT_JSP, Constants.PATIENT_OBJECT
-            , model);
+            , patient);
     }
 
     /**

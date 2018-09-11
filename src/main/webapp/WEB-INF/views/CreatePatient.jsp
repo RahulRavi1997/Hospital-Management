@@ -12,10 +12,10 @@
       </center>
       <c:choose>
          <c:when test="${empty patient.id}">
-            <c:set var="value" value="addPatient"/>
+            <c:set var="value" value="addpatient"/>
          </c:when>
          <c:otherwise>
-            <c:set var="value" value="updatePatient"/>
+            <c:set var="value" value="updatepatient"/>
          </c:otherwise>
       </c:choose>
       <div class="row">
@@ -54,13 +54,13 @@
                   <div class="form-group">
                      <label class="col-sm-2 control-label" for="mobileNumber">MobileNumber</label>
                      <div class="col-sm-10">
-                        <form:input type="date" id="DOB" path="mobileNumber" required="required" class ="form-control spacing" />
+                        <form:input path="mobileNumber" required="required" class ="form-control spacing" />
                      </div>
                   </div>
                   <div class="form-group">
                      <label class="col-sm-2 control-label" for="gender">Gender</label>
                      <div class="col-sm-10">
-                        <form:input type="date" id="DOJ" path="gender" class ="form-control spacing" />
+                        <form:input  path="gender" class ="form-control spacing" />
                      </div>
                   </div>
                   <c:if test="${not empty patient.id}">
@@ -86,8 +86,8 @@
             <div class="form-group">
             <label class="col-sm-2 control-label" for="Postcode">Postcode</label>
             <div class="col-sm-10">
-            <form:input path="address.pincode" class="form-control spacing"/>
-            <form:errors path="address.pincode" placeholder="Post Code"/>
+            <form:input path="address.pinCode" class="form-control spacing"/>
+            <form:errors path="address.pinCode" placeholder="Post Code"/>
             </div>
             </div>
             <div class="form-group">

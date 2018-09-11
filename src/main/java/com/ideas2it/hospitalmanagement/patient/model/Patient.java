@@ -26,7 +26,7 @@ public class Patient {
     private String lastName;
     private String emailId;
 	private Long mobileNumber;
-    private String role;
+    private String type;
     private Date birthDate;
     private Address address = new Address();
     private List<Visit> visits = new ArrayList<Visit>();
@@ -88,12 +88,12 @@ public class Patient {
 		this.mobileNumber = mobileNumber;
 	}
 
-	public String getRole() {
-		return role;
+	public String getType() {
+		return type;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setType(String type) {
+		this.type = type;
 	}
 
     @DateTimeFormat(pattern = Constants.REVERSED_DATE_FORMAT)
