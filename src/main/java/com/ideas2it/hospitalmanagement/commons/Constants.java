@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.ideas2it.hospitalmanagement.commons;
 
 /**
@@ -102,7 +101,19 @@ public final class Constants {
    public static final String PATIENT_SEARCH_FAILED = "Patient Search Failed";
    public static final String PATIENT_DISPLAY_FAILED = "Patient Display Failed";
    public static final String PATIENT_ACTIVATION_FAILED = "Patient Activation Failed";
-   public static final String COMMAND ="command";
-
+   
+   public static final String PATIENT_ADDITION_EXCEPTION = 
+           "Error while adding a patient- Name:%s %s\n";
+   public static final String PATIENT_SEARCH_EXCEPTION = 
+           "Error while searching patient id %d\n";
+   public static final String PATIENT_DELETE_EXCEPTION = 
+           "Error while deleting patient id %d\n";
+   public static final String PATIENT_EDIT_EXCEPTION = 
+           "Error while modifying patient id %d\n";
+   public static final String PATIENT_DISPLAY_EXCEPTION = 
+           "Error while displaying patients\n";
+   public static final String PATIENT_RESTORE_EXCEPTION = 
+           "Error while restoring patient id %d\n";
+   public static final String PATIENT_OBJECT = "patient";
 
 }

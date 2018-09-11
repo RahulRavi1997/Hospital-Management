@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ideas2it.hospitalmanagement.patient.dao.PatientDao;
 import com.ideas2it.hospitalmanagement.patient.model.Patient;
+import com.ideas2it.hospitalmanagement.physician.model.Physician;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 
 /**
@@ -115,4 +116,17 @@ public interface PatientService {
      */
     public boolean activatePatient(final Integer patientId)
             throws ApplicationException;
+
+    /**
+	 * <p>
+	 * This Method is used to retrieve an list of all selected Patients.
+	 * </p>
+	 *
+	 * @return ids an Array of integers containing the id of Patients that are
+	 *             to be retrieved.
+	 *
+	 * @throws ApplicationException An exception created for catching exceptions
+	 *                              that occur while displaying all Patients.
+	 */
+	public List<Patient> retrievePatientsByIds(Integer[] ids) throws ApplicationException;
 }

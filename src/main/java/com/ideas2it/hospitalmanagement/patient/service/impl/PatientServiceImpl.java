@@ -3,7 +3,6 @@ package com.ideas2it.hospitalmanagement.patient.service.impl;
 import java.util.List;
 
 import com.ideas2it.hospitalmanagement.patient.dao.PatientDao;
-import com.ideas2it.hospitalmanagement.patient.dao.impl.PatientDaoImpl;
 import com.ideas2it.hospitalmanagement.patient.model.Patient;
 import com.ideas2it.hospitalmanagement.patient.service.PatientService;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
@@ -40,10 +39,10 @@ public class PatientServiceImpl implements PatientService {
      */
     public boolean modifyPatient(final Patient patient)
             throws ApplicationException {
-    	Patient oldPatient = patientDao.selectPatientById(patient.
+    	Patient oldPatient = patientDao.searchPatientById(patient.
             getId());
     	patient.setVisits(oldPatient.getVisits());
-        return patientDao.updateEmployee(patient);
+        return patientDao.updatePatient(patient);
     }
 
     /**
@@ -51,31 +50,38 @@ public class PatientServiceImpl implements PatientService {
      */
     public boolean removePatient(final Integer patientId)
             throws ApplicationException {
-    	Patient patient = patientDao.selectPatientById(patientId);
-        return patientDao.inActivatePatient(patient);
+    	Patient patient = patientDao.searchPatientById(patientId);
+        return patientDao.deletePatient(patient);
     }
 
     /**
      * {@inheritDoc}
      */
-    public Employee getEmployeeById(final Integer employeeId)
+    public Patient getPatientById(final Integer patientId)
             throws ApplicationException {
-        return employeeDao.selectEmployeeById(employeeId);
+        return patientDao.searchPatientById(patientId);
     }
 
     /**
      * {@inheritDoc}
      */
-    public List<Employee> getEmployees()
+    public List<Patient> getPatients()
             throws ApplicationException {
-        return employeeDao.getAllEmployees();
+        return patientDao.getAllPatients();
     }
 
     /**
      * {@inheritDoc}
      */
-    public boolean activateEmployee(final Integer employeeId)
+    public boolean activatePatient(final Integer patientId)
             throws ApplicationException {
-        return employeeDao.activateEmployeeById(employeeId);
+        return patientDao.activatePatientById(patientId);
     }
+    
+	/**
+	 *  {@inheritDoc}
+	 */
+	public List<Patient> retrievePatientsByIds(Integer[] ids) throws ApplicationException {
+		return patientDao.getPatientsByIds(ids);
+	}
 }

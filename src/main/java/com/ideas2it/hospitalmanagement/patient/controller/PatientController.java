@@ -1,10 +1,7 @@
 package com.ideas2it.hospitalmanagement.patient.controller;
 
-import java.util.ArrayList;
-
 import java.util.List;
 
-import com.ideas2it.hospitalmanagement.address.model.Address;
 import com.ideas2it.hospitalmanagement.commons.Constants;
 import com.ideas2it.hospitalmanagement.logger.Logger;
 import com.ideas2it.hospitalmanagement.patient.model.Patient;
@@ -18,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * PatientController is the controller class for the Patient, which allows
@@ -60,7 +56,7 @@ public class PatientController {
 
     	Patient patient = new Patient();
         model.addAttribute(Constants.PATIENT, patient);
-        return new ModelAndView(Constants.CREATE_PATIENT_JSP, Constants.COMMAND
+        return new ModelAndView(Constants.CREATE_PATIENT_JSP, Constants.PATIENT_OBJECT
             , model);
     }
 
