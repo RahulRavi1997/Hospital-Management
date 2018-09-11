@@ -14,9 +14,8 @@
         <property name="connection.show_sql">true</property>
 
     <mapping resource="address.hbm.xml"/>
-    <mapping resource="employee.hbm.xml"/>
-    <mapping resource="project.hbm.xml"/>
-    <mapping resource="client.hbm.xml"/>
+    <mapping resource="physician.hbm.xml"/>
+    <mapping resource="patient.hbm.xml"/>
     <mapping resource="user.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
