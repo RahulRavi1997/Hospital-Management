@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--    <bean id="doctorDaoImpl" class="com.ideas2it.hospitalmanagement.doctor.dao.impl.DoctorDaoImpl"/>
+    <bean id="patientDaoImpl" class="com.ideas2it.hospitalmanagement.patient.dao.impl.PatientDaoImpl"/>
+    <bean id="visitDaoImpl" class="com.ideas2it.hospitalmanagement.visit.dao.impl.VisitDaoImpl"/>
+
+    <bean id="doctorServiceImpl" class="com.ideas2it.hospitalmanagement.doctor.service.impl.DoctorServiceImpl" >
+        <property name="doctorDao" ref="doctorDaoImpl" />
+    </bean>
+    <bean id="patientServiceImpl" class="com.ideas2it.hospitalmanagement.patient.service.impl.PatientServiceImpl" >
+        <property name="patientDao" ref ="patientDaoImpl" />
+        <property name="doctorService" ref="doctorServiceImpl" />
+    </bean>
+    <bean id="visitServiceImpl" class="com.ideas2it.hospitalmanagement.visit.service.impl.VisitServiceImpl" >
+        <property name="visitDao" ref="visitDaoImpl"/>
+        <property name="patientService" ref="patientServiceImpl" />
+    </bean>
+
+    <bean id="doctorController"  class="com.ideas2it.hospitalmanagement.doctor.controller.DoctorController">
+        <property name="doctorService" ref="doctorServiceImpl" />
+    </bean>
+    <bean id="patientController"  class="com.ideas2it.hospitalmanagement.patient.controller.PatientController" >
+        <property name="patientService" ref="patientServiceImpl" />
+    </bean>
+    <bean id="visitController"  class="com.ideas2it.hospitalmanagement.visit.controller.VisitController" >
+        <property name="visitService" ref="visitServiceImpl"/>
+    </bean> -->
+
+    <bean id="userController"  class="com.ideas2it.hospitalmanagement.user.controller.UserController">
+    </bean>
+
+</beans>
