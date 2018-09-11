@@ -14,7 +14,7 @@ public final class Constants {
     public static final String ID_NOT_NULL = "Input Id is Null.";
     public static final String REVERSED_DATE_FORMAT = "yyyy-MM-dd";
     public static final String LOGGER_PROPERTIES_LOCATION =
-            "log4j.xml";
+            "src/main/resources/log4j.xml";
     public static final String HIBERNATE_CONFIG_FILE =
             "hibernate.cfg.xml";
     public static final String NAME = "name";
@@ -29,7 +29,8 @@ public final class Constants {
     public static final String MAIN_MENU_PATH = "/main_menu";
     public static final String INDEX_PATH = "/WEB-INF/views/index.jsp";
     public static final String SIGNIN_EMAIL = "signinEmail";
-    public static final String DATABASE_FAILURE = "Database Connection Error has Occured";
+    public static final String DATABASE_FAILURE =
+    		"Database Connection Error has Occured";
     public static final String ADMIN = "ADMIN";
 
     public static final String PHYSICIAN_ADDITION_EXCEPTION = 
@@ -76,10 +77,14 @@ public final class Constants {
     public static final String SEARCH_FAIL_MESSAGE = "No Such Physician ID- %s . Try Again";
     public static final String NUMBER_OF_PHYSICIANS = "numberOfPhysicians";
     
-    public static final String PHYSICIAN_ADD_SUCCESS_MESSAGE = "Physician Added Successfully";
-    public static final String PHYSICIAN_RESTORE_SUCCESS_MESSAGE = "Physician Restored Successfully";
-    public static final String PHYSICIAN_DELETE_SUCCESS_MESSAGE = "Physician deleted Successfully";
-    public static final String PHYSICIAN_UPDATE_SUCCESS_MESSAGE = "Physician Updated Successfully";
+    public static final String PHYSICIAN_ADD_SUCCESS_MESSAGE =
+    		"Physician Added Successfully";
+    public static final String PHYSICIAN_RESTORE_SUCCESS_MESSAGE =
+    		"Physician Restored Successfully";
+    public static final String PHYSICIAN_DELETE_SUCCESS_MESSAGE =
+    		"Physician deleted Successfully";
+    public static final String PHYSICIAN_UPDATE_SUCCESS_MESSAGE =
+    		"Physician Updated Successfully";
 
    public static final String CREATE_PATIENT = "/createpatient";
    public static final String ADD_PATIENT = "/addpatient";
@@ -121,18 +126,22 @@ public final class Constants {
    public static final String PASSWORD = "password";
    public static final String INVALID_INPUT = "Not a Valid Input";
    public static final String SIGN_UP_SUCCESS = "signUpSuccess";
-   public static final String SIGN_UP_SUCCESS_MESSAGE = "User successfully Registered!";
+   public static final String SIGN_UP_SUCCESS_MESSAGE =
+		   "User successfully Registered!";
    public static final String SIGN_UP_FAIL = "signUpFail";
-   public static final String SIGN_UP_FAIL_MESSAGE = "User Registration Failed! Try again Later";
+   public static final String SIGN_UP_FAIL_MESSAGE =
+		   "User Registration Failed! Try again Later";
    public static final String LOGIN_JSP = "login";
    public static final String SIGNIN = "signin";
-   public static final String SIGNIN_PASSWORD_FAIL_MESSAGE = "Sign-in Failed! Passwords Dont Match";
-   public static final String SIGNIN_USER_FAIL_MESSAGE = "Sign-in Failed! User already registered";
+   public static final String SIGNIN_PASSWORD_FAIL_MESSAGE =
+		   "Sign-in Failed! Passwords Dont Match";
+   public static final String SIGNIN_USER_FAIL_MESSAGE =
+		   "Sign-in Failed! User already registered";
    public static final String USER_FAIL = "userFail";
-   public static final String USER_ADD_EXCEPTION = "Error while adding User! Try Again later!";
+   public static final String USER_ADD_EXCEPTION =
+		   "Error while adding User! Try Again later!";
    public static final String USER_ADDITION_EXCEPTION = 
            "Error while adding a user- Name:%s\n";
    public static final String USER_SEARCH_EXCEPTION = 
            "Error while searching user %s\n";
-   
 }

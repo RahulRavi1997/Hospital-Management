@@ -110,7 +110,7 @@ public class UserController {
             model.addAttribute("message", "Hi " + principal.getName()
                     + "<br> You do not have permission to access this page!");
         } else {
-            model.addAttribute("msg",
+            model.addAttribute("message",
                     "You do not have permission to access this page!");
         }
         return "accessDenied";
