@@ -18,11 +18,19 @@
         <intercept-url pattern="/login" access="permitAll()" />
         <intercept-url pattern="/logout" access="permitAll()" />
  
+<<<<<<< HEAD
         <intercept-url pattern="/index"
             access="hasAnyRole('ROLE_NURSE', 'ROLE_ADMIN', 'ROLE_RECEPTIONIST', 'ROLE_PHYSICIAN')" />
         <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/nurse" access="hasAnyRole('ROLE_ADMIN', 'ROLE_NURSE')" />
         <intercept-url pattern="/physician" access="hasAnyRole('ROLE_ADMIN', 'ROLE_PHYSICIAN')" />
+=======
+        <intercept-url pattern="/userInfo"
+            access="hasAnyRole('ROLE_NURSE', 'ROLE_ADMIN', 'ROLE_RECEPTIONIST', 'ROLE_DOCTOR')" />
+        <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/nurse" access="hasAnyRole('ROLE_ADMIN', 'ROLE_NURSE')" />
+        <intercept-url pattern="/doctor" access="hasAnyRole('ROLE_ADMIN', 'ROLE_DOCTOR')" />
+>>>>>>> 3f1ff0fbab14d171f5277e78a41d0884a124d1e2
         <intercept-url pattern="/receptionist" access="hasAnyRole('ROLE_ADMIN', 'ROLE_RECEPTIONIST')" />
         <intercept-url pattern="/other/**" access="isAuthenticated()" />
  

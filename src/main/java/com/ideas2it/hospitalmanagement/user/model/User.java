@@ -5,6 +5,7 @@ import java.util.Date;
 import com.ideas2it.hospitalmanagement.address.model.Address;
 import com.ideas2it.hospitalmanagement.commons.Constants;
 
+<<<<<<< HEAD
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -12,6 +13,12 @@ import org.springframework.format.annotation.DateTimeFormat;
  * Person class is the Entity class is having the getters and setter methods
  * which is used to get the values from the user. This class acts as an Model
  * for the Person Details.
+=======
+/**
+ * User class is the Entity class is having the getters and setter methods
+ * which is used to get the values from the user. This class acts as an Model
+ * for the User Details.
+>>>>>>> 3f1ff0fbab14d171f5277e78a41d0884a124d1e2
  *
  * @author  Arul Murugan
  * @version 1.0
@@ -19,6 +26,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class User {
 
 	private Integer id ;
+<<<<<<< HEAD
     private String email;
     private String password;
     private String role;
@@ -55,3 +63,50 @@ public class User {
 		this.active = active;
 	}
 }
+=======
+    private String userName;
+    private String emailId;
+    private String role;
+    private boolean active;
+    
+    public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getFirstName() {
+		return userName;
+	}
+
+	public void setFirstName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getEmailId() {
+		return emailId;
+	}
+
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+}
+>>>>>>> 3f1ff0fbab14d171f5277e78a41d0884a124d1e2
