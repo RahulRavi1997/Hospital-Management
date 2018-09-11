@@ -33,33 +33,14 @@ import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 @Controller
 public class UserController {
 
-<<<<<<< HEAD
     @RequestMapping(value = "/index", method = RequestMethod.GET)
-=======
-    @RequestMapping("/")
-    public String redirectlogin(){
-	    return "login";
-    }
-
-    @RequestMapping("/main_menu")
-    public String redirectToMenu(){
-	    return "main_menu";
-    }
-
-    @RequestMapping(value = "/userInfo", method = RequestMethod.GET)
->>>>>>> 3f1ff0fbab14d171f5277e78a41d0884a124d1e2
     public String userInfo(Model model, Principal principal) {
         model.addAttribute("email",principal.getName());
         Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>)SecurityContextHolder.getContext().getAuthentication().getAuthorities();
         if (authorities.iterator().next().toString().equals("ROLE_ADMIN")) {
             return "admin";
-<<<<<<< HEAD
         } else if (authorities.iterator().next().toString().equals("ROLE_PHYSICIAN")) {
             return "physician";
-=======
-        } else if (authorities.iterator().next().toString().equals("ROLE_DOCTOR")) {
-            return "doctor";
->>>>>>> 3f1ff0fbab14d171f5277e78a41d0884a124d1e2
         } else if (authorities.iterator().next().toString().equals("ROLE_NURSE")) {
             return "nurse";
         } else if (authorities.iterator().next().toString().equals("ROLE_RECEPTIONIST")) {
@@ -85,56 +66,8 @@ public class UserController {
         return "accessDenied";
     }
 
-<<<<<<< HEAD
     @RequestMapping(value={"/login","/"})
     public String redirectLogin(){
 	    return "login";
     }
-=======
-    @RequestMapping("/login")
-    public String redirectLogin(){
-	    return "login";
-    }
-
-    @RequestMapping("/doctor")
-    public String redirectDoctor(Model model, Principal principal) {
-        if (principal != null) {
-            model.addAttribute("email", principal.getName());
-        } else {
-            model.addAttribute("email", "Intruder");
-        }
-	    return "doctor";
-    }
-
-    @RequestMapping("/admin")
-    public String redirectAdmin(Model model, Principal principal) {
-        if (principal != null) {
-            model.addAttribute("email", principal.getName());
-        } else {
-            model.addAttribute("email", "Intruder");
-        }
-	    return "admin";
-    }
-
-    @RequestMapping("/nurse")
-    public String redirectNurse(Model model, Principal principal) {
-        if (principal != null) {
-            model.addAttribute("email", principal.getName());
-        } else {
-            model.addAttribute("email", "Intruder");
-        }
-	    return "nurse";
-    }
-
-    @RequestMapping("/receptionist")
-    public String redirectReceptionist(Model model, Principal principal) {
-        if (principal != null) {
-            model.addAttribute("email", principal.getName());
-        } else {
-            model.addAttribute("email", "Intruder");
-        }
-	    return "receptionist";
-    }
-    
->>>>>>> 3f1ff0fbab14d171f5277e78a41d0884a124d1e2
 }

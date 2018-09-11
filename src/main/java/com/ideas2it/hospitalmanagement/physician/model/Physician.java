@@ -1,6 +1,5 @@
 package com.ideas2it.hospitalmanagement.physician.model;
 
-<<<<<<< HEAD
 import java.util.List;
 import java.util.Date;
 
@@ -101,14 +100,3 @@ public class Physician {
 		this.userId = userId;
 	}
 }
-=======
-/**
- * Patient class is the Patient class is having the getters and setter methods
- * which is used to get the values from the user. This class acts as an Model
- * for the Patient Details.
- *
- * @author  Arul Murugan
- * @version 1.0
- */
-public class Physician {
->>>>>>> 3f1ff0fbab14d171f5277e78a41d0884a124d1e2
