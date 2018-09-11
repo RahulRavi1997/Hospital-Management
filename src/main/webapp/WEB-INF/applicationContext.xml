@@ -36,6 +36,15 @@
         <property name="visitService" ref="visitServiceImpl"/>
     </bean> -->
 
-    <bean id="userController"  class="com.ideas2it.hospitalmanagement.user.controller.UserController"/>
+    <bean id="userDaoImpl" class="com.ideas2it.hospitalmanagement.user.dao.impl.UserDaoImpl"/>
 
+    <bean id="userServiceImpl" class="com.ideas2it.hospitalmanagement.user.service.impl.UserServiceImpl" >
+        <property name="userDao" ref="userDaoImpl" />
+    </bean>
+
+    <bean id="userController"  class="com.ideas2it.hospitalmanagement.user.controller.UserController">
+        <property name="userService" ref="userServiceImpl" />
+    </bean>
+    
+    
 </beans>

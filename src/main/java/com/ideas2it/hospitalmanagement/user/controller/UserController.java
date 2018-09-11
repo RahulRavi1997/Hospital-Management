@@ -19,6 +19,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import com.ideas2it.hospitalmanagement.commons.Constants;
 import com.ideas2it.hospitalmanagement.logger.Logger;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
+import com.ideas2it.hospitalmanagement.user.service.impl.UserServiceImpl;
+import com.ideas2it.hospitalmanagement.user.model.User;
+import com.ideas2it.hospitalmanagement.user.service.UserService;
+
 
 /**
  * <p>
@@ -32,6 +36,51 @@ import com.ideas2it.hospitalmanagement.exception.ApplicationException;
  */
 @Controller
 public class UserController {
+
+    private UserService userService = null;
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    public UserService getUserService() {
+        return this.userService;
+    }
+
+    /**
+     * This Method is used to obtain the user Credentials during login and
+     * create a new Session.
+     *
+     * @param email a String indicating the email Id entered by the user while
+     *              logging in.
+     *
+     * @param password a String indicating the password entered by the user while
+     *                 logging in.
+     *
+     * @param role a String indicating the role of the user that is logging in.
+     */
+    @RequestMapping(value=Constants.SIGNUP_PATH,method=RequestMethod.POST)
+    private ModelAndView createUser(Model model, @RequestParam(Constants.EMAIL) String email,
+                            @RequestParam(Constants.PASSWORD) String password) {
+        try {
+            if (null != userService.retrieveUserByEmail(email)) {
+                return new ModelAndView(Constants.LOGIN, Constants.USER_FAIL, Constants.SIGNIN_USER_FAIL_MESSAGE);
+            } else {
+                User user = new User();
+                user.setEmail(email);
+                user.setPassword(password);
+                if (userService.addUser(user)) {
+                    model.addAttribute(Constants.SIGNIN_EMAIL, email);
+                    return new ModelAndView(Constants.LOGIN, Constants.SIGN_UP_SUCCESS, Constants.SIGN_UP_SUCCESS_MESSAGE);
+                } else {
+                    return new ModelAndView(Constants.LOGIN, Constants.SIGN_UP_FAIL, Constants.SIGN_UP_FAIL_MESSAGE);
+                }
+            }
+        } catch (ApplicationException e) {
+            Logger.error(e);
+            return new ModelAndView(Constants.LOGIN_JSP, Constants.SIGN_UP_FAIL, Constants.USER_ADD_EXCEPTION);
+        }
+    }
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String userInfo(Model model, Principal principal) {

@@ -42,7 +42,6 @@ public class ApplicationException extends Throwable {
 
     public ApplicationException(Throwable cause, int errorCode) {
         super(cause);
-        this.message = message;
         this.errorCode = errorCode;
     }
 

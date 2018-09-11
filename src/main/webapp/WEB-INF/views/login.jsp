@@ -1,50 +1,101 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>Login page</title>
+<head>
+<title>
+Hospital Management
+</title>
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+  <meta charset="UTF-8">
+  <title>Sign-Up/Login Form</title>
+<meta name="_csrf" content="${_csrf.token}"/>
+<sec:csrfMetaTags /> 
+  <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 		<link href="<c:url value='/static/css/bootstrap.css' />"  rel="stylesheet"></link>
 		<link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
 		<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
-	</head>
-
-	<body>
-		<div id="mainWrapper">
-			<div class="login-container">
-				<div class="login-card">
-					<div class="login-form">
-						<c:url var="loginUrl" value="/j_spring_security_check" />
-						<form action="${loginUrl}" method="post" class="form-horizontal">
-							<c:if test="${param.error != null}">
-								<div class="alert alert-danger">
-									<p>Invalid username and password.</p>
-								</div>
-							</c:if>
-							<c:if test="${param.logout != null}">
-								<div class="alert alert-success">
-									<p>You have been logged out successfully.</p>
-								</div>
-							</c:if>
-							<div class="input-group input-sm">
-								<label class="input-group-addon" for="username"><i class="fa fa-user"></i></label>
-								<input type="text" class="form-control" id="username" name="email" placeholder="Enter Username" required>
-							</div>
-							<div class="input-group input-sm">
-								<label class="input-group-addon" for="password"><i class="fa fa-lock"></i></label> 
-								<input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required>
-							</div>
-							<input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
-								
-							<div class="form-actions">
-								<input type="submit"
-									class="btn btn-block btn-primary btn-default" value="Log in">
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-
+      <link rel="stylesheet" href="static/css/index.css">
+</head>
+<style>
+</style>
+<body>
+           <c:out value="${loginFail}"/>
+          <c:out value="${signinFail}"/>
+         <c:out value="${signUpFail}"/>
+       <label> <c:out value="${userFail}"/></label>
+  <c:url var="loginUrl" value="/j_spring_security_check" />
+  <div class="form">
+      <h1 align="center">Hospital Management</h1>
+      <ul class="tab-group">
+        <li class="tab active"><a href="#login">Log In</a></li>
+        <li class="tab"><a href="#signup">Sign Up</a></li>
+      </ul>
+      <div class="tab-content">
+        <div id="login">   
+          <h1>Welcome Back!</h1>
+		 <form action="${loginUrl}" method="post" class="form-horizontal">
+          <div class="field-wrap">
+            <label>
+              Email Address
+            </label>
+            <input type="email" name="email" value="${signinEmail}" required autocomplete="off"/>
+          </div>
+          <div class="field-wrap">
+            <label>
+               Password
+            </label>
+            <input type="password" name="password" required autocomplete="off"/>
+           <font color="red">
+		  <input type="hidden" name="${_csrf.parameterName}"
+			value="${_csrf.token}" />
+        <c:if test="${param.error != null}"><div class="alert alert-danger">
+            <p class="errorCustomLogin">Login failed. Please try your
+                username/password again.</p></div>
+        </c:if>
+	    <c:if test="${param.logout != null}">
+		    <div class="alert alert-success">
+			    <p>You have been logged out successfully.</p>
+      		</div>
+		</c:if>
+           </font>
+           <font color="green">
+           <label><c:out value="${signUpSuccess}"/></label>
+           </font>
+          </div>
+          <button type="submit" class="button button-block"/>Login</button>
+		 <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
+          </form>
+        </div>
+        <div id="signup">   
+          <form role="form" action="signup" method="post">
+            <div class="field-wrap">
+              <label>
+                Email Address<span class="req">*</span>
+              </label>
+              <input type="email" name="email" required autocomplete="off" />
+            </div>
+          <div class="field-wrap">
+            <label>
+              Password<span class="req">*</span>
+            </label>
+            <input type="password" name="password" id="password" required autocomplete="off"/>
+          </div> 
+          <div class="field-wrap">
+            <label>
+              Confirm Password<span class="req">*</span>
+            </label>
+            <input type="password" name= "confirmPassword" id="confirmPassword"  required autocomplete="off"/>
+          </div>
+          <button id="register" class="button button-block"/>Get Started</button>
+          </form>
+        </div>
+      </div>
+</div> 
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script  src="/static/script/index.js"></script>
+</body>
+</html>
 	</body>
 </html>

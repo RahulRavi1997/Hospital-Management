@@ -116,4 +116,22 @@ public final class Constants {
            "Error while restoring patient id %d\n";
    public static final String PATIENT_OBJECT = "patient";
 
+   public static final String SIGNUP_PATH = "/signup";
+   public static final String PASSWORD = "password";
+   public static final String INVALID_INPUT = "Not a Valid Input";
+   public static final String SIGN_UP_SUCCESS = "signUpSuccess";
+   public static final String SIGN_UP_SUCCESS_MESSAGE = "User successfully Registered!";
+   public static final String SIGN_UP_FAIL = "signUpFail";
+   public static final String SIGN_UP_FAIL_MESSAGE = "User Registration Failed! Try again Later";
+   public static final String LOGIN_JSP = "login";
+   public static final String SIGNIN = "signin";
+   public static final String SIGNIN_PASSWORD_FAIL_MESSAGE = "Sign-in Failed! Passwords Dont Match";
+   public static final String SIGNIN_USER_FAIL_MESSAGE = "Sign-in Failed! User already registered";
+   public static final String USER_FAIL = "userFail";
+   public static final String USER_ADD_EXCEPTION = "Error while adding User! Try Again later!";
+   public static final String USER_ADDITION_EXCEPTION = 
+           "Error while adding a user- Name:%s\n";
+   public static final String USER_SEARCH_EXCEPTION = 
+           "Error while searching user %s\n";
+   
 }
