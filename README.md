@@ -1,1 +1,2 @@
-# Hospital-Management
+# HospitalManagement
+Mini Project
