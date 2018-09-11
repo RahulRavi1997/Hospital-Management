@@ -14,7 +14,6 @@
     <property name="mobileNumber" column="MOBILE_NUMBER" type="long"/>
     <property name="email" column="EMAIL" type="string"/>
     <one-to-one name="address" class="com.ideas2it.hosiptalmanagement.address.model.Address" cascade="save-update"></one-to-one>
-    
     <property name="specialisation" column="SPECIALISATION" type="string"/>
     <property name="active" column="ACTIVE" type="boolean"/>
     <property name="userId" column="USER_ID" type="integer"/>

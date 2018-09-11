@@ -18,7 +18,7 @@
         <intercept-url pattern="/login" access="permitAll()" />
         <intercept-url pattern="/logout" access="permitAll()" />
  
-        <intercept-url pattern="/userInfo"
+        <intercept-url pattern="/index"
             access="hasAnyRole('ROLE_NURSE', 'ROLE_ADMIN', 'ROLE_RECEPTIONIST', 'ROLE_PHYSICIAN')" />
         <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/nurse" access="hasAnyRole('ROLE_ADMIN', 'ROLE_NURSE')" />

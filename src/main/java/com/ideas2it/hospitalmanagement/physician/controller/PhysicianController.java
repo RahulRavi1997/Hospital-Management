@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.ideas2it.hospitalmanagement.address.model.Address;
 import com.ideas2it.hospitalmanagement.commons.Constants;
-import com.ideas2it.hospitalmanagement.contact.model.Contact;
 import com.ideas2it.hospitalmanagement.physician.model.Physician;
 import com.ideas2it.hospitalmanagement.physician.service.PhysicianService;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
@@ -57,8 +56,9 @@ public class PhysicianController {
     @RequestMapping(value=Constants.CREATE_PHYSICIAN_MAPPING, method=RequestMethod.GET)
     private ModelAndView redirectToCreatePhysician(Model model) {
 
-        model.addAttribute(new Contact());        
-        return new ModelAndView(Constants.CREATE_PHYSICIAN_JSP, Constants.PHYSICIAN, new Physician());
+    	Physician physician = new Physician();
+        physician.setAddress(new Address());
+        return new ModelAndView(Constants.CREATE_PHYSICIAN_JSP, Constants.PHYSICIAN, physician);
     }
 
 

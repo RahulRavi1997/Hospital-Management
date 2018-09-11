@@ -33,7 +33,7 @@ import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 @Controller
 public class UserController {
 
-    @RequestMapping(value = "/userInfo", method = RequestMethod.GET)
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String userInfo(Model model, Principal principal) {
         model.addAttribute("email",principal.getName());
         Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>)SecurityContextHolder.getContext().getAuthentication().getAuthorities();

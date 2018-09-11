@@ -36,18 +36,18 @@ public class Patient {
     public enum Gender{
         Male,
         Female,
-        Transgender;
-
-    	private String gender;
- 
-		public String getGender() {
-			return gender;
-		}
-		public void setGender(String gender) {
-			this.gender = gender;
-		}
+        Others;
     }
 
+	private Gender gender;
+	 
+	public Gender getGender() {
+		return gender;
+	}
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
+	
     public Integer getId() {
 		return id;
 	}
