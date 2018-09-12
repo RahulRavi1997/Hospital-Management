@@ -14,22 +14,21 @@
         <property name="physicianService" ref="physicianServiceImpl" />
     </bean>
 
-<!--    
     <bean id="patientDaoImpl" class="com.ideas2it.hospitalmanagement.patient.dao.impl.PatientDaoImpl"/>
-    <bean id="visitDaoImpl" class="com.ideas2it.hospitalmanagement.visit.dao.impl.VisitDaoImpl"/>
-
+ 
 
     <bean id="patientServiceImpl" class="com.ideas2it.hospitalmanagement.patient.service.impl.PatientServiceImpl" >
         <property name="patientDao" ref ="patientDaoImpl" />
-        <property name="physicianService" ref="physicianServiceImpl" />
 
-    </bean>
-    <bean id="visitServiceImpl" class="com.ideas2it.hospitalmanagement.visit.service.impl.VisitServiceImpl" >
-        <property name="visitDao" ref="visitDaoImpl"/>
-        <property name="patientService" ref="patientServiceImpl" />
     </bean>
 
     <bean id="patientController"  class="com.ideas2it.hospitalmanagement.patient.controller.PatientController" >
+        <property name="patientService" ref="patientServiceImpl" />
+    </bean>
+    <!--
+    <bean id="visitDaoImpl" class="com.ideas2it.hospitalmanagement.visit.dao.impl.VisitDaoImpl"/>
+    <bean id="visitServiceImpl" class="com.ideas2it.hospitalmanagement.visit.service.impl.VisitServiceImpl" >
+        <property name="visitDao" ref="visitDaoImpl"/>
         <property name="patientService" ref="patientServiceImpl" />
     </bean>
     <bean id="visitController"  class="com.ideas2it.hospitalmanagement.visit.controller.VisitController" >

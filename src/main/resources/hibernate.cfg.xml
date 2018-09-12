@@ -15,11 +15,11 @@
         <property name="hbm2ddl.auto">create</property>
         <property name="hbm2ddl.auto">update</property>
 
-        
-  <!--
           <mapping resource="physician.hbm.xml"/>
         <mapping resource="patient.hbm.xml"/>
     <mapping resource="address.hbm.xml"/>
+        
+  <!--
     <mapping resource="bed.hbm.xml"/>
     <mapping resource="prescription.hbm.xml"/>
     <mapping resource="diagnosis.hbm.xml"/>

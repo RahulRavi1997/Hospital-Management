@@ -57,12 +57,6 @@
                         <form:input path="mobileNumber" required="required" class ="form-control spacing" />
                      </div>
                   </div>
-                  <div class="form-group">
-                     <label class="col-sm-2 control-label" for="gender">Gender</label>
-                     <div class="col-sm-10">
-                        <form:input  path="gender" class ="form-control spacing" />
-                     </div>
-                  </div>
                   <c:if test="${not empty patient.id}">
                      <input type="hidden" name="id" value="${patient.id}" />
                   </c:if>
@@ -98,7 +92,6 @@
             </div>
             </div>
             </div>
-      </div>
       <br>
       <div style="text-align:center">
       <c:choose>
@@ -109,7 +102,8 @@
       <input type="submit" class="btn btn-info center" value="MODIFY PATIENT DETAILS" onclick= "return confirm('Sure want to make changes for Patient :${patient.id} ?')" >
       </c:otherwise>
       </c:choose>
+            </div>
       </form:form>
-      </div>
+            </div>
    </body>
 </html>

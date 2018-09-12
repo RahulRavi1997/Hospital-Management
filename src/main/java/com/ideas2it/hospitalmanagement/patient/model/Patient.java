@@ -26,7 +26,6 @@ public class Patient {
     private String lastName;
     private String emailId;
 	private Long mobileNumber;
-    private String type;
     private Date birthDate;
     private Address address = new Address();
     private List<Visit> visits = new ArrayList<Visit>();
@@ -39,12 +38,12 @@ public class Patient {
         Others;
     }
 
-	private Gender gender;
+	private String gender;
 	 
-	public Gender getGender() {
+	public String getGender() {
 		return gender;
 	}
-	public void setGender(Gender gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 	
@@ -86,14 +85,6 @@ public class Patient {
 
 	public void setMobileNumber(Long mobileNumber) {
 		this.mobileNumber = mobileNumber;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
 	}
 
     @DateTimeFormat(pattern = Constants.REVERSED_DATE_FORMAT)
