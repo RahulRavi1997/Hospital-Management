@@ -23,6 +23,7 @@ import com.ideas2it.hospitalmanagement.logger.Logger;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.item.model.Item;
 import com.ideas2it.hospitalmanagement.item.service.ItemService;
+
 /**
  * <p>
  * User Controller is a Controller Class, which is used authorise the user to
@@ -52,28 +53,24 @@ public class ItemController {
 
 		return "index";
 	}
-	
-	@RequestMapping("/viewAllItems")
+
+	@RequestMapping(value = "/viewAllItems", method = RequestMethod.GET)
 	public ModelAndView viewAllItems() {
 		try {
-		List<Item> allItems = itemService.retrieveAllItems();
-		return new ModelAndView("displayAllItems", "allItems", allItems);
-		 } catch (ApplicationException e) {
-	            Logger.error(e);
-	            return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
-	                    Constants.ITEM_DISPLAY_EXCEPTION);
-	        }
+			List<Item> allItems = itemService.retrieveAllItems();
+			return new ModelAndView("displayAllItems", "allItems", allItems);
+		} catch (ApplicationException e) {
+			Logger.error(e);
+			return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE, Constants.ITEM_DISPLAY_EXCEPTION);
+		}
 	}
-	
-	
 
 	/**
 	 * This Method is used to redirect user to the webpage with the form used to
 	 * create and add a new Diagnosis.
 	 *
-	 * @param model
-	 *            a Model object which is used to add the diagnosis information as
-	 *            an attribute to the view Layer.
+	 * @param model a Model object which is used to add the diagnosis information as
+	 *              an attribute to the view Layer.
 	 *
 	 * @return modelAndView a ModelAndView object which is used to add attributes to
 	 *         a model and redirect it to a view such as a jsp page.
@@ -89,9 +86,8 @@ public class ItemController {
 	 * This Method is used to add a new diagnosis after obtaining all the details
 	 * from the doctor. Redirects to error page if any error occurs.
 	 *
-	 * @param diagnosis
-	 *            an Diagnnosis object with all the diagnosis information to be
-	 *            added.
+	 * @param diagnosis an Diagnnosis object with all the diagnosis information to
+	 *                  be added.
 	 *
 	 * @return modelAndView a ModelAndView object which is used to add attributes to
 	 *         a model and redirect it to a view such as a jsp page.
@@ -119,9 +115,8 @@ public class ItemController {
 	 * modified successfully, else returns false if the entry is not found.
 	 * </p>
 	 *
-	 * @param id
-	 *            an Integer indicating the id of the diagnosis information to be
-	 *            modified.
+	 * @param id an Integer indicating the id of the diagnosis information to be
+	 *           modified.
 	 *
 	 * @return modelAndView a ModelAndView object which is used to add attributes to
 	 *         a model and redirect it to a view such as a jsp page.

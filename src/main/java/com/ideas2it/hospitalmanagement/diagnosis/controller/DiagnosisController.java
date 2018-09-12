@@ -92,7 +92,7 @@ public class DiagnosisController {
                 return new ModelAndView(Constants.ERROR_JSP, Constants.
                     ERROR_MESSAGE, Constants.DIAGNOSIS_ADDITION_EXCEPTION);
             }
-            model.addAttribute(Constants.MESSAGE, Constants.EMPLOYEE_ADD_SUCCESS_MESSAGE);
+            model.addAttribute(Constants.MESSAGE, Constants.DIAGONSIS_ADD_SUCCESS_MESSAGE);
             return new ModelAndView(Constants.SEARCH_DIAGNOSIS_JSP, Constants.
                     DIAGNOSIS, diagnosis);
         } catch (ApplicationException e) {

@@ -2,14 +2,11 @@
 <!DOCTYPE hibernate-mapping PUBLIC
     "-//Hibernate/Hibernate Mapping DTD 5.3//EN"
     "http://hibernate.sourceforge.net/hibernate-mapping-5.3.dtd">
-
 <hibernate-mapping>
-	<class name="com.ideas2it.employeedetails.user.model.Diagnosis"
-		table="item">
-		<id name="id" column="id">
-			<generator class="increment"></generator>
+	<class name="com.ideas2it.hospitalmanagement.item.model.Item" table="item">
+		<id name="id" column="Id">
+	    <generator class="increment"></generator>
 		</id>
-		<property name="id" column="ID" type="integer" />
-		<property name="name" column="ITEM_NAME" type="String" />
+		<property name="itemName"  column="ITEM_NAME"  type="string" />
 	</class>
 </hibernate-mapping>

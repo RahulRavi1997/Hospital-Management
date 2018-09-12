@@ -24,13 +24,12 @@ public class Prescription {
 	public void setVisitId(int visitId) {
 		this.visitId = visitId;
 	}
-	
-    public List <PrescriptionDetails> getPrescriptions() {
+
+	public List<PrescriptionDetails> getPrescriptions() {
 		return prescriptions;
 	}
-	
-	public void setPrescription(List <PrescriptionDetails> prescriptions) {
+
+	public void setPrescriptions(List<PrescriptionDetails> prescriptions) {
 		this.prescriptions = prescriptions;
 	}
-	
 }

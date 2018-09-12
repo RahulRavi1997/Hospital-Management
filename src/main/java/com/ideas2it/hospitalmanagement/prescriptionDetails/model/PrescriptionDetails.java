@@ -1,14 +1,21 @@
 package com.ideas2it.hospitalmanagement.prescriptionDetails.model;
 
-import java.util.List;
-
 public class PrescriptionDetails {
-	int prescriptionId;
+	int id;
+    int prescriptionId;
 	int itemId;
     int dosageId;
-    int quenatity;
+    int quantity;
     
-	public int getPrescriptionId() {
+    public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+  	public int getPrescriptionId() {
 		return prescriptionId;
 	}
 	
@@ -32,11 +39,12 @@ public class PrescriptionDetails {
 		this.dosageId = dosageId;
 	}
 	
-	public int getQuenatity() {
-		return quenatity;
+	public int getQuantity() {
+		return quantity;
 	}
 	
-	public void setQuenatity(int quenatity) {
-		this.quenatity = quenatity;
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
+	
 }

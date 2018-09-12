@@ -232,10 +232,6 @@ public class GenericDao {
      *                              obtaining a table from the database.
      */
     public static <T> List<T> getAll(final Class<T> type) throws ApplicationException {
-<<<<<<< HEAD
-
-=======
->>>>>>> 4f41a9f7b131749d517c91f7ec433b74f184986e
         Session session = null;
         try {
             session = getSession();
@@ -248,8 +244,7 @@ public class GenericDao {
             close(session);
         }
     }
-<<<<<<< HEAD
-=======
+
     
     
     /**
@@ -286,7 +281,4 @@ public class GenericDao {
             close(session);
         }
     }
-
-    
->>>>>>> 4f41a9f7b131749d517c91f7ec433b74f184986e
-}
+    }
