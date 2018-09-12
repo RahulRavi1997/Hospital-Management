@@ -1,57 +1,19 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE hibernate-configuration PUBLIC
-<<<<<<< HEAD
-          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-          "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
-
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE hibernate-configuration PUBLIC
-"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
-
-<hibernate-configuration>
-	<session-factory>
-
-		<!-- Related to the connection START -->
-		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="connection.url">jdbc:mysql://localhost:3306/EMP</property>
-		<property name="connection.user">root</property>
-		<property name="connection.password">root</property>
-		<!-- Related to the connection END -->
-
-		<!-- Related to hibernate properties START -->
-		<property name="show_sql">true </property>
-		<property name="dialet">org.hibernate.dialect.MySQLDialect</property>
-		<property name="hbm2ddl.auto">update</property>
-		<!-- Related to hibernate properties END -->
-
-		<!-- Related to mapping START -->
-		<mapping resource="diagnosis.hbm.xml" />
-		<mapping resource="item.hbm.xml" />
-		<!-- Related to the mapping END -->
-
-	</session-factory>
-</hibernate-configuration>
-
-
-<
-=======
           "-//Hibernate/Hibernate Configuration DTD 5.3//EN"
           "http://hibernate.sourceforge.net/hibernate-configuration-5.3.dtd">
-
 <hibernate-configuration>
     <session-factory>
         <property name="dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
-        <property name="connection.url">jdbc:mysql://localhost/Emp?useSSL=false</property>
+        <property name="connection.url">jdbc:mysql://localhost/EMR?useSSL=false</property>
         <property name="connection.username">root</property>
-        <property name="connection.password">password</property>
+        <property name="connection.password">1234</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="connection.release_mode">auto</property>
+        <property name="hbm2ddl.auto">create</property>
         <property name="connection.show_sql">true</property>
-
-   
     <mapping resource="user.hbm.xml"/>
     <mapping resource="ward.hbm.xml"/>
+    <mapping resource="prescription.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
->>>>>>> 4f41a9f7b131749d517c91f7ec433b74f184986e
