@@ -17,11 +17,6 @@ public final class Constants {
             "hibernate.cfg.xml";
     public static final String NAME = "name";
     public static final String ROLE = "role";
-    public static final String ICU = "ICU";
-    public static final String PICU = "PICU";
-    public static final String GENERAL = "General";
-    public static final String EMERGENCYWARD = "EmergencyWard";
-
     public static final String EMAIL = "email";
     public static final String STYLES = "styles";
     public static final String IMAGES = "images";
@@ -33,4 +28,6 @@ public final class Constants {
     public static final String INDEX_PATH = "/WEB-INF/views/index.jsp";
     public static final String SIGNIN_EMAIL = "signinEmail";
     public static final String DATABASE_FAILURE = "Database Connection Error has Occured";
+    
+    public static final String CREATE_PRESCRIPTION = "createPrescription";
 }

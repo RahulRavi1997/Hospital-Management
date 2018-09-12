@@ -107,13 +107,11 @@ public class GenericDao {
             if (null != transaction) {
                 transaction.rollback();
             }
-            Logger.debug(e);
             throw new ApplicationException(e);
         } catch (PersistenceException e) {
             if (null != transaction) {
                 transaction.rollback();
             }
-            Logger.debug(e);
             throw new ApplicationException(e);
         } finally {
             close(session);
@@ -148,7 +146,6 @@ public class GenericDao {
             if (null != transaction) {
                 transaction.rollback();
             }
-            Logger.debug(e);
             throw new ApplicationException(e);
         } finally {
             close(session);
@@ -184,7 +181,6 @@ public class GenericDao {
             criteria.add(Restrictions.eq(attributeName, attributeValue));
             return (T) criteria.uniqueResult();
         } catch (HibernateException e) {
-            Logger.debug(e);
             throw new ApplicationException(e);
         } finally {
             close(session);
@@ -212,7 +208,6 @@ public class GenericDao {
             session = getSession();
             return (T) session.get(type, id);
         } catch (HibernateException e) {
-            Logger.debug(e);
             throw new ApplicationException(e);
         } finally {
             close(session);
@@ -232,19 +227,18 @@ public class GenericDao {
      *                              obtaining a table from the database.
      */
     public static <T> List<T> getAll(final Class<T> type) throws ApplicationException {
+
         Session session = null;
         try {
             session = getSession();
             return session.createCriteria(type).list();
 
         } catch (HibernateException e) {
-            Logger.debug(e);
             throw new ApplicationException(e);
         } finally {
             close(session);
         }
     }
-    
     
     /**
      * This Method is used to obtain all objects in a certain class type
@@ -274,12 +268,10 @@ public class GenericDao {
             criteria.add(Restrictions.eq(attributeName, attributeValue));
             return criteria.list();
         } catch (HibernateException e) {
-            Logger.debug(e);
             throw new ApplicationException(e);
         } finally {
             close(session);
         }
     }
-
     
 }
