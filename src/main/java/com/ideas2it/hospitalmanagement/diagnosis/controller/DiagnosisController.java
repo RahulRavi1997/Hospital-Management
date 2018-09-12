@@ -1,0 +1,132 @@
+package com.ideas2it.hospitalmanagement.diagnosis.controller;
+
+import java.security.Principal;
+import java.util.Collection;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;  
+import org.springframework.web.bind.annotation.RequestMethod;  
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+
+import com.ideas2it.hospitalmanagement.commons.Constants;
+import com.ideas2it.hospitalmanagement.diagnosis.model.Diagnosis;
+import com.ideas2it.hospitalmanagement.diagnosis.service.DiagnosisService;
+import com.ideas2it.hospitalmanagement.logger.Logger;
+import com.ideas2it.hospitalmanagement.exception.ApplicationException;
+
+/**
+ * <p>
+ * User Controller is a Controller Class, which is used authorise the user to
+ * access the application and allow them to make modifications to the
+ * available data. Provides methods to implement basic user operations like
+ * Login, Signup and Logout operations.
+ * </p>
+ * @author    Rahul Ravi
+ * @version   1.0
+ */
+@Controller
+public class DiagnosisController {
+	
+	private DiagnosisService diagnosisService = null;
+
+
+    public void setDiagnosisService(DiagnosisService diagnosisService) {
+        this.diagnosisService = diagnosisService;
+    }
+
+    public DiagnosisService getDiagnosisService() {
+        return this.diagnosisService;
+    }
+
+    /*@RequestMapping(value="/welcome", method=RequestMethod.GET)
+    private String homePage() {
+
+    	return "index";
+    }*/
+    
+    
+    /**
+    *  This Method is used to redirect user to the webpage with the form used
+    *  to create and add a new Diagnosis.
+    *
+    *  @param model a Model object which is used to add the diagnosis information as an
+    *               attribute to the view Layer.
+    *
+    *  @return modelAndView a ModelAndView object which is used to add
+    *                       attributes to a model and redirect it to a view
+    *                       such as a jsp page.
+    */
+    @RequestMapping(value="/create_diagnosis", method=RequestMethod.GET)
+    private ModelAndView redirectToCreateDiagnosis() {
+
+        Diagnosis diagnosis1 = new Diagnosis();
+        return new ModelAndView(Constants.CREATE_DIAGNOSIS_JSP, Constants.DIAGNOSIS, diagnosis1);
+    }
+    
+    
+    /**
+     *  This Method is used to add a new diagnosis after obtaining all the
+     *  details from the doctor. Redirects to error page if any error
+     *  occurs.
+     *
+     * @param diagnosis an Diagnnosis object with all the diagnosis information
+     *                 to be added.
+     *
+     * @return modelAndView a ModelAndView object which is used to add
+     *                       attributes to a model and redirect it to a view
+     *                       such as a jsp page.
+     */
+    @RequestMapping(value=Constants.ADD_DIAGNOSIS_MAPPING, method=RequestMethod.POST)
+    private ModelAndView createDiagnosis(@ModelAttribute Diagnosis diagnosis, Model model) {
+        try {
+            if (!diagnosisService.createDiagnosis(diagnosis)) {
+                return new ModelAndView(Constants.ERROR_JSP, Constants.
+                    ERROR_MESSAGE, Constants.DIAGNOSIS_ADDITION_EXCEPTION);
+            }
+            model.addAttribute(Constants.MESSAGE, Constants.EMPLOYEE_ADD_SUCCESS_MESSAGE);
+            return new ModelAndView(Constants.SEARCH_DIAGNOSIS_JSP, Constants.
+                    DIAGNOSIS, diagnosis);
+        } catch (ApplicationException e) {
+            Logger.error(e);
+            return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
+                    String.format(Constants.DIAGNOSIS_ADDITION_EXCEPTION, diagnosis.getId()));
+        }
+
+    }
+    
+    /**
+     *  <p>
+     *  Method to update existing diagnosis Details. Returns true if the entry
+     *  is modified successfully, else returns false if the entry is not found.
+     *  </p>
+     *
+     * @param id an Integer indicating the id of the diagnosis information to be modified.
+     *
+     * @return modelAndView a ModelAndView object which is used to add
+     *                       attributes to a model and redirect it to a view
+     *                       such as a jsp page.
+     */
+   /* @RequestMapping(value="/edit_diagnosis", method=RequestMethod.GET)
+    private ModelAndView redirectToEditDiagnosis(@RequestParam(Constants.ID) int id) {
+    	try {
+            return new ModelAndView(Constants.CREATE_DIAGNOSIS_JSP,Constants.
+                    DIAGNOSIS, diagnosisService.modifyDiagnosis());
+        } catch (ApplicationException e) {
+            Logger.error(e);
+            return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
+                    String.format(Constants.EMPLOYEE_EDIT_EXCEPTION, id));
+        }
+    }
+    */
+    
+    
+}

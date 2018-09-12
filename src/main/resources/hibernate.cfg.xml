@@ -1,22 +1,36 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE hibernate-configuration PUBLIC
-          "-//Hibernate/Hibernate Configuration DTD 5.3//EN"
-          "http://hibernate.sourceforge.net/hibernate-configuration-5.3.dtd">
+          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 
 <hibernate-configuration>
-    <session-factory>
-        <property name="dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
-        <property name="connection.url">jdbc:mysql://localhost/Emp?useSSL=false</property>
-        <property name="connection.username">root</property>
-        <property name="connection.password">password</property>
-        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.release_mode">auto</property>
-        <property name="connection.show_sql">true</property>
+	<session-factory>
 
-    <mapping resource="address.hbm.xml"/>
-    <mapping resource="employee.hbm.xml"/>
-    <mapping resource="project.hbm.xml"/>
-    <mapping resource="client.hbm.xml"/>
-    <mapping resource="user.hbm.xml"/>
-    </session-factory>
+		<!-- Related to the connection START -->
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/EMP</property>
+		<property name="connection.user">root</property>
+		<property name="connection.password">root</property>
+		<!-- Related to the connection END -->
+
+		<!-- Related to hibernate properties START -->
+		<property name="show_sql">true </property>
+		<property name="dialet">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hbm2ddl.auto">update</property>
+		<!-- Related to hibernate properties END -->
+
+		<!-- Related to mapping START -->
+		<mapping resource="diagnosis.hbm.xml" />
+		<mapping resource="item.hbm.xml" />
+		<!-- Related to the mapping END -->
+
+	</session-factory>
 </hibernate-configuration>
+
+
+<

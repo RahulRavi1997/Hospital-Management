@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 5.3//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-5.3.dtd">
+
+<hibernate-mapping>
+	<class name="com.ideas2it.employeedetails.user.model.Diagnosis"
+		table="diagnosis">
+		<id name="id" column="id">
+			<generator class="increment"></generator>
+		</id>
+		<property name="id" column="ID" type="integer" />
+		<property name="date" column="DATE" type="date" />
+		<property name="doctorId" column="DOCTOR_ID" type="integer" />
+		<property name="weight" column="WEIGHT" type="float" />
+		<property name="height" column="HEIGHT" type="float" />
+		<property name="bloodSugar" column="BLOOD_SUGAR" type="float" />
+		<property name="bodytemperature" column="BODY_TEMPERATURE"
+			type="float" />
+		<property name="bloodSugar" column="BLOOD_SUGAR" type="float" />
+
+	</class>
+</hibernate-mapping>

@@ -1,5 +1,9 @@
 package com.ideas2it.hospitalmanagement.commons;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Constants Class is used to store all the constants in other parts of the 
  * application. It is created to reduce repeated Strings and code Size.
@@ -18,6 +22,14 @@ public final class Constants {
         "Email-%s already exists! \nError while adding employee\n";
     public static final String CLIENT_UNIQUE_KEY_EXCEPTION = 
         "Email-%s already exists! \nError while adding client\n";
+    
+    public static final String DIAGNOSIS = "diagnosis";
+    public static final String SEARCH_DIAGNOSIS_JSP = "display_diagnosis";
+    public static final String ADD_DIAGNOSIS_MAPPING = "/add_diagnosis";
+    public static final String DIAGNOSIS_ADDITION_EXCEPTION = 
+            "Error while adding the Diagnosis information ID:%d\n";
+
+    public static final String CREATE_DIAGNOSIS_JSP = "create_diagnosis";
 
     public static final String EMPLOYEE_ADDITION_EXCEPTION = 
             "Error while adding an employee- Name:%s\n";
@@ -25,12 +37,21 @@ public final class Constants {
             "Error while searching employee id %d\n";
     public static final String EMPLOYEE_DELETE_EXCEPTION = 
             "Error while deleting employee id %d\n";
+    
+    public static final String CREATE_DIAGNOSIS_MAPPING = "/create_diagnosis";
+
+    public static final String DIAGNOSIS_EDIT_EXCEPTION = 
+            "Error while modifying diagnosis id %d\n";
+    
     public static final String EMPLOYEE_EDIT_EXCEPTION = 
             "Error while modifying employee id %d\n";
     public static final String EMPLOYEE_DISPLAY_EXCEPTION = 
             "Error while displaying employees\n";
     public static final String EMPLOYEE_RESTORE_EXCEPTION = 
             "Error while restoring employee id %d\n";
+
+    public static final String DIAGNOSIS_DISPLAY_EXCEPTION = 
+            "Error while displaying diagnosis details\n";
 
     public static final String PROJECT_ADD_EXCEPTION = 
             "Error while adding project \n";
@@ -337,4 +358,26 @@ public final class Constants {
     public static final String SIGNIN_EMAIL = "signinEmail";
      
     public static final String DATABASE_FAILURE = "Database Connection Error has Occured";
+
+	public static final String ADD_ITEM_MAPPING = "/add_item";
+
+	public static final String ITEM_ADDITION_EXCEPTION = "Error while adding the item information ID:%d";
+
+	public static final Object ITEM_ADD_SUCCESS_MESSAGE = "Item Added Successfully";
+
+	public static final String ITEM = "item";
+
+	public static final String CREATE_ITEM_JSP = "create_item";
+
+	public static final String ITEM_EDIT_EXCEPTION = "Error while modifying items id %d";
+
+	public static final String ITEM_DISPLAY_EXCEPTION = "Error while diaplaying Items";
+
+	public static final String ITEM_SEARCH_EXCEPTION = "Item not found";
+
+	public static final String UPDATE_ITEM_MAPPING = "/update_item";
+
+	public static final String SEARCH_ITEM_JSP = "display_item";
+
+	public static final String ITEM_UPDATE_SUCCESS_MESSAGE = "Item List updated successfully";
 }
