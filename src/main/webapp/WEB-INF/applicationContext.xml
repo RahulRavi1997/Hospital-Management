@@ -4,25 +4,31 @@
     xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-<!--    <bean id="doctorDaoImpl" class="com.ideas2it.hospitalmanagement.doctor.dao.impl.DoctorDaoImpl"/>
+    <bean id="physicianDaoImpl" class="com.ideas2it.hospitalmanagement.physician.dao.impl.PhysicianDaoImpl"/>
+
+    <bean id="physicianServiceImpl" class="com.ideas2it.hospitalmanagement.physician.service.impl.PhysicianServiceImpl" >
+        <property name="physicianDao" ref="physicianDaoImpl" />
+    </bean>
+
+    <bean id="physicianController"  class="com.ideas2it.hospitalmanagement.physician.controller.PhysicianController">
+        <property name="physicianService" ref="physicianServiceImpl" />
+    </bean>
+
+<!--    
     <bean id="patientDaoImpl" class="com.ideas2it.hospitalmanagement.patient.dao.impl.PatientDaoImpl"/>
     <bean id="visitDaoImpl" class="com.ideas2it.hospitalmanagement.visit.dao.impl.VisitDaoImpl"/>
 
-    <bean id="doctorServiceImpl" class="com.ideas2it.hospitalmanagement.doctor.service.impl.DoctorServiceImpl" >
-        <property name="doctorDao" ref="doctorDaoImpl" />
-    </bean>
+
     <bean id="patientServiceImpl" class="com.ideas2it.hospitalmanagement.patient.service.impl.PatientServiceImpl" >
         <property name="patientDao" ref ="patientDaoImpl" />
-        <property name="doctorService" ref="doctorServiceImpl" />
+        <property name="physicianService" ref="physicianServiceImpl" />
+
     </bean>
     <bean id="visitServiceImpl" class="com.ideas2it.hospitalmanagement.visit.service.impl.VisitServiceImpl" >
         <property name="visitDao" ref="visitDaoImpl"/>
         <property name="patientService" ref="patientServiceImpl" />
     </bean>
 
-    <bean id="doctorController"  class="com.ideas2it.hospitalmanagement.doctor.controller.DoctorController">
-        <property name="doctorService" ref="doctorServiceImpl" />
-    </bean>
     <bean id="patientController"  class="com.ideas2it.hospitalmanagement.patient.controller.PatientController" >
         <property name="patientService" ref="patientServiceImpl" />
     </bean>
@@ -30,7 +36,15 @@
         <property name="visitService" ref="visitServiceImpl"/>
     </bean> -->
 
-    <bean id="userController"  class="com.ideas2it.hospitalmanagement.user.controller.UserController">
+    <bean id="userDaoImpl" class="com.ideas2it.hospitalmanagement.user.dao.impl.UserDaoImpl"/>
+
+    <bean id="userServiceImpl" class="com.ideas2it.hospitalmanagement.user.service.impl.UserServiceImpl" >
+        <property name="userDao" ref="userDaoImpl" />
     </bean>
 
+    <bean id="userController"  class="com.ideas2it.hospitalmanagement.user.controller.UserController">
+        <property name="userService" ref="userServiceImpl" />
+    </bean>
+    
+    
 </beans>

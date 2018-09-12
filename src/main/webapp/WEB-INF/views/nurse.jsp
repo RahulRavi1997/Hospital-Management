@@ -8,6 +8,6 @@
 <body>
 	Dear <strong>${email}</strong>, Welcome to Nurse Page.
 	<a href="<c:url value="/logout" />">Logout</a>
-	<a href="<c:url value="/main_menu" />">LINK</a>
+	<a href="<c:url value="/admin" />">LINK</a>
 </body>
 </html>
