@@ -70,7 +70,7 @@ public class UserController {
                 User user = new User();
                 user.setEmail(email);
                 user.setPassword(password);
-                user.setRole(Role.ADMIN);
+                user.setRole(Role.ADMIN.toValue());
                 if (userService.addUser(user)) {
                     model.addAttribute(Constants.SIGNIN_EMAIL, email);
                     return new ModelAndView(Constants.LOGIN, Constants.SIGN_UP_SUCCESS, Constants.SIGN_UP_SUCCESS_MESSAGE);

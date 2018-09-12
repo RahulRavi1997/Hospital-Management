@@ -6,11 +6,11 @@ public enum Role {
 
     private final String value;
 
-    Role(String value){
+    Role(String value) {
         this.value = value;
     }
 
-    public static Role fromValue(int value){
+    public static Role fromValue(int value) {
         for (Role role : values()) {  
             if (role.value.equals(value)) {  
                 return role;  
@@ -22,5 +22,4 @@ public enum Role {
     public String toValue(){
         return value;
     }
-
 }

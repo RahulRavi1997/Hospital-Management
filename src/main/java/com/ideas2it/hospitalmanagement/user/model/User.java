@@ -2,10 +2,6 @@ package com.ideas2it.hospitalmanagement.user.model;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-
 import com.ideas2it.hospitalmanagement.address.model.Address;
 import com.ideas2it.hospitalmanagement.commons.Constants;
 import com.ideas2it.hospitalmanagement.commons.enums.Role;
@@ -23,7 +19,7 @@ public class User {
 	private Integer id ;
     private String email;
     private String password;
-    private Role role;
+    private String role;
     private Boolean active;
 
 	public Integer getId() {
@@ -44,12 +40,10 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Role getRole() {
+	public String getRole() {
 		return role;
 	}
-    @Enumerated(EnumType.STRING)
-    @Column(length = 20)
-	public void setRole(Role role) {
+	public void setRole(String role) {
 		this.role = role;
 	}
 	public Boolean getActive() {

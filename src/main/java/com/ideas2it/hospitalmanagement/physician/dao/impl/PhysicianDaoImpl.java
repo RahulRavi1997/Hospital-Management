@@ -118,5 +118,4 @@ public class PhysicianDaoImpl extends GenericDao implements PhysicianDao {
 			throw new ApplicationException(Constants.PHYSICIAN_DISPLAY_EXCEPTION, e);
 		}
 	}
-
 }
