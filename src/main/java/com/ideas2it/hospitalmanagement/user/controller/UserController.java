@@ -27,7 +27,11 @@ import com.ideas2it.hospitalmanagement.exception.ApplicationException;
  * available data. Provides methods to implement basic user operations like
  * Login, Signup and Logout operations.
  * </p>
+<<<<<<< HEAD
  * @author    Hariharasudan K S
+=======
+ * @author    Rahul Ravi
+>>>>>>> 4f41a9f7b131749d517c91f7ec433b74f184986e
  * @version   1.0
  */
 @Controller

@@ -1,9 +1,12 @@
 package com.ideas2it.hospitalmanagement.commons;
 
+<<<<<<< HEAD
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+=======
+>>>>>>> 4f41a9f7b131749d517c91f7ec433b74f184986e
 /**
  * Constants Class is used to store all the constants in other parts of the 
  * application. It is created to reduce repeated Strings and code Size.
@@ -15,6 +18,7 @@ public final class Constants {
 
     private Constants() {
     }
+<<<<<<< HEAD
 
     public static final String ID_NOT_NULL = "Enter valid id please!";
 
@@ -321,6 +325,20 @@ public final class Constants {
     public static final String ASSIGNED_EMPLOYEES = "assignedEmployees";
     public static final String ASSIGNED_PROJECTS = "assignedProjects";
 
+=======
+    public static final String LOGGER_PROPERTIES_LOCATION =
+            "log4j.xml";
+    public static final String HIBERNATE_CONFIG_FILE =
+            "hibernate.cfg.xml";
+    public static final String NAME = "name";
+    public static final String ROLE = "role";
+    public static final String ICU = "ICU";
+    public static final String PICU = "PICU";
+    public static final String GENERAL = "General";
+    public static final String EMERGENCYWARD = "EmergencyWard";
+
+    public static final String EMAIL = "email";
+>>>>>>> 4f41a9f7b131749d517c91f7ec433b74f184986e
     public static final String STYLES = "styles";
     public static final String IMAGES = "images";
     public static final String SCRIPT = "script";
@@ -329,6 +347,7 @@ public final class Constants {
     public static final String LOGIN_PATH = "/login";
     public static final String MAIN_MENU_PATH = "/main_menu";
     public static final String INDEX_PATH = "/WEB-INF/views/index.jsp";
+<<<<<<< HEAD
     public static final String ADDRESS_TYPES = "addressTypes";
     public static final String NUMBER_OF_EMPLOYEES = "numberOfEmployees";
     public static final String NUMBER_OF_PROJECTS = "numberOfProjects";
@@ -381,3 +400,8 @@ public final class Constants {
 
 	public static final String ITEM_UPDATE_SUCCESS_MESSAGE = "Item List updated successfully";
 }
+=======
+    public static final String SIGNIN_EMAIL = "signinEmail";
+    public static final String DATABASE_FAILURE = "Database Connection Error has Occured";
+}
+>>>>>>> 4f41a9f7b131749d517c91f7ec433b74f184986e

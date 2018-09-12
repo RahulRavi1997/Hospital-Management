@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE hibernate-configuration PUBLIC
+<<<<<<< HEAD
           "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
           "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 
@@ -34,3 +35,23 @@
 
 
 <
+=======
+          "-//Hibernate/Hibernate Configuration DTD 5.3//EN"
+          "http://hibernate.sourceforge.net/hibernate-configuration-5.3.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <property name="dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
+        <property name="connection.url">jdbc:mysql://localhost/Emp?useSSL=false</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">password</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.release_mode">auto</property>
+        <property name="connection.show_sql">true</property>
+
+   
+    <mapping resource="user.hbm.xml"/>
+    <mapping resource="ward.hbm.xml"/>
+    </session-factory>
+</hibernate-configuration>
+>>>>>>> 4f41a9f7b131749d517c91f7ec433b74f184986e
