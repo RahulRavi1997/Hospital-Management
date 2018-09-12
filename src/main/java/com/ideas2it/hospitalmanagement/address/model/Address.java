@@ -10,11 +10,20 @@ package com.ideas2it.hospitalmanagement.address.model;
  */
 public class Address {
 
-    private String AddressLine1;
+	private Integer id;
+	private String AddressLine1;
     private String AddressLine2;
     private String country;
     private Long pinCode;
+	private Integer physicianId;
+    private Integer patientId;
     
+    public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public String getAddressLine1() {
 		return AddressLine1;
 	}
@@ -38,5 +47,17 @@ public class Address {
 	}
 	public void setPinCode(Long pinCode) {
 		this.pinCode = pinCode;
+	}
+    public Integer getPhysicianId() {
+		return physicianId;
+	}
+	public void setPhysicianId(Integer physicianId) {
+		this.physicianId = physicianId;
+	}
+	public Integer getPatientId() {
+		return patientId;
+	}
+	public void setPatientId(Integer patientId) {
+		this.patientId = patientId;
 	}
 }

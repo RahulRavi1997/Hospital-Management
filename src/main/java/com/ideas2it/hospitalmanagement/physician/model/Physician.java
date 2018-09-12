@@ -19,7 +19,7 @@ public class Physician {
 	private Long mobileNumber;
     private String email;
     private Address address;
-    private Gender gender;
+    private String gender;
 	private String specialisation;
 	private List<Patient> patients;
 	private Boolean active;
@@ -68,10 +68,10 @@ public class Physician {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-	public Gender getGender() {
+	public String getGender() {
 		return gender;
 	}
-	public void setGender(Gender gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 	public String getSpecialisation() {
