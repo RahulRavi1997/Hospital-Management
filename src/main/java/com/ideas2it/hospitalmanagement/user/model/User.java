@@ -2,8 +2,13 @@ package com.ideas2it.hospitalmanagement.user.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
 import com.ideas2it.hospitalmanagement.address.model.Address;
 import com.ideas2it.hospitalmanagement.commons.Constants;
+import com.ideas2it.hospitalmanagement.commons.enums.Role;
 
 /**
  * User class is the Entity class is having the getters and setter methods
@@ -18,7 +23,7 @@ public class User {
 	private Integer id ;
     private String email;
     private String password;
-    private String role;
+    private Role role;
     private Boolean active;
 
 	public Integer getId() {
@@ -39,10 +44,12 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getRole() {
+	public Role getRole() {
 		return role;
 	}
-	public void setRole(String role) {
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
+	public void setRole(Role role) {
 		this.role = role;
 	}
 	public Boolean getActive() {

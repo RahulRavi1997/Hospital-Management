@@ -19,10 +19,9 @@
         <intercept-url pattern="/logout" access="permitAll()" />
         <intercept-url pattern="/static" access="permitAll()" />
         
-
         <intercept-url pattern="/index"
             access="hasAnyRole('ROLE_NURSE', 'ROLE_ADMIN', 'ROLE_RECEPTIONIST', 'ROLE_PHYSICIAN')" />
-        <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/admin" access="hasAnyRole('ROLE_ADMIN')" />
         <intercept-url pattern="/nurse" access="hasAnyRole('ROLE_ADMIN', 'ROLE_NURSE')" />
         <intercept-url pattern="/physician" access="hasAnyRole('ROLE_ADMIN', 'ROLE_PHYSICIAN')" />
 
@@ -32,7 +31,7 @@
         <access-denied-handler error-page="/Access_Denied" />
  
         <form-login login-page='/login' login-processing-url="/j_spring_security_check"
-            default-target-url="/index" always-use-default-target="false"
+            default-target-url="/index" always-use-default-target="true"
             authentication-failure-url="/login?error=true" username-parameter="email"
             password-parameter="password" />
 

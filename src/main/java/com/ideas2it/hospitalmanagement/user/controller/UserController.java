@@ -17,6 +17,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.ideas2it.hospitalmanagement.commons.Constants;
+import com.ideas2it.hospitalmanagement.commons.enums.Role;
 import com.ideas2it.hospitalmanagement.logger.Logger;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.user.service.impl.UserServiceImpl;
@@ -69,7 +70,7 @@ public class UserController {
                 User user = new User();
                 user.setEmail(email);
                 user.setPassword(password);
-                user.setRole(Constants.ADMIN);
+                user.setRole(Role.ADMIN);
                 if (userService.addUser(user)) {
                     model.addAttribute(Constants.SIGNIN_EMAIL, email);
                     return new ModelAndView(Constants.LOGIN, Constants.SIGN_UP_SUCCESS, Constants.SIGN_UP_SUCCESS_MESSAGE);
@@ -99,11 +100,6 @@ public class UserController {
             return "accessDenied";
         }
     }
-    @RequestMapping("/logoutSuccessful")
-    public String redirectAfterLogout(){
-	    return "login";
-    }
-
     @RequestMapping("/Access_Denied")
     public String accessDenied(Model model, Principal principal) {
         if (principal != null) {
@@ -116,8 +112,12 @@ public class UserController {
         return "accessDenied";
     }
 
-    @RequestMapping(value={"/login","/"})
-    public String redirectLogin(){
-	    return "login";
+    @RequestMapping(value={"/login","/","/logoutSuccessful"})
+    public String redirectLogin(Model model, Principal principal){
+        if (principal == null) {
+	        return "login";
+        } else {
+        	return userInfo(model, principal);
+        }
     }
 }

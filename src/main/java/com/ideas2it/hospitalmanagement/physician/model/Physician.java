@@ -8,7 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.ideas2it.hospitalmanagement.patient.model.Patient;
 import com.ideas2it.hospitalmanagement.address.model.Address;
 import com.ideas2it.hospitalmanagement.commons.Constants;
-
+import com.ideas2it.hospitalmanagement.commons.enums.Gender;
 
 public class Physician {
 
@@ -16,7 +16,6 @@ public class Physician {
 	private String firstName;
 	private String lastName;
     private Date birthDate;
-    public enum Gender {MALE, FEMALE, OTHER;}
 	private Long mobileNumber;
     private String email;
     private Address address;

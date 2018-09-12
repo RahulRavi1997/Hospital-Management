@@ -4,7 +4,7 @@
     "http://hibernate.sourceforge.net/hibernate-mapping-5.3.dtd">
 
  <hibernate-mapping>
-  <class name="com.ideas2it.employeedetails.physician.model.Physician" table="physicians">
+  <class name="com.ideas2it.hospitalmanagement.physician.model.Physician" table="physicians">
     <id name="id" column="id">
      <generator class="increment"></generator>
     </id>
@@ -17,11 +17,16 @@
     <property name="specialisation" column="SPECIALISATION" type="string"/>
     <property name="active" column="ACTIVE" type="boolean"/>
     <property name="userId" column="USER_ID" type="integer"/>
-    <property name="gender" column="GENDER" type="string"/>
-    
-      <bag name="patients" table="physician_patient" fetch="select" lazy="false">
-         <key column = "PHYSICIAN_ID"/>
-         <many-to-many column="PATIENT_ID" entity-name="com.ideas2it.hospitalmanagement.patient.model.Patient"/>
-      </bag>
+    <property name="gender">
+      <type name="com.ideas2it.hospitalmanagement.commons.enums.Gender">
+        <param name="Gender">
+          com.ideas2it.hospitalmanagement.commons.enums.Gender
+        </param>
+      </type>
+    </property>    
+    <bag name="patients" table="physician_patient" fetch="select" lazy="false">
+      <key column = "PHYSICIAN_ID"/>
+      <many-to-many column="PATIENT_ID" entity-name="com.ideas2it.hospitalmanagement.patient.model.Patient"/>
+    </bag>
   </class>
  </hibernate-mapping>

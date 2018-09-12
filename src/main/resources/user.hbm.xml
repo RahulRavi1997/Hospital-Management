@@ -11,6 +11,12 @@
     <property name="email" column="email" type="string"/>
     <property name="password" column="password" type="string"/>
     <property name="active" column="active" type="boolean"/>
-    <property name="role" column="role" type="string"/>
+    <property name="role">
+      <type name="com.ideas2it.hospitalmanagement.commons.enums.Role">
+        <param name="Role">
+          com.ideas2it.hospitalmanagement.commons.enums.Role
+        </param>
+      </type>
+    </property>   
   </class>
  </hibernate-mapping>

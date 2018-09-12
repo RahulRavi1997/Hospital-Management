@@ -17,7 +17,6 @@ import com.ideas2it.hospitalmanagement.exception.ApplicationException;
  */
 public interface UserDao {
 
-
     /**
      * <p>
      * This Method is used to insert a new User.

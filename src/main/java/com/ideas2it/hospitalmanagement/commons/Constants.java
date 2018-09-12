@@ -26,7 +26,6 @@ public final class Constants {
     public static final String SIGNUP = "signup";
     public static final String LOGIN = "login";
     public static final String LOGIN_PATH = "/login";
-    public static final String MAIN_MENU_PATH = "/main_menu";
     public static final String INDEX_PATH = "/WEB-INF/views/index.jsp";
     public static final String SIGNIN_EMAIL = "signinEmail";
     public static final String DATABASE_FAILURE =
@@ -45,22 +44,22 @@ public final class Constants {
             "Error while displaying physicians\n";
     public static final String PHYSICIAN_RESTORE_EXCEPTION = 
             "Error while restoring physician id %d\n";
-    public static final String CREATE_PHYSICIAN_MAPPING = "/create_physician";
-    public static final String ADD_PHYSICIAN_MAPPING = "/add_physician";
-    public static final String MODIFY_PHYSICIAN_MAPPING = "/modify_physician";
-    public static final String UPDATE_PHYSICIAN_MAPPING = "/update_physician";
-    public static final String RESTORE_PHYSICIAN_MAPPING = "/restore_physician";
-    public static final String DELETE_PHYSICIAN_MAPPING = "/delete_physician";
-    public static final String SEARCH_PHYSICIAN_MAPPING = "/search_physician";
-    public static final String DISPLAY_PHYSICIAN_MAPPING = "/display_physicians";
+    public static final String CREATE_PHYSICIAN_MAPPING = "/createPhysician";
+    public static final String ADD_PHYSICIAN_MAPPING = "/addPhysician";
+    public static final String MODIFY_PHYSICIAN_MAPPING = "/modifyPhysician";
+    public static final String UPDATE_PHYSICIAN_MAPPING = "/updatePhysician";
+    public static final String RESTORE_PHYSICIAN_MAPPING = "/restorePhysician";
+    public static final String DELETE_PHYSICIAN_MAPPING = "/deletePhysician";
+    public static final String SEARCH_PHYSICIAN_MAPPING = "/searchPhysician";
+    public static final String DISPLAY_PHYSICIAN_MAPPING = "/displayPhysicians";
 
-    public static final String CREATE_PHYSICIAN_JSP = "create_physician";
+    public static final String CREATE_PHYSICIAN_JSP = "createPhysician";
     public static final String PHYSICIANS = "physicians";
-    public static final String DISPLAY_PHYSICIAN_JSP = "display_physicians";
+    public static final String DISPLAY_PHYSICIAN_JSP = "displayPhysicians";
     public static final String ERROR_JSP = "error";
     public static final String ERROR_MESSAGE = "errorMessage";
     public static final String PHYSICIAN = "physician";
-    public static final String SEARCH_PHYSICIAN_JSP = "search_physician";
+    public static final String SEARCH_PHYSICIAN_JSP = "searchPhysician";
     public static final String ID = "id";
     public static final String FAIL_MESSAGE = "failMessage";
     
