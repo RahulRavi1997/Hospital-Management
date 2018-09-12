@@ -19,7 +19,9 @@ public class Visit {
     private Date admitDate;
     private Date dischargeDate;
     private Integer patientId;
-    private Integer doctorId;
+    private Integer physicianId;
+	private String patientType;
+
     
 	public Integer getId() {
 		return id;
@@ -45,10 +47,16 @@ public class Visit {
 	public void setPatientId(Integer patientId) {
 		this.patientId = patientId;
 	}
-	public Integer getDoctorId() {
-		return doctorId;
+	public Integer getPhysicianId() {
+		return physicianId;
 	}
-	public void setDoctorId(Integer doctorId) {
-		this.doctorId = doctorId;
-	}   
+	public void setPhysicianId(Integer physicianId) {
+		this.physicianId = physicianId;
+	}
+    public String getPatientType() {
+		return patientType;
+	}
+	public void setPatientType(String patientType) {
+		this.patientType = patientType;
+	}
 }

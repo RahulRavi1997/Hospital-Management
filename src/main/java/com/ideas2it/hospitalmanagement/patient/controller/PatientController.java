@@ -3,6 +3,7 @@ package com.ideas2it.hospitalmanagement.patient.controller;
 import java.util.List;
 
 import com.ideas2it.hospitalmanagement.commons.Constants;
+import com.ideas2it.hospitalmanagement.commons.enums.Gender;
 import com.ideas2it.hospitalmanagement.logger.Logger;
 import com.ideas2it.hospitalmanagement.patient.model.Patient;
 import com.ideas2it.hospitalmanagement.patient.service.PatientService;
@@ -48,12 +49,15 @@ public class PatientController {
      * This method returns the value as ModelAndView Class Object contains the
      * Model having the Patient object with List as Address Object.
      * </p>
+     *  @param model a Model object which is used to add the patient as an
+     *               attribute to the view Layer.
      * @return ModelAndView Object which redirects to the Create Patient Page.
      */
     @RequestMapping(value = Constants.CREATE_PATIENT, method = RequestMethod.GET)
-    public ModelAndView getPatientDetailsFromUser() {
+    public ModelAndView getPatientDetailsFromUser(Model model) {
 
     	Patient patient = new Patient();
+        model.addAttribute("genders",Gender.values());
         return new ModelAndView(Constants.CREATE_PATIENT_JSP, Constants.PATIENT_OBJECT
             , patient);
     }
@@ -102,12 +106,13 @@ public class PatientController {
     @RequestMapping(value = Constants.MODIFY_PATIENT, method = {RequestMethod.POST
         ,RequestMethod.GET})
     public ModelAndView getPatientToModify(@RequestParam(Constants.ID)
-            Integer patientId) {
+            Integer patientId, Model model) {
 
         try {
             Patient patient = patientService.getPatientById(patientId);
+            model.addAttribute("genders",Gender.values());
             return new ModelAndView(Constants.CREATE_PATIENT_JSP, Constants.
-            		PATIENT, patient);
+            		PATIENT_OBJECT, patient);
         } catch (ApplicationException e) {
             Logger.error(e);
             return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
@@ -135,7 +140,8 @@ public class PatientController {
 
         try {
         	patientService.modifyPatient(patient);
-            return new ModelAndView(Constants.SEARCH_PATIENT_JSP);
+            return new ModelAndView(Constants.SEARCH_PATIENT_JSP, Constants.PATIENT_OBJECT,
+            		patient);
         } catch (ApplicationException e) {
             Logger.error(e);
             return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
@@ -198,7 +204,7 @@ public class PatientController {
         try {
             Patient patient = patientService.getPatientById(patientId);
             return new ModelAndView(Constants.SEARCH_PATIENT_JSP, Constants.
-                PATIENT, patient);
+            	PATIENT_OBJECT, patient);
         } catch (ApplicationException e) {
             Logger.error(e);
             return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
@@ -223,7 +229,7 @@ public class PatientController {
         try {
             List<Patient> patients = patientService.getPatients();
             return new ModelAndView(Constants.DISPLAY_PATIENT_JSP, Constants.
-            		PATIENTS, patients);
+            		PATIENT_OBJECTS, patients);
         } catch (ApplicationException e) {
             Logger.error(e);
             return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
@@ -253,7 +259,7 @@ public class PatientController {
             patientService.activatePatient(patientId);
             List<Patient> patients = patientService.getPatients();
             return new ModelAndView(Constants.DISPLAY_PATIENT_JSP, Constants.
-            		PATIENTS, patients);
+            		PATIENT_OBJECTS, patients);
         } catch (ApplicationException e) {
             Logger.error(e);
             return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,

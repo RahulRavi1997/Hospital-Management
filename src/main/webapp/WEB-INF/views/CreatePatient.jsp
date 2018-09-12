@@ -12,10 +12,10 @@
       </center>
       <c:choose>
          <c:when test="${empty patient.id}">
-            <c:set var="value" value="addpatient"/>
+            <c:set var="value" value="addPatient"/>
          </c:when>
          <c:otherwise>
-            <c:set var="value" value="updatepatient"/>
+            <c:set var="value" value="updatePatient"/>
          </c:otherwise>
       </c:choose>
       <div class="row">
@@ -57,7 +57,14 @@
                         <form:input path="mobileNumber" required="required" class ="form-control spacing" />
                      </div>
                   </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" for="Gender">Gender</label>
+                     <div class="col-sm-10">
+                       <form:select path="gender" items="${genders}" />
+                     </div>
+                  </div>
                   <c:if test="${not empty patient.id}">
+                     <input type="hidden" name="active" value="${patient.active}" />
                      <input type="hidden" name="id" value="${patient.id}" />
                   </c:if>
             </div>
@@ -66,19 +73,19 @@
             <div class="form-group">
             <label class="col-sm-2 control-label" for="addressLine1">Address Line 1</label>
             <div class="col-sm-10">
-            <form:input path="address.addressLine1" class="form-control spacing"/>
+            <form:input  path="address.addressLine1"  class="form-control spacing"/>
             <form:errors path="address.addressLine1" placeholder="addressLine1"/>
             </div>
             </div>
             <div class="form-group">
             <label class="col-sm-2 control-label" for="addressLine2">Address Line 2</label>
             <div class="col-sm-10">
-            <form:input path="address.addressLine2" class="form-control spacing"/>
+            <form:input  path="address.addressLine1"  class="form-control spacing"/>
             <form:errors path="address.addressLine2" placeholder="addressLine2"/>
             </div>
             </div>
             <div class="form-group">
-            <label class="col-sm-2 control-label" for="Postcode">Postcode</label>
+            <label class="col-sm-2 control-label" for="Postcode">Post code</label>
             <div class="col-sm-10">
             <form:input path="address.pinCode" class="form-control spacing"/>
             <form:errors path="address.pinCode" placeholder="Post Code"/>

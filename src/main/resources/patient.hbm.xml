@@ -12,9 +12,9 @@
     <property name="lastName" column="LAST_NAME" type="string"/>
     <property name="birthDate" column="BIRTH_DATE" type="date"/>
     <property name="mobileNumber" column="MOBILE_NUMBER" type="long"/>
-    <property name="email" column="EMAIL" type="string"/>
+    <property name="emailId" column="EMAIL" type="string"/>
     <one-to-one name="address" class="com.ideas2it.hospitalmanagement.address.model.Address" cascade="save-update"></one-to-one>
-    <property name="active" column="ACTIVE" type="boolean"/>
+    <property name="active" column="ACTIVE" type="org.hibernate.type.NumericBooleanType"/>
     <property name="gender" column="GENDER" type="string"/>
       <bag name="physicians" table="physician_patient" fetch="select" lazy="false">
          <key column = "PATIENT_ID"/>
