@@ -32,6 +32,7 @@ public class Patient {
     private List<Physician> physicians = new ArrayList<Physician>();
     private boolean active;
 	private String gender;
+	
 	public Integer getId() {
 		return id;
 	}

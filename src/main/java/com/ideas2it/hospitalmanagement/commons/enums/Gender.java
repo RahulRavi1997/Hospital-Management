@@ -2,7 +2,7 @@ package com.ideas2it.hospitalmanagement.commons.enums;
 
 public enum Gender {
 
-    MALE("Male"), FEMALE("Female"), OTHER("Other");
+    Male("Male"), Female("Female"), Other("Other");
 
     private final String value;
 
@@ -15,11 +15,11 @@ public enum Gender {
             if (gender.value.equals(value)) {  
                 return gender;  
             }  
-        }  
+        }
         throw new IllegalArgumentException("Invalid gender: " + value);  
     }
 
-    public String toValue(){
+    public String toValue() {
         return value;
     }
 
