@@ -8,6 +8,7 @@
 
     <bean id="physicianServiceImpl" class="com.ideas2it.hospitalmanagement.physician.service.impl.PhysicianServiceImpl" >
         <property name="physicianDao" ref="physicianDaoImpl" />
+        <property name="userService" ref="userServiceImpl" />
     </bean>
 
     <bean id="physicianController"  class="com.ideas2it.hospitalmanagement.physician.controller.PhysicianController">
@@ -31,8 +32,8 @@
     </bean>
     <bean id="visitController"  class="com.ideas2it.hospitalmanagement.visit.controller.VisitController" >
         <property name="visitService" ref="visitServiceImpl"/>
-    </bean> 
-
+    </bean>
+    
     <bean id="userDaoImpl" class="com.ideas2it.hospitalmanagement.user.dao.impl.UserDaoImpl"/>
 
     <bean id="userServiceImpl" class="com.ideas2it.hospitalmanagement.user.service.impl.UserServiceImpl" >

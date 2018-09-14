@@ -9,6 +9,7 @@
 	Dear <strong>${email}</strong>, Welcome to Admin Page.
 	
 	<a href="createPhysician">Add Doctor </a>
+	<a href="displayPhysicians">Display Doctor </a>
 	<a href="<c:url value="/logout" />">Logout</a>
 </body>
 </html>

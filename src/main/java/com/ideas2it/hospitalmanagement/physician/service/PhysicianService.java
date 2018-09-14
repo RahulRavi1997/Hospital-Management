@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.physician.service.impl.PhysicianServiceImpl;
+import com.ideas2it.hospitalmanagement.user.model.User;
 import com.ideas2it.hospitalmanagement.physician.model.Physician;
 
 public interface PhysicianService {
@@ -127,4 +128,21 @@ public interface PhysicianService {
 	 */
 	public List<Physician> retrievePhysiciansByIds(Integer[] ids) throws ApplicationException;
 
+    /**
+     * <p>
+     * This Method is used to search a User Entry and return the User
+     * object. It returns null if no match is found.
+     * </p>
+     *
+     * @param email a String indicating the email of the user that is
+     *              to be searched an returned.
+     *
+     * @return user an User object is returned if a valid match is
+     *                  found, else returns null.
+     *
+     * @throws ApplicationException A Custom Exception created for catching
+     *                              exceptions that occur while retrieving an
+     *                              user.
+     */
+    public User retrieveUserByEmail(String email) throws ApplicationException;
 }
