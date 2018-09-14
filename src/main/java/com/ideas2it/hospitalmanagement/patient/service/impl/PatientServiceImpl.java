@@ -41,7 +41,6 @@ public class PatientServiceImpl implements PatientService {
             throws ApplicationException {
     	Patient oldPatient = patientDao.searchPatientById(patient.
             getId());
-    	patient.setVisits(oldPatient.getVisits());
         return patientDao.updatePatient(patient);
     }
 

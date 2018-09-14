@@ -17,7 +17,6 @@
         
         <mapping resource="address.hbm.xml"/>
         <mapping resource="physician.hbm.xml"/>
-
         <mapping resource="patient.hbm.xml"/>
         <mapping resource="user.hbm.xml"/>
     <mapping resource="address.hbm.xml"/>

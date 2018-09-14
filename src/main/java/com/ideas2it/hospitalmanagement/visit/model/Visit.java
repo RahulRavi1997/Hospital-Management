@@ -2,6 +2,10 @@ package com.ideas2it.hospitalmanagement.visit.model;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.ideas2it.hospitalmanagement.commons.Constants;
+
 /**
  * Visit class is the Entity class is having the getters and setter methods
  * which monitors Patient Visit to the Hospital.This class acts as an Model
@@ -32,12 +36,14 @@ public class Visit {
 	public Date getAdmitDate() {
 		return admitDate;
 	}
+    @DateTimeFormat(pattern = Constants.REVERSED_DATE_FORMAT)
 	public void setAdmitDate(Date admitDate) {
 		this.admitDate = admitDate;
 	}
 	public Date getDischargeDate() {
 		return dischargeDate;
 	}
+    @DateTimeFormat(pattern = Constants.REVERSED_DATE_FORMAT)
 	public void setDischargeDate(Date dischargeDate) {
 		this.dischargeDate = dischargeDate;
 	}
