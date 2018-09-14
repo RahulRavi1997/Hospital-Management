@@ -6,10 +6,8 @@
  <hibernate-mapping>
   <class name="com.ideas2it.hospitalmanagement.physician.model.Physician" table="physicians">
     <id name="id" column="id">
-     <generator class="foreign">
-       <param name="property">user</param>
-     </generator>
-   </id>
+     <generator class="increment"></generator>
+    </id>
     <property name="firstName" column="FIRST_NAME" type="string"/>
     <property name="lastName" column="LAST_NAME" type="string"/>
     <property name="birthDate" column="BIRTH_DATE" type="date"/>

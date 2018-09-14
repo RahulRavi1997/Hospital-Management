@@ -28,8 +28,6 @@ public class Patient {
 	private Long mobileNumber;
     private Date birthDate;
     private Address address = new Address();
-    private List<Visit> visits = new ArrayList<Visit>();
-    private List<Physician> physicians = new ArrayList<Physician>();
     private boolean active;
 	private String gender;
 	
@@ -75,18 +73,6 @@ public class Patient {
 	}
 	public void setAddress(Address address) {
 		this.address = address;
-	}
-	public List<Visit> getVisits() {
-		return visits;
-	}
-	public void setVisits(List<Visit> visits) {
-		this.visits = visits;
-	}
-	public List<Physician> getPhysicians() {
-		return physicians;
-	}
-	public void setPhysicians(List<Physician> physicians) {
-		this.physicians = physicians;
 	}
 	public boolean isActive() {
 		return active;

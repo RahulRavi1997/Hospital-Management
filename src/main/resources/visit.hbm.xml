@@ -4,14 +4,14 @@
     "http://hibernate.sourceforge.net/hibernate-mapping-5.3.dtd">
 
  <hibernate-mapping>
-  <class name="com.ideas2it.hospitalmanagement.visit.model.Visit" table="users">
+  <class name="com.ideas2it.hospitalmanagement.visit.model.Visit" table="visit">
     <id name="id" column="id">
      <generator class="increment"></generator>
     </id>
     <property name="admitDate" column="ADMIT_DATE" type="date"/>
     <property name="dischargeDate" column="DISCHARGE_DATE" type="date"/>
     <property name="patientType" column="PATIENT_TYPE" type="string"/>
-    <one-to-one name="patientId" fetch="join" lazy="false" cascade="all" class="com.ideas2it.hospitalmanagement.patient.model.Patient" />
-    <one-to-one name="physicianId" fetch="join"  lazy="false" cascade="all" class="com.ideas2it.hospitalmanagement.physician.model.Physician" />
+    <property name="patientId" column="PATIENT_ID" type="int" />
+    <property name="physicianId" column="PHYSICIAN_ID" type="int" />
   </class>
  </hibernate-mapping>

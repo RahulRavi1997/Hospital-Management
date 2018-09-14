@@ -38,8 +38,8 @@
                   <div class="form-group">
                      <label class="col-sm-2 control-label" for="patientId">Patient Name</label>
                      <div class="col-sm-10">
-                     <input type="text" id="search" name="name" class="search" />
-                     <form:hidden path="patientId"/>
+                     <input type="text" id="search" name="name" class="search" onselect=""/>
+                     <form:hidden path="patientId" id="patientId"/>
                      </div>
                   </div>
                   <div class="form-group">
@@ -95,9 +95,10 @@
 
 	           response($.map(data, function (value, key) {
 	               console.log(value);
+                   $("#patientId").val(value.id);
 	               return {
 	                   label: value.firstName,
-	                   value: value.firstName
+	                   value: value.firstName,
 	               };
 	           }));
 
