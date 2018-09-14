@@ -33,20 +33,36 @@ public class WardController {
 
     @RequestMapping(value = "/AddWard", method = RequestMethod.GET)
     public ModelAndView showForm() {
-
-
         return new ModelAndView("Ward", "ward", new Ward());
 
     }
 
 
+    @RequestMapping(value = "/DisplayAllWards", method = RequestMethod.GET)
+    public ModelAndView displayAllWards() {
+    	System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		 ModelAndView mav = new ModelAndView("displayWards");
+    	try {
+        mav.addObject("wards" , wardService.displayAllWards("All"));
+         mav.addObject("ward" , new Ward());
+    	} catch(ApplicationException e) {
+    		
+    	}
+        return mav;
+
+    }
+
+    
   @RequestMapping(value="/wardOperation", method=RequestMethod.POST, params="AddWard")
   public ModelAndView createWard(@ModelAttribute("ward") Ward ward ,
 		   @RequestParam("noOfRooms")String noOfRooms) {
-	  ModelAndView mav = new ModelAndView("a");
+		 ModelAndView mav = new ModelAndView("displayWards");
 	  try {
         System.out.println("controllerwardname" + ward.getName() + "" + noOfRooms);
         wardService.createWard(ward, Integer.parseInt(noOfRooms));
+        mav.addObject("wards" , wardService.displayAllWards("All"));
+        mav.addObject("ward" , new Ward());
+
       } catch(ApplicationException e) {
     	  
       }
@@ -117,60 +133,6 @@ public class WardController {
 	  
   }
     
-    public void updateWard() {
-    	Ward ward = new Ward();
-    	int numberOfRooms = 0;
-    	try {
-        	wardService.updateWard(ward);
-    	}catch (ApplicationException e) {
-    		
-    	}
 
-    }
-    
-    public void addRooms() {
-    	Ward ward = new Ward();
-    	int numberOfRooms = 0;
-    	int wardNumber = 0;
-
-    	try {
-        	wardService.addRooms(wardService.searchWard(wardNumber), numberOfRooms);
-    	}catch (ApplicationException e) {
-    		
-    	}
-
-    }
-    
-    public void deleteWard() {
-    	Ward ward = new Ward();
-    	int wardNumber = 0;
-    	try {
-        	wardService.deleteWard(wardService.searchWard(wardNumber));
-    	}catch (ApplicationException e) {
-    		
-    	}
-
-    }
-    
-    public void  searchWard() {
-    	Ward ward = new Ward();
-    	int wardNumber = 0;
-    	try {
-        	wardService.searchWard(wardNumber);
-    	}catch (ApplicationException e) {
-    		
-    	}
-
-    }
-    
-    public void retrieveAllWards() {
-    	String status = null;
-    	try {
-        	wardService.displayAllWards(status);
-    	}catch (ApplicationException e) {
-    		
-    	}
-	
-    }
     
 }

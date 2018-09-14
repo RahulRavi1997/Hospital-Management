@@ -75,7 +75,11 @@ public class WardDaoImpl extends GenericDao implements WardDao{
     public List<Ward> displayAllWards(String status) throws ApplicationException {
 
         try {
-            return super.getAllByAttribute(Ward.class, "status", status);
+        	if("All".equals(status)) {
+        		return super.getAll(Ward.class);
+        	} else {
+                return super.getAllByAttribute(Ward.class, "status", status);
+        	}
         } catch (ApplicationException e) {
             Logger.error("Wards could not be retrieved", e);
             throw new ApplicationException("Wards could not be retrieved", e);

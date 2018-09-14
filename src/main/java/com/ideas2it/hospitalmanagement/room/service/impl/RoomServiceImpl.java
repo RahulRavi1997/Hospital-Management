@@ -13,7 +13,6 @@ import com.ideas2it.hospitalmanagement.ward.service.WardService;
 public class RoomServiceImpl implements RoomService {
 
 	private static RoomDao roomDao;
-	private static WardService wardService;
     
     public static RoomDao getRoomDao() {
 		return roomDao;
