@@ -5,28 +5,21 @@
 
 <hibernate-configuration>
     <session-factory>
-<<<<<<< HEAD
-        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
-=======
         <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
->>>>>>> 8378e1dfc1c39e48622925cb5190c02b479b2b1d
         <property name="connection.url">jdbc:mysql://localhost/Hms?useSSL=false</property>
         <property name="connection.username">root</property>
-        <property name="connection.password">ubuntu</property>
+        <property name="connection.password">password</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="connection.release_mode">auto</property>
         <property name="connection.show_sql">true</property>
-<<<<<<< HEAD
-        <mapping resource="address.hbm.xml"/>
-        <mapping resource="physician.hbm.xml"/>
-=======
         <property name="hbm2ddl.auto">create</property>
         <property name="hbm2ddl.auto">update</property>
+        
+        <mapping resource="address.hbm.xml"/>
+        <mapping resource="physician.hbm.xml"/>
 
-          <mapping resource="physician.hbm.xml"/>
->>>>>>> 8378e1dfc1c39e48622925cb5190c02b479b2b1d
         <mapping resource="patient.hbm.xml"/>
-    <mapping resource="address.hbm.xml"/>
+        <mapping resource="user.hbm.xml"/>
         
   <!--
 
@@ -35,6 +28,5 @@
     <mapping resource="diagnosis.hbm.xml"/>
     <mapping resource="visit.hbm.xml"/>  
   -->
-    <mapping resource="user.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

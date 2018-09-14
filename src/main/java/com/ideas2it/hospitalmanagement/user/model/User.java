@@ -1,12 +1,5 @@
 package com.ideas2it.hospitalmanagement.user.model;
 
-import java.io.Serializable;
-import java.util.Date;
-
-import com.ideas2it.hospitalmanagement.address.model.Address;
-import com.ideas2it.hospitalmanagement.commons.Constants;
-import com.ideas2it.hospitalmanagement.commons.enums.Role;
-
 /**
  * User class is the Entity class is having the getters and setter methods
  * which is used to get the values from the user. This class acts as an Model
@@ -15,20 +8,13 @@ import com.ideas2it.hospitalmanagement.commons.enums.Role;
  * @author  Arul Murugan
  * @version 1.0
  */
-public class User implements Serializable {
+public class User {
 
 	private Integer id ;
     private String email;
     private String password;
     private String role;
     private Boolean active;
-    public Integer getPhysicianId() {
-		return physicianId;
-	}
-	public void setPhysicianId(Integer physicianId) {
-		this.physicianId = physicianId;
-	}
-	private Integer physicianId;
 
 	public Integer getId() {
 		return id;

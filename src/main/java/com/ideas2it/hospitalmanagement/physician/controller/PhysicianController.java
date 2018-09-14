@@ -3,6 +3,8 @@ package com.ideas2it.hospitalmanagement.physician.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.inject.Specializes;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;  
@@ -15,6 +17,7 @@ import com.ideas2it.hospitalmanagement.address.model.Address;
 import com.ideas2it.hospitalmanagement.commons.Constants;
 import com.ideas2it.hospitalmanagement.commons.enums.Gender;
 import com.ideas2it.hospitalmanagement.commons.enums.Role;
+import com.ideas2it.hospitalmanagement.commons.enums.Specialisation;
 import com.ideas2it.hospitalmanagement.physician.model.Physician;
 import com.ideas2it.hospitalmanagement.physician.service.PhysicianService;
 import com.ideas2it.hospitalmanagement.user.model.User;
@@ -61,10 +64,8 @@ public class PhysicianController {
     private ModelAndView redirectToCreatePhysician(Model model) {
 
     	Physician physician = new Physician();
-        physician.setAddress(new Address());
-        List<Patient> patients = new ArrayList<Patient>();
-        physician.setPatients(patients);
         model.addAttribute("genders", Gender.values());
+        model.addAttribute("specialisations", Specialisation.values());
         return new ModelAndView(Constants.CREATE_PHYSICIAN_JSP, Constants.PHYSICIAN, physician);
     }
 
@@ -83,12 +84,13 @@ public class PhysicianController {
      */
     @RequestMapping(value=Constants.ADD_PHYSICIAN_MAPPING, method=RequestMethod.POST)
     private ModelAndView createPhysician(@ModelAttribute Physician physician, Model model,
-    		@RequestParam(Constants.USER_EMAIL)String userEmail) {
+    		@RequestParam(value=Constants.USER_EMAIL, required = false)String userEmail) {
         try {
-        	if (null != userEmail) {
-        		User user = physicianService.retrieveUserByEmail(userEmail);
+    		User user = physicianService.retrieveUserByEmail(userEmail);
+        	if (null != user) {
         		user.setRole(Role.PHYSICIAN.toValue());
-        		physician.setUser(user);
+        		physicianService.modifyUser(user);
+        		physician.setUserId(user.getId());
         	}
             if (!physicianService.addPhysician(physician)) {
                 return new ModelAndView(Constants.ERROR_JSP, Constants.
@@ -153,6 +155,7 @@ public class PhysicianController {
     		@RequestParam(Constants.ID) int id) {
         try {
             model.addAttribute("genders", Gender.values());
+            model.addAttribute("specialisations", Specialisation.values());
             return new ModelAndView(Constants.CREATE_PHYSICIAN_JSP,Constants.
                     PHYSICIAN, physicianService.retrievePhysicianById(id));
         } catch (ApplicationException e) {
@@ -176,9 +179,16 @@ public class PhysicianController {
      *                       such as a jsp page.
      */
     @RequestMapping(value=Constants.UPDATE_PHYSICIAN_MAPPING, method=RequestMethod.POST)
-    private ModelAndView updatePhysician(@ModelAttribute Physician physician, Model model) {
+    private ModelAndView updatePhysician(@ModelAttribute Physician physician, Model model,
+    		@RequestParam(value=Constants.USER_EMAIL, required = false) String userEmail) {
 
         try {
+    		User user = physicianService.retrieveUserByEmail(userEmail);
+        	if (null != user) {
+        		user.setRole(Role.PHYSICIAN.toValue());
+        		physicianService.modifyUser(user);
+        		physician.setUserId(user.getId());
+        	}
             if (!physicianService.modifyPhysician(physician)) {
                 return new ModelAndView(Constants.ERROR_JSP, Constants.
                         ERROR_MESSAGE, Constants.EDIT_FAILED);

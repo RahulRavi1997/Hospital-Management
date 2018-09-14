@@ -11,8 +11,6 @@
     <property name="email" column="email" type="string"/>
     <property name="password" column="password" type="string"/>
     <property name="active" column="active" type="boolean"/>
-    <property name="role" column="role" type="string"/>
-    <property name="physicianId" column="PHYSICIAN_ID" type="integer"/>
-    
+    <property name="role" column="role" type="string"/>    
   </class>
  </hibernate-mapping>

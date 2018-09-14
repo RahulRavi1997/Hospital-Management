@@ -7,11 +7,11 @@
 <html>
   <head>
     <title>PhysicianForm</title>
-    <link rel="shortcut icon" href="styles/images/ideas1.jpg"/>
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
     <META HTTP-EQUIV="Expires" CONTENT="-1">
   </head>
     <link rel="stylesheet" href="/static/css/jquery-ui.css">
+    <link rel="stylesheet" href="/static/css/hms.css">
   <body>
     <c:if test="${not empty message}">
      <script>alert("${message}");</script>
@@ -43,19 +43,19 @@
           <div class="col-sm-6 col-xs-6 create-col-padding">
             <div class="row">
               <div class="col-sm-3 col-xs-3 required">
-                <label for="name">FirstName</label>
+                <label for="name">First Name</label>
               </div>
               <div class="col-sm-3 col-xs-3">
-                <form:input type="text" path="firstName" placeholder="FirstName" aria-describedby="basic-addon1" required="required"/>
+                <form:input type="text" path="firstName" placeholder="First Name" aria-describedby="basic-addon1" required="required"/>
                 <br/>
               </div>
             </div>
             <div class="row">
               <div class="col-sm-3 col-xs-3 required">
-                <label for="name">LastName</label>
+                <label for="name">Last Name</label>
               </div>
               <div class="col-sm-3 col-xs-3">
-                <form:input type="text" path="lastName" placeholder="LastName" aria-describedby="basic-addon1" required="required"/>
+                <form:input type="text" path="lastName" placeholder="Last Name" aria-describedby="basic-addon1" required="required"/>
                 <br/>
               </div>
             </div>
@@ -73,7 +73,7 @@
                 <label for="name">Mobile Number:</label>
               </div>
               <div class="col-sm-3 col-xs-3">
-                <form:input type="number" path="mobileNumber" placeholder="mobileNumber" aria-describedby="basic-addon1"/>
+                <form:input type="number" path="mobileNumber" placeholder="Mobile Number" aria-describedby="basic-addon1"/>
                 <br/>
               </div>
             </div>
@@ -92,7 +92,7 @@
                 <label for="role">Specialisation</label>
               </div>
               <div class="col-sm-3 col-xs-3">
-                <form:input type="text" path="specialisation" placeholder="Specialisation" aria-describedby="basic-addon1" maxLength="50" required="required"/>
+                <form:select path="specialisation" items="${specialisations}" />
               </div>
             </div>
             <div class="row">
@@ -103,47 +103,6 @@
                 <form:select path="gender" items="${genders}" />
               </div>
             </div>
-              <div class="row">
-              <div class="row">
-                <div class="col-sm-3 col-xs-3">
-                  <form:label class="color-black" path="address.addressLine1" cssErrorClass="invalid">Address Line 1</form:label>
-                </div>
-                <div class="col-sm-3 col-xs-3">
-                  <div class="input">
-                    <form:input type="text"  placeholder="Door Number" path="address.addressLine1" cssErrorClass="invalid " required="required"/>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-3 col-xs-3">
-                  <form:label class="color-black" path="address.addressLine2" cssErrorClass="invalid">address Line 2</form:label>
-                </div>
-                <div class="col-sm-3 col-xs-3">
-                  <div class="input">
-                    <form:input placeholder="addressLine2" path="address.addressLine2" cssErrorClass="invalid "/>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-3 col-xs-3">
-                  <form:label class="color-black" path="address.country" cssErrorClass="invalid">Country</form:label>
-                </div>
-                <div class="col-sm-3 col-xs-3">
-                  <div class="input">
-                    <form:input placeholder="Country" path="address.country" cssErrorClass="invalid " maxLength="50" required="required" />
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-3 col-xs-3">
-                  <form:label class="color-black" path="address.pinCode" cssErrorClass="invalid">PinCode</form:label>
-                </div>
-                <div class="col-sm-3 col-xs-3">
-                  <div class="input">
-                    <form:input placeholder="Pin Code" type="number" min="0" path="address.pinCode" cssErrorClass="invalid" required="required" maxLength="10"/>
-                  </div>
-                </div>
-              </div>
           </div>
         </div>
          Add User Login For Physician
@@ -154,8 +113,6 @@
         </div>
       </div>
     </form:form>
-     
-
     </br>
     </br>
     <script src="/static/script/jquery.min.js"></script>
@@ -165,6 +122,5 @@
 <script src="/static/script/jquery-1.9.1.min.js"></script>
 <script src="/static/script/jquery-ui.js"></script>
 <script src="/static/script/script.js"></script>
-
   </body>
 </html>

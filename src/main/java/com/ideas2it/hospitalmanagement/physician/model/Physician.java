@@ -19,12 +19,10 @@ public class Physician {
     private Date birthDate;
 	private Long mobileNumber;
     private String email;
-    private Address address;
     private String gender;
 	private String specialisation;
-	private List<Patient> patients;
 	private boolean active;
-	private User user;
+	private Integer userId;
 
 	public Integer getId() {
 		return id;
@@ -63,12 +61,6 @@ public class Physician {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Address getAddress() {
-		return address;
-	}
-	public void setAddress(Address address) {
-		this.address = address;
-	}
 	public String getGender() {
 		return gender;
 	}
@@ -81,12 +73,6 @@ public class Physician {
 	public void setSpecialisation(String specialisation) {
 		this.specialisation = specialisation;
 	}
-	public List<Patient> getPatients() {
-		return patients;
-	}
-	public void setPatients(List<Patient> patients) {
-		this.patients = patients;
-	}
 	public boolean isActive() {
 		return active;
 	}
@@ -96,10 +82,11 @@ public class Physician {
 	public Integer getAge() {	
 	    return DateUtil.getYearDifference(this.birthDate);
 	}
-	public User getUser() {
-		return user;
+	public Integer getUserId() {
+		return userId;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
+
 }

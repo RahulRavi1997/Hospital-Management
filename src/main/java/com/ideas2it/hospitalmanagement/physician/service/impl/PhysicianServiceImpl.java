@@ -119,4 +119,15 @@ public class PhysicianServiceImpl implements PhysicianService {
         }
         return userService.retrieveUserByEmail(email);
     }
+    /**
+     *  {@inheritDoc}
+     */
+    public boolean modifyUser(User user)
+            throws ApplicationException {
+
+        if (null == user) {
+            throw new ApplicationException(Constants.ID_NOT_NULL);
+        }
+        return userService.modifyUser(user);
+    }
 }

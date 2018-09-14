@@ -13,6 +13,7 @@
     <META HTTP-EQUIV="Expires" CONTENT="-1">
   </head>
   <body>
+    <link rel="stylesheet" href="/static/css/hms.css">
     <c:if test="${not empty message}">
      <div id="snackbar">${message}</div>
     </c:if>
@@ -28,7 +29,7 @@
         <div class="col-sm-4 col-xs-4 search-bar-display">
            <form  autocomplete="off" class="form-inline" action="searchPhysician" method="get">
               <input name="id"  type="number" class="form-control mr-sm-2" placeholder="Search"  required>
-              <button class="glyphicon glyphicon-search"  type="submit"/>    
+              <button class="glyphicon glyphicon-search"  type="submit">Search</button>    
             </form>
         </div>
         <div class="col-sm-4 col-xs-4 text-align-center">
@@ -108,75 +109,12 @@
         </table>
       </div>
     </c:if>
-    <c:if test="${not empty physician.address}">
-
-     <div align="center">
-   \\  Address //
-      <table border="1" cellpadding="5" class="table">
-        <tr>
-          <th>Address Line 1</th>
-          <th>Address Line 2</th>
-          <th>Country</th>
-          <th>Pin-Code</th>
-        </tr>
-          <tr>
-             <td>
-              <c:out value="${physician.address.addressLine1}"/>
-            </td>
-            <td>
-              <c:out value="${physician.address.addressLine2}"/>
-            </td>
-            <td>
-              <c:out value="${physician.address.country}"/>
-            </td>
-            <td>
-              <c:out value="${physician.address.pinCode}"/>
-            </td>
-          </tr>
-      </table>
-     </div>
-    </c:if>
-    <c:if test="${not empty physician.patients}">
-      <div align="center"><h3>${physician.firstName} ${physician.lastName}'s Patients</h3></div>
-      <table border="1" cellpadding="5" class="table">
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Email</th>
-        </tr>
-        <c:forEach var="patient" items="${physician.patients}">
-          <tr>
-            <td>
-              <c:out value="${patient.id}"/>
-            </td>
-            <td>
-              <form action="searchPatient" method="get"><button type="submit" class="button-as-link">${patient.firstName patient.lastName}</button>
-                <input type="hidden" name="id" value="${patient.id}" /> 
-              </form>
-            </td>
-            <td>
-              <c:out value="${patient.email}"/>
-            </td>
-          </tr>
-        </c:forEach>
-      </table></div>
-    </c:if>
-
-      <div align="center"><h3>${physician.firstName} ${physician.lastName}'s User Login</h3>
-      <table border="1" cellpadding="5" class="table">
-        <tr>
-          <th>ID</th>
-          <th>Email</th>
-        </tr>
-          <tr>
-            <td>
-              <c:out value="${physician.user.id}"/>
-            </td>
-            <td>
-              <c:out value="${physician.user.email}"/>
-            </td>
-          </tr>
-      </table></div>
   </body>
-  <script src="script/script.js"></script>
+<script src="/static/script/jquery.min.js"></script>
+<script src="/static/script/jquery-1.10.2.js"></script>
+<script src="/static/script/bootstrap.min.js"></script>
+<script src="/static/script/sorttable.js"></script>
+<script src="/static/script/jquery-1.9.1.min.js"></script>
+<script src="/static/script/jquery-ui.js"></script>
+<script src="/static/script/script.js"></script>
 </html>

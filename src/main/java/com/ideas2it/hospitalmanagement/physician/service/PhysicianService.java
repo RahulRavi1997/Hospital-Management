@@ -145,4 +145,24 @@ public interface PhysicianService {
      *                              user.
      */
     public User retrieveUserByEmail(String email) throws ApplicationException;
+    
+    /**
+     * <p>
+     *  This Method is used to modify the details of an existing user with
+     *  updated details provided by the user. Returns true if the user 
+     *  information is updated, else returns false if the operation fails.
+     * </p>
+     *
+     * @param newUser an User object is passed with the id of the old
+     *                    User which is used as a reference.
+     *
+     * @return boolean a boolean value is returned whether the operation to
+     *                 modify is successful or not.
+     *
+     * @throws ApplicationException A Custom Exception created for catching
+     *                              exceptions that occur while modifying an
+     *                              user.
+     */
+    public boolean modifyUser(User newUser)
+            throws ApplicationException;
 }
