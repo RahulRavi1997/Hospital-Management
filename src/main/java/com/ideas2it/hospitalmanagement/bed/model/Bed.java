@@ -1,4 +1,10 @@
 package com.ideas2it.hospitalmanagement.bed.model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.ideas2it.hospitalmanagement.bedallocation.model.BedAllocation;
+
 /**
  * <p>
  * Consist of all the details regarding the bed which contains bed number and 
@@ -14,6 +20,16 @@ public class Bed {
 	private String status = "Available";
 	private Integer visitId;
 	private Integer roomNumber;
+	private List<BedAllocation> bedAllocations = new ArrayList<BedAllocation>();
+
+	
+	public List<BedAllocation> getBedAllocations() {
+		return bedAllocations;
+	}
+	public void setBedAllocations(List<BedAllocation> bedAllocations) {
+		this.bedAllocations = bedAllocations;
+	}
+	
 	
 	public Integer getBedNumber() {
 		return bedNumber;

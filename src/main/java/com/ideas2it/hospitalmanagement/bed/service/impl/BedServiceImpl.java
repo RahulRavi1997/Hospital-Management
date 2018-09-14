@@ -2,7 +2,9 @@ package com.ideas2it.hospitalmanagement.bed.service.impl;
 
 import com.ideas2it.hospitalmanagement.bed.model.Bed;
 import com.ideas2it.hospitalmanagement.bed.service.BedService;
+import com.ideas2it.hospitalmanagement.bedallocation.model.BedAllocation;
 import com.ideas2it.hospitalmanagement.genericdao.GenericDao;
+import com.ideas2it.hospitalmanagement.utils.DateUtil;
 import com.ideas2it.hospitalmanagement.visit.model.Visit;
 import com.ideas2it.hospitalmanagement.visit.service.VisitService;
 import com.ideas2it.hospitalmanagement.visit.service.impl.VisitServiceImpl;
@@ -44,6 +46,7 @@ public class BedServiceImpl extends GenericDao implements BedService {
 			if(visit.getPatientType() == "OutPatient") {
 				bed.setVisitId(visitId);
 				bed.setStatus("Occupied");
+        		addBedAllocationDetails(visitId, bedNumber, bed);
 				return bedDao.updateBed(bed);
 			} else {
 				return false;
@@ -52,6 +55,21 @@ public class BedServiceImpl extends GenericDao implements BedService {
 			return false;
 		}
 	}
+	
+	
+    private void addBedAllocationDetails(int visitId, int bedNumber, Bed bed) {
+
+    	BedAllocation bedAllocation = new BedAllocation();
+    	bedAllocation.setBedId(bedNumber);
+    	bedAllocation.setVisitId(visitId);
+    	try {
+			bedAllocation.setAdmitDate(DateUtil.getCurrentDate());
+			bed.getBedAllocations().add(bedAllocation);
+		} catch (ApplicationException e) {
+			// TODO Auto-generated catch block
+		}
+	}
+
 	
 	/**
 	 *  {@inheritDoc}
@@ -71,6 +89,7 @@ public class BedServiceImpl extends GenericDao implements BedService {
 				visit.setDischargeDate(new Date());
 				bed.setVisitId(null);
 				bed.setStatus("Under Maintainence");
+        		addBedDischargeDetails(visitId, bed);
 				visitService.modifyVisit(visit);
 				return bedDao.updateBed(bed);
 			} else {
@@ -81,6 +100,20 @@ public class BedServiceImpl extends GenericDao implements BedService {
 		}
 	}
 	
+	private void addBedDischargeDetails(int visitId, Bed bed) {
+        for(BedAllocation bedAllocation : bed.getBedAllocations()) {
+        	if(bedAllocation.getVisitId() == visitId) {
+        		try {
+					bedAllocation.setDischargeDate(DateUtil.getCurrentDate());
+				} catch (ApplicationException e) {
+					
+					
+				}
+        		
+        	}
+        }
+	}
+
 	/**
 	 *  {@inheritDoc}
 	 */

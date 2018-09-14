@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
+import com.ideas2it.hospitalmanagement.utils.DateUtil;
 import com.ideas2it.hospitalmanagement.bed.model.Bed;
 import com.ideas2it.hospitalmanagement.bed.service.BedService;
 import com.ideas2it.hospitalmanagement.bed.service.impl.BedServiceImpl;
+import com.ideas2it.hospitalmanagement.bedallocation.model.BedAllocation;
 
 @Controller
 public class BedController {
@@ -41,7 +43,7 @@ public class BedController {
         ModelAndView modelAndView = new ModelAndView("");
         try {
         	if(bedService.admitPatient(visitId, bedNumber)) {
-        		//Success message
+        		
         	} else {
         		//Fail message
         	}
@@ -52,7 +54,8 @@ public class BedController {
 		} 
     }
     
-    /**
+
+	/**
      * <p>
      * dischargePatient method is used to discharge a patient from his assigned
      * bed

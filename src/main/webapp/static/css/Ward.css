@@ -28,6 +28,19 @@ body {
 .sidenav a:hover {
     color: #f1f1f1;
 }
+.search{
+float:right;
+
+height:25px;
+
+}
+
+.searchWard{
+margin-left:20px;
+float:right;
+width:100px;
+height:20px;
+}
 
 .sidenav .closebtn {
     position: absolute;
@@ -44,7 +57,7 @@ body {
 
 
 /* Full-width input fields */
-input[type=text], input[type=password] {
+input[type=text], input[type=password] not(.searchWard){
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;

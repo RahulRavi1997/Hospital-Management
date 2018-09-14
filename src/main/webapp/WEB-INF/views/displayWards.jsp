@@ -9,15 +9,20 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
       <link rel="stylesheet" type="text/css" href="static/css/Ward.css"/>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       <title>Welcome page</title>
    </head>
    <body>
+  
       <div class = "heading">
          <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <a onclick="document.getElementById('addWard').style.display='block'" style="width:auto;">Add Ward</a>
          </div>
          <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+         <input type = "text" class = "searchWard" pattern =[0-9]* name = "noOfRooms" placeholder= "Ward Number " maxlength= "20">    
+  <button class = "search" type="submit"><i class="fa fa-search"></i></button>
+         
       </div>
       <h2 class = "wardDetails"> Wards Information </h2>
       <div id="addWard" class="modal">
@@ -35,6 +40,7 @@
             </div>
          </form:form>
       </div>
+
       <c:forEach items= "${wards}" var = "ward">
          <h2 class ="wardInformation" > Ward Name : ${ward.name} &nbsp Ward Number : ${ward.wardNumber} </h2>
          <div class = "wardBasicInformation">
@@ -90,7 +96,7 @@
                   Enter the Number of rooms :
                   <input type="text" pattern =[0-9]* name = "noOfRooms" placeholder= "Number of Rooms " maxlength= "20"   title="Enter a valid number "  required = "required"/>
                   <input type = "hidden" value = "${ward.wardNumber}" name = "wardNumber">
-                  <input class = "addWard" type="submit" name="AddRooms" value="Add Rooms ${ward.wardNumber}"/>
+                  <input class = "addWard" type="submit" name="AddRooms" value="Add Rooms"/>
                </div>
             </form:form>
          </div>
