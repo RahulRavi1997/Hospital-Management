@@ -13,6 +13,7 @@
     <META HTTP-EQUIV="Expires" CONTENT="-1">
   </head>
   <body>
+    <link rel="stylesheet" href="/static/css/hms.css">
     <c:if test="${not empty message}">
      <div id="snackbar">${message}</div>
     </c:if>
@@ -26,9 +27,10 @@
           </button>
           </a>
         </div>
-        <form action="searchPhysicians" method="GET">
+        <form action="searchPhysician" method="GET">
         <div class="col-sm-4 col-xs-4"> 
           <input name="id" autocomplete="off" id="myInput" class="form-control mr-sm-2" placeholder="Search" required/>
+              <button class="glyphicon glyphicon-search"  type="submit">Search</button>    
         </div>
         <div class="col-sm-4 col-xs-4 text-align-center">
           <h4>
@@ -92,7 +94,7 @@
                 ${physician.specialisation}
               </td>
               <td>${physician.birthDate}</td>
-              <td>$${physician.mobileNumber}</td>
+              <td>${physician.mobileNumber}</td>
               <td>${physician.age} years</td>
               <c:if test="${!physician.isActive()}">
                   <td colspan="2" class="type">
@@ -121,5 +123,11 @@
     </td>
     </table>
   </body>
-  <script src="script/script.js"></script>
+<script src="/static/script/jquery.min.js"></script>
+<script src="/static/script/jquery-1.10.2.js"></script>
+<script src="/static/script/bootstrap.min.js"></script>
+<script src="/static/script/sorttable.js"></script>
+<script src="/static/script/jquery-1.9.1.min.js"></script>
+<script src="/static/script/jquery-ui.js"></script>
+<script src="/static/script/script.js"></script>
 </html>

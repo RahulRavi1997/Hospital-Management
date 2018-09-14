@@ -13,14 +13,9 @@
     <property name="birthDate" column="BIRTH_DATE" type="date"/>
     <property name="mobileNumber" column="MOBILE_NUMBER" type="long"/>
     <property name="email" column="EMAIL" type="string"/>
-    <one-to-one name="address" class="com.ideas2it.hospitalmanagement.address.model.Address" cascade="save-update"></one-to-one>
     <property name="specialisation" column="SPECIALISATION" type="string"/>
     <property name="active" column="ACTIVE" type="boolean"/>
-    <property name="gender" column="gender" type="string"/>
-    <one-to-one name="user" class="com.ideas2it.hospitalmanagement.user.model.User" cascade="save-update"></one-to-one>
-    <bag name="patients" table="physician_patient" fetch="select" lazy="false">
-      <key column = "PHYSICIAN_ID"/>
-      <many-to-many column="PATIENT_ID" entity-name="com.ideas2it.hospitalmanagement.patient.model.Patient"/>
-    </bag>
+    <property name="gender" column="GENDER" type="string"/>
+    <property name="userId" column="USER_ID" type="integer"/>
   </class>
  </hibernate-mapping>
