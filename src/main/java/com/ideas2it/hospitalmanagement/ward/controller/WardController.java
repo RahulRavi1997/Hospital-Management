@@ -70,7 +70,7 @@ public class WardController {
   }
 
   
-  @RequestMapping(value="/wardOperation", method=RequestMethod.POST, params="ChangeWardToMaintaince")
+  @RequestMapping(value="/ChangeWardToMaintaince", method=RequestMethod.POST)
   public ModelAndView ChangeWardToMaintaince(@ModelAttribute("ward") Ward ward) {
 	  
 	 ModelAndView mav = new ModelAndView("displayWards");
@@ -86,7 +86,7 @@ public class WardController {
 	  
   }
   
-  @RequestMapping(value="/wardOperation", method=RequestMethod.POST, params="ChangeWardToFree")
+  @RequestMapping(value="/ChangeWardToFree", method=RequestMethod.POST)
 	  public ModelAndView ChangeWardToFree(@RequestParam("number")String wardnumber) {
 		  Ward ward = new Ward();
 		 ModelAndView mav = new ModelAndView("displayWards");

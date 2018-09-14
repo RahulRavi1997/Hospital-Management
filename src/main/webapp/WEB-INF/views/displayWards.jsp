@@ -42,12 +42,6 @@ Enter the Number of rooms :
 
    </form:form>
 </div>
-
-   
-   
-   
-   
-   
             <c:forEach items= "${wards}" var = "ward">
      <h2 class ="wardInformation" > Ward Name : ${ward.name} &nbsp Ward Number : ${ward.wardNumber} </h2>
    
@@ -65,15 +59,11 @@ Enter the Number of rooms :
                 <tr>
                 <td>
                     <c:forEach items= "${room.beds}" var = "bed">
-                    
-                    
-                                             <button class="bedType"><img src="static/bed.png"><br>
+                         <button class="bedType"><img src="static/bed.png"><br>
                                              ${bed.bedNumber}</button>
                                               </c:forEach>
                                              </td>
-                                             </tr>
-                                           
-                                             
+                                             </tr>                
     </table>
         
           
@@ -82,19 +72,20 @@ Enter the Number of rooms :
     
     
      </c:forEach>
-  
-   
    </div>
    <table>
+
    <tr>
-   <button class="button"><span> Maintaince </span></button>
+      <button onclick="document.getElementById('addRooms').style.display='block'" style="width:auto;" class="button"><span> s </span></button>
+      </tr>
+       <tr><form:form action = "ChangeWardToFree" method ="post">
+       <input type = "hidden" value = "${ward.wardNumber}" name = "number">
+      <button class="button"><span> Free </span></button></form:form>
+      </tr>
+     <tr><form:form action = "ChangeWardToMaintaince" method ="post">
+  	 <input type = "hidden" value = "${ward.wardNumber}" name = "wardNumber">
+   	<button class="button"><span> Maintaince </span></button></form:form>
    </tr>
-   <tr>
-      <button onclick="document.getElementById('addRooms').style.display='block'" style="width:auto;" class="button"><span> Add Rooms </span></button>
-      </tr>
-       <tr>
-      <button class="button"><span> Free </span></button>
-      </tr>
       </table>
    <hr>
    <div id="addRooms" class="modal">
@@ -115,26 +106,6 @@ Enter the Number of rooms :
    </form:form>
 </div>
    </c:forEach>
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-
-
-   
-   
-   
-   
-   
-
 <script>
 
 // Get the modal
