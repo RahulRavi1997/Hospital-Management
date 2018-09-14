@@ -5,6 +5,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
    <head>
+   <link rel="stylesheet" 
+  href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
    </head>
    <body>
       <center>
@@ -34,15 +36,22 @@
                      </div>
                   </div>
                   <div class="form-group">
-                     <label class="col-sm-2 control-label" for="patientId">Patient ID</label>
+                     <label class="col-sm-2 control-label" for="patientId">Patient Name</label>
                      <div class="col-sm-10">
-                        <form:input type="number" id="patientId" path="patientId" required="required" class ="form-control spacing" />
+                     <input type="text" id="search" name="name" class="search" />
+                     <form:hidden path="patientId"/>
                      </div>
                   </div>
                   <div class="form-group">
                      <label class="col-sm-2 control-label" for="physicianId">Physician ID</label>
                      <div class="col-sm-10">
                         <form:input type="number" id="physicianId" path="physicianId" required="required" class ="form-control spacing" />
+                     </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" for="PatientType">Patient Type</label>
+                     <div class="col-sm-10">
+                       <form:select path="patientType" items="${types}" />
                      </div>
                   </div>
                   <c:if test="${not empty visit.id}">
@@ -63,4 +72,40 @@
       </form:form>
             </div>
    </body>
+   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+   <script>
+   $(document).ready(function() {
+	   $(function() {
+	       $("#search").autocomplete({     
+	           source : function(request, response) {
+	             $.ajax({
+	           headers: { 
+	                'Accept': 'application/json',
+	                'Content-Type': 'application/json' 
+	            },
+	                  url : "searchPatientByName",
+	                  type : "GET",
+	                  data : {
+                          name : request.term
+	                  },
+	                  dataType : "json",
+	                  success : function(data) {
+
+
+	           response($.map(data, function (value, key) {
+	               console.log(value);
+	               return {
+	                   label: value.firstName,
+	                   value: value.firstName
+	               };
+	           }));
+
+	                  }
+	           });
+	        }
+	    });
+	 });
+	});
+   </script>
 </html>

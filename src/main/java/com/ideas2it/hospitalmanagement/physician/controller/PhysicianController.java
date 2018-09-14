@@ -50,7 +50,7 @@ public class PhysicianController {
     }
 
     /**
-     *  This Method is used to redirect user to the webpage with the form used
+     *  This Method is used to redirect user to the web page with the form used
      *  to create and add a new Physician.
      *
      *  @param model a Model object which is used to add the physician as an

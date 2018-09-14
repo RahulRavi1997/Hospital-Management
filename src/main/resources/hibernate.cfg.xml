@@ -20,13 +20,13 @@
 
         <mapping resource="patient.hbm.xml"/>
         <mapping resource="user.hbm.xml"/>
-        
+    <mapping resource="address.hbm.xml"/>
+    <mapping resource="visit.hbm.xml"/>  
   <!--
 
     <mapping resource="bed.hbm.xml"/>
     <mapping resource="prescription.hbm.xml"/>
     <mapping resource="diagnosis.hbm.xml"/>
-    <mapping resource="visit.hbm.xml"/>  
   -->
     </session-factory>
 </hibernate-configuration>
