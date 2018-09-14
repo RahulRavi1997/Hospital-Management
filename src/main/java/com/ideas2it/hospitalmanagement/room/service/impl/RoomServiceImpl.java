@@ -1,61 +1,49 @@
 package com.ideas2it.hospitalmanagement.room.service.impl;
 
 import com.ideas2it.hospitalmanagement.bed.model.Bed;
-import com.ideas2it.hospitalmanagement.bed.service.BedService;
 import com.ideas2it.hospitalmanagement.commons.Constants;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
+import com.ideas2it.hospitalmanagement.room.dao.RoomDao;
+import com.ideas2it.hospitalmanagement.room.dao.impl.RoomDaoImpl;
 import com.ideas2it.hospitalmanagement.room.model.Room;
 import com.ideas2it.hospitalmanagement.room.service.RoomService;
 import com.ideas2it.hospitalmanagement.ward.dao.WardDao;
+import com.ideas2it.hospitalmanagement.ward.service.WardService;
 
 public class RoomServiceImpl implements RoomService {
-	
-    private static WardDao wardDao;
-    private static BedService bedService;
 
-  
-    public  void setWardDao(WardDao wardDao) {
-       this.wardDao = wardDao;
+	private static RoomDao roomDao;
+	private static WardService wardService;
+    
+    public static RoomDao getRoomDao() {
+		return roomDao;
+	}
 
-    }
+	public static void setRoomDao(RoomDaoImpl roomDao) {
+		RoomServiceImpl.roomDao = roomDao;
+	}
 
-    public  void setBedService(BedService bedService) {
-        this.bedService = bedService;
-
-     }
- 
-	
-	public Room createRoom(Room room, String roomType) throws ApplicationException {
-		
-		if (roomType.equals(Constants.ICU)) {
-		    for (int count = 0; count < 1; count++ ) {
-		    	room.getBeds().add(bedService.createBed(new Bed()));
-		    }
-			
+    /**
+     *  {@inheritDoc}
+     */
+	public Room createRoom(Room room) throws ApplicationException {
+		System.out.println("entered room service");
+		Bed bed;
+		for(int i = 0; i < 5; i++) {
+			bed = new Bed();
+			room.getBeds().add(bed);
 		}
-		
-		if (roomType.equals(Constants.PICU)) {
-		    for (int count = 0; count < 3; count++ ) {
-		    	room.getBeds().add(bedService.createBed(new Bed()));
-		    }
-
-			
-		}
-		if (roomType.equals(Constants.EMERGENCYWARD)) {
-		    for (int count = 0; count < 3; count++ ) {
-		    	room.getBeds().add(bedService.createBed(new Bed()));
-		    }
-
-			
-		}
-		if (roomType.equals(Constants.GENERAL)) {
-		    for (int count = 0; count < 5; count++ ) {
-		    	room.getBeds().add(bedService.createBed(new Bed()));
-		    }
-
-			
-		}
-
 	    return room;
+	}
+	
+    /**
+     *  {@inheritDoc}
+     */
+	public Room searchRoomByNumber(int roomNumber) throws ApplicationException {
+		return roomDao.searchRoomByNumber(roomNumber);
+	}
+	
+	public boolean updateRoom(Room room) throws ApplicationException {
+		return roomDao.updateRoom(room);
 	}
 }

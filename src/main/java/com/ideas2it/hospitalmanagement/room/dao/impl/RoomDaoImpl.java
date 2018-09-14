@@ -19,12 +19,24 @@ public class RoomDaoImpl extends GenericDao implements RoomDao{
     /**
      *  {@inheritDoc}
      */
-    public boolean insertRoom(Room room)  throws ApplicationException{
+ 	public Room searchRoomByNumber(int roomNumber) throws ApplicationException{
         try {
-            return (null != super.save(room));
+        	return super.getByAttribute(Room.class,"roomNumber",roomNumber);
         } catch (ApplicationException e) {
             Logger.error(Constants.ROOM_NOT_ADDED, e);
             throw new ApplicationException(Constants.ROOM_NOT_ADDED, e);
+        }
+    }
+ 	
+    /**
+     *  {@inheritDoc}
+     */ 	
+    public boolean updateRoom(Room room) throws ApplicationException {
+        try {
+            return super.update(room);
+        } catch (ApplicationException e) {
+            Logger.error(Constants.ROOM_NOT_UPDATED, e );
+            throw new ApplicationException(Constants.ROOM_NOT_UPDATED, e);
         }
     }
  }

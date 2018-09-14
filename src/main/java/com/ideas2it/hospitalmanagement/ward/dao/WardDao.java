@@ -24,7 +24,7 @@ public interface WardDao {
      *  
      *  @return boolean
      */
-    public boolean insertWard(Ward ward) throws ApplicationException;
+    public Ward insertWard(Ward ward) throws ApplicationException;
     
     /**
      *  <p>
@@ -44,24 +44,38 @@ public interface WardDao {
      *  ward number.
      *  </p>
      *  
-     *  @param ward                             Ward object
-     *  @param attributeName                     Attribute name
-     *  @param attributeValue                     Attribute value
+     *  @param    wardNumber           ward number
      *  
-     *  @return Ward                            Ward object
+     *  @return Ward                   Ward object
      */
-    public Ward searchWard(Ward ward,String attributeName,Object attributeValue) 
-                                                throws ApplicationException;
+    public Ward searchWard(int wardNumber) throws ApplicationException;
+
     
-    /**
-     *  <p>
-     *  getAllWards is a method which retreives all the wards present in
-     *  the database.
-     *  </p>
-     *  
-     *  @param ward                             Ward object
-     *  
-     *  @return boolean
-     */
-    public List<Ward> getAllWards() throws ApplicationException;
+    
+	/**
+	 * <p>
+	 * Delete a particular ward.
+	 * </p>
+	 * @param   ward  ward information
+	 * @return  true  if the ward is deleted
+	 *          false if the ward is not deleted.
+	 * @throws ApplicationException
+	 */
+	public boolean deleteWard(Ward ward) throws ApplicationException;
+
+	/**
+	 * <p>
+	 * display all the wards 
+	 * </p>
+	 * @param   status  Status of the ward to be searched.
+	 * @return
+	 * @throws ApplicationException
+	 */
+	public List<Ward> displayAllWards(String status) throws ApplicationException;
+
+	public boolean changeWardToFree(Ward ward)throws ApplicationException;
+
+	public boolean addRoomsToWard(Ward ward)throws ApplicationException;
+
+
 }

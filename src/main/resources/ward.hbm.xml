@@ -5,10 +5,17 @@
 
  <hibernate-mapping>
   <class name="com.ideas2it.hospitalmanagement.ward.model.Ward" table="wards">
-    <id name="id" column="bedNumber">
+    <id name="wardNumber" column="wardNumber">
      <generator class="increment"></generator>
     </id>
-    <property name="wardNumber" column="wardNumber" type="string"/>
+    <property name="name" column="name" type="string"/>
     <property name="status" column="status" type="string"/>
+    
+    
+    
+          <bag name = "rooms" cascade = "all" lazy = "false">
+          <key column = "wardNumber"/>
+          <one-to-many class = "com.ideas2it.hospitalmanagement.room.model.Room"/>
+      </bag>
   </class>
  </hibernate-mapping>

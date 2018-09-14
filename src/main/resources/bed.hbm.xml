@@ -1,0 +1,16 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name = "com.ideas2it.hospitalmanagement.bed.model.Bed" table = "Beds">
+      <id name = "bedNumber" type = "int">
+         <column name= "bedNumber" default = "0" />
+         <generator class="increment"/>
+      </id>
+      <property name = "visitId" column = "visitId" type = "int" />
+	  <property name = "roomNumber" column = "roomNumber" type = "int" />
+      <property name = "status" column = "status" type = "string"/>
+   </class>
+</hibernate-mapping>
