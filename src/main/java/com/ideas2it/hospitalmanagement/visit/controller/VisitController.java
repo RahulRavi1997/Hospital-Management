@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ideas2it.hospitalmanagement.commons.Constants;
 import com.ideas2it.hospitalmanagement.commons.enums.PatientType;
+import com.ideas2it.hospitalmanagement.commons.enums.Specialisation;
 import com.ideas2it.hospitalmanagement.logger.Logger;
 import com.ideas2it.hospitalmanagement.visit.model.Visit;
 import com.ideas2it.hospitalmanagement.visit.service.VisitService;
@@ -58,6 +59,7 @@ public class VisitController {
 
     	Visit visit = new Visit();
         model.addAttribute("types",PatientType.values());
+        model.addAttribute("specialisations",Specialisation.values());
         return new ModelAndView(Constants.CREATE_VISIT_JSP, Constants.VISIT_OBJECT
             , visit);
     }

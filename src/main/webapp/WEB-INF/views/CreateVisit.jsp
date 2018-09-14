@@ -49,6 +49,19 @@
                      </div>
                   </div>
                   <div class="form-group">
+                    <label class="col-sm-2 control-label" for="Specialisation">Specialisation</label>
+                     <div class="col-sm-10">
+                      <select id='specialisation'>
+                      <c:forEach items="${specialisations}" var="specialisation">
+                        <c:if test="${specialisation != selected}">
+                         <option value="${specialisation}">${specialisation}</option>
+                          </c:if>
+                           </c:forEach> 
+                           </select>
+                     </div>
+                  </div>
+                  
+                  <div class="form-group">
                     <label class="col-sm-2 control-label" for="PatientType">Patient Type</label>
                      <div class="col-sm-10">
                        <form:select path="patientType" items="${types}" />
@@ -107,6 +120,35 @@
 	        }
 	    });
 	 });
+	});
+   $(document).ready(function(){
+
+	    $("#specialisation").change(function(){
+	        var specialisation = $(this).val();
+
+	        $.ajax({
+	            url: 'displayPhysiciansBySpecialisation',
+	            type: 'GET',
+	            data: {
+	            	specialisation:deptid
+	            	},
+	            dataType: 'json',
+	            success:function(response){
+
+	                var len = response.length;
+
+	                $("#sel_user").empty();
+	                for( var i = 0; i<len; i++){
+	                    var id = response[i]['id'];
+	                    var name = response[i]['name'];
+	                    
+	                    $("#sel_user").append("<option value='"+id+"'>"+name+"</option>");
+
+	                }
+	            }
+	        });
+	    });
+
 	});
    </script>
 </html>
