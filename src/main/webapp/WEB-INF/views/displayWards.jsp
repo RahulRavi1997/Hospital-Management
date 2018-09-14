@@ -15,7 +15,6 @@
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a onclick="document.getElementById('addWard').style.display='block'" style="width:auto;">Add Ward</a>
-   <a onclick="document.getElementById('searcWard').style.display='block'" style="width:auto;">Search Ward</a>
 </div>
 
 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
@@ -91,13 +90,30 @@ Enter the Number of rooms :
    <button class="button"><span> Maintaince </span></button>
    </tr>
    <tr>
-      <button class="button"><span> Add Rooms </span></button>
+      <button onclick="document.getElementById('addRooms').style.display='block'" style="width:auto;" class="button"><span> Add Rooms </span></button>
       </tr>
        <tr>
       <button class="button"><span> Free </span></button>
       </tr>
       </table>
    <hr>
+   <div id="addRooms" class="modal">
+        <form:form class="modal-content animate" action = "wardOperation" commandName = "ward" method ="post">
+  
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('addRooms').style.display='none'" class="close" title="Close Modal">&times;</span>
+    </div>
+
+    <div class="container">
+        <h2 class = "wardDetails" > Add rooms to the ward</h2>
+Enter the Number of rooms :
+<input type="text" pattern =[0-9]* name = "noOfRooms" placeholder= "Number of Rooms " maxlength= "20"   title="Enter a valid number "  required = "required"/>
+<input type = "hidden" value = "${ward.wardNumber}" name = "wardNumber">
+ <input class = "addWard" type="submit" name="AddRooms" value="Add Rooms ${ward.wardNumber}"/>
+    </div>
+
+   </form:form>
+</div>
    </c:forEach>
    
    
@@ -110,6 +126,9 @@ Enter the Number of rooms :
    
    
    
+   
+
+
    
    
    

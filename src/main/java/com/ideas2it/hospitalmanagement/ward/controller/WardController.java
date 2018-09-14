@@ -73,9 +73,12 @@ public class WardController {
   @RequestMapping(value="/wardOperation", method=RequestMethod.POST, params="ChangeWardToMaintaince")
   public ModelAndView ChangeWardToMaintaince(@ModelAttribute("ward") Ward ward) {
 	  
-	 ModelAndView mav = new ModelAndView("a");
+	 ModelAndView mav = new ModelAndView("displayWards");
 	  try {
       	wardService.deleteWard(wardService.searchWard(ward.getWardNumber()));
+        mav.addObject("wards" , wardService.displayAllWards("All"));
+        mav.addObject("ward" , new Ward());
+
       } catch(ApplicationException e) {
     	  
       }
@@ -86,10 +89,13 @@ public class WardController {
   @RequestMapping(value="/wardOperation", method=RequestMethod.POST, params="ChangeWardToFree")
 	  public ModelAndView ChangeWardToFree(@RequestParam("number")String wardnumber) {
 		  Ward ward = new Ward();
-		 ModelAndView mav = new ModelAndView("a");
+		 ModelAndView mav = new ModelAndView("displayWards");
 		  try {
 	      ward = 	wardService.searchWard(Integer.parseInt(wardnumber));
      		wardService.changeWardToFree(ward);
+            mav.addObject("wards" , wardService.displayAllWards("All"));
+            mav.addObject("ward" , new Ward());
+
       } catch(ApplicationException e) {
     	  
       }
@@ -98,17 +104,18 @@ public class WardController {
   }
   
   
-  @RequestMapping(value="/wardOperation", method=RequestMethod.POST, params="AddRoomsToWard")
-  public ModelAndView addRoomsToWard(@RequestParam("number")String wardnumber,
-		  @RequestParam("NoOfRooms")String noOfRooms) {
+  @RequestMapping(value="/wardOperation", method=RequestMethod.POST, params="AddRooms")
+  public ModelAndView addRoomsToWard(@RequestParam("wardNumber")String wardnumber,
+		   @RequestParam("noOfRooms")String noOfRooms) {
 	  Ward ward = new Ward();
 	  System.out.println("wwwwwwwwwwwwwwwww" + noOfRooms + "" + wardnumber);
-	 ModelAndView mav = new ModelAndView("a");
+	 ModelAndView mav = new ModelAndView("displayWards");
 	  try {
       ward = 	wardService.searchWard(Integer.parseInt(wardnumber));
       wardService.addRoomsToWard(ward, Integer.parseInt(noOfRooms));
+      mav.addObject("wards" , wardService.displayAllWards("All"));
+      mav.addObject("ward" , new Ward());
 
-      mav.addObject("ward" , ward);
       System.out.println("rooms in ward" + ward);
       } catch(ApplicationException e) {
     	  
@@ -121,10 +128,11 @@ public class WardController {
   public ModelAndView SearchWard(@RequestParam("number")String wardnumber) {
 	  Ward ward = new Ward();
 	  System.out.println("wwwwwwwwwwwwwwwww" + wardnumber);
-	 ModelAndView mav = new ModelAndView("a");
+	 ModelAndView mav = new ModelAndView("displayWards");
 	  try {
       ward = 	wardService.searchWard(Integer.parseInt(wardnumber));
-      mav.addObject("ward" , ward);
+      mav.addObject("wards" , wardService.displayAllWards("All"));
+      mav.addObject("ward" , new Ward());
       System.out.println("rooms in ward" + ward);
       } catch(ApplicationException e) {
     	  
