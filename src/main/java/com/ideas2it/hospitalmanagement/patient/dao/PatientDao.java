@@ -3,7 +3,6 @@ package com.ideas2it.hospitalmanagement.patient.dao;
 import java.util.List;
 
 import com.ideas2it.hospitalmanagement.patient.model.Patient;
-import com.ideas2it.hospitalmanagement.physician.model.Physician;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 
 /**

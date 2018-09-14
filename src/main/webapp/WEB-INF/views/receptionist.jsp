@@ -8,10 +8,10 @@
 <body>
 	Dear <strong>${email}</strong>, Welcome to Receptionist Page.
 	<a href="<c:url value="/logout" />">Logout</a>
-	<form action="createpatient" method="get">
+	<form action="createPatient" method="get">
 	  <input type="submit" value="CreatePatient">
 	</form>
-    <form action="searchpatient" method="get">
+    <form action="displayPatients" method="get">
 	  <input type="submit" value="SearchPatient">
 	</form>
 </body>

@@ -11,8 +11,8 @@ package com.ideas2it.hospitalmanagement.address.model;
 public class Address {
 
 	private Integer id;
-	private String AddressLine1;
-    private String AddressLine2;
+	private String addressLine1;
+    private String addressLine2;
     private String country;
     private Long pinCode;
 	private Integer physicianId;
@@ -25,16 +25,16 @@ public class Address {
 		this.id = id;
 	}
 	public String getAddressLine1() {
-		return AddressLine1;
+		return addressLine1;
 	}
 	public void setAddressLine1(String addressLine1) {
-		AddressLine1 = addressLine1;
+		addressLine1 = addressLine1;
 	}
 	public String getAddressLine2() {
-		return AddressLine2;
+		return addressLine2;
 	}
 	public void setAddressLine2(String addressLine2) {
-		AddressLine2 = addressLine2;
+		addressLine2 = addressLine2;
 	}
 	public String getCountry() {
 		return country;

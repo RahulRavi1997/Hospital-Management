@@ -24,7 +24,7 @@ public class Patient {
 	private Integer id;
     private String firstName;
     private String lastName;
-    private String email;
+    private String emailId;
 	private Long mobileNumber;
     private Date birthDate;
     private Address address = new Address();
@@ -51,11 +51,11 @@ public class Patient {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public String getEmail() {
-		return email;
+	public String getEmailId() {
+		return emailId;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
 	}
 	public Long getMobileNumber() {
 		return mobileNumber;
@@ -66,7 +66,7 @@ public class Patient {
 	public Date getBirthDate() {
 		return birthDate;
 	}
-    @DateTimeFormat(pattern = Constants.REVERSED_DATE_FORMAT)
+        @DateTimeFormat(pattern = Constants.REVERSED_DATE_FORMAT)
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
