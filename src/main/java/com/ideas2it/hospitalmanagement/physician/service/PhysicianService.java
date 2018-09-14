@@ -102,6 +102,25 @@ public interface PhysicianService {
 
 	/**
 	 * <p>
+	 * This Method is used to search an Physician Entry and return the Physician
+	 * objects. It returns null if no match is found.
+	 * </p>
+	 *
+	 * @param specialisation a String indicating the specialisation of the
+	 *                       physician that is to be searched an returned.
+	 *
+	 * @return physicians an ArrayList of  Physicians is returned if a valid match is
+	 *                     found, else returns null.
+	 *
+	 * @throws ApplicationException A Custom Exception created for catching
+	 *                              exceptions that occur while retrieving an
+	 *                              physician.
+	 */
+	public List<Physician> retrievePhysiciansBySpecialisation(String specialisation)
+			throws ApplicationException;
+	
+	/**
+	 * <p>
 	 *  This Method is used to obtain all the physician details using an
 	 *  list. Returns an empty list if no physicians are added.
 	 * </p>

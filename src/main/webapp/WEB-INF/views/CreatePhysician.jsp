@@ -32,6 +32,11 @@
     <fmt:formatDate value="${maxdob}" var="maxBirthDate" type="date" pattern="yyyy-MM-dd" />
     <fmt:parseDate value="${currentYear-100}-${currentMonth}-${currentDay}" pattern="yyyy-MM-dd" var="mindob" type="date" />
     <fmt:formatDate value="${mindob}" var="minBirthDate" type="date" pattern="yyyy-MM-dd" />
+           <a href="displayPhysicians">
+          <button class="btn-margin-format add-button">
+             View All Physicians
+          </button>
+          </a>
     <form:form commandName="physician" action="${operation}" method="post" onsubmit="submit_form(this.form)">
       <form:hidden path="id" value="${physician.id}"/>
       <form:hidden path="active" value="${physician.isActive()}"/>
@@ -104,6 +109,8 @@
               </div>
             </div>
           </div>
+
+
         </div>
          Add User Login For Physician
 	    <input type="text"  id="autocomplete" value="" name="UserEmail">

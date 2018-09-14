@@ -13,6 +13,7 @@
     <META HTTP-EQUIV="Expires" CONTENT="-1">
   </head>
   <body>
+   
     <link rel="stylesheet" href="/static/css/hms.css">
     <c:if test="${not empty message}">
      <div id="snackbar">${message}</div>
