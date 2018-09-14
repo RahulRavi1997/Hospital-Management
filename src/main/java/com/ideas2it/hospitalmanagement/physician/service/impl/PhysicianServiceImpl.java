@@ -130,4 +130,14 @@ public class PhysicianServiceImpl implements PhysicianService {
         }
         return userService.modifyUser(user);
     }
+    
+	/**
+	 *  {@inheritDoc}
+	 */
+	public List<Physician> retrievePhysiciansBySpecialisation(String specialisation)
+			throws ApplicationException {
+
+		return physicianDao.getPhysiciansBySpecialisation(specialisation);
+	}
+    
 }

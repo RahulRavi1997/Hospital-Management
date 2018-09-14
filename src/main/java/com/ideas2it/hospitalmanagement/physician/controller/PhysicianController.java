@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;  
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import com.google.gson.Gson;
 import com.ideas2it.hospitalmanagement.address.model.Address;
 import com.ideas2it.hospitalmanagement.commons.Constants;
 import com.ideas2it.hospitalmanagement.commons.enums.Gender;
@@ -282,6 +284,19 @@ public class PhysicianController {
             Logger.error(e);
             return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
                     Constants.PHYSICIAN_DISPLAY_EXCEPTION);
+        }
+    }
+    
+    @RequestMapping(value="/displayPhysiciansBySpecialisation",
+    		produces={"application/json","application/xml"}, consumes="application/json",
+   	headers = "content-type=application/x-www-form-urlencoded", method = RequestMethod.GET)
+    private @ResponseBody String displayPhysiciansBySpecialisation(Model model,
+    		@RequestParam("specialisation") String specialisation) {
+        try {
+        	return new Gson().toJson(physicianService.retrievePhysiciansBySpecialisation(specialisation));
+        } catch (ApplicationException e) {
+            Logger.error(e);
+            return null;
         }
     }
 }

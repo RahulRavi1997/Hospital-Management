@@ -117,6 +117,24 @@ public interface PhysicianDao {
 	     *                              that occur while displaying all physicians.
 	     */
 	    public List<Physician> getPhysiciansByIds(Integer[] ids) throws ApplicationException;
-	
+	    
+		/**
+		 * <p>
+		 * This Method is used to search an Physician Entry and return the Physician
+		 * objects. It returns null if no match is found.
+		 * </p>
+		 *
+		 * @param specialisation a String indicating the specialisation of the
+		 *                       physician that is to be searched an returned.
+		 *
+		 * @return physicians an ArrayList of  Physicians is returned if a valid match is
+		 *                     found, else returns null.
+		 *
+		 * @throws ApplicationException A Custom Exception created for catching
+		 *                              exceptions that occur while retrieving an
+		 *                              physician.
+		 */
+		public List<Physician> getPhysiciansBySpecialisation(String specialisation)
+				throws ApplicationException;
 	
 }

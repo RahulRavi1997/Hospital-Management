@@ -18,9 +18,12 @@ import org.hibernate.Query;
 
 public class PhysicianDaoImpl extends GenericDao implements PhysicianDao {
 
-
 	String PHYSICIAN_IN_QUERY = "from Physician where id in (:ids)";
 	String IDS = "ids";
+
+	String PHYSICIAN_SPECIALISATION_QUERY = "from Physician where specialisation in (:specialisation)";
+	String SPECIALISATION = "specialisation";
+	
 	public PhysicianDaoImpl() throws ApplicationException {
 		super();
 	}
@@ -117,5 +120,22 @@ public class PhysicianDaoImpl extends GenericDao implements PhysicianDao {
 			Logger.error(Constants.PHYSICIAN_DISPLAY_EXCEPTION, e);
 			throw new ApplicationException(Constants.PHYSICIAN_DISPLAY_EXCEPTION, e);
 		}
+	}
+	/**
+	 *  {@inheritDoc}
+	 */
+	public List<Physician> getPhysiciansBySpecialisation(String specialisation)
+			throws ApplicationException {
+		
+		try {
+			Session session = super.getSession();
+			Query query = session.createQuery(PHYSICIAN_SPECIALISATION_QUERY);  
+			query.setParameter(SPECIALISATION, specialisation); 
+			return query.list();
+		} catch (ApplicationException e) {
+			Logger.error(Constants.PHYSICIAN_DISPLAY_EXCEPTION, e);
+			throw new ApplicationException(Constants.PHYSICIAN_DISPLAY_EXCEPTION, e);
+		}
+		
 	}
 }
