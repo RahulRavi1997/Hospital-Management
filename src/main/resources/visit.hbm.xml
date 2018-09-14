@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 5.3//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-5.3.dtd">
+
+ <hibernate-mapping>
+  <class name="com.ideas2it.hospitalmanagement.visit.model.Visit" table="users">
+    <id name="id" column="id">
+     <generator class="increment"></generator>
+    </id>
+    <property name="admitDate" column="ADMIT_DATE" type="date"/>
+    <property name="dischargeDate" column="DISCHARGE_DATE" type="date"/>
+    <property name="patientType" column="PATIENT_TYPE" type="string"/>
+    <one-to-one name="patientId" fetch="join" lazy="false" cascade="all" class="com.ideas2it.hospitalmanagement.patient.model.Patient" />
+    <one-to-one name="physicianId" fetch="join"  lazy="false" cascade="all" class="com.ideas2it.hospitalmanagement.physician.model.Physician" />
+  </class>
+ </hibernate-mapping>

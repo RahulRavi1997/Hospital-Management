@@ -54,7 +54,7 @@ public class VisitController {
      * @return ModelAndView Object which redirects to the Create visit Page.
      */
     @RequestMapping(value = Constants.CREATE_VISIT, method = RequestMethod.GET)
-    public ModelAndView getvisitDetailsFromUser(Model model) {
+    public ModelAndView getVisitDetailsFromUser(Model model) {
 
     	Visit visit = new Visit();
         model.addAttribute("types",PatientType.values());
@@ -77,7 +77,7 @@ public class VisitController {
      */
     @RequestMapping(value = Constants.ADD_VISIT, method = {RequestMethod.POST
         ,RequestMethod.GET})
-    private ModelAndView createvisit(@ModelAttribute(Constants.VISIT) 
+    private ModelAndView createVisit(@ModelAttribute(Constants.VISIT) 
             Visit visit) {
 
         try {
@@ -105,7 +105,7 @@ public class VisitController {
      */
     @RequestMapping(value = Constants.MODIFY_VISIT, method = {RequestMethod.POST
         ,RequestMethod.GET})
-    public ModelAndView getvisitToModify(@RequestParam(Constants.ID)
+    public ModelAndView getVisitToModify(@RequestParam(Constants.ID)
             Integer visitId, Model model) {
 
         try {
@@ -135,7 +135,7 @@ public class VisitController {
      */
     @RequestMapping(value = Constants.UPDATE_VISIT, method = {RequestMethod.POST
         ,RequestMethod.GET})
-    private ModelAndView updatevisit(@ModelAttribute(Constants.VISIT)
+    private ModelAndView updateVisit(@ModelAttribute(Constants.VISIT)
             Visit visit) {
 
         try {
@@ -166,7 +166,7 @@ public class VisitController {
      */
     @RequestMapping(value = Constants.SEARCH_VISIT, method = {RequestMethod.POST
         ,RequestMethod.GET})
-    public ModelAndView searchvisit(@RequestParam(Constants.ID)
+    public ModelAndView searchVisit(@RequestParam(Constants.ID)
             Integer visitId) {
 
         try {

@@ -25,15 +25,13 @@
     <bean id="patientController"  class="com.ideas2it.hospitalmanagement.patient.controller.PatientController" >
         <property name="patientService" ref="patientServiceImpl" />
     </bean>
-    <!--
     <bean id="visitDaoImpl" class="com.ideas2it.hospitalmanagement.visit.dao.impl.VisitDaoImpl"/>
     <bean id="visitServiceImpl" class="com.ideas2it.hospitalmanagement.visit.service.impl.VisitServiceImpl" >
         <property name="visitDao" ref="visitDaoImpl"/>
-        <property name="patientService" ref="patientServiceImpl" />
     </bean>
     <bean id="visitController"  class="com.ideas2it.hospitalmanagement.visit.controller.VisitController" >
         <property name="visitService" ref="visitServiceImpl"/>
-    </bean> -->
+    </bean> 
 
     <bean id="userDaoImpl" class="com.ideas2it.hospitalmanagement.user.dao.impl.UserDaoImpl"/>
 
