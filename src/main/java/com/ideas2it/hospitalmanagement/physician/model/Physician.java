@@ -8,7 +8,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.ideas2it.hospitalmanagement.address.model.Address;
 import com.ideas2it.hospitalmanagement.commons.Constants;
-import com.ideas2it.hospitalmanagement.patient.model.Patient;
 import com.ideas2it.hospitalmanagement.user.model.User;
 import com.ideas2it.hospitalmanagement.utils.DateUtil;
 
@@ -23,7 +22,7 @@ public class Physician {
     private String gender;
 	private String specialisation;
 	private boolean active;
-	private User user = new User();
+	private User user;
 	private List<Address> addresses = new ArrayList<Address>();
 
 	public Integer getId() {

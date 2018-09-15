@@ -109,8 +109,9 @@
 	           response($.map(data, function (value, key) {
 	               console.log(value);
                    $("#patientId").val(value.id);
+                   var id = value.id;
 	               return {
-	                   label: value.firstName,
+	                   label: value.firstName +" - [" +  id  + "]",
 	                   value: value.firstName,
 	               };
 	           }));

@@ -31,7 +31,8 @@ public class UserDaoImpl extends GenericDao implements UserDao {
     String IDS = "ids";
     String QUERY = "query";
     String ROLE = "role";
-    String USER_AUTOCOMPLETE_QUERY = "From User where email like :query and role = : role order by email";
+    String ACTIVE = "active";
+    String USER_AUTOCOMPLETE_QUERY = "From User where email like :query and role = : role and active like :active order by email";
     /**
      *  {@inheritDoc}
      */
@@ -143,7 +144,8 @@ public class UserDaoImpl extends GenericDao implements UserDao {
             Session session = super.getSession();
             Query query = session.createQuery(USER_AUTOCOMPLETE_QUERY);  
             query.setParameter(QUERY, autoCompleteQuery + "%" ); 
-            query.setParameter(ROLE, role); 
+            query.setParameter(ROLE, role);
+            query.setParameter(ACTIVE, Boolean.TRUE);
             return query.setMaxResults(10).list();
         } catch (ApplicationException e) {
             Logger.error(Constants.USER_DISPLAY_EXCEPTION, e);
