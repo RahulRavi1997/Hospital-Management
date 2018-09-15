@@ -144,6 +144,8 @@ public final class Constants {
    public static final String PATIENT_RESTORE_EXCEPTION = 
            "Error while restoring patient id %d\n";
    public static final String PATIENT_OBJECT = "patient";
+   public static final String PATIENT_ID = "patientId";
+   public static final String PHYSICIAN_ID = "physicianId";
    public static final String PATIENT_OBJECTS = "patients";
 
    public static final String CREATE_VISIT = "/createVisit";

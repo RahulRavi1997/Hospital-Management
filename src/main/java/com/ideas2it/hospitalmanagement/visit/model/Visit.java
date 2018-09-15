@@ -49,16 +49,16 @@ public class Visit {
 	public void setDischargeDate(Date dischargeDate) {
 		this.dischargeDate = dischargeDate;
 	}
-	public Patient getPatientId() {
+	public Patient getPatient() {
 		return patient;
 	}
-	public void setPatientId(Patient patientId) {
+	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}
-	public Physician getPhysicianId() {
+	public Physician getPhysician() {
 		return physician;
 	}
-	public void setPhysicianId(Physician physician) {
+	public void setPhysician(Physician physician) {
 		this.physician = physician;
 	}
     public String getPatientType() {

@@ -11,7 +11,7 @@
     <property name="admitDate" column="ADMIT_DATE" type="date"/>
     <property name="dischargeDate" column="DISCHARGE_DATE" type="date"/>
     <property name="patientType" column="PATIENT_TYPE" type="string"/>
-    <many-to-one name = "patient" column = "PATIENT" class="com.ideas2it.hospitalmanagementsystem.patient.model.Patient" cascade="all" not-null="false"/>
-    <many-to-one name = "physician" column = "PHYSICIAN" class="com.ideas2it.hospitalmanagementsystem.physician.model.Physician" cascade="all" not-null="false"/>
+    <many-to-one name = "patient" column = "PATIENT" class="com.ideas2it.hospitalmanagement.patient.model.Patient" cascade="all" not-null="false"/>
+    <many-to-one name = "physician" column = "PHYSICIAN" class="com.ideas2it.hospitalmanagement.physician.model.Physician" cascade="all" not-null="false"/>
   </class>
  </hibernate-mapping>

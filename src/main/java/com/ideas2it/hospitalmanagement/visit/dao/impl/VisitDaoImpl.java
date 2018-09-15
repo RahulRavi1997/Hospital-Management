@@ -46,9 +46,9 @@ public class VisitDaoImpl extends GenericDao implements VisitDao {
 			return (null != super.save(visit));
 		} catch (ApplicationException e) {
 			Logger.error(String.format(Constants.
-					VISIT_ADDITION_EXCEPTION, visit.getPatientId(), visit.getPhysicianId()), e);
+					VISIT_ADDITION_EXCEPTION, visit.getPatient(), visit.getPhysician()), e);
 			throw new ApplicationException(String.format(Constants.
-					VISIT_ADDITION_EXCEPTION, visit.getPatientId(), visit.getPhysicianId()), e);
+					VISIT_ADDITION_EXCEPTION, visit.getPatient(), visit.getPhysician()), e);
 		}
 	}
 

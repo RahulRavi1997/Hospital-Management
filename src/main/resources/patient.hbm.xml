@@ -16,8 +16,8 @@
     <property name="active" column="ACTIVE" type="boolean"/>
     <property name="gender" column="GENDER" type="string"/>
     <bag name = "addresses" cascade ="save-update" fetch="select" lazy="false">
-      <key column ="clientid"/>
-      <one-to-many class="com.ideas2it.employeeinformation.address.model.Address"/>
+      <key column ="PATIENT_ID"/>
+      <one-to-many class="com.ideas2it.hospitalmanagement.address.model.Address"/>
     </bag>
   </class>
  </hibernate-mapping>

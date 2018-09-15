@@ -80,10 +80,11 @@ public class VisitController {
     @RequestMapping(value = Constants.ADD_VISIT, method = {RequestMethod.POST
         ,RequestMethod.GET})
     private ModelAndView createVisit(@ModelAttribute(Constants.VISIT) 
-            Visit visit) {
+            Visit visit, @RequestParam(Constants.PATIENT_ID) Integer patientId,
+            @RequestParam(Constants.PHYSICIAN_ID) Integer physicianId) {
 
         try {
-        	visitService.addVisit(visit);
+        	visitService.addVisit(visit, patientId, physicianId);
             return new ModelAndView(Constants.SEARCH_VISIT_JSP);
         } catch (ApplicationException e) {
             Logger.error(e);

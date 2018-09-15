@@ -68,10 +68,10 @@ public class Patient {
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
-	public List<Address> getAddress() {
+	public List<Address> getAddresses() {
 		return addresses;
 	}
-	public void setAddress(List<Address> addresses) {
+	public void setAddresses(List<Address> addresses) {
 		this.addresses = addresses;
 	}
 	public boolean isActive() {

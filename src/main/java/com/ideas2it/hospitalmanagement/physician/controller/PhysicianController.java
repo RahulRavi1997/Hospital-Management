@@ -1,7 +1,7 @@
 package com.ideas2it.hospitalmanagement.physician.controller;
 
+import java.util.ArrayList;
 import java.util.List;
-
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.google.gson.Gson;
+import com.ideas2it.hospitalmanagement.address.model.Address;
 import com.ideas2it.hospitalmanagement.commons.Constants;
 import com.ideas2it.hospitalmanagement.commons.enums.Gender;
-import com.ideas2it.hospitalmanagement.commons.enums.Role;
 import com.ideas2it.hospitalmanagement.commons.enums.Specialisation;
 import com.ideas2it.hospitalmanagement.physician.model.Physician;
 import com.ideas2it.hospitalmanagement.physician.service.PhysicianService;
@@ -256,7 +256,7 @@ public class PhysicianController {
     /**
      * This Method is used to display all details of the physicians.
      *
-     * @return response a HttpServletResponse object which is used to redirect
+     * @return response a HttpServletResponse com.google.gson.internal.bind.TypeAdaptersobject which is used to redirect
      *                 or send text output.
      *
      * @return modelAndView a ModelAndView object which is used to add
@@ -283,7 +283,8 @@ public class PhysicianController {
     private @ResponseBody String displayPhysiciansBySpecialisation(Model model,
     		@RequestParam("specialisationName") String specialisation) {
         try {
-        	return new Gson().toJson(physicianService.retrievePhysiciansBySpecialisation(specialisation));
+        	List <Physician> physicians = physicianService.retrievePhysiciansBySpecialisation(specialisation);
+        	return new Gson().toJson(physicians);
         } catch (ApplicationException e) {
             Logger.error(e);
             return null;
