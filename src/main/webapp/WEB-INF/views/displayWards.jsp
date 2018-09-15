@@ -1,13 +1,11 @@
-
-
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-   pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>  
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <html>
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
       <link rel="stylesheet" type="text/css" href="static/css/Ward.css"/>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       <title>Welcome page</title>
@@ -20,10 +18,19 @@
             <a onclick="document.getElementById('addWard').style.display='block'" style="width:auto;">Add Ward</a>
          </div>
          <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
-         <input type = "text" class = "searchWard" pattern =[0-9]* name = "noOfRooms" placeholder= "Ward Number " maxlength= "20">    
-  <button class = "search" type="submit"><i class="fa fa-search"></i></button>
-         
+ 
       </div>
+      
+      	 
+      	 <form:form action="searchWard" method ="post">
+      	      Search for a ward : 
+      	 <select name="wardNumber">
+	    <c:forEach items="${wards}" var="ward">
+	        <option value="${ward.wardNumber}">${ward.wardNumber}</option>
+	    </c:forEach>
+		</select><input type="submit" value="Search">
+		</form:form>
+      	 
       <h2 class = "wardDetails"> Wards Information </h2>
       <div id="addWard" class="modal">
          <form:form class="modal-content animate" action = "wardOperation" commandName = "ward" method ="post">
@@ -43,6 +50,34 @@
 
       <c:forEach items= "${wards}" var = "ward">
          <h2 class ="wardInformation" > Ward Name : ${ward.name} &nbsp Ward Number : ${ward.wardNumber} </h2>
+         		<div>
+            <form:form action = "openAddMenu" method ="post">
+               <button class="w3-btn w3-orange" estyle="float:left;"> <input type = "hidden" value = "${ward.wardNumber}" name = "number"><span> Add rooms </span></button></form:form>
+            
+            <c:if test="${ward.status == 'under maintaince'}">
+              
+                  <form:form action = "ChangeWardToFree" method ="post">
+                     <input type = "hidden" value = "${ward.wardNumber}" name = "number">
+                     <button  class="w3-btn w3-orange" style="float:right;" ><span> Free </span></button>
+                  </form:form>
+               
+            </c:if>
+            <c:if test="${ward.status == 'free'}">
+               
+                  <form:form action = "ChangeWardToMaintaince" method ="post">
+                     <input type = "hidden" value = "${ward.wardNumber}" name = "wardNumber">
+                     <button class="w3-btn w3-orange" style="float:right;"><span> Maintaince </span></button>
+                  </form:form>
+               
+            </c:if>
+
+            <c:if test="${addRoomsToWard == 'Yes'}">
+               <script> 
+               window.onload = function() {
+               document.getElementById('addRooms').style.display='block';
+               } 
+            </script>
+            </c:if></div>
          <div class = "wardBasicInformation">
             <c:forEach items= "${ward.rooms}" var = "room">
                <div class = "roomBasicInformation">
@@ -64,41 +99,25 @@
                </div>
             </c:forEach>
          </div>
-         <table>
-            <tr>
-               <button onclick="document.getElementById('addRooms').style.display='block'" style="width:auto;" class="button"><span> Add rooms </span></button>
-            </tr>
-            <c:if test="${ward.status == 'under maintaince'}">
-               <tr>
-                  <form:form action = "ChangeWardToFree" method ="post">
-                     <input type = "hidden" value = "${ward.wardNumber}" name = "number">
-                     <button class="button"><span> Free </span></button>
-                  </form:form>
-               </tr>
-            </c:if>
-            <c:if test="${ward.status == 'free'}">
-               <tr>
-                  <form:form action = "ChangeWardToMaintaince" method ="post">
-                     <input type = "hidden" value = "${ward.wardNumber}" name = "wardNumber">
-                     <button class="button"><span> Maintaince </span></button>
-                  </form:form>
-               </tr>
-            </c:if>
-         </table>
-         <hr>
+
+
          <div id="addRooms" class="modal">
-            <form:form class="modal-content animate" action = "wardOperation" commandName = "ward" method ="post">
+            
                <div class="imgcontainer">
                   <span onclick="document.getElementById('addRooms').style.display='none'" class="close" title="Close Modal">&times;</span>
                </div>
-               <div class="container">
+               
+               <div class="container modal-content animate">
                   <h2 class = "wardDetails" > Add rooms to the ward</h2>
                   Enter the Number of rooms :
+                <form:form action = "AddRooms" method ="post">
                   <input type="text" pattern =[0-9]* name = "noOfRooms" placeholder= "Number of Rooms " maxlength= "20"   title="Enter a valid number "  required = "required"/>
-                  <input type = "hidden" value = "${ward.wardNumber}" name = "wardNumber">
-                  <input class = "addWard" type="submit" name="AddRooms" value="Add Rooms"/>
+    
+                    <input type = "hidden" value = "${wardNumber}" name = "wardNumber">
+                     <button class="button"><span> Add Rooms </span></button>
+                </form:form>
                </div>
-            </form:form>
+            
          </div>
       </c:forEach>
       <script>
@@ -123,4 +142,3 @@
       </script>
    </body>
 </html>
-

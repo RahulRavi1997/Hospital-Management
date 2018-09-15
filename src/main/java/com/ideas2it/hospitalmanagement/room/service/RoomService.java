@@ -1,7 +1,10 @@
 package com.ideas2it.hospitalmanagement.room.service;
 
+import java.util.List;
+
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
-import com.ideas2it.hospitalmanagement.room.model.Room;;
+import com.ideas2it.hospitalmanagement.room.model.Room;
+import com.ideas2it.hospitalmanagement.ward.model.Ward;;
 
 public interface RoomService {
 	
@@ -40,4 +43,8 @@ public interface RoomService {
      *  										False if room modification fails
      */
 	public boolean updateRoom(Room room) throws ApplicationException;
+	
+	public List<Ward> getWards() throws ApplicationException;
+
+	public Ward getWardByNumber(int wardNumber)throws ApplicationException;
 }
