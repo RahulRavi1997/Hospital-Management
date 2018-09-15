@@ -155,7 +155,7 @@ public interface UserService {
      */
     public List<User> retrieveUsersByIds(Integer[] ids) throws ApplicationException;
     
-	public List<User> retrieveUsersByQuery(String query) throws ApplicationException;
+	public List<User> retrieveUsersByQuery(String query, String role) throws ApplicationException;
 
 }
 

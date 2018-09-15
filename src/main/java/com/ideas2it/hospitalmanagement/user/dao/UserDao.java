@@ -144,6 +144,6 @@ public interface UserDao {
      */
     public List<User> getUsersByIds(Integer[] ids) throws ApplicationException;
     
-	public List<User> getUsersByQuery(String query) throws ApplicationException;
+	public List<User> getUsersByQuery(String query, String role) throws ApplicationException;
 
 }

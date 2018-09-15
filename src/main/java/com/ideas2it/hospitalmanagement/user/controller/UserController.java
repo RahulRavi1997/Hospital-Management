@@ -103,7 +103,7 @@ public class UserController {
    	"application/xml"},consumes="application/json",headers = "content-type=application/x-www-form-urlencoded", method = RequestMethod.GET)
     private @ResponseBody String displayAllUsers(Model model, @RequestParam("query") String query) {
         try {
-        	return new Gson().toJson(userService.retrieveUsersByQuery(query));
+        	return new Gson().toJson(userService.retrieveUsersByQuery(query, Role.PHYSICIAN.toString()));
         } catch (ApplicationException e) {
             Logger.error(e);
             return null;
@@ -146,7 +146,11 @@ public class UserController {
         	return userInfo(model, principal);
         }
     }
-    
+
+    @RequestMapping(value="/createUser")
+    public String redirectCreateUser(Model model){
+	        return "CreateUser";
+    }
     
     /**
      * This Method is used to restore a deleted user. Redirects to display

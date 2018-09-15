@@ -283,7 +283,8 @@ public class PhysicianController {
     private @ResponseBody String displayPhysiciansBySpecialisation(Model model,
     		@RequestParam("specialisationName") String specialisation) {
         try {
-        	List <Physician> physicians = physicianService.retrievePhysiciansBySpecialisation(specialisation);
+        	List<Physician> physicians = physicianService.retrievePhysiciansBySpecialisation(specialisation);        
+
         	return new Gson().toJson(physicians);
         } catch (ApplicationException e) {
             Logger.error(e);
