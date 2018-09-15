@@ -66,9 +66,9 @@ public class UserServiceImpl implements UserService {
 	/**
 	 *  {@inheritDoc}
 	 */
-	public List<User> retrieveUsersByQuery(String query) throws ApplicationException {
+	public List<User> retrieveUsersByQuery(String query, String role) throws ApplicationException {
 
-		return userDao.getUsersByQuery(query);
+		return userDao.getUsersByQuery(query, role);
 	}
 	
 

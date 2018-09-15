@@ -9,8 +9,8 @@
      <generator class="increment"/>
     </id>
     <property name="type" column="TYPE"/>
-    <property name="addressLine1" column="ADDRESS_LINE_1"/>
-    <property name="addressLine2" column="ADDRESS_LINE_2"/>
+    <property name="addressLine1" column="ADDRESS_LINE_1" type="string"/>
+    <property name="addressLine2" column="ADDRESS_LINE_2" type="string"/>
     <property name="country" column="COUNTRY"/>
     <property name="pinCode" column="PIN_CODE"/>
     <property name="physicianId" column="PHYSICIAN_ID"/>

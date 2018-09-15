@@ -30,7 +30,8 @@ public class UserDaoImpl extends GenericDao implements UserDao {
     String USER_IN_QUERY = "from User where id in (:ids)";
     String IDS = "ids";
     String QUERY = "query";
-    String USER_AUTOCOMPLETE_QUERY = "From User where email like :query order by email";
+    String ROLE = "role";
+    String USER_AUTOCOMPLETE_QUERY = "From User where email like :query and role = : role order by email";
     /**
      *  {@inheritDoc}
      */
@@ -136,12 +137,13 @@ public class UserDaoImpl extends GenericDao implements UserDao {
         }
     }
     
-	public List<User> getUsersByQuery(String autoCompleteQuery) throws ApplicationException {
+	public List<User> getUsersByQuery(String autoCompleteQuery, String role) throws ApplicationException {
 		
         try {
             Session session = super.getSession();
             Query query = session.createQuery(USER_AUTOCOMPLETE_QUERY);  
             query.setParameter(QUERY, autoCompleteQuery + "%" ); 
+            query.setParameter(ROLE, role); 
             return query.setMaxResults(10).list();
         } catch (ApplicationException e) {
             Logger.error(Constants.USER_DISPLAY_EXCEPTION, e);

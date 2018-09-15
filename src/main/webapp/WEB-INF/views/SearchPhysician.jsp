@@ -109,6 +109,39 @@
         </table>
       </div>
     </c:if>
+
+    <c:if test="${not empty physician.addresses}">
+
+     <div align="center">
+        Address 
+      <table border="1" cellpadding="5" class="table">
+        <tr>
+          <th>Address Line 1</th>
+          <th>Address Line 2</th>
+          <th>Country</th>
+          <th>Pin-Code</th>
+        </tr>
+           <c:forEach items="${physician.addresses}" var="address">
+          <tr>
+             <td>
+              <c:out value="${address.addressLine1}"/>
+            </td>
+            <td>
+              <c:out value="${address.addressLine2}"/>
+            </td>
+            <td>
+              <c:out value="${address.country}"/>
+            </td>
+            <td>
+              <c:out value="${address.pinCode}"/>
+            </td>
+          </tr>
+         </c:forEach>
+      </table>
+     </div>
+    </c:if>
+
+
   </body>
 <script src="/static/script/jquery.min.js"></script>
 <script src="/static/script/jquery-1.10.2.js"></script>
