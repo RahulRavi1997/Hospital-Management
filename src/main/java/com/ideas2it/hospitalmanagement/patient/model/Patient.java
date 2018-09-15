@@ -27,7 +27,7 @@ public class Patient {
     private String emailId;
 	private Long mobileNumber;
     private Date birthDate;
-    private Address address = new Address();
+    private List<Address> addresses = new ArrayList<Address>();
     private boolean active;
 	private String gender;
 	
@@ -68,11 +68,11 @@ public class Patient {
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
-	public Address getAddress() {
-		return address;
+	public List<Address> getAddress() {
+		return addresses;
 	}
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setAddress(List<Address> addresses) {
+		this.addresses = addresses;
 	}
 	public boolean isActive() {
 		return active;

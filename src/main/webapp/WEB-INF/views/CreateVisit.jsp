@@ -42,13 +42,6 @@
                      <form:hidden path="patientId" id="patientId"/>
                      </div>
                   </div>
-                  <div class="form-group">
-                     <label class="col-sm-2 control-label" for="physicianId">Physician ID</label>
-                     <div class="col-sm-10">
-                        <form:input type="number" id="physicianId" path="physicianId" required="required" class ="form-control spacing" />
-                     </div>
-                  </div>
-                  <div class="form-group">
                     <label class="col-sm-2 control-label" for="Specialisation">Specialisation</label>
                      <div class="col-sm-10">
                       <select id='specialisation'>
@@ -59,6 +52,13 @@
                            </c:forEach> 
                            </select>
                      </div>
+                     <div class="form-group">
+                    <label class="col-sm-2 control-label" for="Physician">Physician</label>
+                     <div class="col-sm-10">
+                        <select id="sel_user">
+                        <option value="0">- Select -</option>
+                       </select>
+                      <form:hidden path="physicianId" id="physicianId"/>
                   </div>
                   
                   <div class="form-group">
@@ -127,21 +127,24 @@
 	        var specialisation = $(this).val();
 
 	        $.ajax({
+		           headers: { 
+		                'Accept': 'application/json',
+		                'Content-Type': 'application/json' 
+		            },
 	            url: 'displayPhysiciansBySpecialisation',
 	            type: 'GET',
 	            data: {
-	            	specialisation:deptid
+	            	specialisationName : specialisation
 	            	},
 	            dataType: 'json',
 	            success:function(response){
-
 	                var len = response.length;
 
 	                $("#sel_user").empty();
-	                for( var i = 0; i<len; i++){
+	                for( var i = 0; i<len; i++) {
 	                    var id = response[i]['id'];
-	                    var name = response[i]['name'];
-	                    
+	                    var name = response[i]['firstName'];
+	                    $("#physicianId").val(id);
 	                    $("#sel_user").append("<option value='"+id+"'>"+name+"</option>");
 
 	                }
@@ -150,5 +153,6 @@
 	    });
 
 	});
+
    </script>
 </html>

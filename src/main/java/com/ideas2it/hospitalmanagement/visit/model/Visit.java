@@ -5,6 +5,8 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.ideas2it.hospitalmanagement.commons.Constants;
+import com.ideas2it.hospitalmanagement.patient.model.Patient;
+import com.ideas2it.hospitalmanagement.physician.model.Physician;
 
 /**
  * Visit class is the Entity class is having the getters and setter methods
@@ -22,8 +24,8 @@ public class Visit {
     private Integer id;
     private Date admitDate;
     private Date dischargeDate;
-    private Integer patientId;
-    private Integer physicianId;
+    private Patient patient;
+    private Physician physician;
 	private String patientType;
 
     
@@ -47,17 +49,17 @@ public class Visit {
 	public void setDischargeDate(Date dischargeDate) {
 		this.dischargeDate = dischargeDate;
 	}
-	public Integer getPatientId() {
-		return patientId;
+	public Patient getPatientId() {
+		return patient;
 	}
-	public void setPatientId(Integer patientId) {
-		this.patientId = patientId;
+	public void setPatientId(Patient patientId) {
+		this.patient = patient;
 	}
-	public Integer getPhysicianId() {
-		return physicianId;
+	public Physician getPhysicianId() {
+		return physician;
 	}
-	public void setPhysicianId(Integer physicianId) {
-		this.physicianId = physicianId;
+	public void setPhysicianId(Physician physician) {
+		this.physician = physician;
 	}
     public String getPatientType() {
 		return patientType;

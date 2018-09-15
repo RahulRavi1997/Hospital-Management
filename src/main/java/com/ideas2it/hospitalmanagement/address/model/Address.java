@@ -15,10 +15,10 @@ public class Address {
     private String addressLine2;
     private String country;
     private Long pinCode;
+	private Integer patientId;
 	private Integer physicianId;
-    private Integer patientId;
-    
-    public Integer getId() {
+
+	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
@@ -28,13 +28,13 @@ public class Address {
 		return addressLine1;
 	}
 	public void setAddressLine1(String addressLine1) {
-		addressLine1 = addressLine1;
+		this.addressLine1 = addressLine1;
 	}
 	public String getAddressLine2() {
 		return addressLine2;
 	}
 	public void setAddressLine2(String addressLine2) {
-		addressLine2 = addressLine2;
+		this.addressLine2 = addressLine2;
 	}
 	public String getCountry() {
 		return country;
@@ -48,16 +48,16 @@ public class Address {
 	public void setPinCode(Long pinCode) {
 		this.pinCode = pinCode;
 	}
-    public Integer getPhysicianId() {
-		return physicianId;
-	}
-	public void setPhysicianId(Integer physicianId) {
-		this.physicianId = physicianId;
-	}
-	public Integer getPatientId() {
+    public Integer getPatientId() {
 		return patientId;
 	}
 	public void setPatientId(Integer patientId) {
 		this.patientId = patientId;
+	}
+	public Integer getPhysicianId() {
+		return physicianId;
+	}
+	public void setPhysicianId(Integer physicianId) {
+		this.physicianId = physicianId;
 	}
 }
