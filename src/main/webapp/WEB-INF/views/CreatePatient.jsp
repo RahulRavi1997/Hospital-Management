@@ -68,37 +68,67 @@
                      <input type="hidden" name="id" value="${patient.id}" />
                   </c:if>
             </div>
-            <div class="col-md-6">
-            <br>
-            <div class="form-group">
-            <label class="col-sm-2 control-label" for="addressLine1">Address Line 1</label>
-            <div class="col-sm-10">
-            <form:input  path="address.addressLine1"  class="form-control spacing"/>
-            <form:errors path="address.addressLine1" placeholder="addressLine1"/>
-            </div>
-            </div>
-            <div class="form-group">
-            <label class="col-sm-2 control-label" for="addressLine2">Address Line 2</label>
-            <div class="col-sm-10">
-            <form:input  path="address.addressLine1"  class="form-control spacing"/>
-            <form:errors path="address.addressLine2" placeholder="addressLine2"/>
-            </div>
-            </div>
-            <div class="form-group">
-            <label class="col-sm-2 control-label" for="Postcode">Post code</label>
-            <div class="col-sm-10">
-            <form:input path="address.pinCode" class="form-control spacing"/>
-            <form:errors path="address.pinCode" placeholder="Post Code"/>
-            </div>
-            </div>
-            <div class="form-group">
-            <label class="col-sm-2 control-label" for="country">Country</label>
-            <div class="col-sm-10">
-            <form:input path="address.country" class="form-control spacing"/>
-            <form:errors path="address.country" placeholder="Country"/>
-            </div>
-            </div>
-            </div>
+<div class="col-sm-6 col-xs-6">
+            <c:forEach items="${patient.addresses}" varStatus="vs">
+              <c:if test="${vs.index+1 eq 1}"> <c:set var="addrstype" value="Permanent"/></c:if>
+              <c:if test="${vs.index+1 eq 2}"> <c:set var="addrstype" value="Temporary"/></c:if>
+              <div class="row">
+                <div class="col-sm-6 col-xs-6"> 
+                  <b>${addrstype} Address</b>
+                </div>
+              </div>
+               <form:hidden path="addresses[${vs.index}].type" value="${addrstype}"/>
+              <div class="row">
+                <div class="col-sm-3 col-xs-3">
+                  <form:label class="color-black" path="addresses[${vs.index}].addressLine1" cssErrorClass="invalid">Address Line 1</form:label>
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                  <div class="input">
+                    <form:input type="TEXT" placeholder="Address Line 1" path="addresses[${vs.index}].addressLine1" cssErrorClass="invalid " required="required"/>
+                    <form:label path="addresses[${vs.index}].addressLine1" cssErrorClass="icon invalid" />
+                    <form:errors path="addresses[${vs.index}].addressLine1" cssClass="inline_invalid" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3 col-xs-3">
+                  <form:label class="color-black" path="addresses[${vs.index}].addressLine2" cssErrorClass="invalid">Address Line 2</form:label>
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                  <div class="input">
+                    <form:input placeholder="Address Line 2" path="addresses[${vs.index}].addressLine2" cssErrorClass="invalid"/>
+                    <form:label path="addresses[${vs.index}].addressLine2" cssErrorClass="icon invalid" />
+                    <form:errors path="addresses[${vs.index}].addressLine2" cssClass="inline_invalid" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3 col-xs-3">
+                  <form:label class="color-black" path="addresses[${vs.index}].country" cssErrorClass="invalid">Country</form:label>
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                  <div class="input">
+                    <form:input placeholder="Country" path="addresses[${vs.index}].country" cssErrorClass="invalid " maxLength="50" required="required" />
+                    <form:label path="addresses[${vs.index}].country" cssErrorClass="icon invalid" />
+                    <form:errors path="addresses[${vs.index}].country" cssClass="inline_invalid" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3 col-xs-3">
+                  <form:label class="color-black" path="addresses[${vs.index}].pinCode" cssErrorClass="invalid">PinCode</form:label>
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                  <div class="input">
+                    <form:input placeholder="Pin Code" type="number" min="0" path="addresses[${vs.index}].pinCode" cssErrorClass="invalid" required="required" maxLength="10"/>
+                    <form:label path="addresses[${vs.index}].pinCode" cssErrorClass="icon invalid" />
+                    <form:errors path="addresses[${vs.index}].pinCode" cssClass="inline_invalid" />
+                  </div>
+                </div>
+              </div>
+            </c:forEach>
+                          </div>
+            
       <br>
       <div style="text-align:center">
       <c:choose>

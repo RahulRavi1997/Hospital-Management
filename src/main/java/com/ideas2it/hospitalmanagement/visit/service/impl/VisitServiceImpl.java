@@ -2,6 +2,8 @@ package com.ideas2it.hospitalmanagement.visit.service.impl;
 
 import java.util.List;
 
+import com.ideas2it.hospitalmanagement.patient.service.PatientService;
+import com.ideas2it.hospitalmanagement.physician.service.PhysicianService;
 import com.ideas2it.hospitalmanagement.visit.dao.VisitDao;
 import com.ideas2it.hospitalmanagement.visit.model.Visit;
 import com.ideas2it.hospitalmanagement.visit.service.VisitService;
@@ -20,17 +22,26 @@ import com.ideas2it.hospitalmanagement.exception.ApplicationException;
  */
 public class VisitServiceImpl implements VisitService {
 
-    private VisitDao visitDao ;
+    private VisitDao visitDao;
+    private PatientService patientService;
+    private PhysicianService physicianService;
 
+    public void setPatientService(PatientService patientService) {
+        this.patientService = patientService;
+    }
+    public void setPhysicianService(PhysicianService physicianService) {
+        this.physicianService = physicianService;
+    }
     public void setVisitDao(VisitDao visitDao) {
         this.visitDao = visitDao;
     }
-
     /**
      * {@inheritDoc}
      */
-    public boolean addVisit(final Visit visit)
+    public boolean addVisit(final Visit visit, final Integer patientId,  final Integer physicianId)
             throws ApplicationException {
+    	visit.setPatient(patientService.getPatientById(patientId));
+    	visit.setPhysician(physicianService.retrievePhysicianById(physicianId));
         return visitDao.insertVisit(visit);
     }
 

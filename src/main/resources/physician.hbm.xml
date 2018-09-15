@@ -21,6 +21,6 @@
         <one-to-many class="com.ideas2it.hospitalmanagement.address.model.Address"/>
     </bag>
     <many-to-one name = "user" column = "USER_ID" 
-         class="com.ideas2it.hospitalmanagement.user.model.User" fetch="select" cascade="all" not-null="false"/>
+         class="com.ideas2it.hospitalmanagement.user.model.User" fetch="select" cascade="all" not-null="false" lazy="false"/>
   </class> 
  </hibernate-mapping>

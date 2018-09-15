@@ -100,42 +100,37 @@
                      </c:choose>
             </tr>
             </tbody>
-         </table>
-                  <div>
-                  <table class="table table-bordered ">
+    <c:if test="${not empty patient.addresses}">
 
-                     <thead>
-                        <caption>
-                           <h2>
-                              <c:out value="${patient.firstName}" />
-                              's Address Details
-                           </h2>
-                        </caption>
-                        <tr>
-                           <th>AddressLine 1</th>
-                           <th>AddressLine 2</th>
-                           <th>COUNTRY</th>
-                           <th>PINCODE</th>
-                        </tr>
-                     </thead>
-                     <tbody>
-                           <tr>
-                              <td>
-                                 <c:out value="${address.addressLine1}" />
-                              </td>
-                              <td>
-                                 <c:out value="${address.addressLine2}" />
-                              </td>
-                              <td>
-                                 <c:out value="${address.country}" />
-                              </td>
-                              <td>
-                                 <c:out value="${address.pincode}" />
-                              </td>
-                           </tr>
-                     </tbody>
+     <div align="center">
+        Address 
+      <table border="1" cellpadding="5" class="table">
+        <tr>
+          <th>Address Line 1</th>
+          <th>Address Line 2</th>
+          <th>Country</th>
+          <th>Pin-Code</th>
+        </tr>
+           <c:forEach items="${patient.addresses}" var="address">
+          <tr>
+             <td>
+              <c:out value="${address.addressLine1}"/>
+            </td>
+            <td>
+              <c:out value="${address.addressLine2}"/>
+            </td>
+            <td>
+              <c:out value="${address.country}"/>
+            </td>
+            <td>
+              <c:out value="${address.pinCode}"/>
+            </td>
+          </tr>
+         </c:forEach>
+      </table>
+     </div>
+    </c:if>
 
-                  </table>
       </div>
                       </c:otherwise>
                      </c:choose>

@@ -1,7 +1,9 @@
 package com.ideas2it.hospitalmanagement.patient.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.ideas2it.hospitalmanagement.address.model.Address;
 import com.ideas2it.hospitalmanagement.commons.Constants;
 import com.ideas2it.hospitalmanagement.commons.enums.Gender;
 import com.ideas2it.hospitalmanagement.logger.Logger;
@@ -59,6 +61,10 @@ public class PatientController {
     public ModelAndView getPatientDetailsFromUser(Model model) {
 
     	Patient patient = new Patient();
+        List<Address> addresses = new ArrayList<Address>();
+        addresses.add(new Address());
+        addresses.add(new Address());
+        patient.setAddresses(addresses);
         model.addAttribute("genders",Gender.values());
         return new ModelAndView(Constants.CREATE_PATIENT_JSP, Constants.PATIENT_OBJECT
             , patient);
@@ -84,7 +90,8 @@ public class PatientController {
 
         try {
         	patientService.addPatient(patient);
-            return new ModelAndView(Constants.SEARCH_PATIENT_JSP);
+            return new ModelAndView(Constants.SEARCH_PATIENT_JSP, Constants.
+                	PATIENT_OBJECT, patient);
         } catch (ApplicationException e) {
             Logger.error(e);
             return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,

@@ -3,8 +3,6 @@ package com.ideas2it.hospitalmanagement.physician.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.inject.Specializes;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;  
@@ -18,14 +16,12 @@ import com.google.gson.Gson;
 import com.ideas2it.hospitalmanagement.address.model.Address;
 import com.ideas2it.hospitalmanagement.commons.Constants;
 import com.ideas2it.hospitalmanagement.commons.enums.Gender;
-import com.ideas2it.hospitalmanagement.commons.enums.Role;
 import com.ideas2it.hospitalmanagement.commons.enums.Specialisation;
 import com.ideas2it.hospitalmanagement.physician.model.Physician;
 import com.ideas2it.hospitalmanagement.physician.service.PhysicianService;
 import com.ideas2it.hospitalmanagement.user.model.User;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.logger.Logger;
-import com.ideas2it.hospitalmanagement.patient.model.Patient;
 /**
  * <p>
  * PhysicianController is a Controller Class, which is used to implement
@@ -260,7 +256,7 @@ public class PhysicianController {
     /**
      * This Method is used to display all details of the physicians.
      *
-     * @return response a HttpServletResponse object which is used to redirect
+     * @return response a HttpServletResponse com.google.gson.internal.bind.TypeAdaptersobject which is used to redirect
      *                 or send text output.
      *
      * @return modelAndView a ModelAndView object which is used to add
@@ -285,9 +281,11 @@ public class PhysicianController {
     		produces={"application/json","application/xml"}, consumes="application/json",
    	headers = "content-type=application/x-www-form-urlencoded", method = RequestMethod.GET)
     private @ResponseBody String displayPhysiciansBySpecialisation(Model model,
-    		@RequestParam("specialisation") String specialisation) {
+    		@RequestParam("specialisationName") String specialisation) {
         try {
-        	return new Gson().toJson(physicianService.retrievePhysiciansBySpecialisation(specialisation));
+        	List<Physician> physicians = physicianService.retrievePhysiciansBySpecialisation(specialisation);        
+
+        	return new Gson().toJson(physicians);
         } catch (ApplicationException e) {
             Logger.error(e);
             return null;

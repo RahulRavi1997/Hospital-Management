@@ -109,7 +109,6 @@
         </table>
       </div>
     </c:if>
-
     <c:if test="${not empty physician.addresses}">
 
      <div align="center">
