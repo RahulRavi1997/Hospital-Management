@@ -11,6 +11,13 @@ package com.ideas2it.hospitalmanagement.address.model;
 public class Address {
 
 	private Integer id;
+	private String type;
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	private String addressLine1;
     private String addressLine2;
     private String country;
@@ -18,7 +25,8 @@ public class Address {
 	private Integer patientId;
 	private Integer physicianId;
 
-	public Integer getId() {
+    
+    public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
