@@ -16,6 +16,11 @@
     <property name="specialisation" column="SPECIALISATION" type="string"/>
     <property name="active" column="ACTIVE" type="boolean"/>
     <property name="gender" column="GENDER" type="string"/>
-    <property name="userId" column="USER_ID" type="integer"/>
-  </class>
+    <bag name="addresses" cascade="all" fetch="select" lazy="false">
+        <key column="physicianId"/>
+        <one-to-many class="com.ideas2it.hospitalmanagement.address.model.Address"/>
+    </bag>
+    <many-to-one name = "user" column = "USER_ID" 
+         class="com.ideas2it.hospitalmanagement.user.model.User" fetch="select" cascade="all"/>
+  </class> 
  </hibernate-mapping>

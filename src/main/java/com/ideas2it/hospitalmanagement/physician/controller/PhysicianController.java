@@ -66,11 +66,14 @@ public class PhysicianController {
     private ModelAndView redirectToCreatePhysician(Model model) {
 
     	Physician physician = new Physician();
+        List<Address> addresses = new ArrayList<Address>();
+        addresses.add(new Address());
+        addresses.add(new Address());
+        physician.setAddresses(addresses);
         model.addAttribute("genders", Gender.values());
         model.addAttribute("specialisations", Specialisation.values());
         return new ModelAndView(Constants.CREATE_PHYSICIAN_JSP, Constants.PHYSICIAN, physician);
     }
-
 
     /**
      *  This Method is used to add a new Physician after obtaining all the
@@ -86,13 +89,11 @@ public class PhysicianController {
      */
     @RequestMapping(value=Constants.ADD_PHYSICIAN_MAPPING, method=RequestMethod.POST)
     private ModelAndView createPhysician(@ModelAttribute Physician physician, Model model,
-    		@RequestParam(value=Constants.USER_EMAIL, required = false)String userEmail) {
+    		@RequestParam(value="UserEmail") String userEmail) {
         try {
-    		User user = physicianService.retrieveUserByEmail(userEmail);
+        	User user = physicianService.retrieveUserByEmail(userEmail);
         	if (null != user) {
-        		user.setRole(Role.PHYSICIAN.toValue());
-        		physicianService.modifyUser(user);
-        		physician.setUserId(user.getId());
+        		physician.setUser(user);
         	}
             if (!physicianService.addPhysician(physician)) {
                 return new ModelAndView(Constants.ERROR_JSP, Constants.
@@ -181,16 +182,9 @@ public class PhysicianController {
      *                       such as a jsp page.
      */
     @RequestMapping(value=Constants.UPDATE_PHYSICIAN_MAPPING, method=RequestMethod.POST)
-    private ModelAndView updatePhysician(@ModelAttribute Physician physician, Model model,
-    		@RequestParam(value=Constants.USER_EMAIL, required = false) String userEmail) {
+    private ModelAndView updatePhysician(@ModelAttribute Physician physician, Model model) {
 
         try {
-    		User user = physicianService.retrieveUserByEmail(userEmail);
-        	if (null != user) {
-        		user.setRole(Role.PHYSICIAN.toValue());
-        		physicianService.modifyUser(user);
-        		physician.setUserId(user.getId());
-        	}
             if (!physicianService.modifyPhysician(physician)) {
                 return new ModelAndView(Constants.ERROR_JSP, Constants.
                         ERROR_MESSAGE, Constants.EDIT_FAILED);

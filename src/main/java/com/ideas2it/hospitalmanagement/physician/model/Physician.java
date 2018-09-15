@@ -1,5 +1,6 @@
 package com.ideas2it.hospitalmanagement.physician.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,7 +23,8 @@ public class Physician {
     private String gender;
 	private String specialisation;
 	private boolean active;
-	private Integer userId;
+	private User user = new User();
+	private List<Address> addresses = new ArrayList<Address>();
 
 	public Integer getId() {
 		return id;
@@ -82,11 +84,16 @@ public class Physician {
 	public Integer getAge() {	
 	    return DateUtil.getYearDifference(this.birthDate);
 	}
-	public Integer getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
-
+	public List<Address> getAddresses() {
+		return addresses;
+	}
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
+	}
 }

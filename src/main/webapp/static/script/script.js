@@ -10,7 +10,7 @@
                    url : "displayUsers",
                    type : "GET",
                    data : {
-                          term : request.term
+                          query : request.term
                    },
                    dataType : "json",
                    success : function(data) {

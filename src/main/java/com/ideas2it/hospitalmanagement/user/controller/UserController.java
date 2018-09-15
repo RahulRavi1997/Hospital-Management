@@ -66,7 +66,8 @@ public class UserController {
      */
     @RequestMapping(value=Constants.SIGNUP_PATH,method=RequestMethod.POST)
     private ModelAndView createUser(Model model, @RequestParam(Constants.EMAIL) String email,
-                            @RequestParam(Constants.PASSWORD) String password) {
+                            @RequestParam(Constants.PASSWORD) String password,
+                            @RequestParam(value=Constants.ROLE, required=false) String role) {
         try {
             if (null != userService.retrieveUserByEmail(email)) {
                 return new ModelAndView(Constants.LOGIN, Constants.USER_FAIL, Constants.SIGNIN_USER_FAIL_MESSAGE);
@@ -74,7 +75,11 @@ public class UserController {
                 User user = new User();
                 user.setEmail(email);
                 user.setPassword(password);
-                user.setRole(Role.ADMIN.toValue());
+                if (null == role) {
+                    user.setRole(Role.ADMIN.toString());
+                } else {
+                	user.setRole(role);
+                }
                 if (userService.addUser(user)) {
                     model.addAttribute(Constants.SIGNIN_EMAIL, email);
                     return new ModelAndView(Constants.LOGIN, Constants.SIGN_UP_SUCCESS, Constants.SIGN_UP_SUCCESS_MESSAGE);
@@ -96,7 +101,7 @@ public class UserController {
      */
     @RequestMapping(value=Constants.DISPLAY_USER_MAPPING, produces={"application/json",
    	"application/xml"},consumes="application/json",headers = "content-type=application/x-www-form-urlencoded", method = RequestMethod.GET)
-    private @ResponseBody String displayAllUsers(Model model, @RequestParam("term") String query) {
+    private @ResponseBody String displayAllUsers(Model model, @RequestParam("query") String query) {
         try {
         	return new Gson().toJson(userService.retrieveUsersByQuery(query));
         } catch (ApplicationException e) {

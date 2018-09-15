@@ -13,9 +13,6 @@
     <link rel="stylesheet" href="/static/css/jquery-ui.css">
     <link rel="stylesheet" href="/static/css/hms.css">
   <body>
-    <c:if test="${not empty message}">
-     <script>alert("${message}");</script>
-    </c:if>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <c:set var="value" value="Add"/>
     <c:set var="operation" value="addPhysician"/>
@@ -24,19 +21,6 @@
       <c:set var="operation" value="updatePhysician"/>
     </c:if>
     <jsp:useBean id="now" class="java.util.Date"/>
-    <fmt:formatDate var="currentDate" value="${now}" pattern="yyyy-MM-dd" />
-    <fmt:formatDate var="currentYear" value="${now}" pattern="yyyy" />
-    <fmt:formatDate var="currentMonth" value="${now}" pattern="MM" />
-    <fmt:formatDate var="currentDay" value="${now}" pattern="dd" />
-    <fmt:parseDate value="${currentYear-18}-${currentMonth}-${currentDay}" pattern="yyyy-MM-dd" var="maxdob" type="date" />
-    <fmt:formatDate value="${maxdob}" var="maxBirthDate" type="date" pattern="yyyy-MM-dd" />
-    <fmt:parseDate value="${currentYear-100}-${currentMonth}-${currentDay}" pattern="yyyy-MM-dd" var="mindob" type="date" />
-    <fmt:formatDate value="${mindob}" var="minBirthDate" type="date" pattern="yyyy-MM-dd" />
-           <a href="displayPhysicians">
-          <button class="btn-margin-format add-button">
-             View All Physicians
-          </button>
-          </a>
     <form:form commandName="physician" action="${operation}" method="post" onsubmit="submit_form(this.form)">
       <form:hidden path="id" value="${physician.id}"/>
       <form:hidden path="active" value="${physician.isActive()}"/>
@@ -91,7 +75,6 @@
                 <form:input type="email" path="email" placeholder="Email-Id" aria-describedby="basic-addon1" maxLength="20" required="required"/>
               </div>
             </div>
-
             <div class="row">
               <div class="col-sm-3 col-xs-3 required">
                 <label for="role">Specialisation</label>
@@ -111,7 +94,68 @@
           </div>
 
 
-        </div>
+
+
+<div class="col-sm-6 col-xs-6">
+            <c:forEach items="${physician.addresses}" varStatus="vs">
+              <c:if test="${vs.index+1 eq 1}"> <c:set var="addrstype" value="Permanent"/></c:if>
+              <c:if test="${vs.index+1 eq 2}"> <c:set var="addrstype" value="Temporary"/></c:if>
+              <div class="row">
+                <div class="col-sm-6 col-xs-6"> 
+                  <b>${addrstype} Address</b>
+                </div>
+              </div>
+               <form:hidden path="addresses[${vs.index}].type" value="${addrstype}"/>
+              <div class="row">
+                <div class="col-sm-3 col-xs-3">
+                  <form:label class="color-black" path="addresses[${vs.index}].addressLine1" cssErrorClass="invalid">Address Line 1</form:label>
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                  <div class="input">
+                    <form:input type="TEXT" placeholder="Address Line 1" path="addresses[${vs.index}].addressLine1" cssErrorClass="invalid " required="required"/>
+                    <form:label path="addresses[${vs.index}].addressLine1" cssErrorClass="icon invalid" />
+                    <form:errors path="addresses[${vs.index}].addressLine1" cssClass="inline_invalid" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3 col-xs-3">
+                  <form:label class="color-black" path="addresses[${vs.index}].addressLine2" cssErrorClass="invalid">Address Line 2</form:label>
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                  <div class="input">
+                    <form:input placeholder="Address Line 2" path="addresses[${vs.index}].addressLine2" cssErrorClass="invalid"/>
+                    <form:label path="addresses[${vs.index}].addressLine2" cssErrorClass="icon invalid" />
+                    <form:errors path="addresses[${vs.index}].addressLine2" cssClass="inline_invalid" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3 col-xs-3">
+                  <form:label class="color-black" path="addresses[${vs.index}].country" cssErrorClass="invalid">Country</form:label>
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                  <div class="input">
+                    <form:input placeholder="Country" path="addresses[${vs.index}].country" cssErrorClass="invalid " maxLength="50" required="required" />
+                    <form:label path="addresses[${vs.index}].country" cssErrorClass="icon invalid" />
+                    <form:errors path="addresses[${vs.index}].country" cssClass="inline_invalid" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3 col-xs-3">
+                  <form:label class="color-black" path="addresses[${vs.index}].pinCode" cssErrorClass="invalid">PinCode</form:label>
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                  <div class="input">
+                    <form:input placeholder="Pin Code" type="number" min="0" path="addresses[${vs.index}].pinCode" cssErrorClass="invalid" required="required" maxLength="10"/>
+                    <form:label path="addresses[${vs.index}].pinCode" cssErrorClass="icon invalid" />
+                    <form:errors path="addresses[${vs.index}].pinCode" cssClass="inline_invalid" />
+                  </div>
+                </div>
+              </div>
+            </c:forEach>
+          </div>
          Add User Login For Physician
 	    <input type="text"  id="autocomplete" value="" name="UserEmail">
         <div class="row" align="center">
