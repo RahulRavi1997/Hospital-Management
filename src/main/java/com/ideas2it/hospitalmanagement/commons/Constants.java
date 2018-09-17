@@ -161,7 +161,7 @@ public final class Constants {
    public static final String VISITS = "/visits";
    public static final String CREATE_VISIT_JSP ="CreateVisit";
    public static final String SEARCH_VISIT_JSP ="SearchVisit";
-   public static final String DISPLAY_VISIT_JSP ="DisplayVisits";
+   public static final String DISPLAY_VISIT_JSP ="DisplayVisit";
 
    public static final String VISIT_ADD_FAILED = "Visit Addition Failed";
    public static final String VISIT_UPDATE_FAILED = "Visit Updation Failed";
@@ -184,5 +184,6 @@ public final class Constants {
            "Error while restoring visit id %d\n";
    public static final String VISIT_OBJECT = "visit";
    public static final String VISIT_OBJECTS = "visits";
+   public static final int SESSION_ACTIVE_INTERVAL = 30*60;
    
 }

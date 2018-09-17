@@ -5,10 +5,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
    <head>
-   <link rel="stylesheet" 
-  href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+            <jsp:include page="access.jsp"/>
    </head>
    <body>
+            <jsp:include page="Header.jsp"/>
       <center>
          <h1>Hospital Management</h1>
       </center>
@@ -85,6 +85,7 @@
       </form:form>
             </div>
    </body>
+               <jsp:include page="footer.jsp"/>
    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
    <script>
