@@ -7,6 +7,9 @@
 </head>
 <body>
   <jsp:include page="header.jsp"/>
+     <div id="snackbar">
+     <c:out value="${message}"/>
+     </div>
      <div id="wrapper">
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
@@ -19,15 +22,16 @@
                 <li>
              <a href="createUser">Create User </a> 
                 </li>
-                <li>
-              <a href="createPhysician">Add Physician</a> 
-                </li>
-                <li>
-	           <a href="displayPhysicians">Display Physician</a>
-                </li>
-                <li>
+               <li>
 	           <a href="displayUsers">Display Users</a>
                 </li>
+                <li>
+              <a href="createPhysician">Create Physician</a> 
+                </li>
+                <li>
+	           <a href="displayPhysicians">Display Physicians</a>
+                </li>
+
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->

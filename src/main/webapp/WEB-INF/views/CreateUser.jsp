@@ -21,13 +21,13 @@
              <a href="createUser">Create User </a> 
                 </li>
                 <li>
+	           <a href="displayUsers">Display Users</a>
+                </li>
+                <li>
               <a href="createPhysician">Add Physician</a> 
                 </li>
                 <li>
 	           <a href="displayPhysicians">Display Physician</a>
-                </li>
-                <li>
-	           <a href="displayUsers">Display Users</a>
                 </li>
             </ul>
         </div>

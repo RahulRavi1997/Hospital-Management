@@ -24,15 +24,16 @@
                 <li>
              <a href="createUser">Create User </a> 
                 </li>
-                <li  class="highlight">
-              <a href="createPhysician">Add Physician</a> 
-                </li>
-                <li>
-	           <a href="displayPhysicians">Display Physician</a>
-                </li>
-                <li>
+                                <li>
 	           <a href="displayUsers">Display Users</a>
                 </li>
+                <li  class="highlight">
+              <a href="createPhysician">Create Physician</a> 
+                </li>
+                <li>
+	           <a href="displayPhysicians">Display Physicians</a>
+                </li>
+
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->

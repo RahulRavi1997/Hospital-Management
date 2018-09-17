@@ -81,7 +81,6 @@ public class UserController {
                 if (null == role) {
                     user.setRole(Role.ADMIN.toString());
                     if (userService.addUser(user)) {
-                        model.addAttribute(Constants.SIGNIN_EMAIL, email);
                         return new ModelAndView(Constants.LOGIN, Constants.SIGN_UP_SUCCESS, Constants.SIGN_UP_SUCCESS_MESSAGE);
                     } else {
                         return new ModelAndView(Constants.LOGIN, Constants.SIGN_UP_FAIL, Constants.SIGN_UP_FAIL_MESSAGE);
@@ -89,7 +88,7 @@ public class UserController {
                 } else {
                 	user.setRole(role);
                     if (userService.addUser(user)) {
-                        model.addAttribute(Constants.SIGNIN_EMAIL, email);
+                        model.addAttribute(Constants.MESSAGE, Constants.SIGN_UP_SUCCESS_MESSAGE);
                         return new ModelAndView(Constants.ADMIN, Constants.SIGN_UP_SUCCESS, Constants.SIGN_UP_SUCCESS_MESSAGE);
                     } else {
                         return new ModelAndView(Constants.LOGIN, Constants.SIGN_UP_FAIL, Constants.SIGN_UP_FAIL_MESSAGE);
