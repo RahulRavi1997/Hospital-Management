@@ -8,12 +8,37 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Physician Details</title>
-    <link rel="shortcut icon" href="styles/images/ideas1.jpg"/>
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
     <META HTTP-EQUIV="Expires" CONTENT="-1">
   </head>
   <body>
-    <link rel="stylesheet" href="/static/css/hms.css">
+  <jsp:include page="header.jsp"/>
+     <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="index">
+                        Home
+                    </a>
+                </li>
+                <li>
+             <a href="createUser">Create User </a> 
+                </li>
+                <li>
+              <a href="createPhysician">Add Physician</a> 
+                </li>
+                <li>
+	           <a href="displayPhysicians">Display Physician</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
     <c:if test="${not empty message}">
      <div id="snackbar">${message}</div>
     </c:if>
@@ -139,14 +164,12 @@
       </table>
      </div>
     </c:if>
-
-
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <jsp:include page="footer.jsp"/>
   </body>
-<script src="/static/script/jquery.min.js"></script>
-<script src="/static/script/jquery-1.10.2.js"></script>
-<script src="/static/script/bootstrap.min.js"></script>
-<script src="/static/script/sorttable.js"></script>
-<script src="/static/script/jquery-1.9.1.min.js"></script>
-<script src="/static/script/jquery-ui.js"></script>
-<script src="/static/script/script.js"></script>
 </html>

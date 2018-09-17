@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.http.MediaType;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -111,8 +114,15 @@ public class UserController {
     }
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String userInfo(Model model, Principal principal) {
+    public String userInfo(Model model, Principal principal, HttpServletRequest request) {
         model.addAttribute("email",principal.getName());
+        HttpSession oldSession = request.getSession(Boolean.FALSE);
+        if (null != oldSession) {
+            oldSession.invalidate();
+        }
+        HttpSession session = request.getSession();
+        session.setAttribute(Constants.EMAIL, principal.getName());
+        session.setMaxInactiveInterval(Constants.SESSION_ACTIVE_INTERVAL);
         Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>)SecurityContextHolder.getContext().getAuthentication().getAuthorities();
         if (authorities.iterator().next().toString().equals("ROLE_ADMIN")) {
             return "admin";
@@ -139,11 +149,11 @@ public class UserController {
     }
 
     @RequestMapping(value={"/login","/","/logoutSuccessful"})
-    public String redirectLogin(Model model, Principal principal){
+    public String redirectLogin(Model model, Principal principal, HttpServletRequest request){
         if (principal == null) {
 	        return "login";
         } else {
-        	return userInfo(model, principal);
+        	return userInfo(model, principal, request);
         }
     }
 

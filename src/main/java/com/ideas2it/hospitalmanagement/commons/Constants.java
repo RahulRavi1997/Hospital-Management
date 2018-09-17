@@ -184,5 +184,6 @@ public final class Constants {
            "Error while restoring visit id %d\n";
    public static final String VISIT_OBJECT = "visit";
    public static final String VISIT_OBJECTS = "visits";
+   public static final Integer SESSION_ACTIVE_INTERVAL = 30*60;
    
 }
