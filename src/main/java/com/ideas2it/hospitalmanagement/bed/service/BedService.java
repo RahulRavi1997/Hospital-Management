@@ -1,7 +1,10 @@
 package com.ideas2it.hospitalmanagement.bed.service;
 
+import java.util.List;
+
 import com.ideas2it.hospitalmanagement.bed.model.Bed;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
+import com.ideas2it.hospitalmanagement.ward.model.Ward;
 
 public interface BedService {
 	
@@ -56,4 +59,14 @@ public interface BedService {
      *											is updated or not
      */
 	public boolean updateBed(Bed bed) throws ApplicationException;
+	
+	/**
+	 * <p>
+	 * getWardsByStatus returns all wards based upon the status
+	 * </p>
+	 * @param  status   						status of the Ward to be searched.
+	 * 
+	 * @return List<Ward>						List of wards
+	 */
+	public List<Ward> getWardsByStatus(String status) throws ApplicationException;
 }

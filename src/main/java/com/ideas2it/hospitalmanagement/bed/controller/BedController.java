@@ -1,5 +1,8 @@
 package com.ideas2it.hospitalmanagement.bed.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,14 +42,16 @@ public class BedController {
      */
 	@RequestMapping(value="/admitPatient" , method= RequestMethod.POST)   
     public ModelAndView admitPatient(@RequestParam("bedNumber") 
-    										int bedNumber,	@RequestParam("visitId") int visitId) {
+          int bedNumber,	@RequestParam("visitId") int visitId) {
     	System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + bedNumber + "visit" + visitId);
         ModelAndView modelAndView = new ModelAndView("displayWards");
         try {
         	if(bedService.admitPatient(visitId, bedNumber)) {
-        		
+        		modelAndView.addObject("wards",bedService.getWardsByStatus("All"));
+        		modelAndView.addObject("wardIds" , getWardIds());
         	} else {
-        		//Fail message
+        		modelAndView.addObject("wards",bedService.getWardsByStatus("All"));
+        		modelAndView.addObject("wardIds" , getWardIds());
         	}
         	modelAndView.addObject("ward" , new Ward());
 
@@ -71,19 +76,30 @@ public class BedController {
      */
     @RequestMapping(value="/dischargePatient" , method= RequestMethod.POST)   
     public ModelAndView dischargePatient(@RequestParam("bedNumber") 
-												int bedNumber,	@RequestParam("visitId") int visitId) {
-    	
-        ModelAndView modelAndView = new ModelAndView("");
+        	int bedNumber,	@RequestParam("visitId") int visitId) {
+
         try {
         	if(bedService.dischargePatient(visitId, bedNumber)) {
-        		//Success message
-        	} else {
-        		//Fail message
-        	}
-        	return modelAndView;
+                ModelAndView modelAndView = new ModelAndView("displayWards");
+
+        		modelAndView.addObject("ward" , new Ward());
+        		modelAndView.addObject("wards",bedService.getWardsByStatus("All"));
+        		modelAndView.addObject("wardIds" , getWardIds());
+            	return modelAndView;
+            	} else {
+            	       ModelAndView modelAndView = new ModelAndView("displayWards");
+
+            		modelAndView.addObject("ward" , new Ward());
+            		modelAndView.addObject("wards",bedService.getWardsByStatus("All"));
+            		modelAndView.addObject("wardIds" , getWardIds());
+                	return modelAndView;     
+                	}
+        	
         } catch (ApplicationException e) {
-        	//Attach an exception message for model.
-        	return modelAndView;
+        	ModelAndView modelAndView = null;
+			//Attach an exception message for model.
+        	return modelAndView;     
+
 		} 
     }
     
@@ -116,6 +132,13 @@ public class BedController {
 		}
     }
     
+    public List<Integer> getWardIds() throws ApplicationException {
+        List<Integer> wardIds = new ArrayList<Integer>();
+        for(Ward wardIterator : bedService.getWardsByStatus("All")) {
+        	wardIds.add(wardIterator.getWardNumber());
+        }
+        return wardIds;
+    }
     /**
      * <p>
      * performBedMaintanence method is used to perform maintenance over a particular bed.

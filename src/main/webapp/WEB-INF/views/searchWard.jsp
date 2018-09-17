@@ -65,18 +65,18 @@
                      </tr>
                      <tr>
                         <td>
-                           <c:forEach items= "${room.beds}" var = "bed">
+                            <c:forEach items= "${room.beds}" var = "bed">
                               <button class="bedType"><img src="static/bed.png"><br>
                               ${bed.bedNumber}</button>
-                              <c:if test="${bed.status == 'Available'}">
-							  <form:form action="admitPatient" method="post">
-							  <input type="hidden" value="${visitId}" name="visitId">
+                            <c:if test="${bed.status == 'Available'}">
+							  <form:form action="admitPatient" commandName="bed" method="post">
+							  <input type="hidden" value="1" name="visitId">
 							  <input type="hidden" value="${bed.bedNumber}" name="bedNumber">
                               <button type="submit">Admit</button>
                              </form:form> </c:if> 
                              <c:if test="${bed.status != 'Available'}">
                             <form:form action="dischargePatient" method="post">
-                             <input type="hidden" value="${visitId}" name="visitId">
+                             <input type="hidden" value="1" name="visitId">
                              <input type="hidden" value="${bed.bedNumber}" name="bedNumber">
                               <button type="submit">Discharge</button>
                               </form:form></c:if>

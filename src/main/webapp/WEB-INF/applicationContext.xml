@@ -21,6 +21,7 @@
 
     <bean id="bedServiceImpl" class="com.ideas2it.hospitalmanagement.bed.service.impl.BedServiceImpl" >
         <property name="bedDao" ref="bedDaoImpl" />
+         <property name="wardService" ref="wardServiceImpl" />
     </bean>
 
     <bean id="bedController"  class="com.ideas2it.hospitalmanagement.bed.controller.BedController">

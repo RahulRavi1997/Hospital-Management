@@ -54,7 +54,6 @@ public class WardController {
     		
     	}
         return mav;
-
     }
 
     
@@ -110,6 +109,13 @@ public class WardController {
 	  
   }
   
+	@RequestMapping(value="/nurseHome" , method= RequestMethod.GET)   
+    public ModelAndView displayAllPatients() {
+    	System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		 ModelAndView mav = new ModelAndView("nurseHome");
+        return mav;
+    }
+    
   public List<Integer> getWardIds() throws ApplicationException {
       List<Integer> wardIds = new ArrayList<Integer>();
       for(Ward wardIterator : wardService.displayAllWards("All")) {
