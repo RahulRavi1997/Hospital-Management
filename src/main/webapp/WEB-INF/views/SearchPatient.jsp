@@ -10,24 +10,32 @@
             <jsp:include page="access.jsp"/>
    </head>
    <body>
-         <jsp:include page="Header.jsp"/>
-      <center>
-         <h1>Hospital Management System</h1>
-      </center>
-     <div class="row">
-     <div class="col-xs-6">
-     <form action="createPatient" method="get">
-     <button type="submit" class="btn btn-primary spacing leftpad">Create Patient</button>
-     </form>
-     </div>
-     <div class="col-xs-6">
-     <form action="displayPatients" method="get">
-     <button type="submit" class="btn btn-primary spacing leftpadding">Display All Patient</button>
-     </form>
-     </div>
-     </div>
+         <jsp:include page="header.jsp"/>
+                                <div id="wrapper">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="index">
+                        Home
+                    </a>
+                </li>
+                <li>
+             <a href="createVisit">Create Visit </a> 
+                </li>
+             <li>
+              <a href="displayVisits">Display Visit</a> 
+                </li>
+                <li>
+	           <a href="createPatient">Create Patient</a>
+                </li>
+                <li>
+	           <a href="displayPatients">Display Patient</a>
+                </li>
+            </ul>
+        </div>
+                <div id="page-content-wrapper">
 <form action="searchPatient" method="post">
-  <input type="number" class="search" name="id" placeholder="Search Patient By Id">
+  <input type="number" style="margin-left:42%" name="id" placeholder="Search Patient By Id">
 </form>
       <c:choose>
        <c:when test="${empty patient}">
@@ -42,8 +50,7 @@
                </caption>
                <tr>
                   <th>ID</th>
-                  <th>FIRST NAME</th>
-                  <th>LAST NAME</th>
+                  <th>NAME</th>
                   <th>MOBILE NUMBER</th>
                   <th>EMAIL ID</th>
                   <th>DATE OF BIRTH</th>
@@ -59,10 +66,7 @@
                      <c:out value="${patient.id}" />
                   </td>
                   <td>
-                     <c:out value="${patient.firstName}" />
-                  </td>
-                  <td>
-                     <c:out value="${patient.lastName}" />
+                     <c:out value="${patient.firstName} ${patient.lastName}" />
                   </td>
                   <td>
                      <c:out value="${patient.mobileNumber}" />
@@ -105,8 +109,7 @@
     <c:if test="${not empty patient.addresses}">
 
      <div align="center">
-        Address 
-      <table border="1" cellpadding="5" class="table">
+      <table class="table">
         <tr>
           <th>Address Line 1</th>
           <th>Address Line 2</th>
@@ -129,13 +132,14 @@
             </td>
           </tr>
          </c:forEach>
-      </table>
      </div>
     </c:if>
+      </table>
 
       </div>
                       </c:otherwise>
                      </c:choose>
+                     </div></div>
    </body>
          <jsp:include page="footer.jsp"/>
    

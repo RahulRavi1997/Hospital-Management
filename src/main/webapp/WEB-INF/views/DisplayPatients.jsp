@@ -11,16 +11,33 @@
             <jsp:include page="access.jsp"/>
    </head>
    <body>
-         <jsp:include page="Header.jsp"/>
-     <div class="row">
-     <div class="col-sm-10">
-     <form action="createPatient" method="get">
-     <button type="submit" class="btn btn-primary spacing leftpad">Create Patient</button>
-     </form>
-     </div>
+         <jsp:include page="header.jsp"/>
+                                <div id="wrapper">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="index">
+                        Home
+                    </a>
+                </li>
+                <li>
+             <a href="createVisit">Create Visit </a> 
+                </li>
+             <li>
+              <a href="displayVisits">Display Visits</a> 
+                </li>
+                <li>
+	           <a href="createPatient">Create Patient</a>
+                </li>
+                <li  class="highlight">
+	           <a href="displayPatients">Display Patients</a>
+                </li>
+            </ul>
+        </div>
+       <div id="page-content-wrapper">
      <div class="col-sm-10">
      <form action="searchPatient" method="post">
-      <input type="number" class="search" name="id" placeholder="Search Patient By Id">
+      <input type="number" style="margin-left:50%" name="id" placeholder="Search Patient By Id">
      </form>
      </div>
      </div>
@@ -32,8 +49,7 @@
             <thead>
                <tr>
                   <th>ID</th>
-                  <th>FIRST NAME</th>
-                  <th>LAST NAME</th>
+                  <th>NAME</th>
                   <th>MOBILE NUMBER</th>
                   <th>EMAIL ID</th>
                   <th>DATE OF BIRTH</th>
@@ -61,10 +77,7 @@
                         <c:out value="${patient.id}" />
                      </td>
                      <td>
-                        <c:out value="${patient.firstName}" />
-                     </td>
-                     <td>
-                        <c:out value="${patient.lastName}" />
+                        <c:out value="${patient.firstName} ${patient.lastName}" />
                      </td>
                      <td>
                         <c:out value="${patient.mobileNumber}" />
@@ -113,6 +126,7 @@
             </tbody>
          </table>
       </div>
+            </div>
    </body>
          <jsp:include page="footer.jsp"/>
 </html>

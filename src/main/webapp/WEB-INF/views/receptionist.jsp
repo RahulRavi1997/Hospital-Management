@@ -7,19 +7,33 @@
       <jsp:include page="access.jsp"/>
 </head>
 <body>
-      <jsp:include page="Header.jsp"/>
-	<form action="createPatient" method="get">
-	  <input type="submit" class="btn btn-info" value="CreatePatient">
-	</form>
-    <form action="displayPatients" method="get">
-	  <input type="submit" class="btn btn-info" value="DisplayPatient">
-	</form>
-	<form action="createVisit" method="get">
-	  <input type="submit" class="btn btn-info" value="CreateVisit">
-	</form>
-	<form action="displayVisits" method="get">
-	  <input type="submit" value="DisplayVisit" class="btn btn-info">
-	</form>
+      <jsp:include page="header.jsp"/>
+                       <div id="wrapper">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="index">
+                        Home
+                    </a>
+                </li>
+                <li >
+             <a href="createVisit">Create Visit </a> 
+                </li>
+             <li>
+              <a href="displayVisits">Display Visits</a> 
+                </li>
+                <li>
+	           <a href="createPatient">Create Patient</a>
+                </li>
+                <li>
+	           <a href="displayPatients">Display Patients</a>
+                </li>
+            </ul>
+        </div>
+        <div id="page-content-wrapper">
+            <h4>Welcome to Receptionist Page-${email}</h4>
+        </div>
+        </div>
 </body>
       <jsp:include page="footer.jsp"/>
 
