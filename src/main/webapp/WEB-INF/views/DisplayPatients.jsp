@@ -8,8 +8,10 @@
       <title>Hospital Management System</title>
       <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
       <META HTTP-EQUIV="Expires" CONTENT="-1">
+            <jsp:include page="access.jsp"/>
    </head>
-   <body >
+   <body>
+         <jsp:include page="Header.jsp"/>
      <div class="row">
      <div class="col-sm-10">
      <form action="createPatient" method="get">
@@ -112,4 +114,5 @@
          </table>
       </div>
    </body>
+         <jsp:include page="footer.jsp"/>
 </html>

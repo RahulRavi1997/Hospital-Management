@@ -8,8 +8,10 @@
       <title>Hospital Management System</title>
       <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
       <META HTTP-EQUIV="Expires" CONTENT="-1">
+            <jsp:include page="access.jsp"/>
    </head>
-   <body >
+   <body>
+         <jsp:include page="Header.jsp"/>
      <div class="row">
      <div class="col-sm-10">
      <form action="createVisit" method="get">
@@ -32,84 +34,51 @@
                   <th>ID</th>
                   <th>ADMIT DATE</th>
                   <th>DISCHARGE DATE</th>
-                  <th>MOBILE NUMBER</th>
-                  <th>EMAIL ID</th>
-                  <th>DATE OF BIRTH</th>
-                  <th>GENDER</th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
+                  <th>PATIENT ID</th>
+                  <th>PATIENT NAME</th>                  
+                  <th>PHYSICIAN ID</th>
+                  <th>PHYSICIAN NAME</th>
+                  <th>PATIENT TYPE</th>
                </tr>
             </thead>
             <tbody>
-               <c:forEach var="patient" items="${patients}">
+               <c:forEach var="visit" items="${visits}">
                   <tr>
-                     <td style="display:none">
-                       <c:choose>
-                        <c:when test="${patient.active}">
-                          <c:out value="1"/>
-                        </c:when>
-                        <c:otherwise>
-                          <c:out value="0"/>
-                        </c:otherwise>
-                      </c:choose>   
-                     </td>                         
                      <td>
-                        <input type="hidden" value="${patient.active}" />
-                        <c:out value="${patient.id}" />
+                        <c:out value="${visit.id}" />
                      </td>
                      <td>
-                        <c:out value="${patient.firstName}" />
+                        <c:out value="${visit.admitDate}" />
+                     </td>
+                     <td>visit
+                        <c:out value="${visit.dischargeDate}" />
                      </td>
                      <td>
-                        <c:out value="${patient.lastName}" />
+                        <c:out value="${visit.patient.id}" />
                      </td>
                      <td>
-                        <c:out value="${patient.mobileNumber}" />
+                        <c:out value="${visit.patient.firstName}" />
                      </td>
                      <td>
-                        <c:out value="${patient.emailId}" />
+                        <c:out value="${visit.physician.id}" />
                      </td>
                      <td>
-                        <c:out value="${patient.birthDate}" />
+                        <c:out value="${visit.physician.firstName}" />
                      </td>
                      <td>
-                        <c:out value="${patient.gender}" />
+                        <c:out value="${visit.patientType}" />
                      </td>
-                     <c:choose>
-                       <c:when test="${patient.active == true}">
-                         <td>
-                           <form  action="modifyPatient" method="post" >
-                             <input type="hidden" name="id" value="${patient.id}" />
-                             <input type="submit" value="Edit" class="btn btn-primary">
-                           </form>
-                         </td>
-                         <td>
-                           <form  action="deletePatient" method="post" >
-                             <input type="hidden" name="id" value="${patient.id}" />
-                              <input type="submit" value="Delete" class="btn btn-danger" onclick= "return confirm('Are you sure want to delete Employee :${employee.id} ?') ">
-                           </form>
-                         </td>
-                         <td>
-                           <form  action="searchPatient" method="post" >
-                             <input type="hidden" name="id" value="${patient.id}" />
-                              <input type="submit" value="View Details" class="btn btn-info">
-                           </form>
-                         </td>
-                       </c:when>
-                       <c:otherwise>
-                         <td>
-                           <form  action="activatePatient" method="post" >
-                             <input type="submit" value="Activate" class="btn btn-primary" onclick= "return confirm('Are you sure want to Activate Employee :${employee.id} ?')"/>
-                             <input type="hidden" name="id" value="${patient.id}" />
-                           </form>
-                         </td>
-                       </c:otherwise>
-                     </c:choose>
+                     <td>
+                        <form  action="searchVisit" method="post" >
+                         <input type="hidden" name="id" value="${visit.id}" />
+                         <input type="submit" value="View Details" class="btn btn-info">
+                        </form>
+                    </td>
                   </tr>
                </c:forEach>
             </tbody>
          </table>
       </div>
    </body>
+         <jsp:include page="footer.jsp"/>
 </html>

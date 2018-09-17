@@ -7,8 +7,10 @@
       <link rel="shortcut icon" href="images/i2i.png" />
       <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
       <META HTTP-EQUIV="Expires" CONTENT="-1">
+            <jsp:include page="access.jsp"/>
    </head>
-   <body >
+   <body>
+         <jsp:include page="Header.jsp"/>
       <center>
          <h1>Hospital Management System</h1>
       </center>
@@ -135,4 +137,6 @@
                       </c:otherwise>
                      </c:choose>
    </body>
+         <jsp:include page="footer.jsp"/>
+   
 </html>
