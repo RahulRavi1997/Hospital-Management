@@ -114,48 +114,48 @@ public class UserController {
     }
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
-   public String userInfo(Model model, Principal principal, HttpServletRequest request) {
-       model.addAttribute("email",principal.getName());
-       HttpSession oldSession = request.getSession(Boolean.FALSE);
-       if (null != oldSession) {
-           oldSession.invalidate();
-       }
-       HttpSession session = request.getSession();
-       session.setAttribute(Constants.EMAIL, principal.getName());
-       session.setMaxInactiveInterval(Constants.SESSION_ACTIVE_INTERVAL);
-       Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>)SecurityContextHolder.getContext().getAuthentication().getAuthorities();
-       if (authorities.iterator().next().toString().equals("ROLE_ADMIN")) {
-           return "admin";
-       } else if (authorities.iterator().next().toString().equals("ROLE_PHYSICIAN")) {
-           return "physician";
-       } else if (authorities.iterator().next().toString().equals("ROLE_NURSE")) {
-           return "nurse";
-       } else if (authorities.iterator().next().toString().equals("ROLE_RECEPTIONIST")) {
-           return "receptionist";
-       } else {
-           return "accessDenied";
-       }
-   }
-   @RequestMapping("/Access_Denied")
-   public String accessDenied(Model model, Principal principal) {
-       if (principal != null) {
-           model.addAttribute("message", "Hi " + principal.getName()
-                   + "<br> You do not have permission to access this page!");
-       } else {
-           model.addAttribute("message",
-                   "You do not have permission to access this page!");
-       }
-       return "accessDenied";
-   }
+    public String userInfo(Model model, Principal principal, HttpServletRequest request) {
+        model.addAttribute("email",principal.getName());
+        HttpSession oldSession = request.getSession(Boolean.FALSE);
+        if (null != oldSession) {
+            oldSession.invalidate();
+        }
+        HttpSession session = request.getSession();
+        session.setAttribute(Constants.EMAIL, principal.getName());
+        session.setMaxInactiveInterval(Constants.SESSION_ACTIVE_INTERVAL);
+        Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>)SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+        if (authorities.iterator().next().toString().equals("ROLE_ADMIN")) {
+            return "admin";
+        } else if (authorities.iterator().next().toString().equals("ROLE_PHYSICIAN")) {
+            return "physician";
+        } else if (authorities.iterator().next().toString().equals("ROLE_NURSE")) {
+            return "nurse";
+        } else if (authorities.iterator().next().toString().equals("ROLE_RECEPTIONIST")) {
+            return "receptionist";
+        } else {
+            return "accessDenied";
+        }
+    }
+    @RequestMapping("/Access_Denied")
+    public String accessDenied(Model model, Principal principal) {
+        if (principal != null) {
+            model.addAttribute("message", "Hi " + principal.getName()
+                    + "<br> You do not have permission to access this page!");
+        } else {
+            model.addAttribute("message",
+                    "You do not have permission to access this page!");
+        }
+        return "accessDenied";
+    }
 
-   @RequestMapping(value={"/login","/","/logoutSuccessful"})
-   public String redirectLogin(Model model, Principal principal, HttpServletRequest request){
-       if (principal == null) {
-       return "login";
-       } else {
-       	return userInfo(model, principal, request);
-       }
-   }
+    @RequestMapping(value={"/login","/","/logoutSuccessful"})
+    public String redirectLogin(Model model, Principal principal, HttpServletRequest request){
+        if (principal == null) {
+	        return "login";
+        } else {
+        	return userInfo(model, principal, request);
+        }
+    }
 
     @RequestMapping(value="/createUser")
     public String redirectCreateUser(Model model){

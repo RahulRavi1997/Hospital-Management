@@ -6,34 +6,40 @@
 	<title>Admin page</title>
 </head>
 <body>
-  <link rel="stylesheet" href="static/css/font-awesome.min.css">
-  <link rel="stylesheet" href="static/css/hms.css">
-  <div class="navbar">
-    <div class="left" >
-    Hospital Management System
-  </div>
-  <div class="dropdown">
-    <button class="dropbtn " style="font-family:'Righteous';"><i class="fa fa-user-md font18px"></i>&nbsp;&nbsp;${email}&nbsp;&nbsp;&nbsp;
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-      <a href="#"><i class="fa fa-lock"></i>&nbsp;&nbsp;Change Password</a>
-      <a href="logout"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Logout</a>
+  <jsp:include page="header.jsp"/>
+     <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand highlight">
+                    <a href="index">
+                        Home
+                    </a>
+                </li>
+                <li>
+             <a href="createUser">Create User </a> 
+                </li>
+                <li>
+              <a href="createPhysician">Add Physician</a> 
+                </li>
+                <li>
+	           <a href="displayPhysicians">Display Physician</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                      Dear <strong>${sessionScope.email}</strong>, Welcome to Admin Page.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
     </div>
-  </div>
-</div>
-
-<div class="left_div">
-   <a href="createUser"><button class="sidebar-btn">Create User</button> </a> 
-   <a href="createPhysician"><button class="sidebar-btn">Add Doctor</button> </a> 
-	  <a href="displayPhysicians"><button class="sidebar-btn">Display Doctor </button></a>
-
-</div>
-<div class="right_div">
-  <!--Content-->
-
-	Dear <strong>${email}</strong>, Welcome to Admin Page.
-
-</div>
+    <jsp:include page="footer.jsp"/>
 </body>
 </html>

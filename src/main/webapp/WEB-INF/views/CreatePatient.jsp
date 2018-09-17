@@ -129,8 +129,7 @@
                 </div>
               </div>
             </c:forEach>
-                          </div>
-            
+         </div>
       <br>
       <div style="text-align:center">
       <c:choose>

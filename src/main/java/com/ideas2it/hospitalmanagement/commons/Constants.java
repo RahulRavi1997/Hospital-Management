@@ -185,5 +185,4 @@ public final class Constants {
    public static final String VISIT_OBJECT = "visit";
    public static final String VISIT_OBJECTS = "visits";
    public static final int SESSION_ACTIVE_INTERVAL = 30*60;
-   
 }

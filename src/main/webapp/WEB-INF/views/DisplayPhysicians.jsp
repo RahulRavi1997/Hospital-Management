@@ -8,13 +8,39 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Physician Details</title>
-    <link rel="shortcut icon" href="styles/images/ideas1.jpg"/>
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
     <META HTTP-EQUIV="Expires" CONTENT="-1">
   </head>
   <body>
-   
-    <link rel="stylesheet" href="/static/css/hms.css">
+  <jsp:include page="header.jsp"/>
+     <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="index">
+                        Home
+                    </a>
+                </li>
+                <li>
+             <a href="createUser">Create User </a> 
+                </li>
+                <li>
+              <a href="createPhysician">Add Physician</a> 
+                </li>
+                <li  class="highlight">
+	           <a href="displayPhysicians">Display Physician</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+
     <c:if test="${not empty message}">
      <div id="snackbar">${message}</div>
     </c:if>
@@ -30,13 +56,13 @@
         </div>
         <form action="searchPhysician" method="GET">
         <div class="col-sm-4 col-xs-4"> 
-          <input name="id" autocomplete="off" id="myInput" class="form-control mr-sm-2" placeholder="Search" required/>
+          <input name="id" autocomplete="off" id="myInput" class="form-control mr-sm-2" placeholder="Search" type="number" required/>
               <button class="glyphicon glyphicon-search"  type="submit">Search</button>    
         </div>
         <div class="col-sm-4 col-xs-4 text-align-center">
           <h4>
             Filter :
-            <select id="choice">
+            <select id="filterChoice">
               <option value>All</option>
               <option value="Delete">Active</option>
               <option value="Restore">Inactive</option>
@@ -123,12 +149,16 @@
     </c:if>
     </td>
     </table>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <jsp:include page="footer.jsp"/>
+
+
   </body>
-<script src="/static/script/jquery.min.js"></script>
-<script src="/static/script/jquery-1.10.2.js"></script>
-<script src="/static/script/bootstrap.min.js"></script>
-<script src="/static/script/sorttable.js"></script>
-<script src="/static/script/jquery-1.9.1.min.js"></script>
-<script src="/static/script/jquery-ui.js"></script>
-<script src="/static/script/script.js"></script>
 </html>

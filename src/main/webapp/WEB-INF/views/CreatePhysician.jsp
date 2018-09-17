@@ -10,10 +10,35 @@
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
     <META HTTP-EQUIV="Expires" CONTENT="-1">
   </head>
-    <link rel="stylesheet" href="/static/css/jquery-ui.css">
-    <link rel="stylesheet" href="/static/css/hms.css">
   <body>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <jsp:include page="header.jsp"/>
+     <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="index">
+                        Home
+                    </a>
+                </li>
+                <li>
+             <a href="createUser">Create User </a> 
+                </li>
+                <li  class="highlight">
+              <a href="createPhysician">Add Physician</a> 
+                </li>
+                <li>
+	           <a href="displayPhysicians">Display Physician</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
     <c:set var="value" value="Add"/>
     <c:set var="operation" value="addPhysician"/>
     <c:if test="${not empty physician.firstName}">
@@ -92,11 +117,7 @@
               </div>
             </div>
           </div>
-
-
-
-
-<div class="col-sm-6 col-xs-6">
+           <div class="col-sm-6 col-xs-6">
             <c:forEach items="${physician.addresses}" varStatus="vs">
               <c:if test="${vs.index+1 eq 1}"> <c:set var="addrstype" value="Permanent"/></c:if>
               <c:if test="${vs.index+1 eq 2}"> <c:set var="addrstype" value="Temporary"/></c:if>
@@ -166,12 +187,15 @@
     </form:form>
     </br>
     </br>
-    <script src="/static/script/jquery.min.js"></script>
-<script src="/static/script/jquery-1.10.2.js"></script>
-<script src="/static/script/bootstrap.min.js"></script>
-<script src="/static/script/sorttable.js"></script>
-<script src="/static/script/jquery-1.9.1.min.js"></script>
-<script src="/static/script/jquery-ui.js"></script>
-<script src="/static/script/script.js"></script>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <jsp:include page="footer.jsp"/>
   </body>
 </html>
