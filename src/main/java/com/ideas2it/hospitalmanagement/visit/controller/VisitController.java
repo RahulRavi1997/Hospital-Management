@@ -85,7 +85,8 @@ public class VisitController {
 
         try {
         	visitService.addVisit(visit, patientId, physicianId);
-            return new ModelAndView(Constants.SEARCH_VISIT_JSP);
+            return new ModelAndView(Constants.SEARCH_VISIT_JSP, Constants.
+                VISIT_OBJECT, visit);
         } catch (ApplicationException e) {
             Logger.error(e);
             return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
