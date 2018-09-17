@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.utils.DateUtil;
+import com.ideas2it.hospitalmanagement.ward.model.Ward;
 import com.ideas2it.hospitalmanagement.bed.model.Bed;
 import com.ideas2it.hospitalmanagement.bed.service.BedService;
 import com.ideas2it.hospitalmanagement.bed.service.impl.BedServiceImpl;
@@ -39,14 +40,16 @@ public class BedController {
 	@RequestMapping(value="/admitPatient" , method= RequestMethod.POST)   
     public ModelAndView admitPatient(@RequestParam("bedNumber") 
     										int bedNumber,	@RequestParam("visitId") int visitId) {
-    	
-        ModelAndView modelAndView = new ModelAndView("");
+    	System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + bedNumber + "visit" + visitId);
+        ModelAndView modelAndView = new ModelAndView("displayWards");
         try {
         	if(bedService.admitPatient(visitId, bedNumber)) {
         		
         	} else {
         		//Fail message
         	}
+        	modelAndView.addObject("ward" , new Ward());
+
         	return modelAndView;
         } catch (ApplicationException e) {
         	//Attach an exception message for model.

@@ -12,5 +12,11 @@
       <property name = "visitId" column = "visitId" type = "int" />
 	  <property name = "roomNumber" column = "roomNumber" type = "int" />
       <property name = "status" column = "status" type = "string"/>
+      
+      
+        <bag name = "bedAllocations" cascade = "all" lazy = "false">
+          <key column = "bed"/>
+          <one-to-many class = "com.ideas2it.hospitalmanagement.bedallocation.model.BedAllocation"/>
+      </bag>
    </class>
 </hibernate-mapping>

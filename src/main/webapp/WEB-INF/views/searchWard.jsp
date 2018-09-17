@@ -49,7 +49,11 @@
             </div>
          </form:form>
       </div>
-
+	
+      <form:form action="DisplayAllWards" method="get">
+	  <button type="submit">Go back to Wards</button>
+	 </form:form>
+	 
          <div class = "wardBasicInformation">
             <c:forEach items= "${ward.rooms}" var = "room">
                <div class = "roomBasicInformation">
@@ -64,6 +68,18 @@
                            <c:forEach items= "${room.beds}" var = "bed">
                               <button class="bedType"><img src="static/bed.png"><br>
                               ${bed.bedNumber}</button>
+                              <c:if test="${bed.status == 'Available'}">
+							  <form:form action="admitPatient" method="post">
+							  <input type="hidden" value="${visitId}" name="visitId">
+							  <input type="hidden" value="${bed.bedNumber}" name="bedNumber">
+                              <button type="submit">Admit</button>
+                             </form:form> </c:if> 
+                             <c:if test="${bed.status != 'Available'}">
+                            <form:form action="dischargePatient" method="post">
+                             <input type="hidden" value="${visitId}" name="visitId">
+                             <input type="hidden" value="${bed.bedNumber}" name="bedNumber">
+                              <button type="submit">Discharge</button>
+                              </form:form></c:if>
                            </c:forEach>
                         </td>
                      </tr>

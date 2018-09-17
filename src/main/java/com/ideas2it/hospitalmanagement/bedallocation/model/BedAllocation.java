@@ -14,6 +14,17 @@ public class BedAllocation {
 	private Date dischargeDate;
 	private int visitId;
 	
+	public int getBedId() {
+		return bedId;
+	}
+	public void setBedId(int bedId) {
+		this.bedId = bedId;
+	}
+
+
+	private int bedId;
+
+	
 	public Bed getBed() {
 		return bed;
 	}
@@ -46,5 +57,11 @@ public class BedAllocation {
 	}
 	public void setBedAllocationId(int bedAllocationId) {
 		this.bedAllocationId = bedAllocationId;
+	}
+	
+	
+	public String toString() {
+		return ("\nvisitId" + visitId + "\nadmintDate" + admitDate);
+		
 	}
 }

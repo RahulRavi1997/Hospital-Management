@@ -56,6 +56,12 @@ public class Bed {
 		this.roomNumber = roomNumber;
 	}
 
-		
+	public String toString() {
+		StringBuilder stringBuilder = new StringBuilder();
+		for(BedAllocation bedAllocation : bedAllocations) {
+			stringBuilder.append("bedaallocation" +  bedAllocation);
+		}
+		return stringBuilder.toString();
+	}
 	
 }

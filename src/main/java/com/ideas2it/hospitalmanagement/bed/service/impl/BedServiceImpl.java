@@ -41,24 +41,24 @@ public class BedServiceImpl extends GenericDao implements BedService {
 	 */
 	public boolean admitPatient(int visitId, int bedNumber) throws ApplicationException {
 		Bed bed = searchBedByNumber(bedNumber);
-		if(bed.getStatus() != "Occupied") {
-			Visit visit = visitService.getVisitById(visitId);
-			if(visit.getPatientType() == "OutPatient") {
+	//	if(bed.getStatus() != "Occupied") {
+		//	Visit visit = visitService.getVisitById(visitId);
+			//if(visit.getPatientType() == "InPatient") {
 				bed.setVisitId(visitId);
 				bed.setStatus("Occupied");
         		addBedAllocationDetails(visitId, bed);
 				return bedDao.updateBed(bed);
-			} else {
-				return false;
-			}
-		} else {
-			return false;
-		}
+		//	} else {
+			//	return false;
+			///}
+		//} else {
+			//return false;
+		//}
 	}
 	
 	
     private void addBedAllocationDetails(int visitId, Bed bed) {
-
+System.out.println("hellooooooooooooooooooo wrold" + visitId + "bedddddddddddddddddddd" + bed);
     	BedAllocation bedAllocation = new BedAllocation();
     	bedAllocation.setBed(bed);
     	bedAllocation.setVisitId(visitId);
