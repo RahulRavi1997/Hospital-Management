@@ -11,19 +11,33 @@
             <jsp:include page="access.jsp"/>
    </head>
    <body>
-         <jsp:include page="Header.jsp"/>
-     <div class="row">
-     <div class="col-sm-10">
-     <form action="createVisit" method="get">
-     <button type="submit" class="btn btn-primary spacing leftpad">Create Visit</button>
-     </form>
-     </div>
-     <div class="col-sm-10">
-     <form action="searchVisit" method="post">
-      <input type="number" class="search" name="id" placeholder="Search Visit By Id">
-     </form>
-     </div>
-     </div>
+         <jsp:include page="header.jsp"/>
+                          <div id="wrapper">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="index">
+                        Home
+                    </a>
+                </li>
+             <li>
+             <a href="createVisit">Create Visit </a> 
+                </li>
+              <li  class="highlight">
+              <a href="displayVisits">Display Visits</a> 
+                </li>
+                <li>
+	           <a href="createPatient">Create Patient</a>
+                </li>
+                <li>
+	           <a href="displayPatients">Display Patient</a>
+                </li>
+            </ul>
+        </div>
+              <div id="page-content-wrapper">
+                            <form action="searchVisit" method="post">
+  <input type="number" style="margin-left:42%" name="id" placeholder="Search Visit By Id">
+</form>
       <div align="center" >
          <table class ="table">
                <caption>
@@ -50,7 +64,7 @@
                      <td>
                         <c:out value="${visit.admitDate}" />
                      </td>
-                     <td>visit
+                     <td>
                         <c:out value="${visit.dischargeDate}" />
                      </td>
                      <td>
@@ -79,6 +93,10 @@
             </tbody>
          </table>
       </div>
+            </div>
+      
+            </div>
+      
    </body>
          <jsp:include page="footer.jsp"/>
 </html>

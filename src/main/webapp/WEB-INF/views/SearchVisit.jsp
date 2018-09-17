@@ -11,21 +11,38 @@
             <jsp:include page="access.jsp"/>
    </head>
    <body>
-         <jsp:include page="Header.jsp"/>
-     <div class="row">
-     <div class="col-sm-10">
-     <form action="createVisit" method="get">
-     <button type="submit" class="btn btn-primary spacing leftpad">Create Visit</button>
-     </form>
-     </div>
-     <div class="col-sm-10">
-     <form action="displayVisit" method="get">
-      <input type="submit" class="btn btn-primary spacing leftpad" value="DisplayAllVisit">
-     </form>
-     </div>
-     </div>
-      <div align="center" >
+         <jsp:include page="header.jsp"/>
+                          <div id="wrapper">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="index">
+                        Home
+                    </a>
+                </li>
+                <li >
+             <a href="createVisit">Create Visit </a> 
+                </li>
+             <li>
+              <a href="displayVisits">Display Visits</a> 
+                </li>
+                <li>
+	           <a href="createPatient">Create Patient</a>
+                </li>
+                 <li>
+	           <a href="displayPatients">Display Patients</a>
+                </li>
+            </ul>
+        </div>
+              <div id="page-content-wrapper">
+              <form action="searchVisit" method="post">
+  <input type="number" style="margin-left:42%" name="id" placeholder="Search Visit By Id">
+</form>
+                    <div align="center" >
          <table class ="table">
+               <caption>
+                  <h2>Visit-${visit.id} Details</h2>
+               </caption>
             <thead>
                <tr>
                   <th>ID</th>
@@ -42,7 +59,7 @@
                      <td>
                         <c:out value="${visit.admitDate}" />
                      </td>
-                     <td>visit
+                     <td>
                         <c:out value="${visit.dischargeDate}" />
                      </td>
                      <td>
@@ -88,7 +105,7 @@
                   <th>PHYSICIAN NAME</th>
                   <th>PHYSICIAN EMAILID</th>
                   <th>PHYSICIAN MOBILENUMBER</th>
-                  <th>PHYSICIAN SPECIALIS	ATION</th>
+                  <th>PHYSICIAN SPECIALISATION</th>
                </tr>
             </thead>
             <tbody>
@@ -112,6 +129,10 @@
                 </tbody>
                 </table>
       </div>
+            </div>
+      
+            </div>
+      
    </body>
          <jsp:include page="footer.jsp"/>
 </html>

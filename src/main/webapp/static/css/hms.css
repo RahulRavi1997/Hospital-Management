@@ -93,3 +93,11 @@ background-color:#333;
     -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
     animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
+.inputtext {
+	width:200px;
+	margin-bottom:10px;	
+}
+.buttn{
+	margin-top:15px;
+	margin-left:150px;
+}

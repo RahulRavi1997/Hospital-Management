@@ -13,7 +13,6 @@
   <body>
   <jsp:include page="header.jsp"/>
      <div id="wrapper">
-        <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
