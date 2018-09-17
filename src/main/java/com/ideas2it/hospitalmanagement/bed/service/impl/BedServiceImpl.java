@@ -53,26 +53,31 @@ public class BedServiceImpl extends GenericDao implements BedService {
 	 */
 	public boolean admitPatient(int visitId, int bedNumber) throws ApplicationException {
 		Bed bed = searchBedByNumber(bedNumber);
-	//	if(bed.getStatus() != "Occupied") {
-		//	Visit visit = visitService.getVisitById(visitId);
-			//if(visit.getPatientType() == "InPatient") {
+		if(bed.getStatus() != "Occupied") {
+			Visit visit = visitService.getVisitById(visitId);
+
+	if(visit.getPatientType().equals("InPatient") && bed.getStatus().equals("Available")) {
 				bed.setVisitId(visitId);
+				System.out.println("dddddddddddddddddddddddddddddddddd" + visit.getPatientStatus());
+
 				bed.setStatus("Occupied");
-        		addBedAllocationDetails(visitId, bed);
+				visit.setPatientStatus("Admitted");
+				System.out.println("dddddddddddddddddddddddddddddddddd" + visit.getPatientStatus());
+        		addBedAllocationDetails(visit, bed);
 				return bedDao.updateBed(bed);
-		//	} else {
-			//	return false;
-			///}
-		//} else {
-			//return false;
-		//}
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
 	}
 	
 	
-    private void addBedAllocationDetails(int visitId, Bed bed) {
+    private void addBedAllocationDetails(Visit visit, Bed bed) {
     	BedAllocation bedAllocation = new BedAllocation();
     	bedAllocation.setBed(bed);
-    	bedAllocation.setVisitId(visitId);
+    	bedAllocation.setVisit(visit);
     	try {
 			bedAllocation.setAdmitDate(DateUtil.getCurrentDate());
 			bed.getBedAllocations().add(bedAllocation);
@@ -92,20 +97,19 @@ public class BedServiceImpl extends GenericDao implements BedService {
 	/**
 	 *  {@inheritDoc}
 	 */
-	public boolean dischargePatient(int visitId, int bedNumber) throws ApplicationException {
+	public boolean dischargePatient( int bedNumber) throws ApplicationException {
 
 		Bed bed = searchBedByNumber(bedNumber);
-		System.out.println("treeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"+ bed.getStatus());
+		System.out.println("dichargeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"+ bed.getVisitId() + bed.getStatus() + "" + bed.getBedNumber() + "" + bed.getRoomNumber());
 
-		if(bed.getStatus().equals( "Occupied")) {
+		if(bed.getStatus().equals("Occupied")) {
 
-	//		Visit visit = visitService.getVisitById(visitId);
-		//	if(visit.getPatientType() == "OutPatient" && null == visit.getDischargeDate()) {
-			//	visit.setDischargeDate(new Date());
-				bed.setVisitId(null);
+			Visit visit = visitService.getVisitById(bed.getVisitId());
+			if(visit.getPatientType().equals("InPatient")) {
+				visit.setDischargeDate(new Date());
 				bed.setStatus("Available");
-        		addBedDischargeDetails(visitId, bed);
-			//	visitService.modifyVisit(visit);
+        		addBedDischargeDetails(bed.getVisitId(), bed);
+				visitService.modifyVisit(visit);
         		System.out.println("treeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
 				return bedDao.updateBed(bed);
 			} else {
@@ -113,23 +117,22 @@ public class BedServiceImpl extends GenericDao implements BedService {
 
 				return false;
 			}
-	//	} else {
-		//	return false;
-		//}
+			} else {
+			return false;
+		}
 	}
 	
 	private void addBedDischargeDetails(int visitId, Bed bed) {
-		System.out.println("fidvhsthrrrrrrrrrrrrrrrrrr");
-
+		System.out.println("fidvhsthrrrrrrrrrrrrrrrrrr" + visitId + "bed" + bed.getStatus() + "" + bed.getBedNumber());
+		bed.setVisitId(null);
         for(BedAllocation bedAllocation : bed.getBedAllocations()) {
-        	if(bedAllocation.getVisitId() == visitId) {
+        	if(bedAllocation.getVisit() != null) {
         		try {
 					bedAllocation.setDischargeDate(DateUtil.getCurrentDate());
 				} catch (ApplicationException e) {
 					
 					
 				}
-        		
         	}
         }
 	}

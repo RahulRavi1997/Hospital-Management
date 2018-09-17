@@ -49,5 +49,101 @@ public interface UserDao {
      */
     public User searchUserByEmail(String email) throws ApplicationException;
 
+	/**
+	 * <p>
+	 * This Method is used to obtain an arraylist of all the users that
+	 * are currently present.
+	 * </p>
+	 *
+	 * @return users an Arraylist consisting of all the users is
+	 *                   returned.
+	 *
+	 * @throws ApplicationException An exception created for catching exceptions
+	 *                              that occur while displaying all users.
+	 */
+	public List<User> getAllUsers() throws ApplicationException;
+
+	
+    /**
+     * <p>
+     *  This Method is used to update the details of an User. Returns true
+     *  if the entry is modified, else returns false.
+     *  <p>
+     *
+     * @param user an User object is passed with the details to be
+     *                 updated.
+     *
+     * @return boolean a boolean value is returned whether the operation is
+     *                 successful or not.
+     *
+     * @throws ApplicationException An exception created for catching exceptions
+     *                              that occur while updating an user.
+     */
+    public boolean updateUser(User user) throws ApplicationException;
+
+    /**
+     * <p>
+     * This Method is used to delete an User. Returns true if the entry is
+     * removed, else returns false.
+     * </p>
+     *
+     * @param user an User object that is to be deleted from the
+     *                 database table.
+     *
+     * @return boolean a boolean value is returned whether the operation to
+     *                 remove is successful or not.
+     *
+     * @throws ApplicationException An exception created for catching exceptions
+     *                              that occur while deleting an user.
+     */
+    public boolean deleteUser(User user) throws ApplicationException;
+
+    /**
+     * <p>
+     * This Method is used to search for an user. Returns the user
+     * object if a match is found with same id, else returns null.
+     * </p>
+     *
+     * @param id         an Integer to identify the required User
+     *                   Object by the ID of User.
+     *
+     * @return user  an User object which has same id is returned.
+     *
+     * @throws ApplicationException An exception created for catching exceptions
+     *                              that occur while searching an user.
+     */
+    public User searchUserById(Integer id) throws ApplicationException;
+
+    /**
+     * <p>
+     *  This Method is used to re-activate an user who has been deleted.
+     *  Returns true if the operation is successful.
+     * </p>
+     *
+     * @param user an User object to be restored.
+     *
+     * @return boolean a boolean value is returned whether the operation to
+     *                 modify is successful or not.
+     *
+     * @throws ApplicationException A Custom Exception created for catching
+     *                              exceptions that occur while modifying an
+     *                              user.
+     */
+    public boolean restoreUser(User user) throws ApplicationException;
+
+    /**
+     * <p>
+     * This Method is used to obtain an arraylist of all selected users.
+     * </p>
+     *
+     * @return ids an Array of integers containing the id of users that are
+     *             to be retrieved.
+     *
+     * @throws ApplicationException An exception created for catching exceptions
+     *                              that occur while displaying all users.
+     */
+    public List<User> getUsersByIds(Integer[] ids) throws ApplicationException;
+    
+	public List<User> getUsersByQuery(String query, String role) throws ApplicationException;
 
 }

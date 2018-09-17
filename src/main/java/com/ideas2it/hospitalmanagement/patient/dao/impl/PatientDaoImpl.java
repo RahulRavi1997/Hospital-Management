@@ -19,7 +19,7 @@ import com.ideas2it.hospitalmanagement.patient.model.Patient;
  * <p>
  * It is having the data manipulation methods like Add, Modify, Remove,
  * Search and Display the details in the Database implements the PatientDao
- * interface funtions.
+ * interface functions.
  * </p>
  * ArrayList is used to store the values of the Patient details which are
  * gathered from the Database.
@@ -35,8 +35,8 @@ public class PatientDaoImpl extends GenericDao implements PatientDao {
 
 	String PATIENT_IN_QUERY = "from Patient where id in (:ids)";
 	String IDS = "ids";
-
-
+    String PATIENTS_IN_NAMES = "from Patient where firstName like :name";
+    String NAME = "name";
 	/**
 	 * {@inheritDoc}
 	 */
@@ -126,6 +126,19 @@ public class PatientDaoImpl extends GenericDao implements PatientDao {
 			Session session = super.getSession();
 			Query query = session.createQuery(PATIENT_IN_QUERY);  
 			query.setParameterList(IDS, ids); 
+			return query.list();
+		} catch (ApplicationException e) {
+			Logger.error(Constants.PATIENT_DISPLAY_EXCEPTION, e);
+			throw new ApplicationException(Constants.PATIENT_DISPLAY_EXCEPTION, e);
+		}
+	}
+
+    public List<Patient> getPatientsByName(String name) throws ApplicationException {
+
+	    try {
+			Session session = super.getSession();
+			Query query = session.createQuery(PATIENTS_IN_NAMES);
+			query.setParameter(NAME, name+"%"); 
 			return query.list();
 		} catch (ApplicationException e) {
 			Logger.error(Constants.PATIENT_DISPLAY_EXCEPTION, e);

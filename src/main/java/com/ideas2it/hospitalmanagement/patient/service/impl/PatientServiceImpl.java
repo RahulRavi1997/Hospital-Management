@@ -41,7 +41,6 @@ public class PatientServiceImpl implements PatientService {
             throws ApplicationException {
     	Patient oldPatient = patientDao.searchPatientById(patient.
             getId());
-    	patient.setVisits(oldPatient.getVisits());
         return patientDao.updatePatient(patient);
     }
 
@@ -84,4 +83,11 @@ public class PatientServiceImpl implements PatientService {
 	public List<Patient> retrievePatientsByIds(Integer[] ids) throws ApplicationException {
 		return patientDao.getPatientsByIds(ids);
 	}
+
+    /**
+     *  {@inheritDoc}
+     */
+    public List<Patient> retrievePatientsByName(String name) throws ApplicationException {
+	    return patientDao.getPatientsByName(name);
+    }
 }

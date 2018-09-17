@@ -86,4 +86,6 @@ public interface VisitDao {
      *                              that occur while displaying all visits.
      */
     public List<Visit> getVisitsByIds(Integer[] ids) throws ApplicationException;
+
+	public List<Visit> getVisitsByPatientType(String patientType) throws ApplicationException;
 }

@@ -1,7 +1,9 @@
 package com.ideas2it.hospitalmanagement.patient.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.ideas2it.hospitalmanagement.address.model.Address;
 import com.ideas2it.hospitalmanagement.commons.Constants;
 import com.ideas2it.hospitalmanagement.commons.enums.Gender;
 import com.ideas2it.hospitalmanagement.logger.Logger;
@@ -13,9 +15,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping; 
 import org.springframework.ui.Model; 
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import com.google.gson.Gson;
 
 /**
  * PatientController is the controller class for the Patient, which allows
@@ -57,6 +61,10 @@ public class PatientController {
     public ModelAndView getPatientDetailsFromUser(Model model) {
 
     	Patient patient = new Patient();
+        List<Address> addresses = new ArrayList<Address>();
+        addresses.add(new Address());
+        addresses.add(new Address());
+        patient.setAddresses(addresses);
         model.addAttribute("genders",Gender.values());
         return new ModelAndView(Constants.CREATE_PATIENT_JSP, Constants.PATIENT_OBJECT
             , patient);
@@ -82,7 +90,8 @@ public class PatientController {
 
         try {
         	patientService.addPatient(patient);
-            return new ModelAndView(Constants.SEARCH_PATIENT_JSP);
+            return new ModelAndView(Constants.SEARCH_PATIENT_JSP, Constants.
+                	PATIENT_OBJECT, patient);
         } catch (ApplicationException e) {
             Logger.error(e);
             return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
@@ -169,6 +178,7 @@ public class PatientController {
     public ModelAndView removePatient(@RequestParam(Constants.ID)
             Integer patientId) {
 
+
         try {
         	patientService.removePatient(patientId);
             List<Patient> patients = patientService.getPatients();
@@ -192,7 +202,8 @@ public class PatientController {
      * value as ModelAndView Class Object.
      * </p>
      * @param patientId Integer with patientId value from which the Patient
-     *                   Object is obtained from the Database. 
+     *                   Object is obtained from the Database. import org.springframework.web.bind.annotation.RequestMethod;
+
      * @return ModelAndView Object which redirects to the Search Patient Page
      *                      with the Patient Object or to the Error Page.
      */
@@ -265,5 +276,19 @@ public class PatientController {
             return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
                 Constants.PATIENT_ACTIVATION_FAILED);
         }
+    }
+
+    @RequestMapping(value="/searchPatientByName", produces={"application/json",
+    		"application/xml"},consumes="application/json",headers = "content-type=application/x-www-form-urlencoded", method = RequestMethod.GET)
+    @ResponseBody
+    public String searchPatientByName(@RequestParam("name") String name) {
+    	String searchedPatients = null;
+    	try {
+            List<Patient> patients = patientService.retrievePatientsByName(name);
+            searchedPatients = new Gson().toJson(patients);
+        } catch (ApplicationException e) {
+            Logger.error(e);
+        }
+        return searchedPatients;
     }
 }

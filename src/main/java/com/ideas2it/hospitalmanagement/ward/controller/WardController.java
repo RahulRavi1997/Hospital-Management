@@ -30,7 +30,7 @@ public class WardController {
 
 
     public void setWardService(WardService wardService) {
-        this.wardService = wardService;
+        WardController.wardService = wardService;
     }
 
 
@@ -56,7 +56,42 @@ public class WardController {
         return mav;
     }
 
+    @RequestMapping(value="/admitButton", method=RequestMethod.POST)
+    public ModelAndView admitButton(@RequestParam("visitId")String visitId) {
+  	  
+  	 ModelAndView mav = new ModelAndView("displayWards");
+  	  try {
+          mav.addObject("visitId",visitId);
+          mav.addObject("admitButton", "Yes");
+          mav.addObject("wards" , wardService.displayAllWards("All"));
+          mav.addObject("ward" , new Ward());
+          mav.addObject("wardIds" , getWardIds());
+
+        } catch(ApplicationException e) {
+      	  
+        }
+  	  return mav;
+  	  
+    }
     
+    @RequestMapping(value="/dischargeButton", method=RequestMethod.POST)
+    public ModelAndView dischargeButton(@RequestParam("visitId")String visitId) {
+  	  
+  	 ModelAndView mav = new ModelAndView("displayWards");
+  	  try {
+          mav.addObject("visitId",visitId);
+          mav.addObject("dischargeButton", "Yes");
+          mav.addObject("wards" , wardService.displayAllWards("All"));
+          mav.addObject("ward" , new Ward());
+          mav.addObject("wardIds" , getWardIds());
+
+        } catch(ApplicationException e) {
+      	  
+        }
+  	  return mav;
+  	  
+    }
+
   @RequestMapping(value="/wardOperation", method=RequestMethod.POST, params="AddWard")
   public ModelAndView createWard(@ModelAttribute("ward") Ward ward ,
 		   @RequestParam("noOfRooms")String noOfRooms) {
@@ -111,9 +146,15 @@ public class WardController {
   
 	@RequestMapping(value="/nurseHome" , method= RequestMethod.GET)   
     public ModelAndView displayAllPatients() {
-    	System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-		 ModelAndView mav = new ModelAndView("nurseHome");
-        return mav;
+		ModelAndView mav = new ModelAndView("nurseHome");
+		try {
+		System.out.println("***************************");
+		mav.addObject("inpatients", wardService.getVisitsByPatientType("InPatient"));
+		System.out.println("***************************"+wardService.getVisitsByPatientType("InPatient"));
+		} catch(ApplicationException e) {
+			  
+		}
+		  return mav;
     }
     
   public List<Integer> getWardIds() throws ApplicationException {

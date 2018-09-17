@@ -2,6 +2,12 @@ package com.ideas2it.hospitalmanagement.visit.model;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.ideas2it.hospitalmanagement.commons.Constants;
+import com.ideas2it.hospitalmanagement.patient.model.Patient;
+import com.ideas2it.hospitalmanagement.physician.model.Physician;
+
 /**
  * Visit class is the Entity class is having the getters and setter methods
  * which monitors Patient Visit to the Hospital.This class acts as an Model
@@ -18,11 +24,18 @@ public class Visit {
     private Integer id;
     private Date admitDate;
     private Date dischargeDate;
-    private Integer patientId;
-    private Integer physicianId;
+    private Patient patient;
+    private Physician physician;
 	private String patientType;
+	private String patientStatus;
+	
+    public String getPatientStatus() {
+		return patientStatus;
+	}
+	public void setPatientStatus(String patientStatus) {
+		this.patientStatus = patientStatus;
+	}
 
-    
 	public Integer getId() {
 		return id;
 	}
@@ -32,26 +45,28 @@ public class Visit {
 	public Date getAdmitDate() {
 		return admitDate;
 	}
+    @DateTimeFormat(pattern = Constants.REVERSED_DATE_FORMAT)
 	public void setAdmitDate(Date admitDate) {
 		this.admitDate = admitDate;
 	}
 	public Date getDischargeDate() {
 		return dischargeDate;
 	}
+    @DateTimeFormat(pattern = Constants.REVERSED_DATE_FORMAT)
 	public void setDischargeDate(Date dischargeDate) {
 		this.dischargeDate = dischargeDate;
 	}
-	public Integer getPatientId() {
-		return patientId;
+	public Patient getPatient() {
+		return patient;
 	}
-	public void setPatientId(Integer patientId) {
-		this.patientId = patientId;
+	public void setPatient(Patient patient) {
+		this.patient = patient;
 	}
-	public Integer getPhysicianId() {
-		return physicianId;
+	public Physician getPhysician() {
+		return physician;
 	}
-	public void setPhysicianId(Integer physicianId) {
-		this.physicianId = physicianId;
+	public void setPhysician(Physician physician) {
+		this.physician = physician;
 	}
     public String getPatientType() {
 		return patientType;
@@ -60,3 +75,4 @@ public class Visit {
 		this.patientType = patientType;
 	}
 }
+

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.physician.service.impl.PhysicianServiceImpl;
+import com.ideas2it.hospitalmanagement.user.model.User;
 import com.ideas2it.hospitalmanagement.physician.model.Physician;
 
 public interface PhysicianService {
@@ -101,6 +102,25 @@ public interface PhysicianService {
 
 	/**
 	 * <p>
+	 * This Method is used to search an Physician Entry and return the Physician
+	 * objects. It returns null if no match is found.
+	 * </p>
+	 *
+	 * @param specialisation a String indicating the specialisation of the
+	 *                       physician that is to be searched an returned.
+	 *
+	 * @return physicians an ArrayList of  Physicians is returned if a valid match is
+	 *                     found, else returns null.
+	 *
+	 * @throws ApplicationException A Custom Exception created for catching
+	 *                              exceptions that occur while retrieving an
+	 *                              physician.
+	 */
+	public List<Physician> retrievePhysiciansBySpecialisation(String specialisation)
+			throws ApplicationException;
+	
+	/**
+	 * <p>
 	 *  This Method is used to obtain all the physician details using an
 	 *  list. Returns an empty list if no physicians are added.
 	 * </p>
@@ -127,4 +147,41 @@ public interface PhysicianService {
 	 */
 	public List<Physician> retrievePhysiciansByIds(Integer[] ids) throws ApplicationException;
 
+    /**
+     * <p>
+     * This Method is used to search a User Entry and return the User
+     * object. It returns null if no match is found.
+     * </p>
+     *
+     * @param email a String indicating the email of the user that is
+     *              to be searched an returned.
+     *
+     * @return user an User object is returned if a valid match is
+     *                  found, else returns null.
+     *
+     * @throws ApplicationException A Custom Exception created for catching
+     *                              exceptions that occur while retrieving an
+     *                              user.
+     */
+    public User retrieveUserByEmail(String email) throws ApplicationException;
+    
+    /**
+     * <p>
+     *  This Method is used to modify the details of an existing user with
+     *  updated details provided by the user. Returns true if the user 
+     *  information is updated, else returns false if the operation fails.
+     * </p>
+     *
+     * @param newUser an User object is passed with the id of the old
+     *                    User which is used as a reference.
+     *
+     * @return boolean a boolean value is returned whether the operation to
+     *                 modify is successful or not.
+     *
+     * @throws ApplicationException A Custom Exception created for catching
+     *                              exceptions that occur while modifying an
+     *                              user.
+     */
+    public boolean modifyUser(User newUser)
+            throws ApplicationException;
 }

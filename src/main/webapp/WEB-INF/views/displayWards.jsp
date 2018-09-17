@@ -17,7 +17,7 @@
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <a onclick="document.getElementById('addWard').style.display='block'" style="width:auto;">Add Ward</a>
          </div>
-         <span style="font-size:30px;cursor:pointer;color:white;" onclick="openNav()">&#9776;</span>
+         <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
  
       </div>
       
@@ -93,17 +93,18 @@
                               <button class="bedType"><img src="static/bed.png"><br>
                               ${bed.bedNumber}</button>
                             <c:if test="${bed.status == 'Available'}">
-							  <form:form action="admitPatient" commandName="bed" method="post">
-							  <input type="hidden" value="1" name="visitId">
+                              <c:if test="${admitButton == 'Yes'}">
+							  <form:form action="admitPatient" method="post">
+							  <input type="hidden" value="${visitId}" name="visitId">
 							  <input type="hidden" value="${bed.bedNumber}" name="bedNumber">
-                              <button type="submit">Admit</button>
-                             </form:form> </c:if> 
-                             <c:if test="${bed.status != 'Available'}">
-                            <form:form action="dischargePatient" method="post">
-                             <input type="hidden" value="1" name="visitId">
-                             <input type="hidden" value="${bed.bedNumber}" name="bedNumber">
-                              <button type="submit">Discharge</button>
-                              </form:form></c:if>
+                              <button type="submit">Admit${bed.bedNumber}</button>
+                             </form:form> </c:if> </c:if>
+							 <c:if test="${bed.status != 'Available'}">
+                              <c:if test="${admitButton != 'Yes'}">
+							  <form:form action="dischargePatient" method="post">
+							  <input type="hidden" value="${bed.bedNumber}" name="bedNumber">
+                              <button type="submit">discharge${bed.bedNumber}</button>
+                             </form:form> </c:if> </c:if> 
                            </c:forEach>
                         </td>
                      </tr>

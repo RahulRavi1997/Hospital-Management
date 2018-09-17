@@ -120,11 +120,23 @@ public interface PatientService {
 	 * This Method is used to retrieve an list of all selected Patients.
 	 * </p>
 	 *
-	 * @return ids an Array of integers containing the id of Patients that are
+	 * @param ids an Array of integers containing the id of Patients that are
 	 *             to be retrieved.
-	 *
+	 * @return List of Patients from the given array of Ids.
 	 * @throws ApplicationException An exception created for catching exceptions
 	 *                              that occur while displaying all Patients.
 	 */
 	public List<Patient> retrievePatientsByIds(Integer[] ids) throws ApplicationException;
+
+    /**
+	 * <p>
+	 * This Method is used to retrieve an list of all selected Patients by Name.
+	 * </p>
+	 *
+	 * @param name an String value from which the Patients is retrieved by name
+	 * @return List of Patients from the given String name.
+	 * @throws ApplicationException An exception created for catching exceptions
+	 *                              that occur while displaying all Patients.
+	 */
+	public List<Patient> retrievePatientsByName(String name) throws ApplicationException;
 }

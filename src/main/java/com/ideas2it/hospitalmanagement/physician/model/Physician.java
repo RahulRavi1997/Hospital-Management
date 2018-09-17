@@ -1,14 +1,15 @@
 package com.ideas2it.hospitalmanagement.physician.model;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.ideas2it.hospitalmanagement.patient.model.Patient;
 import com.ideas2it.hospitalmanagement.address.model.Address;
 import com.ideas2it.hospitalmanagement.commons.Constants;
-import com.ideas2it.hospitalmanagement.commons.enums.Gender;
+import com.ideas2it.hospitalmanagement.user.model.User;
+import com.ideas2it.hospitalmanagement.utils.DateUtil;
 
 public class Physician {
 
@@ -18,12 +19,11 @@ public class Physician {
     private Date birthDate;
 	private Long mobileNumber;
     private String email;
-    private Address address;
     private String gender;
 	private String specialisation;
-	private List<Patient> patients;
-	private Boolean active;
-	private Integer userId;
+	private boolean active;
+	private User user;
+	private List<Address> addresses = new ArrayList<Address>();
 
 	public Integer getId() {
 		return id;
@@ -62,12 +62,6 @@ public class Physician {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Address getAddress() {
-		return address;
-	}
-	public void setAddress(Address address) {
-		this.address = address;
-	}
 	public String getGender() {
 		return gender;
 	}
@@ -80,22 +74,25 @@ public class Physician {
 	public void setSpecialisation(String specialisation) {
 		this.specialisation = specialisation;
 	}
-	public List<Patient> getPatients() {
-		return patients;
-	}
-	public void setPatients(List<Patient> patients) {
-		this.patients = patients;
-	}
-	public Boolean getActive() {
+	public boolean isActive() {
 		return active;
 	}
-	public void setActive(Boolean active) {
+	public void setActive(boolean active) {
 		this.active = active;
 	}
-	public Integer getUserId() {
-		return userId;
+	public Integer getAge() {	
+	    return DateUtil.getYearDifference(this.birthDate);
 	}
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public List<Address> getAddresses() {
+		return addresses;
+	}
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
 	}
 }

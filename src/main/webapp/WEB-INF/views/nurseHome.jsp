@@ -1,108 +1,90 @@
-<!DOCTYPE html>
+
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<link rel="stylesheet" href="https://unpkg.com/@coreui/coreui/dist/css/coreui.min.css">
 <html>
-<head>
-  <link href='https://fonts.googleapis.com/css?family=Righteous' rel='stylesheet'>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <style>
-  .navbar {
-    overflow: hidden;
-    background-color: #333;
-    font-family: Arial, Helvetica, sans-serif;
-}
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+      <title>Admin page</title>
+   </head>
+   <body>
+      <jsp:include page="header.jsp"/>
+      <div id="wrapper">
+         <!-- Sidebar -->
+         <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+               <li class="sidebar-brand highlight">
+                  <a href="index">
+                  Home
+                  </a>
+               </li>
+               <li>
+                  <a href="DisplayAllWards">View Wards</a> 
+               </li>
+               <li>
+               	  <a href="nurseHome">Display In Patients</a>
+               </li>
+            </ul>
+         </div>
+         <!-- /#sidebar-wrapper -->
+         <!-- Page Content -->
+         <div id="page-content-wrapper">
+            <div class="container-fluid">
+               <div class="row">
+                  <div class="col-lg-12">
+                  	
+                  	                  <table class="w3-table-all w3-hoverable sortable">
 
-.navbar a {
-    float: left;
-    font-size: 16px;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-.dropdown {
-    float: right;
-    overflow: hidden;
-}
-
-.dropdown .dropbtn {
-    font-size: 16px;
-    border: none;
-    outline: none;
-    color: white;
-    padding: 14px 16px;
-    background-color: inherit;
-    font-family: inherit;
-    margin: 0;
-}
-
-.navbar a:hover, .dropdown:hover .dropbtn {
-    background-color: white;
-    color: black;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-.dropdown-content a {
-    float: none;
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-}
-
-.dropdown-content a:hover {
-    background-color: #ddd;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-.left {
-  font-family: 'Righteous'; text-align:center; color:white; font-size:18px; padding-left:10px; padding-top:10px;
-}
-.righteous {
-  font-family: 'Righteous';
-}
-.left_div {
-  width: 20%; float:left; height:100vh;
-      background: linear-gradient(to bottom, #333333 0%, #595959 100%);
-}
-.right_div {
-width: 80%; float:right;  height:100vh;
-}
-.font18px {
-  font-size: 18px;
-}
-</style>
-<body>
-  <div class="navbar">
-    <div class="left" >
-    Hospital Management System
-
-  <div class="dropdown">
-    <button class="dropbtn " style="font-family:'Righteous';"><i class="fa fa-user-md font18px"></i>&nbsp;&nbsp;Bala Subramanian&nbsp;&nbsp;&nbsp;
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-      <a href=""><i class="fa fa-lock"></i>&nbsp;&nbsp;Change Password</a>
-      <a href=""><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Logout</a>
-    </div>
-  </div>
-</div>
-  </div>
-<div class="left_div">
- <!--Menu-->
-</div>
-<div class="right_div">
-  <!--Content-->
-</div>
-</body>
+                     <thead>
+                        <tr>
+                           <td> ID </td>
+                           <td>Admit Date</td>
+                           <td>Discharge Date</td>
+                           <td>Type </td>
+                           <td>Action </td>
+                                                                                 
+                        </tr>
+                     </thead>
+                     <tbody id="myTable">
+                        <c:forEach items="${inpatients}" var="inpatient">
+                           <tr>
+                              <td>${inpatient.id}
+                              </td>
+                              <td>${inpatient.admitDate}</td>
+                              <td>${inpatient.dischargeDate}</td>
+                              <td>${inpatient.patientType}</td>
+                              <td>
+                              <c:if test="${inpatient.patientStatus == 'Admitted'}"> 
+                              <form:form action="dischargeButton" method="post">
+                              <input type="hidden" name="visitId" value="${inpatient.id}"/>
+                              <button type="button" class="btn btn-danger">Discharge</button>
+                              </form:form>
+                              </c:if>
+                              <c:if test="${inpatient.patientStatus == 'Discharged' } "> 
+                              <button type="button" class="btn btn-danger" disabled>Patient Discharged</button>
+                              </c:if>
+                              <c:if test="${inpatient.patientStatus == 'Yet to admit'}"> 
+                              <form:form action="admitButton" method="post">
+                              <input type="hidden" name="visitId" value="${inpatient.id}"/>
+                              <button type="submit" class="btn btn-success">Admit</button>
+                              </form:form>
+                              </c:if>
+                              </td>
+                           </tr>
+                        </c:forEach>
+                     </tbody>
+                  </table>
+                  	
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- /#page-content-wrapper -->
+      </div>
+      <jsp:include page="footer.jsp"/>
+   </body>
 </html>
+

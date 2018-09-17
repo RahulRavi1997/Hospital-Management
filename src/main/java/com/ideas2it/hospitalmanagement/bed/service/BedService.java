@@ -46,7 +46,7 @@ public interface BedService {
      * @return boolean 							Indicates whether the patient 
      *											has been discharged or not
      */
-	public boolean dischargePatient(int visitId, int bedNumber) throws ApplicationException;
+	public boolean dischargePatient(int bedNumber) throws ApplicationException;
 	
     /**
      * <p>

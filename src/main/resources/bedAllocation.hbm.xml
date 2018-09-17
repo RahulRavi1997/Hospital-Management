@@ -9,12 +9,13 @@
          <column name= "bedAllocationId" default = "0" />
          <generator class="increment"/>
       </id>
-       <many-to-one name = "bed" column = "bed" 
-         class="com.ideas2it.hospitalmanagement.bed.model.Bed" not-null="true"/>
+<many-to-one name = "bed" column = "bed"
+        class="com.ideas2it.hospitalmanagement.bed.model.Bed" not-null="true"/>
       
-	  <property name = "visitId" column = "visitId" type = "int" />
+	  <many-to-one name = "visit" column = "visit"
+        class="com.ideas2it.hospitalmanagement.visit.model.Visit" not-null="true"/>
       <property name = "admitDate" column = "admitDate" type = "date"/>
-            <property name = "dischargeDate" column = "dischargeDate" type = "date"/>
+      <property name = "dischargeDate" column = "dischargeDate" type = "date"/>
       
    </class>
 </hibernate-mapping>

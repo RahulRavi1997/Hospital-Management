@@ -52,6 +52,8 @@ public class BedController {
         	} else {
         		modelAndView.addObject("wards",bedService.getWardsByStatus("All"));
         		modelAndView.addObject("wardIds" , getWardIds());
+        		modelAndView.addObject("status" , "yesss");
+
         	}
         	modelAndView.addObject("ward" , new Ward());
 
@@ -76,10 +78,10 @@ public class BedController {
      */
     @RequestMapping(value="/dischargePatient" , method= RequestMethod.POST)   
     public ModelAndView dischargePatient(@RequestParam("bedNumber") 
-        	int bedNumber,	@RequestParam("visitId") int visitId) {
+        	int bedNumber) {
 
         try {
-        	if(bedService.dischargePatient(visitId, bedNumber)) {
+        	if(bedService.dischargePatient(bedNumber)) {
                 ModelAndView modelAndView = new ModelAndView("displayWards");
 
         		modelAndView.addObject("ward" , new Ward());

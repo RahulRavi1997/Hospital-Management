@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ideas2it.hospitalmanagement.commons.Constants;
 import com.ideas2it.hospitalmanagement.commons.enums.PatientType;
+import com.ideas2it.hospitalmanagement.commons.enums.Specialisation;
 import com.ideas2it.hospitalmanagement.logger.Logger;
 import com.ideas2it.hospitalmanagement.visit.model.Visit;
 import com.ideas2it.hospitalmanagement.visit.service.VisitService;
@@ -54,10 +55,11 @@ public class VisitController {
      * @return ModelAndView Object which redirects to the Create visit Page.
      */
     @RequestMapping(value = Constants.CREATE_VISIT, method = RequestMethod.GET)
-    public ModelAndView getvisitDetailsFromUser(Model model) {
+    public ModelAndView getVisitDetailsFromUser(Model model) {
 
     	Visit visit = new Visit();
         model.addAttribute("types",PatientType.values());
+        model.addAttribute("specialisations",Specialisation.values());
         return new ModelAndView(Constants.CREATE_VISIT_JSP, Constants.VISIT_OBJECT
             , visit);
     }
@@ -77,12 +79,14 @@ public class VisitController {
      */
     @RequestMapping(value = Constants.ADD_VISIT, method = {RequestMethod.POST
         ,RequestMethod.GET})
-    private ModelAndView createvisit(@ModelAttribute(Constants.VISIT) 
-            Visit visit) {
+    private ModelAndView createVisit(@ModelAttribute(Constants.VISIT) 
+            Visit visit, @RequestParam(Constants.PATIENT_ID) Integer patientId,
+            @RequestParam(Constants.PHYSICIAN_ID) Integer physicianId) {
 
         try {
-        	visitService.addVisit(visit);
-            return new ModelAndView(Constants.SEARCH_VISIT_JSP);
+        	visitService.addVisit(visit, patientId, physicianId);
+            return new ModelAndView(Constants.SEARCH_VISIT_JSP, Constants.
+                VISIT_OBJECT, visit);
         } catch (ApplicationException e) {
             Logger.error(e);
             return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
@@ -105,7 +109,7 @@ public class VisitController {
      */
     @RequestMapping(value = Constants.MODIFY_VISIT, method = {RequestMethod.POST
         ,RequestMethod.GET})
-    public ModelAndView getvisitToModify(@RequestParam(Constants.ID)
+    public ModelAndView getVisitToModify(@RequestParam(Constants.ID)
             Integer visitId, Model model) {
 
         try {
@@ -135,7 +139,7 @@ public class VisitController {
      */
     @RequestMapping(value = Constants.UPDATE_VISIT, method = {RequestMethod.POST
         ,RequestMethod.GET})
-    private ModelAndView updatevisit(@ModelAttribute(Constants.VISIT)
+    private ModelAndView updateVisit(@ModelAttribute(Constants.VISIT)
             Visit visit) {
 
         try {
@@ -166,7 +170,7 @@ public class VisitController {
      */
     @RequestMapping(value = Constants.SEARCH_VISIT, method = {RequestMethod.POST
         ,RequestMethod.GET})
-    public ModelAndView searchvisit(@RequestParam(Constants.ID)
+    public ModelAndView searchVisit(@RequestParam(Constants.ID)
             Integer visitId) {
 
         try {

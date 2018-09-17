@@ -3,6 +3,8 @@ package com.ideas2it.hospitalmanagement.physician.service.impl;
 import java.util.List;
 
 import com.ideas2it.hospitalmanagement.physician.service.PhysicianService;
+import com.ideas2it.hospitalmanagement.user.model.User;
+import com.ideas2it.hospitalmanagement.user.service.UserService;
 import com.ideas2it.hospitalmanagement.physician.model.Physician;
 import com.ideas2it.hospitalmanagement.physician.dao.impl.PhysicianDaoImpl;
 import com.ideas2it.hospitalmanagement.physician.dao.PhysicianDao;
@@ -20,6 +22,16 @@ public class PhysicianServiceImpl implements PhysicianService {
 	public PhysicianDao getPhysicianDao() {
 		return this.physicianDao;
 	}
+	
+    private UserService userService = null;
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    public UserService getUserService() {
+        return this.userService;
+    }
 
 	/**
 	 *  {@inheritDoc}
@@ -95,4 +107,37 @@ public class PhysicianServiceImpl implements PhysicianService {
 	public List<Physician> retrievePhysiciansByIds(Integer[] ids) throws ApplicationException {
 		return physicianDao.getPhysiciansByIds(ids);
 	}
+	
+    /**
+     *  {@inheritDoc}
+     */
+    public User retrieveUserByEmail(String email)
+            throws ApplicationException {
+
+        if (null == email) {
+            throw new ApplicationException(Constants.ID_NOT_NULL);
+        }
+        return userService.retrieveUserByEmail(email);
+    }
+    /**
+     *  {@inheritDoc}
+     */
+    public boolean modifyUser(User user)
+            throws ApplicationException {
+
+        if (null == user) {
+            throw new ApplicationException(Constants.ID_NOT_NULL);
+        }
+        return userService.modifyUser(user);
+    }
+    
+	/**
+	 *  {@inheritDoc}
+	 */
+	public List<Physician> retrievePhysiciansBySpecialisation(String specialisation)
+			throws ApplicationException {
+
+		return physicianDao.getPhysiciansBySpecialisation(specialisation);
+	}
+    
 }

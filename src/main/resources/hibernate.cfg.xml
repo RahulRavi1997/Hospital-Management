@@ -16,11 +16,15 @@
         
         <property name="connection.show_sql">true</property>
 
-       <mapping resource="bedAllocation.hbm.xml"/>
-    <mapping resource="user.hbm.xml"/>
-    <mapping resource="ward.hbm.xml"/>
-    <mapping resource="bed.hbm.xml"/>
-    <mapping resource="room.hbm.xml"/>
-    
+  <mapping resource="bedAllocation.hbm.xml"/>
+   <mapping resource="ward.hbm.xml"/>
+   <mapping resource="bed.hbm.xml"/>
+   <mapping resource="room.hbm.xml"/>
+        <mapping resource="address.hbm.xml"/>
+       <mapping resource="physician.hbm.xml"/>
+       <mapping resource="patient.hbm.xml"/>
+       <mapping resource="user.hbm.xml"/>
+   <mapping resource="address.hbm.xml"/>
+   <mapping resource="visit.hbm.xml"/> 
     </session-factory>
 </hibernate-configuration>

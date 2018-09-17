@@ -9,16 +9,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;  
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import com.google.gson.Gson;
 import com.ideas2it.hospitalmanagement.address.model.Address;
 import com.ideas2it.hospitalmanagement.commons.Constants;
 import com.ideas2it.hospitalmanagement.commons.enums.Gender;
+import com.ideas2it.hospitalmanagement.commons.enums.Specialisation;
 import com.ideas2it.hospitalmanagement.physician.model.Physician;
 import com.ideas2it.hospitalmanagement.physician.service.PhysicianService;
+import com.ideas2it.hospitalmanagement.user.model.User;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.logger.Logger;
-import com.ideas2it.hospitalmanagement.patient.model.Patient;
 /**
  * <p>
  * PhysicianController is a Controller Class, which is used to implement
@@ -45,7 +48,7 @@ public class PhysicianController {
     }
 
     /**
-     *  This Method is used to redirect user to the webpage with the form used
+     *  This Method is used to redirect user to the web page with the form used
      *  to create and add a new Physician.
      *
      *  @param model a Model object which is used to add the physician as an
@@ -59,13 +62,14 @@ public class PhysicianController {
     private ModelAndView redirectToCreatePhysician(Model model) {
 
     	Physician physician = new Physician();
-        physician.setAddress(new Address());
-        List<Patient> patients = new ArrayList<Patient>();
-        physician.setPatients(patients);
-        model.addAttribute("genders",Gender.values());
+        List<Address> addresses = new ArrayList<Address>();
+        addresses.add(new Address());
+        addresses.add(new Address());
+        physician.setAddresses(addresses);
+        model.addAttribute("genders", Gender.values());
+        model.addAttribute("specialisations", Specialisation.values());
         return new ModelAndView(Constants.CREATE_PHYSICIAN_JSP, Constants.PHYSICIAN, physician);
     }
-
 
     /**
      *  This Method is used to add a new Physician after obtaining all the
@@ -80,8 +84,13 @@ public class PhysicianController {
      *                       such as a jsp page.
      */
     @RequestMapping(value=Constants.ADD_PHYSICIAN_MAPPING, method=RequestMethod.POST)
-    private ModelAndView createPhysician(@ModelAttribute Physician physician, Model model) {
+    private ModelAndView createPhysician(@ModelAttribute Physician physician, Model model,
+    		@RequestParam(value="UserEmail") String userEmail) {
         try {
+        	User user = physicianService.retrieveUserByEmail(userEmail);
+        	if (null != user) {
+        		physician.setUser(user);
+        	}
             if (!physicianService.addPhysician(physician)) {
                 return new ModelAndView(Constants.ERROR_JSP, Constants.
                     ERROR_MESSAGE, Constants.PHYSICIAN_ADDITION_EXCEPTION);
@@ -141,8 +150,11 @@ public class PhysicianController {
      *                       such as a jsp page.
      */
     @RequestMapping(value=Constants.MODIFY_PHYSICIAN_MAPPING, method=RequestMethod.GET)
-    private ModelAndView modifyPhysician(@RequestParam(Constants.ID) int id) {
+    private ModelAndView modifyPhysician(Model model,
+    		@RequestParam(Constants.ID) int id) {
         try {
+            model.addAttribute("genders", Gender.values());
+            model.addAttribute("specialisations", Specialisation.values());
             return new ModelAndView(Constants.CREATE_PHYSICIAN_JSP,Constants.
                     PHYSICIAN, physicianService.retrievePhysicianById(id));
         } catch (ApplicationException e) {
@@ -196,13 +208,15 @@ public class PhysicianController {
      *                       such as a jsp page.
      */
     @RequestMapping(value=Constants.DELETE_PHYSICIAN_MAPPING, method=RequestMethod.POST)
-    private ModelAndView removePhysician(@RequestParam(Constants.ID) int idToDelete, Model model) {
+    private ModelAndView removePhysician(@RequestParam(Constants.ID) int idToDelete,
+    		Model model) {
         try {
             if (!physicianService.deletePhysician(idToDelete)) {
                 return new ModelAndView(Constants.ERROR_JSP, Constants.
                         ERROR_MESSAGE, Constants.PHYSICIAN_DELETE_EXCEPTION);
             }
-            model.addAttribute(Constants.MESSAGE, Constants.PHYSICIAN_DELETE_SUCCESS_MESSAGE);
+            model.addAttribute(Constants.MESSAGE, Constants.
+            		PHYSICIAN_DELETE_SUCCESS_MESSAGE);
             return new ModelAndView(Constants.SEARCH_PHYSICIAN_JSP, Constants.
                     PHYSICIAN, physicianService.retrievePhysicianById(idToDelete));
         } catch (ApplicationException e) {
@@ -242,7 +256,7 @@ public class PhysicianController {
     /**
      * This Method is used to display all details of the physicians.
      *
-     * @return response a HttpServletResponse object which is used to redirect
+     * @return response a HttpServletResponse com.google.gson.internal.bind.TypeAdaptersobject which is used to redirect
      *                 or send text output.
      *
      * @return modelAndView a ModelAndView object which is used to add
@@ -260,6 +274,21 @@ public class PhysicianController {
             Logger.error(e);
             return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
                     Constants.PHYSICIAN_DISPLAY_EXCEPTION);
+        }
+    }
+    
+    @RequestMapping(value="/displayPhysiciansBySpecialisation",
+    		produces={"application/json","application/xml"}, consumes="application/json",
+   	headers = "content-type=application/x-www-form-urlencoded", method = RequestMethod.GET)
+    private @ResponseBody String displayPhysiciansBySpecialisation(Model model,
+    		@RequestParam("specialisationName") String specialisation) {
+        try {
+        	List<Physician> physicians = physicianService.retrievePhysiciansBySpecialisation(specialisation);        
+
+        	return new Gson().toJson(physicians);
+        } catch (ApplicationException e) {
+            Logger.error(e);
+            return null;
         }
     }
 }

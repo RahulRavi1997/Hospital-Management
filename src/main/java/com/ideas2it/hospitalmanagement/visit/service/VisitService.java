@@ -34,7 +34,7 @@ public interface VisitService {
      *            inserted due to any connection error, same visit EmailId 
      *            or same visitId.
      */
-    public boolean addVisit(final Visit visit)
+    public boolean addVisit(final Visit visit, final Integer patientId,  final Integer physicianId)
             throws ApplicationException;
 
     /**
@@ -94,4 +94,7 @@ public interface VisitService {
 	 *                              that occur while displaying all visits.
 	 */
 	public List<Visit> retrieveVisitsByIds(Integer[] ids) throws ApplicationException;
+
+    public List<Visit> getVisitsByPatientType(String patientType)
+            throws ApplicationException;
 }

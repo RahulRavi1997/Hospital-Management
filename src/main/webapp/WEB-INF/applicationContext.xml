@@ -21,6 +21,8 @@
 
     <bean id="bedServiceImpl" class="com.ideas2it.hospitalmanagement.bed.service.impl.BedServiceImpl" >
         <property name="bedDao" ref="bedDaoImpl" />
+                 <property name="visitService" ref="visitServiceImpl" />
+        
          <property name="wardService" ref="wardServiceImpl" />
     </bean>
 
@@ -29,6 +31,53 @@
     </bean>
 
 
+
+  <bean id="wardDaoImpl" class="com.ideas2it.hospitalmanagement.ward.dao.impl.WardDaoImpl"/>
+
+    <bean id="wardServiceImpl" class="com.ideas2it.hospitalmanagement.ward.service.impl.WardServiceImpl" >
+        <property name="wardDao" ref="wardDaoImpl" />
+                <property name="roomService" ref="roomServiceImpl" />
+        		<property name="visitService" ref="visitServiceImpl"/>
+    </bean>
+
+    <bean id="wardController"  class="com.ideas2it.hospitalmanagement.ward.controller.WardController">
+        <property name="wardService" ref="wardServiceImpl" />
+        
+    </bean>
+    
+    
+        <bean id="physicianDaoImpl" class="com.ideas2it.hospitalmanagement.physician.dao.impl.PhysicianDaoImpl"/>
+
+    <bean id="physicianServiceImpl" class="com.ideas2it.hospitalmanagement.physician.service.impl.PhysicianServiceImpl" >
+        <property name="physicianDao" ref="physicianDaoImpl" />
+        <property name="userService" ref="userServiceImpl" />
+    </bean>
+
+    <bean id="physicianController"  class="com.ideas2it.hospitalmanagement.physician.controller.PhysicianController">
+        <property name="physicianService" ref="physicianServiceImpl" />
+    </bean>
+
+    <bean id="patientDaoImpl" class="com.ideas2it.hospitalmanagement.patient.dao.impl.PatientDaoImpl"/>
+ 
+
+    <bean id="patientServiceImpl" class="com.ideas2it.hospitalmanagement.patient.service.impl.PatientServiceImpl" >
+        <property name="patientDao" ref ="patientDaoImpl" />
+
+    </bean>
+
+    <bean id="patientController"  class="com.ideas2it.hospitalmanagement.patient.controller.PatientController" >
+        <property name="patientService" ref="patientServiceImpl" />
+    </bean>
+    <bean id="visitDaoImpl" class="com.ideas2it.hospitalmanagement.visit.dao.impl.VisitDaoImpl"/>
+    <bean id="visitServiceImpl" class="com.ideas2it.hospitalmanagement.visit.service.impl.VisitServiceImpl" >
+        <property name="visitDao" ref="visitDaoImpl"/>
+        <property name="physicianService" ref="physicianServiceImpl" />
+        <property name="patientService" ref="patientServiceImpl" />
+    </bean>
+    <bean id="visitController"  class="com.ideas2it.hospitalmanagement.visit.controller.VisitController" >
+        <property name="visitService" ref="visitServiceImpl"/>
+    </bean>
+    
     <bean id="userDaoImpl" class="com.ideas2it.hospitalmanagement.user.dao.impl.UserDaoImpl"/>
 
     <bean id="userServiceImpl" class="com.ideas2it.hospitalmanagement.user.service.impl.UserServiceImpl" >
@@ -38,28 +87,7 @@
     <bean id="userController"  class="com.ideas2it.hospitalmanagement.user.controller.UserController">
         <property name="userService" ref="userServiceImpl" />
     </bean>
-
-  <bean id="wardDaoImpl" class="com.ideas2it.hospitalmanagement.ward.dao.impl.WardDaoImpl"/>
-
-    <bean id="wardServiceImpl" class="com.ideas2it.hospitalmanagement.ward.service.impl.WardServiceImpl" >
-        <property name="wardDao" ref="wardDaoImpl" />
-                <property name="roomService" ref="roomServiceImpl" />
-        
-    </bean>
-
-    <bean id="wardController"  class="com.ideas2it.hospitalmanagement.ward.controller.WardController">
-        <property name="wardService" ref="wardServiceImpl" />
-        
-    </bean>
-    
     
 
-    <bean id="visitDaoImpl" class="com.ideas2it.hospitalmanagement.visit.dao.impl.VisitDaoImpl"/>
-    <bean id="visitServiceImpl" class="com.ideas2it.hospitalmanagement.visit.service.impl.VisitServiceImpl" >
-        <property name="visitDao" ref="visitDaoImpl"/>
-            </bean>
-    <bean id="visitController"  class="com.ideas2it.hospitalmanagement.visit.controller.VisitController" >
-        <property name="visitService" ref="visitServiceImpl"/>
-    </bean>
-    
+   
 </beans>
