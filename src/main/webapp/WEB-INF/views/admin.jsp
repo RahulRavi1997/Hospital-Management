@@ -25,6 +25,9 @@
                 <li>
 	           <a href="displayPhysicians">Display Physician</a>
                 </li>
+                <li>
+	           <a href="displayUsers">Display Users</a>
+                </li>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->

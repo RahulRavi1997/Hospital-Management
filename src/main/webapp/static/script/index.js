@@ -55,3 +55,36 @@ function validatePassword(){
 password.onchange = validatePassword;
 confirm_password.onkeyup = validatePassword;
 
+  $(document).ready(function() {
+    $(function() {
+        $("#signupemail").autocomplete({     
+            source : function(request, response) {
+              $.ajax({
+           	  headers: { 
+           	       'Accept': 'application/json',
+           	       'Content-Type': 'application/json' 
+           	   },
+                   url : "searchUser",
+                   type : "GET",
+                   data : {
+                      email : request.term
+                   },
+                   dataType : "json",
+                   success : function(data) {
+              if ($.trim(data)){   
+ 
+                     response($.map(data, function (value, key) {
+                        console.log(value);
+                     $("#nonUniqueEmail").html(value.email + " is already registered");
+                     }));
+              } else {
+                     $("#nonUniqueEmail").html("");
+              }
+
+            }
+            });
+         }
+     });
+  });
+});
+

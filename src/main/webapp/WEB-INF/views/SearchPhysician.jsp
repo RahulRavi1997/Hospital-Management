@@ -31,6 +31,9 @@
                 <li>
 	           <a href="displayPhysicians">Display Physician</a>
                 </li>
+                <li>
+	           <a href="displayUsers">Display Users</a>
+                </li>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -69,8 +72,9 @@
     <fmt:formatDate var="currentyear" value="${now}" pattern="yyyy" />
 <div class="container">
   <ul class="pager">
-     <input type="hidden" id="pager-id" value="${physician.id}">
-    <li id="previous" class="previous"><a id="previous-link" href="searchPhysician?id=${physician.id-1}">Previous</a></li>
+     <input type="hidden" id="pager-id" value="${physician.id}"/>
+     <c:set var="previd" value="${physician.id-1}"/><c:if test="${physician.id == 1}"><c:set var="previd" value="1"/></c:if>
+    <li id="previous" class="previous"><a id="previous-link" href="searchPhysician?id=${previd}">Previous</a></li>
      <li> <b>Physician Details</b></li>
     <li id="next" class="next"><a href="searchPhysician?id=${physician.id+1}">Next</a></li>
   </ul>
