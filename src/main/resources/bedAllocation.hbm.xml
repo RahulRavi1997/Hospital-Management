@@ -9,7 +9,9 @@
          <column name= "bedAllocationId" default = "0" />
          <generator class="increment"/>
       </id>
-      <property name = "bedId" column = "bedId" type = "int" />
+       <many-to-one name = "bed" column = "bed" 
+         class="com.ideas2it.hospitalmanagement.bed.model.Bed" not-null="true"/>
+      
 	  <property name = "visitId" column = "visitId" type = "int" />
       <property name = "admitDate" column = "admitDate" type = "date"/>
             <property name = "dischargeDate" column = "dischargeDate" type = "date"/>

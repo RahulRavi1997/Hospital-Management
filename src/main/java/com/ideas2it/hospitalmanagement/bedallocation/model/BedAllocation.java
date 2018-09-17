@@ -2,22 +2,23 @@ package com.ideas2it.hospitalmanagement.bedallocation.model;
 
 import java.util.Date;
 
+import com.ideas2it.hospitalmanagement.bed.model.Bed;
 import com.ideas2it.hospitalmanagement.visit.model.Visit;
 
 public class BedAllocation {
 	
 	
 	private int bedAllocationId;
-	private int bedId;
+	private Bed bed;
 	private Date admitDate;
 	private Date dischargeDate;
 	private int visitId;
 	
-	public int getBedId() {
-		return bedId;
+	public Bed getBed() {
+		return bed;
 	}
-	public void setBedId(int bedId) {
-		this.bedId = bedId;
+	public void setBed(Bed bed) {
+		this.bed = bed;
 	}
 	
 	public Date getDischargeDate() {
