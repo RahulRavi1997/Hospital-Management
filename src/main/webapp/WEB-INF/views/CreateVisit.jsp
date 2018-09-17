@@ -39,7 +39,7 @@
                      <label class="col-sm-2 control-label" for="patientId">Patient Name</label>
                      <div class="col-sm-10">
                      <input type="text" id="search" name="name" class="search" onselect=""/>
-                      <input type="hidden" id="patientId"/>
+                      <input type="hidden" name="patientId" id="patientId"/>
                      </div>
                   </div>
                     <label class="col-sm-2 control-label" for="Specialisation">Specialisation</label>
@@ -58,7 +58,7 @@
                         <select id="sel_user">
                         <option value="0">- Select -</option>
                        </select>
-                      <input type="hidden" id="physicianId"/>
+                      <input type="hidden" name="physicianId" id="physicianId"/>
                   </div>
                   
                   <div class="form-group">
