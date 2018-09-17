@@ -80,14 +80,20 @@ public class UserController {
                 user.setPassword(password);
                 if (null == role) {
                     user.setRole(Role.ADMIN.toString());
+                    if (userService.addUser(user)) {
+                        model.addAttribute(Constants.SIGNIN_EMAIL, email);
+                        return new ModelAndView(Constants.LOGIN, Constants.SIGN_UP_SUCCESS, Constants.SIGN_UP_SUCCESS_MESSAGE);
+                    } else {
+                        return new ModelAndView(Constants.LOGIN, Constants.SIGN_UP_FAIL, Constants.SIGN_UP_FAIL_MESSAGE);
+                    }
                 } else {
                 	user.setRole(role);
-                }
-                if (userService.addUser(user)) {
-                    model.addAttribute(Constants.SIGNIN_EMAIL, email);
-                    return new ModelAndView(Constants.LOGIN, Constants.SIGN_UP_SUCCESS, Constants.SIGN_UP_SUCCESS_MESSAGE);
-                } else {
-                    return new ModelAndView(Constants.LOGIN, Constants.SIGN_UP_FAIL, Constants.SIGN_UP_FAIL_MESSAGE);
+                    if (userService.addUser(user)) {
+                        model.addAttribute(Constants.SIGNIN_EMAIL, email);
+                        return new ModelAndView(Constants.ADMIN, Constants.SIGN_UP_SUCCESS, Constants.SIGN_UP_SUCCESS_MESSAGE);
+                    } else {
+                        return new ModelAndView(Constants.LOGIN, Constants.SIGN_UP_FAIL, Constants.SIGN_UP_FAIL_MESSAGE);
+                    }
                 }
             }
         } catch (ApplicationException e) {
@@ -102,7 +108,7 @@ public class UserController {
      * @return response a HttpServletResponse object which is used to redirect
      *                 or send text output.
      */
-    @RequestMapping(value=Constants.DISPLAY_USER_MAPPING, produces={"application/json",
+    @RequestMapping(value="displayUserAutocomplete", produces={"application/json",
    	"application/xml"},consumes="application/json",headers = "content-type=application/x-www-form-urlencoded", method = RequestMethod.GET)
     private @ResponseBody String displayAllUsers(Model model, @RequestParam("query") String query) {
         try {
@@ -113,6 +119,17 @@ public class UserController {
         }
     }
 
+    @RequestMapping(value="/searchUser", produces={"application/json",
+   	"application/xml"},consumes="application/json",headers = "content-type=application/x-www-form-urlencoded", method = RequestMethod.GET)
+    private @ResponseBody String searchUser(Model model, @RequestParam(Constants.EMAIL) String email) {
+        try {
+        	return new Gson().toJson(userService.retrieveUsersByQuery(email, Role.ADMIN.toString()));
+        } catch (ApplicationException e) {
+            Logger.error(e);
+            return null;
+        }
+    }
+    
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String userInfo(Model model, Principal principal, HttpServletRequest request) {
         model.addAttribute("email",principal.getName());
@@ -159,9 +176,28 @@ public class UserController {
 
     @RequestMapping(value="/createUser")
     public String redirectCreateUser(Model model){
-	        return "CreateUser";
+    	model.addAttribute("roles", Role.values());
+    	model.addAttribute(Constants.USER, new User());
+	    return "CreateUser";
     }
     
+    /**
+     * This Method is used to display all details of the users.
+     *
+     * @return response a HttpServletResponse object which is used to redirect
+     *                 or send text output.
+     */
+    @RequestMapping(value=Constants.DISPLAY_USER_MAPPING, method = RequestMethod.GET)
+    private ModelAndView displayAllUsers(Model model) {
+        try {
+        	List<User> users = userService.retrieveAllUsers();
+        	model.addAttribute("numberOfUsers", users.size());
+        	return new ModelAndView("DisplayUsers", "users", users);
+        } catch (ApplicationException e) {
+            Logger.error(e);
+            return null;
+        }
+    }
     /**
      * This Method is used to restore a deleted user. Redirects to display
      * all users on successful restoration.
@@ -172,14 +208,14 @@ public class UserController {
      * @return modelAndView a ModelAndView object which is used to add
      *                       attributes to a model and redirect it to a view
      *                       such as a jsp page.
-     *
+     */
     @RequestMapping(value=Constants.RESTORE_USER_MAPPING, method=RequestMethod.POST)
     private ModelAndView restoreUser(@RequestParam(Constants.ID) int id, Model model) {
         try {
             if (userService.restoreUser(id)) {
                 model.addAttribute(Constants.MESSAGE, Constants.USER_RESTORE_SUCCESS_MESSAGE);
-                return new ModelAndView(Constants.SEARCH_USER_JSP, Constants.
-                        USER, userService.retrieveUserById(id));
+                return new ModelAndView(Constants.DISPLAY_USER_JSP, Constants.
+                        USERS, userService.retrieveAllUsers());
             } else {
                 return new ModelAndView(Constants.ERROR_JSP, Constants.
                         ERROR_MESSAGE, Constants.USER_EDIT_EXCEPTION);
@@ -202,11 +238,12 @@ public class UserController {
      * @return modelAndView a ModelAndView object which is used to add
      *                       attributes to a model and redirect it to a view
      *                       such as a jsp page.
-     *
+     */
     @RequestMapping(value=Constants.MODIFY_USER_MAPPING, method=RequestMethod.GET)
-    private ModelAndView modifyUser(@RequestParam(Constants.ID) int id) {
+    private ModelAndView modifyUser(@RequestParam(Constants.ID) int id, Model model) {
         try {
-            return new ModelAndView(Constants.CREATE_USER_JSP,Constants.
+        	model.addAttribute("roles", Role.values());
+            return new ModelAndView(Constants.CREATE_USER_JSP, Constants.
                     USER, userService.retrieveUserById(id));
         } catch (ApplicationException e) {
             Logger.error(e);
@@ -227,7 +264,7 @@ public class UserController {
      * @return modelAndView a ModelAndView object which is used to add
      *                       attributes to a model and redirect it to a view
      *                       such as a jsp page.
-     *
+     */
     @RequestMapping(value=Constants.UPDATE_USER_MAPPING, method=RequestMethod.POST)
     private ModelAndView updateUser(@ModelAttribute User user, Model model) {
 
@@ -237,8 +274,8 @@ public class UserController {
                         ERROR_MESSAGE, Constants.EDIT_FAILED);
             }
             model.addAttribute(Constants.MESSAGE, Constants.USER_UPDATE_SUCCESS_MESSAGE);
-            return new ModelAndView(Constants.SEARCH_USER_JSP,Constants.
-                    USER, user);
+            return new ModelAndView(Constants.DISPLAY_USER_JSP, Constants.
+                    USERS, userService.retrieveAllUsers());
         } catch (ApplicationException e) {
             Logger.error(e);
             return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
@@ -257,7 +294,7 @@ public class UserController {
      * @return modelAndView a ModelAndView object which is used to add
      *                       attributes to a model and redirect it to a view
      *                       such as a jsp page.
-     *
+     */
     @RequestMapping(value=Constants.DELETE_USER_MAPPING, method=RequestMethod.POST)
     private ModelAndView removeUser(@RequestParam(Constants.ID) int idToDelete, Model model) {
         try {
@@ -266,13 +303,12 @@ public class UserController {
                         ERROR_MESSAGE, Constants.USER_DELETE_EXCEPTION);
             }
             model.addAttribute(Constants.MESSAGE, Constants.USER_DELETE_SUCCESS_MESSAGE);
-            return new ModelAndView(Constants.SEARCH_USER_JSP, Constants.
-                    USER, userService.retrieveUserById(idToDelete));
+            return new ModelAndView(Constants.DISPLAY_USER_JSP, Constants.
+                    USERS, userService.retrieveAllUsers());
         } catch (ApplicationException e) {
             Logger.error(e);
             return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
                     String.format(Constants.USER_DELETE_EXCEPTION, idToDelete));
         }
     }
-    */
 }

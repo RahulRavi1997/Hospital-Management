@@ -30,6 +30,9 @@
                 <li>
 	           <a href="displayPhysicians">Display Physician</a>
                 </li>
+                <li>
+	           <a href="displayUsers">Display Users</a>
+                </li>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -60,7 +63,7 @@
                 <label for="name">First Name</label>
               </div>
               <div class="col-sm-3 col-xs-3">
-                <form:input type="text" path="firstName" placeholder="First Name" aria-describedby="basic-addon1" required="required"/>
+                <form:input type="text" path="firstName" placeholder="First Name" aria-describedby="basic-addon1" required="required" maxLength="25"/>
                 <br/>
               </div>
             </div>
@@ -69,7 +72,7 @@
                 <label for="name">Last Name</label>
               </div>
               <div class="col-sm-3 col-xs-3">
-                <form:input type="text" path="lastName" placeholder="Last Name" aria-describedby="basic-addon1" required="required"/>
+                <form:input type="text" path="lastName" placeholder="Last Name" aria-describedby="basic-addon1" required="required" maxLength="25"/>
                 <br/>
               </div>
             </div>
@@ -87,7 +90,7 @@
                 <label for="name">Mobile Number:</label>
               </div>
               <div class="col-sm-3 col-xs-3">
-                <form:input type="number" path="mobileNumber" placeholder="Mobile Number" aria-describedby="basic-addon1"/>
+                <form:input type="number" path="mobileNumber" placeholder="Mobile Number" aria-describedby="basic-addon1" maxLength="10"/>
                 <br/>
               </div>
             </div>
@@ -128,7 +131,7 @@
               </div>
                <form:hidden path="addresses[${vs.index}].type" value="${addrstype}"/>
               <div class="row">
-                <div class="col-sm-3 col-xs-3">
+                <div class="col-sm-3 col-xs-3 required">
                   <form:label class="color-black" path="addresses[${vs.index}].addressLine1" cssErrorClass="invalid">Address Line 1</form:label>
                 </div>
                 <div class="col-sm-3 col-xs-3">
@@ -145,14 +148,14 @@
                 </div>
                 <div class="col-sm-3 col-xs-3">
                   <div class="input">
-                    <form:input placeholder="Address Line 2" path="addresses[${vs.index}].addressLine2" cssErrorClass="invalid"/>
+                    <form:input placeholder="Address Line 2" path="addresses[${vs.index}].addressLine2" cssErrorClass="invalid" maxLength="50"/>
                     <form:label path="addresses[${vs.index}].addressLine2" cssErrorClass="icon invalid" />
                     <form:errors path="addresses[${vs.index}].addressLine2" cssClass="inline_invalid" />
                   </div>
                 </div>
               </div>
               <div class="row">
-                <div class="col-sm-3 col-xs-3">
+                <div class="col-sm-3 col-xs-3 required">
                   <form:label class="color-black" path="addresses[${vs.index}].country" cssErrorClass="invalid">Country</form:label>
                 </div>
                 <div class="col-sm-3 col-xs-3">
@@ -169,7 +172,7 @@
                 </div>
                 <div class="col-sm-3 col-xs-3">
                   <div class="input">
-                    <form:input placeholder="Pin Code" type="number" min="0" path="addresses[${vs.index}].pinCode" cssErrorClass="invalid" required="required" maxLength="10"/>
+                    <form:input placeholder="Pin Code" type="number" min="0" path="addresses[${vs.index}].pinCode" cssErrorClass="invalid" maxLength="10"/>
                     <form:label path="addresses[${vs.index}].pinCode" cssErrorClass="icon invalid" />
                     <form:errors path="addresses[${vs.index}].pinCode" cssClass="inline_invalid" />
                   </div>
@@ -177,8 +180,8 @@
               </div>
             </c:forEach>
           </div>
-         Add User Login For Physician
-	    <input type="text"  id="autocomplete" value="" name="UserEmail">
+         Add User Login For Physician : 
+	    <input type="text"  id="autocomplete" value="" name="UserEmail" placeHolder="Enter User Email"/>
         <div class="row" align="center">
           <input class="btn margin-format" type="reset" value="Reset"/>     
           <input class="btn-primary" type="submit" value="Submit"/>     
@@ -187,9 +190,6 @@
     </form:form>
     </br>
     </br>
-
-
-
                     </div>
                 </div>
             </div>

@@ -28,7 +28,7 @@ public final class Constants {
 	public static final String INDEX_PATH = "/WEB-INF/views/index.jsp";
 	public static final String SIGNIN_EMAIL = "signinEmail";
 	public static final String DATABASE_FAILURE = "Database Connection Error has Occured";
-	public static final String ADMIN = "ADMIN";
+	public static final String ADMIN = "admin";
 
 	public static final String PHYSICIAN_ADDITION_EXCEPTION = "Error while adding a physician- Name:%s %s\n";
 	public static final String PHYSICIAN_SEARCH_EXCEPTION = "Error while searching physician id %d\n";
@@ -90,7 +90,7 @@ public final class Constants {
 	public static final String USER_SEARCH_EXCEPTION = "Error while searching user %s\n";
 	public static final String USER_DISPLAY_EXCEPTION = "Error while displaying users\n";
 	public static final String DISPLAY_USER_MAPPING = "/displayUsers";
-	public static final String RESTORE_USER_MAPPING = "/restoreUsers";
+	public static final String RESTORE_USER_MAPPING = "/restoreUser";
 
 	public static final String ACTIVE = "active";
 	public static final String USERS = "users";

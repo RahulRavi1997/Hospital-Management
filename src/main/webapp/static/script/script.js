@@ -7,10 +7,10 @@
            	       'Accept': 'application/json',
            	       'Content-Type': 'application/json' 
            	   },
-                   url : "displayUsers",
+                   url : "displayUserAutocomplete",
                    type : "GET",
                    data : {
-                          query : request.term
+                          query : request.term+"%"
                    },
                    dataType : "json",
                    success : function(data) {

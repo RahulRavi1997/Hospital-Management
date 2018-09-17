@@ -143,7 +143,7 @@ public class UserDaoImpl extends GenericDao implements UserDao {
         try {
             Session session = super.getSession();
             Query query = session.createQuery(USER_AUTOCOMPLETE_QUERY);  
-            query.setParameter(QUERY, autoCompleteQuery + "%" ); 
+            query.setParameter(QUERY, autoCompleteQuery); 
             query.setParameter(ROLE, role);
             query.setParameter(ACTIVE, Boolean.TRUE);
             return query.setMaxResults(10).list();

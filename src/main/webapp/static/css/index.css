@@ -87,7 +87,9 @@ label .req {
   margin: 2px;
   color: red;
 }
-
+#nonUniqueEmail{
+  color:red;
+}
 label.active {
   -webkit-transform: translateY(50px);
           transform: translateY(-25px);

@@ -15,6 +15,9 @@
 body {
  background-color:#fff;
 }
+ .required:after { content:" *";
+                   color:red; }
+
 .highlight{
   background-color:#424242;
 }
@@ -24,6 +27,11 @@ body {
   margin-left:10px;
   margin-bottom:10px;
 }
+
+.width200px {
+   width:300px;
+}
+
 
 .footer {
  text-align:center;
