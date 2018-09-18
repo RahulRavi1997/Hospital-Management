@@ -21,7 +21,7 @@
                     </a>
                 </li>
              <li>
-             <a href="createVisit">Create Visit </a> 
+             <a href="searchVisitByPatientId">Visit </a> 
                 </li>
               <li  class="highlight">
               <a href="displayVisits">Display Visits</a> 

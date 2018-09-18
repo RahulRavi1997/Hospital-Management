@@ -21,7 +21,7 @@
                     </a>
                 </li>
                 <li>
-             <a href="createVisit">Create Visit </a> 
+             <a href="searchVisitByPatientId">Visit </a> 
                 </li>
              <li>
               <a href="displayVisits">Display Visits</a> 
@@ -36,13 +36,7 @@
         </div>
        <div id="page-content-wrapper">
    <jsp:include page="ReceptionistHeader.jsp"/>
-     <div class="col-sm-10">
-     <form action="searchPatient" method="post">
-      <input type="number" style="margin-left:50%" name="id" placeholder="Search Patient By Id">
-     </form>
-     </div>
-     </div>
-      <div align="center" >
+          <div align="center" >
          <table class ="table">
                <caption>
                   <h2>List of Patients</h2>

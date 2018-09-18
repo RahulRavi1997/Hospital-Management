@@ -20,7 +20,7 @@
                     </a>
                 </li>
                 <li>
-             <a href="createVisit">Create Visit </a> 
+             <a href="searchVisitByPatientId">Visit </a> 
                 </li>
              <li>
               <a href="displayVisits">Display Visit</a> 
@@ -35,9 +35,7 @@
         </div>
                 <div id="page-content-wrapper">
    <jsp:include page="ReceptionistHeader.jsp"/>
-<form action="searchPatient" method="post">
-  <input type="number" style="margin-left:42%" name="id" placeholder="Search Patient By Id">
-</form>
+
       <c:choose>
        <c:when test="${empty patient}">
          <h2>Patient not Found</h2>
@@ -83,6 +81,11 @@
                   </td>
                    <c:choose>
                        <c:when test="${patient.active == true}">
+                       <td>
+                           <form  action="searchVisitByPatientId" method="get" >
+                              <input type="submit" value="Create Visit" class="btn btn-info">
+                           </form>
+                         </td>
                          <td>
                            <form  action="modifyPatient" method="post" >
                              <input type="hidden" name="id" value="${patient.id}" />
