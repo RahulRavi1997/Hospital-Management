@@ -34,6 +34,7 @@
             </ul>
         </div>
                 <div id="page-content-wrapper">
+   <jsp:include page="ReceptionistHeader.jsp"/>
 <form action="searchPatient" method="post">
   <input type="number" style="margin-left:42%" name="id" placeholder="Search Patient By Id">
 </form>

@@ -32,6 +32,7 @@
         </ul>
       </div>
       <div id="page-content-wrapper">
+        <jsp:include page="ReceptionistHeader.jsp"/>
         <c:choose>
           <c:when test="${empty visit.id}">
             <c:set var="value" value="addVisit"/>

@@ -3,6 +3,9 @@ package com.ideas2it.hospitalmanagement.patient.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import com.ideas2it.hospitalmanagement.address.model.Address;
 import com.ideas2it.hospitalmanagement.commons.Constants;
 import com.ideas2it.hospitalmanagement.commons.enums.Gender;
@@ -209,11 +212,13 @@ public class PatientController {
      */
     @RequestMapping(value = Constants.SEARCH_PATIENT, method = {RequestMethod.POST
         ,RequestMethod.GET})
-    public ModelAndView searchPatient(@RequestParam(Constants.ID)
-            Integer patientId) {
+    public ModelAndView searchPatient(@RequestParam(Constants.ID) Integer patientId,
+    		HttpServletRequest request) {
 
         try {
             Patient patient = patientService.getPatientById(patientId);
+    		HttpSession session = request.getSession();
+    		session.setAttribute(Constants.PATIENT_OBJECT, patient);
             return new ModelAndView(Constants.SEARCH_PATIENT_JSP, Constants.
             	PATIENT_OBJECT, patient);
         } catch (ApplicationException e) {

@@ -1,6 +1,5 @@
 package com.ideas2it.hospitalmanagement.physician.dao.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.ideas2it.hospitalmanagement.genericdao.GenericDao;
@@ -10,8 +9,6 @@ import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.commons.Constants;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.logger.Logger;
-
-import javassist.bytecode.CodeIterator.Gap;
 
 import org.hibernate.Session;
 import org.hibernate.Query;
@@ -23,7 +20,7 @@ public class PhysicianDaoImpl extends GenericDao implements PhysicianDao {
 
 	String PHYSICIAN_SPECIALISATION_QUERY = "from Physician where specialisation in (:specialisation)";
 	String SPECIALISATION = "specialisation";
-	
+
 	public PhysicianDaoImpl() throws ApplicationException {
 		super();
 	}
@@ -37,10 +34,10 @@ public class PhysicianDaoImpl extends GenericDao implements PhysicianDao {
 		try {
 			return (null != super.save(physician));
 		} catch (ApplicationException e) {
-			Logger.error(String.format(Constants.
-					PHYSICIAN_ADDITION_EXCEPTION, physician.getFirstName(), physician.getLastName()), e);
-			throw new ApplicationException(String.format(Constants.
-					PHYSICIAN_ADDITION_EXCEPTION, physician.getFirstName(), physician.getLastName()), e);
+			Logger.error(String.format(Constants.PHYSICIAN_ADDITION_EXCEPTION, physician.getFirstName(),
+					physician.getLastName()), e);
+			throw new ApplicationException(String.format(Constants.PHYSICIAN_ADDITION_EXCEPTION,
+					physician.getFirstName(), physician.getLastName()), e);
 		}
 	}
 
@@ -52,36 +49,31 @@ public class PhysicianDaoImpl extends GenericDao implements PhysicianDao {
 		try {
 			return super.update(physician);
 		} catch (ApplicationException e) {
-			Logger.error(String.format(
-					Constants.PHYSICIAN_EDIT_EXCEPTION, physician.getId()), e);
-			throw new ApplicationException(String.format(
-					Constants.PHYSICIAN_EDIT_EXCEPTION, physician.getId()), e);
+			Logger.error(String.format(Constants.PHYSICIAN_EDIT_EXCEPTION, physician.getId()), e);
+			throw new ApplicationException(String.format(Constants.PHYSICIAN_EDIT_EXCEPTION, physician.getId()), e);
 		}
 	}
 
 	/**
-	 *  {@inheritDoc}
+	 * {@inheritDoc}
 	 */
-	public boolean deletePhysician(Physician physician)
-			throws ApplicationException {
+	public boolean deletePhysician(Physician physician) throws ApplicationException {
 
 		physician.setActive(Boolean.FALSE);
 		return updatePhysician(physician);
 	}
 
 	/**
-	 *  {@inheritDoc}
+	 * {@inheritDoc}
 	 */
-	public boolean restorePhysician(Physician physician)
-			throws ApplicationException {
+	public boolean restorePhysician(Physician physician) throws ApplicationException {
 
 		physician.setActive(Boolean.TRUE);
 		return updatePhysician(physician);
 	}
 
-
 	/**
-	 *  {@inheritDoc}
+	 * {@inheritDoc}
 	 */
 	public Physician searchPhysicianById(Integer id) throws ApplicationException {
 
@@ -94,7 +86,7 @@ public class PhysicianDaoImpl extends GenericDao implements PhysicianDao {
 	}
 
 	/**
-	 *  {@inheritDoc}
+	 * {@inheritDoc}
 	 */
 	public List<Physician> getAllPhysicians() throws ApplicationException {
 
@@ -107,35 +99,35 @@ public class PhysicianDaoImpl extends GenericDao implements PhysicianDao {
 	}
 
 	/**
-	 *  {@inheritDoc}
+	 * {@inheritDoc}
 	 */
 	public List<Physician> getPhysiciansByIds(Integer[] ids) throws ApplicationException {
 
 		try {
 			Session session = super.getSession();
-			Query query = session.createQuery(PHYSICIAN_IN_QUERY);  
-			query.setParameterList(IDS, ids); 
+			Query query = session.createQuery(PHYSICIAN_IN_QUERY);
+			query.setParameterList(IDS, ids);
 			return query.list();
 		} catch (ApplicationException e) {
 			Logger.error(Constants.PHYSICIAN_DISPLAY_EXCEPTION, e);
 			throw new ApplicationException(Constants.PHYSICIAN_DISPLAY_EXCEPTION, e);
 		}
 	}
+
 	/**
-	 *  {@inheritDoc}
+	 * {@inheritDoc}
 	 */
-	public List<Physician> getPhysiciansBySpecialisation(String specialisation)
-			throws ApplicationException {
-		
+	public List<Physician> getPhysiciansBySpecialisation(String specialisation) throws ApplicationException {
+
 		try {
 			Session session = super.getSession();
-			Query query = session.createQuery(PHYSICIAN_SPECIALISATION_QUERY);  
-			query.setParameter(SPECIALISATION, specialisation); 
+			Query query = session.createQuery(PHYSICIAN_SPECIALISATION_QUERY);
+			query.setParameter(SPECIALISATION, specialisation);
 			return query.list();
 		} catch (ApplicationException e) {
 			Logger.error(Constants.PHYSICIAN_DISPLAY_EXCEPTION, e);
 			throw new ApplicationException(Constants.PHYSICIAN_DISPLAY_EXCEPTION, e);
 		}
-		
+
 	}
 }

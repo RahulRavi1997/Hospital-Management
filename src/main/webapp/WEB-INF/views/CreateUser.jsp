@@ -24,7 +24,7 @@
 	           <a href="displayUsers">Display Users</a>
                 </li>
                 <li>
-              <a href="createPhysician">Add Physician</a> 
+              <a href="createPhysician">Create Physician</a> 
                 </li>
                 <li>
 	           <a href="displayPhysicians">Display Physician</a>
@@ -69,7 +69,5 @@
         <!-- /#page-content-wrapper -->
     </div>
     <jsp:include page="footer.jsp"/>
-
-
 </body>
 </html>
