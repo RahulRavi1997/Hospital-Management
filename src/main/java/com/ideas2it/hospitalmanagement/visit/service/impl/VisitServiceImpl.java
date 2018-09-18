@@ -82,6 +82,10 @@ public class VisitServiceImpl implements VisitService {
 	 */
 	public Visit getVisitByPatientId(final Patient patient)
             throws ApplicationException {
-        return visitDao.searchVisitByPatientId(patient.getId());
+		if (null != patient ) {
+            return visitDao.searchVisitByPatientId(patient.getId());
+		} else {
+			return null;
+		}
 	}
 }

@@ -36,7 +36,7 @@ public class VisitDaoImpl extends GenericDao implements VisitDao {
 
 	String VISIT_IN_QUERY = "from Visit where id in (:ids)";
 	String IDS = "ids";
-	String PATIENT_VISIT_IN_QUERY = "from Visit where PATIENT = (:id) and ADMIT_DATE = '(:date)'";
+	String PATIENT_VISIT_IN_QUERY = "from Visit where PATIENT = :id and ADMIT_DATE = :date";
 	String ID = "id";
 	String DATE = "date";
 
@@ -131,7 +131,7 @@ public class VisitDaoImpl extends GenericDao implements VisitDao {
 			Session session = super.getSession();
 			Query query = session.createQuery(PATIENT_VISIT_IN_QUERY);  
 			query.setParameter(ID, patientId);
-			query.setParameter(DATE, new Date());
+			query.setParameter(DATE,java.time.LocalDate.now());
 
 			return (Visit) query.uniqueResult();
 		} catch (ApplicationException e) {

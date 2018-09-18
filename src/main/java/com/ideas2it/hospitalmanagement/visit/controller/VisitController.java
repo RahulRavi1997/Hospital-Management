@@ -1,5 +1,6 @@
 package com.ideas2it.hospitalmanagement.visit.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -87,6 +88,7 @@ public class VisitController {
             @RequestParam(Constants.PHYSICIAN_ID) Integer physicianId) {
 
         try {
+        	visit.setAdmitDate(new Date());
         	visitService.addVisit(visit, patientId, physicianId);
             return new ModelAndView(Constants.SEARCH_VISIT_JSP, Constants.
                 VISIT_OBJECT, visit);
@@ -229,13 +231,21 @@ public class VisitController {
      */
     @RequestMapping(value = Constants.SEARCH_VISIT_BY_PATIENTID, method = {RequestMethod.POST
         ,RequestMethod.GET})
-    public ModelAndView searchVisitByPatientId(HttpSession session) {
+    public ModelAndView searchVisitByPatientId(HttpSession session, Model model) {
 
         try {
         	Patient patient = (Patient) session.getAttribute(Constants.PATIENT_OBJECT);
             Visit visit = visitService.getVisitByPatientId(patient);
-            return new ModelAndView(Constants.SEARCH_VISIT_JSP, Constants.
-                VISIT_OBJECT, visit);
+            if (null != visit) {
+                return new ModelAndView(Constants.CREATE_VISIT_JSP, Constants.
+                    VISIT_OBJECT, visit);
+            } else {
+            	Visit newVisit = new Visit();
+                model.addAttribute(Constants.TYPES, PatientType.values());
+                model.addAttribute(Constants.SPECIALISATIONS, Specialisation.values());
+                return new ModelAndView(Constants.CREATE_VISIT_JSP, Constants.VISIT_OBJECT
+                    , newVisit);
+            }
         } catch (ApplicationException e) {
             Logger.error(e);
             return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
