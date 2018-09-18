@@ -2,10 +2,13 @@ package com.ideas2it.hospitalmanagement.visit.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.ideas2it.hospitalmanagement.commons.Constants;
 import com.ideas2it.hospitalmanagement.commons.enums.PatientType;
 import com.ideas2it.hospitalmanagement.commons.enums.Specialisation;
 import com.ideas2it.hospitalmanagement.logger.Logger;
+import com.ideas2it.hospitalmanagement.patient.model.Patient;
 import com.ideas2it.hospitalmanagement.visit.model.Visit;
 import com.ideas2it.hospitalmanagement.visit.service.VisitService;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
@@ -58,8 +61,8 @@ public class VisitController {
     public ModelAndView getVisitDetailsFromUser(Model model) {
 
     	Visit visit = new Visit();
-        model.addAttribute("types",PatientType.values());
-        model.addAttribute("specialisations",Specialisation.values());
+        model.addAttribute(Constants.TYPES, PatientType.values());
+        model.addAttribute(Constants.SPECIALISATIONS, Specialisation.values());
         return new ModelAndView(Constants.CREATE_VISIT_JSP, Constants.VISIT_OBJECT
             , visit);
     }
@@ -114,7 +117,7 @@ public class VisitController {
 
         try {
             Visit visit = visitService.getVisitById(visitId);
-            model.addAttribute("types",PatientType.values()); 
+            model.addAttribute(Constants.TYPES, PatientType.values()); 
             return new ModelAndView(Constants.CREATE_VISIT_JSP, Constants.
             		VISIT_OBJECT, visit);
         } catch (ApplicationException e) {
@@ -206,6 +209,37 @@ public class VisitController {
             Logger.error(e);
             return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
                 Constants.VISIT_DISPLAY_FAILED);
+        }
+    }
+    
+    /**
+     * <p>
+     * This method is called when the request value is search Visit and this
+     * is the Get method which gets the visit Object Details which is needed
+     * to searched. It gets the visit Object from the Id given by the User
+     * and the respective visit Object is redirects to the Search visit
+     * page to display the Details of the respective visit Object or
+     * redirects to Error page if any error occurs. This method returns the
+     * value as ModelAndView Class Object.
+     * </p>
+     * @param visitId Integer with visitId value from which the visit
+     *                   Object is obtained from the Database. 
+     * @return ModelAndView Object which redirects to the Search visit Page
+     *                      with the visit Object or to the Error Page.
+     */
+    @RequestMapping(value = Constants.SEARCH_VISIT_BY_PATIENTID, method = {RequestMethod.POST
+        ,RequestMethod.GET})
+    public ModelAndView searchVisitByPatientId(HttpSession session) {
+
+        try {
+        	Patient patient = (Patient) session.getAttribute(Constants.PATIENT_OBJECT);
+            Visit visit = visitService.getVisitByPatientId(patient);
+            return new ModelAndView(Constants.SEARCH_VISIT_JSP, Constants.
+                VISIT_OBJECT, visit);
+        } catch (ApplicationException e) {
+            Logger.error(e);
+            return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
+                Constants.VISIT_SEARCH_FAILED);
         }
     }
 }

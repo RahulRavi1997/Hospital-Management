@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ideas2it.hospitalmanagement.visit.model.Visit;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
+import com.ideas2it.hospitalmanagement.patient.model.Patient;
 
 /**
  * VisitService is the Service interface which is having the several data
@@ -94,4 +95,20 @@ public interface VisitService {
 	 *                              that occur while displaying all visits.
 	 */
 	public List<Visit> retrieveVisitsByIds(Integer[] ids) throws ApplicationException;
+	
+    /**
+     * <p>
+     * Method to search the Existing visit Id.This method is using the
+     * visitId to search and returns the searched visit Object.
+     * </p>
+     *
+     * @param  visitId  a int datatype which contains the visit
+     *                     id that needs to be searched.
+     * @return returns visit object when id is found and null
+     *         when not found.
+     * @exception throws Application Exception when the visit Object is not
+     *            searched due to any connection error or visitId not found.
+     */
+    public Visit getVisitByPatientId(final Patient patient)
+            throws ApplicationException;
 }

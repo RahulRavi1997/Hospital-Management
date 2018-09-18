@@ -51,27 +51,27 @@
                         Modify Patient Details
                      </c:if>
                      </legend>
-            <div class="col-md-4">
+            <div class="col-md-4 ">
                   <div class="form-group">
-                     <label class="col-sm-4 control-label" for="name">FirstName</label>
+                     <label class="col-sm-4 control-label required" for="name">FirstName</label>
                      <div class="col-sm-8">
-                        <form:input path="firstName" pattern="^[a-zA-Z]{1,20}$" class ="form-control inputtext spacing" required="required" />
+                        <form:input path="firstName" pattern="^[a-zA-Z]{1,20}$" class ="form-control inputtext spacing" required="required" maxLength="25" />
                      </div>
                   </div>
                   <div class="form-group">
-                     <label class="col-sm-4 control-label" for="name">LastName</label>
+                     <label class="col-sm-4 control-label required" for="name">LastName</label>
                      <div class="col-sm-8">
-                        <form:input path="lastName" pattern="^[a-zA-Z]{1,20}$" class ="form-control inputtext spacing" required="required" />
+                        <form:input path="lastName" pattern="^[a-zA-Z]{1,20}$" class ="form-control inputtext spacing" required="required" maxLength="25" />
                      </div>
                   </div>
                   <div class="form-group">
-                     <label class="col-sm-4 control-label" for="emailid">EmailId</label>
+                     <label class="col-sm-4 control-label required" for="emailid">EmailId</label>
                      <div class="col-sm-8">
-                        <form:input type="email" path="emailId" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" class ="form-control inputtext spacing" />
+                        <form:input type="email" path="emailId" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required="required" class ="form-control inputtext spacing" maxLength="25" />
                      </div>
                   </div>
                   <div class="form-group">
-                     <label class="col-sm-4 control-label" for="birthdate">DOB</label>
+                     <label class="col-sm-4 control-label required" for="birthdate">DOB</label>
                      <div class="col-sm-8">
                         <form:input type="date" id="DOB" path="birthDate" required="required" class ="form-control inputtext spacing" />
                      </div>
@@ -79,7 +79,7 @@
                   <div class="form-group">
                      <label class="col-sm-4 control-label" for="mobileNumber">PhoneNumber</label>
                      <div class="col-sm-8">
-                        <form:input path="mobileNumber" required="required" class ="form-control spacing inputtext"/>
+                        <form:input path="mobileNumber" pattern="^[0-9]{10}$" maxLength="10" class ="form-control spacing inputtext"/>
                      </div>
                   </div>
                   <div class="form-group">

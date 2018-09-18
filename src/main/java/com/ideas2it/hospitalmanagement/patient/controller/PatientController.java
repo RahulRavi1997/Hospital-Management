@@ -65,7 +65,7 @@ public class PatientController {
         addresses.add(new Address());
         addresses.add(new Address());
         patient.setAddresses(addresses);
-        model.addAttribute("genders",Gender.values());
+        model.addAttribute(Constants.GENDERS ,Gender.values());
         return new ModelAndView(Constants.CREATE_PATIENT_JSP, Constants.PATIENT_OBJECT
             , patient);
     }
@@ -119,7 +119,7 @@ public class PatientController {
 
         try {
             Patient patient = patientService.getPatientById(patientId);
-            model.addAttribute("genders",Gender.values());
+            model.addAttribute(Constants.GENDERS ,Gender.values());
             return new ModelAndView(Constants.CREATE_PATIENT_JSP, Constants.
             		PATIENT_OBJECT, patient);
         } catch (ApplicationException e) {
@@ -278,10 +278,11 @@ public class PatientController {
         }
     }
 
-    @RequestMapping(value="/searchPatientByName", produces={"application/json",
-    		"application/xml"},consumes="application/json",headers = "content-type=application/x-www-form-urlencoded", method = RequestMethod.GET)
+    @RequestMapping(value=Constants.SEARCH_PATIENT_BY_NAME, produces={Constants.JSON_FORMAT,
+    		Constants.XML_FORMAT},consumes=Constants.JSON_FORMAT, headers = 
+    		Constants.JSON_HEADERS, method = RequestMethod.GET)
     @ResponseBody
-    public String searchPatientByName(@RequestParam("name") String name) {
+    public String searchPatientByName(@RequestParam(Constants.NAME) String name) {
     	String searchedPatients = null;
     	try {
             List<Patient> patients = patientService.retrievePatientsByName(name);

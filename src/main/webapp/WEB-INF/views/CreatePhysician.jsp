@@ -160,7 +160,7 @@
                 </div>
                 <div class="col-sm-3 col-xs-3">
                   <div class="input">
-                    <form:input placeholder="Country" path="addresses[${vs.index}].country" cssErrorClass="invalid " maxLength="50" required="required" />
+                    <form:input placeholder="Country" path="addresses[${vs.index}].country" cssErrorClass="invalid " maxLength="50" />
                     <form:label path="addresses[${vs.index}].country" cssErrorClass="icon invalid" />
                     <form:errors path="addresses[${vs.index}].country" cssClass="inline_invalid" />
                   </div>

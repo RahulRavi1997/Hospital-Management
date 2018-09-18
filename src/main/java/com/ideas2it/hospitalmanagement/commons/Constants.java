@@ -117,7 +117,8 @@ public final class Constants {
    public static final String SEARCH_PATIENT = "/searchPatient";
    public static final String DISPLAY_PATIENTS = "/displayPatients";
    public static final String ACTIVATE_PATIENT = "/activatePatient";
-   
+   public static final String SEARCH_PATIENT_BY_NAME = "/searchPatientByName";
+		   
    public static final String PATIENT = "/patient";
    public static final String PATIENTS = "/patients";
    public static final String CREATE_PATIENT_JSP ="CreatePatient";
@@ -154,6 +155,7 @@ public final class Constants {
    public static final String UPDATE_VISIT = "/updateVisit";
    public static final String DELETE_VISIT = "/deleteVisit";
    public static final String SEARCH_VISIT = "/searchVisit";
+   public static final String SEARCH_VISIT_BY_PATIENTID = "/searchVisitByPatientId";
    public static final String DISPLAY_VISITS = "/displayVisits";
    public static final String ACTIVATE_VISIT = "/activateVisit";
    
@@ -185,4 +187,11 @@ public final class Constants {
    public static final String VISIT_OBJECT = "visit";
    public static final String VISIT_OBJECTS = "visits";
    public static final int SESSION_ACTIVE_INTERVAL = 30*60;
+   
+   public static final String TYPES = "types";
+   public static final String SPECIALISATIONS = "specialisations";
+   public static final String GENDERS = "genders";
+   public static final String JSON_FORMAT = "application/json";
+   public static final String XML_FORMAT = "application/xml";
+   public static final String JSON_HEADERS ="content-type=application/x-www-form-urlencoded";
 }
