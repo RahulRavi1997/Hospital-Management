@@ -44,13 +44,12 @@
                   Physician</button>
                   </a>
                 </div>
-                <form action="searchPhysician" method="GET">
-                  <div class="col-sm-4 col-xs-4">
-                    <input name="id" autocomplete="off" id="myInput"
-                      class="form-control mr-sm-2" placeholder="Search"
-                      type="number" required />
-                    <button class="glyphicon glyphicon-search" type="submit">Search</button>
-                  </div>
+        <div class="col-sm-4 col-xs-4 search-bar-display">
+           <form  autocomplete="off" class="form-inline" action="searchPhysician" method="get">
+              <input name="id"  type="number" class="form-control mr-sm-2" placeholder="Search"  required>
+              <button class="glyphicon glyphicon-search"  type="submit">Search</button>    
+            </form>
+        </div>
                   <div class="col-sm-4 col-xs-4 text-align-center">
                     <h4>
                       Filter : 
@@ -61,7 +60,6 @@
                       </select>
                     </h4>
                   </div>
-                </form>
               </div>
               <c:if test="${empty physicians}">
                 <h2 align="center">No Physicians are available/present at

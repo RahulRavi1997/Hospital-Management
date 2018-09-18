@@ -43,6 +43,9 @@
                   User</button>
                   </a>
                 </div>
+          <div class="col-sm-4 col-xs-4 search-bar-display">
+              <input name="id" id="myInput"  class="form-control mr-sm-2" placeholder="Search"  required>
+           </div>
                 <div class="col-sm-4 col-xs-4 text-align-center">
                   <h4>
                     Filter : 

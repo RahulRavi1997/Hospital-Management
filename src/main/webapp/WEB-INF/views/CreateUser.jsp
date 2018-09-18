@@ -58,7 +58,10 @@
               <label class="active">
                  Role
               </label>
-              <form:select class="form-control width200px" path="role" items="${roles}"/>
+          <form:select class="form-control width200px"  path="role" required="required">
+             <option  selected disabled hidden value="">Select</option>
+             <form:options items="${roles}" />
+            </form:select>
             </div>
           <button id="register" class="button button-block"/>${operation} User</button>
           </form:form>

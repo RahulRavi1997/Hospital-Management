@@ -24,8 +24,8 @@
                 };
             }));
 
-                   }
-            });
+         }
+     });
          }
      });
   });
@@ -133,4 +133,17 @@ $(document).ready(function(){
 
 	});
 
+
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+       if($.isNumeric(value)) {
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).find("td:first").text().toLowerCase().indexOf(value) > -1)
+    }); } else {
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+    } });
+});
 
