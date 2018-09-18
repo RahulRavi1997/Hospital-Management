@@ -6,12 +6,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.http.HttpStatus;
@@ -73,30 +77,29 @@ public class UserController {
 			@RequestParam(value = Constants.ROLE, required = false) String role) {
 		try {
 			if (null != userService.retrieveUserByEmail(email)) {
-				return new ModelAndView(Constants.LOGIN, Constants.USER_FAIL, Constants.SIGNIN_USER_FAIL_MESSAGE);
+				if (null == role) {
+					return new ModelAndView(Constants.LOGIN, Constants.USER_FAIL, Constants.SIGNIN_USER_FAIL_MESSAGE);
+				} else {
+					return new ModelAndView(Constants.ADMIN, Constants.USER_FAIL, Constants.MESSAGE);
+				}
 			} else {
 				User user = new User();
 				user.setEmail(email);
 				user.setPassword(password);
 				if (null == role) {
 					user.setRole(Role.ADMIN.toString());
-					if (userService.addUser(user)) {
-						return new ModelAndView(Constants.LOGIN, Constants.SIGN_UP_SUCCESS,
-								Constants.SIGN_UP_SUCCESS_MESSAGE);
-					} else {
-						return new ModelAndView(Constants.LOGIN, Constants.SIGN_UP_FAIL,
-								Constants.SIGN_UP_FAIL_MESSAGE);
-					}
 				} else {
 					user.setRole(role);
-					if (userService.addUser(user)) {
-						model.addAttribute(Constants.MESSAGE, Constants.SIGN_UP_SUCCESS_MESSAGE);
-						return new ModelAndView(Constants.ADMIN, Constants.SIGN_UP_SUCCESS,
-								Constants.SIGN_UP_SUCCESS_MESSAGE);
-					} else {
-						return new ModelAndView(Constants.LOGIN, Constants.SIGN_UP_FAIL,
-								Constants.SIGN_UP_FAIL_MESSAGE);
-					}
+				}
+				if (userService.addUser(user)) {
+					return new ModelAndView(Constants.ADMIN, Constants.MESSAGE,
+							Constants.SIGN_UP_SUCCESS_MESSAGE);
+				} else if (null == role) {
+					return new ModelAndView(Constants.LOGIN, Constants.USER_FAIL,
+							Constants.SIGN_UP_FAIL_MESSAGE);
+				} else {
+					return new ModelAndView(Constants.ADMIN, Constants.MESSAGE,
+							Constants.SIGN_UP_FAIL_MESSAGE);
 				}
 			}
 		} catch (ApplicationException e) {
@@ -166,10 +169,14 @@ public class UserController {
 		return Constants.ACCESS_DENIED_JSP;
 	}
 
-	@RequestMapping(value = { Constants.LOGIN_PATH, Constants.EMPTY_URI, Constants.LOGOUT_SUCCESS_MAPPING })
-	public String redirectLogin(Model model, Principal principal, HttpServletRequest request) {
+	@RequestMapping(value = { Constants.LOGIN_PATH, Constants.EMPTY_URI, "/logout", Constants.LOGOUT_SUCCESS_MAPPING })
+	public String redirectLogin(Model model, Principal principal, HttpServletRequest request, HttpServletResponse response) {
 		if (principal == null) {
-			return Constants.LOGIN;
+		    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		    if (auth != null){
+		        new SecurityContextLogoutHandler().logout(request, response, auth);
+		    }
+		    return "login";
 		} else {
 			return userInfo(model, principal, request);
 		}

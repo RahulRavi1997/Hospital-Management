@@ -17,7 +17,7 @@
         <intercept-url pattern="/" access="permitAll()" />
         <intercept-url pattern="/login" access="permitAll()" />
         <intercept-url pattern="/logout" access="permitAll()" />
-        <intercept-url pattern="/static" access="permitAll()" />
+        <intercept-url pattern="/static/**" access="permitAll()" />
         <intercept-url pattern="/.css" access="permitAll()" />
         <intercept-url pattern="/.js" access="permitAll()" />
         <intercept-url pattern="/fonts/" access="permitAll()" />
@@ -29,7 +29,7 @@
         <intercept-url pattern="/physician" access="hasAnyRole('ROLE_ADMIN', 'ROLE_PHYSICIAN')" />
 
         <intercept-url pattern="/receptionist" access="hasAnyRole('ROLE_ADMIN', 'ROLE_RECEPTIONIST')" />
-        <intercept-url pattern="/other/**" access="isAuthenticated()" />
+        <intercept-url pattern="/**" access="isAuthenticated()" />
  
         <access-denied-handler error-page="/Access_Denied" />
  

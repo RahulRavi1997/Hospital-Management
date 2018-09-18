@@ -115,7 +115,10 @@
                         <label for="salary">Gender</label>
                       </div>
                       <div class="col-sm-3 col-xs-3">
-                        <form:select path="gender" items="${genders}"  class="create-col-width" />
+                         <form:select path="gender" class="create-col-width" required="required">
+                          <option  selected disabled hidden value="">Select</option>
+                          <form:options items="${genders}" />
+                        </form:select>
                       </div>
                     </div>
                   </div>
@@ -139,7 +142,7 @@
                         </div>
                         <div class="col-sm-3 col-xs-3">
                           <div class="input">
-                            <form:textarea rows="2" cols="30" type="TEXT" placeholder="Address Line 1" path="addresses[${vs.index}].addressLine1" cssErrorClass="invalid" />
+                            <form:textarea rows="2" cols="19" type="TEXT" placeholder="Address Line 1" path="addresses[${vs.index}].addressLine1" cssErrorClass="invalid" />
                             <form:label path="addresses[${vs.index}].addressLine1" cssErrorClass="icon invalid" />
                             <form:errors path="addresses[${vs.index}].addressLine1" cssClass="inline_invalid" />
                           </div>
@@ -151,7 +154,7 @@
                         </div>
                         <div class="col-sm-3 col-xs-3">
                           <div class="input">
-                            <form:textarea rows="2" cols="30" type="TEXT" placeholder="Address Line 2" path="addresses[${vs.index}].addressLine2" cssErrorClass="invalid" maxLength="50"/>
+                            <form:textarea rows="2" cols="19" type="TEXT" placeholder="Address Line 2" path="addresses[${vs.index}].addressLine2" cssErrorClass="invalid" maxLength="50"/>
                             <form:label path="addresses[${vs.index}].addressLine2" cssErrorClass="icon invalid" />
                             <form:errors path="addresses[${vs.index}].addressLine2" cssClass="inline_invalid" />
                           </div>
