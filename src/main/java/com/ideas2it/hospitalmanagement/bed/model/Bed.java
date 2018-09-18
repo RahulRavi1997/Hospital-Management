@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ideas2it.hospitalmanagement.bedallocation.model.BedAllocation;
+import com.ideas2it.hospitalmanagement.visit.model.Visit;
 
 /**
  * <p>
@@ -18,7 +19,9 @@ public class Bed {
 
 	private Integer bedNumber;
 	private String status = "Available";
-	private Integer visitId;
+
+
+	private Visit visit;
 	private Integer roomNumber;
 	private List<BedAllocation> bedAllocations = new ArrayList<BedAllocation>();
 
@@ -43,12 +46,16 @@ public class Bed {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public Integer getVisitId() {
-		return visitId;
+	
+	
+	public Visit getVisit() {
+		return visit;
 	}
-	public void setVisitId(Integer visitId) {
-		this.visitId = visitId;
+	public void setVisit(Visit visit) {
+		this.visit = visit;
 	}
+	
+	
 	public Integer getRoomNumber() {
 		return roomNumber;
 	}

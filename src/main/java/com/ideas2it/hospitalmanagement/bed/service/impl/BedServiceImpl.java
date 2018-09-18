@@ -57,7 +57,7 @@ public class BedServiceImpl extends GenericDao implements BedService {
 			Visit visit = visitService.getVisitById(visitId);
 
 	if(visit.getPatientType().equals("InPatient") && bed.getStatus().equals("Available")) {
-				bed.setVisitId(visitId);
+				bed.setVisit(visit);
 				System.out.println("dddddddddddddddddddddddddddddddddd" + visit.getPatientStatus());
 
 				bed.setStatus("Occupied");
@@ -100,15 +100,15 @@ public class BedServiceImpl extends GenericDao implements BedService {
 	public boolean dischargePatient( int bedNumber) throws ApplicationException {
 
 		Bed bed = searchBedByNumber(bedNumber);
-		System.out.println("dichargeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"+ bed.getVisitId() + bed.getStatus() + "" + bed.getBedNumber() + "" + bed.getRoomNumber());
 
 		if(bed.getStatus().equals("Occupied")) {
 
-			Visit visit = visitService.getVisitById(bed.getVisitId());
+			Visit visit = bed.getVisit();
 			if(visit.getPatientType().equals("InPatient")) {
 				visit.setDischargeDate(new Date());
 				bed.setStatus("Available");
-        		addBedDischargeDetails(bed.getVisitId(), bed);
+				//visit.setPatientStatus("Discharged");
+        		addBedDischargeDetails(bed.getVisit(), bed);
 				visitService.modifyVisit(visit);
         		System.out.println("treeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
 				return bedDao.updateBed(bed);
@@ -122,9 +122,8 @@ public class BedServiceImpl extends GenericDao implements BedService {
 		}
 	}
 	
-	private void addBedDischargeDetails(int visitId, Bed bed) {
-		System.out.println("fidvhsthrrrrrrrrrrrrrrrrrr" + visitId + "bed" + bed.getStatus() + "" + bed.getBedNumber());
-		bed.setVisitId(null);
+	private void addBedDischargeDetails(Visit visit, Bed bed) {
+		bed.setVisit(null);
         for(BedAllocation bedAllocation : bed.getBedAllocations()) {
         	if(bedAllocation.getVisit() != null) {
         		try {
