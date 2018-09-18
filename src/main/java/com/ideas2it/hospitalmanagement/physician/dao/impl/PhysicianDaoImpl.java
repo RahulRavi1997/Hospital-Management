@@ -8,7 +8,6 @@ import com.ideas2it.hospitalmanagement.physician.dao.PhysicianDao;
 import com.ideas2it.hospitalmanagement.physician.model.Physician;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.commons.Constants;
-import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.logger.Logger;
 
 import javassist.bytecode.CodeIterator.Gap;
