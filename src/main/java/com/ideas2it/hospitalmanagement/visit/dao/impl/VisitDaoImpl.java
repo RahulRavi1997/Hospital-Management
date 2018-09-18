@@ -1,5 +1,6 @@
 package com.ideas2it.hospitalmanagement.visit.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session; 
@@ -35,6 +36,9 @@ public class VisitDaoImpl extends GenericDao implements VisitDao {
 
 	String VISIT_IN_QUERY = "from Visit where id in (:ids)";
 	String IDS = "ids";
+	String PATIENT_VISIT_IN_QUERY = "from Visit where PATIENT = (:id) and ADMIT_DATE = '(:date)'";
+	String ID = "id";
+	String DATE = "date";
 
 
 	/**
@@ -109,4 +113,30 @@ public class VisitDaoImpl extends GenericDao implements VisitDao {
 			throw new ApplicationException(Constants.VISIT_DISPLAY_EXCEPTION, e);
 		}
 	}
+	
+    /**
+     * <p>
+     * Method to search the visit Id in the database.This method is using
+     * the visitId to search the visit and is searched in the database.
+     * </p>
+     *
+     * @param   visitId  a int datatype which contains the visit
+     *                      id that needs to be searched.
+     * @return  visit    returns visit object when id is found
+     *                      and null when not found.
+     */
+    public Visit searchVisitByPatientId(final Integer patientId)
+            throws ApplicationException {
+		try {
+			Session session = super.getSession();
+			Query query = session.createQuery(PATIENT_VISIT_IN_QUERY);  
+			query.setParameter(ID, patientId);
+			query.setParameter(DATE, new Date());
+
+			return (Visit) query.uniqueResult();
+		} catch (ApplicationException e) {
+			Logger.error(Constants.VISIT_DISPLAY_EXCEPTION, e);
+			throw new ApplicationException(Constants.VISIT_DISPLAY_EXCEPTION, e);
+		}
+    }
 }

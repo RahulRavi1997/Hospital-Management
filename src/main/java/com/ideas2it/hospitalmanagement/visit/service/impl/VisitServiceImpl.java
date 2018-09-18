@@ -2,6 +2,7 @@ package com.ideas2it.hospitalmanagement.visit.service.impl;
 
 import java.util.List;
 
+import com.ideas2it.hospitalmanagement.patient.model.Patient;
 import com.ideas2it.hospitalmanagement.patient.service.PatientService;
 import com.ideas2it.hospitalmanagement.physician.service.PhysicianService;
 import com.ideas2it.hospitalmanagement.visit.dao.VisitDao;
@@ -74,5 +75,13 @@ public class VisitServiceImpl implements VisitService {
 	 */
 	public List<Visit> retrieveVisitsByIds(Integer[] ids) throws ApplicationException {
 		return visitDao.getVisitsByIds(ids);
+	}
+	
+	/**
+	 *  {@inheritDoc}
+	 */
+	public Visit getVisitByPatientId(final Patient patient)
+            throws ApplicationException {
+        return visitDao.searchVisitByPatientId(patient.getId());
 	}
 }

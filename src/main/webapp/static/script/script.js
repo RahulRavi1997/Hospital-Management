@@ -79,6 +79,11 @@ $(document).ready(function() {
 
 
 	           response($.map(data, function (value, key) {
+	        	   if(value == []) {
+	        		   return {
+	        			 label: "No Patients Found"  
+	        		   };
+	        	   } else {
 	               console.log(value);
                 $("#patientId").val(value.id);
                 var id = value.id;
@@ -86,6 +91,7 @@ $(document).ready(function() {
 	                   label: value.firstName +" - [" +  id  + "]",
 	                   value: value.firstName,
 	               };
+	           }
 	           }));
 
 	                  }

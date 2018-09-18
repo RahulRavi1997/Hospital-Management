@@ -198,4 +198,13 @@ public final class Constants {
 	public static final String USER_DISPLAY_JSP = "DisplayUsers";
 	public static final String QUERY = "query";
 
+   public static final String SEARCH_PATIENT_BY_NAME = "/searchPatientByName";
+   public static final String SEARCH_VISIT_BY_PATIENTID = "/searchVisitByPatientId";
+
+   public static final String TYPES = "types";
+   public static final String SPECIALISATIONS = "specialisations";
+   public static final String GENDERS = "genders";
+   public static final String JSON_FORMAT = "application/json";
+   public static final String XML_FORMAT = "application/xml";
+   public static final String JSON_HEADERS ="content-type=application/x-www-form-urlencoded";
 }

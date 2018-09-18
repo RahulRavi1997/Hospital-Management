@@ -73,13 +73,13 @@
                         <c:out value="${visit.patient.id}" />
                      </td>
                      <td>
-                        <c:out value="${visit.patient.firstName}" />
+                     <c:out value="${visit.patient.firstName} ${visit.patient.lastName}" />
                      </td>
                      <td>
                         <c:out value="${visit.physician.id}" />
                      </td>
                      <td>
-                        <c:out value="${visit.physician.firstName}" />
+                        <c:out value="${visit.physician.firstName} ${visit.physician.lastName}" />
                      </td>
                      <td>
                         <c:out value="${visit.patientType}" />
