@@ -98,3 +98,4 @@ public interface VisitService {
     public List<Visit> getVisitsByPatientType(String patientType)
             throws ApplicationException;
 }
+

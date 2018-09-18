@@ -55,13 +55,15 @@ public class BedServiceImpl extends GenericDao implements BedService {
 		Bed bed = searchBedByNumber(bedNumber);
 		if(bed.getStatus() != "Occupied") {
 			Visit visit = visitService.getVisitById(visitId);
-
-	if(visit.getPatientType().equals("InPatient") && bed.getStatus().equals("Available")) {
+			if(visit.getPatientType().equals("InPatient") && bed.getStatus().equals("Available")) {
 				bed.setVisit(visit);
-				System.out.println("dddddddddddddddddddddddddddddddddd" + visit.getPatientStatus());
-
 				bed.setStatus("Occupied");
+				System.out.println("hellooooooooooooooooooooooooooooooooooooooooooooo" + 
+						visit.getId() + "" + visit.getPatientStatus());
+
 				visit.setPatientStatus("Admitted");
+				visitService.modifyVisit(visit);
+
 				System.out.println("dddddddddddddddddddddddddddddddddd" + visit.getPatientStatus());
         		addBedAllocationDetails(visit, bed);
 				return bedDao.updateBed(bed);
@@ -94,10 +96,18 @@ public class BedServiceImpl extends GenericDao implements BedService {
 		return bedDao.searchBedByNumber(bedNumber);
 	}
 	
+	public Visit searchvisitByNumber(int visitId) throws ApplicationException {
+		return visitService.getVisitById(visitId);
+	}
+	
+	public Bed searchBedByVisit(Visit visit) throws ApplicationException {
+		return bedDao.searchBedByVisit(visit);
+	}
+	
 	/**
 	 *  {@inheritDoc}
 	 */
-	public boolean dischargePatient( int bedNumber) throws ApplicationException {
+	public boolean dischargePatient(int bedNumber) throws ApplicationException {
 
 		Bed bed = searchBedByNumber(bedNumber);
 
@@ -107,10 +117,10 @@ public class BedServiceImpl extends GenericDao implements BedService {
 			if(visit.getPatientType().equals("InPatient")) {
 				visit.setDischargeDate(new Date());
 				bed.setStatus("Available");
-				//visit.setPatientStatus("Discharged");
+        	
+				visit.setPatientStatus("Yet to Admit");
         		addBedDischargeDetails(bed.getVisit(), bed);
 				visitService.modifyVisit(visit);
-        		System.out.println("treeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
 				return bedDao.updateBed(bed);
 			} else {
         		System.out.println("falseeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
@@ -148,5 +158,12 @@ public class BedServiceImpl extends GenericDao implements BedService {
 	 */
 	public boolean updateBed(Bed bed) throws ApplicationException {
 		return bedDao.updateBed(bed);
+	}
+	
+	/**
+	 *  {@inheritDoc}
+	 */
+	public List<Visit> getVisitsByPatientType(String status)throws ApplicationException{
+		return visitService.getVisitsByPatientType(status);
 	}
 }

@@ -236,7 +236,13 @@ margin-left:180px;
 color:white;
 height:60px;
 width:60px;
-
+}
+.bedOccupied{
+background-color:red;
+margin-left:180px;
+color:white;
+height:60px;
+width:60px;
 }
 
 .button {

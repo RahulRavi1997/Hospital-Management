@@ -14,13 +14,15 @@
   
       <div class = "heading">
          <div id="mySidenav" class="sidenav">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="color:white;">&times;</a>
             <a onclick="document.getElementById('addWard').style.display='block'" style="width:auto;">Add Ward</a>
          </div>
-         <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
- 
+         <span style="font-size:30px;cursor:pointer;color:white;" onclick="openNav()">&#9776;</span>
+
       </div>
-      
+               <form:form action="nurseHome" method="get">
+ 		 <button style="submit"  style="float:right;">Back Home</button>
+ 		 </form:form>
       	 
       	 <form:form action="searchWard" method ="post">
       	      Search for a ward : 
@@ -52,7 +54,7 @@
          <h2 class ="wardInformation" > Ward Name : ${ward.name} &nbsp Ward Number : ${ward.wardNumber} </h2>
          		<div>
             <form:form action = "openAddMenu" method ="post">
-               <button class="w3-btn w3-orange" estyle="float:left;"> <input type = "hidden" value = "${ward.wardNumber}" name = "number"><span> Add rooms </span></button></form:form>
+               <button class="w3-btn w3-orange" style="float:left;"> <input type = "hidden" value = "${ward.wardNumber}" name = "number"><span> Add rooms </span></button></form:form>
             
             <c:if test="${ward.status == 'under maintaince'}">
               
@@ -70,6 +72,9 @@
                   </form:form>
                
             </c:if>
+              
+               
+            
 
             <c:if test="${addRoomsToWard == 'Yes'}">
                <script> 
@@ -85,28 +90,62 @@
                   <table>
                      <tr>
                         <td>
-                        </td>
+                        <c:forEach items= "${room.beds}" var = "bed">
+
+                            <c:if test="${bed.status == 'Available'}">
+                            <button class="bedType">
+                            <img src="static/bed.png"><br>${bed.bedNumber}</button>
+                            </c:if>
+                            
+                            <c:if  test="${bed.status != 'Available'}">
+                             <button class="bedOccupied">
+                             <img src="static/bed.png"><br>${bed.bedNumber}</button>
+                             </c:if>
+                        </c:forEach>
+                        <td>
                      </tr>
                      <tr>
-                        <td>
+					<td>
+                        
                            <c:forEach items= "${room.beds}" var = "bed">
-                              <button class="bedType"><img src="static/bed.png"><br>
-                              ${bed.bedNumber}</button>
-                            <c:if test="${bed.status == 'Available'}">
                               <c:if test="${admitButton == 'Yes'}">
-							  <form:form action="admitPatient" method="post">
-							  <input type="hidden" value="${visitId}" name="visitId">
-							  <input type="hidden" value="${bed.bedNumber}" name="bedNumber">
-                              <button type="submit">Admit${bed.bedNumber}</button>
-                             </form:form> </c:if> </c:if>
-							 <c:if test="${bed.status != 'Available'}">
-                              <c:if test="${admitButton != 'Yes'}">
-							  <form:form action="dischargePatient" method="post">
-							  <input type="hidden" value="${bed.bedNumber}" name="bedNumber">
-                              <button type="submit">discharge${bed.bedNumber}</button>
-                             </form:form> </c:if> </c:if> 
+                              <c:if test="${bed.status == 'Available'}">
+                                  <form:form action="admitPatient" method="post">
+                                      <input type="hidden" value="${visitId}" name="visitId">
+                                      <input type="hidden" value="${bed.bedNumber}" name="bedNumber">
+                                      <button type="submit" style="margin-left:180px;">Admit ${bed.bedNumber}</button>        
+                                  </form:form>
+                                </c:if>
+                              </c:if> 
+                              <c:if test="${admitButton == 'Yes'}">
+                              <c:if test="${bed.status != 'Available'}">
+                                  <form:form action="admitPatient" method="post">
+                                      <input type="hidden" value="${visitId}" name="visitId">
+                                      <input type="hidden" value="${bed.bedNumber}" name="bedNumber">
+                                      <button type="submit" style="margin-left:150px; opacity:0">Discharge</button>        
+                                  </form:form>
+                                </c:if>
+                              </c:if> 
+                              
+
+                              <c:if test="${admitButton != 'Yes'}"> 
+                                  <c:if test="${bed.status != 'Available'}">
+                                      <form:form action="dischargePatient" method="post">
+                                          <input type="hidden" value="${bed.bedNumber}" name="bedNumber">
+                                          <button type="submit" style="margin-left:180px;">
+                                          Discharge</button>    
+                                      </form:form> 
+                                  </c:if> 
+                                  <c:if test="${bed.status == 'Available'}">
+                                      <form:form action="dischargePatient" method="post">
+                                          <input type="hidden" value="${bed.bedNumber}" name="bedNumber">
+                                          <button type="submit" style="margin-left:150px; opacity:0">
+                                          Admit</button>    
+                                      </form:form> 
+                                  </c:if> 
+                              </c:if>
                            </c:forEach>
-                        </td>
+                       </td>
                      </tr>
                   </table>
                </div>

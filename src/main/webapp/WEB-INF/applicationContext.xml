@@ -38,6 +38,8 @@
         <property name="wardDao" ref="wardDaoImpl" />
                 <property name="roomService" ref="roomServiceImpl" />
         		<property name="visitService" ref="visitServiceImpl"/>
+        		        		<property name="bedService" ref="bedServiceImpl"/>
+        		
     </bean>
 
     <bean id="wardController"  class="com.ideas2it.hospitalmanagement.ward.controller.WardController">
@@ -47,6 +49,7 @@
     
     
         <bean id="physicianDaoImpl" class="com.ideas2it.hospitalmanagement.physician.dao.impl.PhysicianDaoImpl"/>
+
 
     <bean id="physicianServiceImpl" class="com.ideas2it.hospitalmanagement.physician.service.impl.PhysicianServiceImpl" >
         <property name="physicianDao" ref="physicianDaoImpl" />
@@ -91,3 +94,4 @@
 
    
 </beans>
+

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ideas2it.hospitalmanagement.bed.model.Bed;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
+import com.ideas2it.hospitalmanagement.visit.model.Visit;
 import com.ideas2it.hospitalmanagement.ward.model.Ward;
 
 public interface BedService {
@@ -69,4 +70,10 @@ public interface BedService {
 	 * @return List<Ward>						List of wards
 	 */
 	public List<Ward> getWardsByStatus(String status) throws ApplicationException;
+
+	public List<Visit> getVisitsByPatientType(String string)throws ApplicationException;
+	
+	public Visit searchvisitByNumber(int visitId) throws ApplicationException;
+	
+	public Bed searchBedByVisit(Visit visit) throws ApplicationException;
 }

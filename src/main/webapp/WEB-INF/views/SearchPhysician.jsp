@@ -8,11 +8,44 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Physician Details</title>
-    <link rel="shortcut icon" href="styles/images/ideas1.jpg"/>
+
+
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
     <META HTTP-EQUIV="Expires" CONTENT="-1">
   </head>
   <body>
+
+  <jsp:include page="header.jsp"/>
+     <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="index">
+                        Home
+                    </a>
+                </li>
+                <li>
+             <a href="createUser">Create User </a> 
+                </li>
+                <li>
+	           <a href="displayUsers">Display Users</a>
+                </li>
+                <li>
+              <a href="createPhysician">Create Physician</a> 
+                </li>
+                <li>
+	           <a href="displayPhysicians">Display Physicians</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
     <c:if test="${not empty message}">
      <div id="snackbar">${message}</div>
     </c:if>
@@ -28,7 +61,9 @@
         <div class="col-sm-4 col-xs-4 search-bar-display">
            <form  autocomplete="off" class="form-inline" action="searchPhysician" method="get">
               <input name="id"  type="number" class="form-control mr-sm-2" placeholder="Search"  required>
-              <button class="glyphicon glyphicon-search"  type="submit"/>    
+
+              <button class="glyphicon glyphicon-search"  type="submit">Search</button>    
+
             </form>
         </div>
         <div class="col-sm-4 col-xs-4 text-align-center">
@@ -43,10 +78,13 @@
     <fmt:formatDate var="currentyear" value="${now}" pattern="yyyy" />
 <div class="container">
   <ul class="pager">
-     <input type="hidden" id="pager-id" value="${physician.id}">
-    <li id="previous" class="previous"><a id="previous-link" href="searchPhysician?id=${physician.id-1}">Previous</a></li>
+
+     <input type="hidden" id="pager-id" value="${physician.id}"/>
+     <c:set var="previd" value="${physician.id-1}"/><c:if test="${physician.id == 1}"><c:set var="previd" value="1"/></c:if>
+    <li id="previous" class="previous"><a id="previous-link" href="searchPhysician?id=${previd}">Previous</a></li>
      <li> <b>Physician Details</b></li>
-    <li id="next" class="next"><a href="searchphysician?id=${physician.id+1}">Next</a></li>
+    <li id="next" class="next"><a href="searchPhysician?id=${physician.id+1}">Next</a></li>
+
   </ul>
 </div>
     <c:if  test="${empty physician.id}">
@@ -108,28 +146,26 @@
         </table>
       </div>
     </c:if>
-    <c:if test="${not empty physician.address}">
+
+    <c:if test="${not empty physician.addresses}">
+
+     <div align="center">
+        Address 
       <table border="1" cellpadding="5" class="table">
         <tr>
-          <th>Type</th>
-          <th>Door-Number</th>
-          <th>Street</th>
-          <th>City</th>
+          <th>Address Line 1</th>
+          <th>Address Line 2</th>
           <th>Country</th>
           <th>Pin-Code</th>
         </tr>
+           <c:forEach items="${physician.addresses}" var="address">
           <tr>
-            <td>
-              <c:out value="${address.type}"/>
+             <td>
+              <c:out value="${address.addressLine1}"/>
             </td>
             <td>
-              <c:out value="${address.doorNumber}"/>
-            </td>
-            <td>
-              <c:out value="${address.street}"/>
-            </td>
-            <td>
-              <c:out value="${address.city}"/>
+              <c:out value="${address.addressLine2}"/>
+
             </td>
             <td>
               <c:out value="${address.country}"/>
@@ -138,35 +174,18 @@
               <c:out value="${address.pinCode}"/>
             </td>
           </tr>
-        </c:forEach>
+
+         </c:forEach>
       </table>
+     </div>
     </c:if>
-    <c:if test="${not empty employee.workingProjects}">
-      <div align="center"><h3>${employee.name}'s Projects</h3></div>
-       <div class="scrollable-project-search">
-      <table border="1" cellpadding="5" class="table">
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Resources</th>
-        </tr>
-        <c:forEach var="project" items="${employee.workingProjects}">
-          <tr>
-            <td>
-              <c:out value="${project.id}"/>
-            </td>
-            <td>
-              <form action="search_project" method="get"><button type="submit" class="button-as-link">${project.name}</button>
-                <input type="hidden" name="id" value="${project.id}" /> 
-              </form>
-            </td>
-            <td>
-              <c:out value="${project.numberOfResources}"/>
-            </td>
-          </tr>
-        </c:forEach>
-      </table></div>
-    </c:if>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <jsp:include page="footer.jsp"/>
   </body>
-  <script src="script/script.js"></script>
+
 </html>

@@ -7,16 +7,43 @@
 <html>
   <head>
     <title>PhysicianForm</title>
-    <link rel="shortcut icon" href="styles/images/ideas1.jpg"/>
+
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
     <META HTTP-EQUIV="Expires" CONTENT="-1">
   </head>
-  <link rel="stylesheet" href="styles/employeedetails.css">
   <body>
-    <c:if test="${not empty message}">
-     <script>alert("${message}");</script>
-    </c:if>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <jsp:include page="header.jsp"/>
+     <div id="wrapper">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="index">
+                        Home
+                    </a>
+                </li>
+                <li>
+             <a href="createUser">Create User </a> 
+                </li>
+                                <li>
+	           <a href="displayUsers">Display Users</a>
+                </li>
+                <li  class="highlight">
+              <a href="createPhysician">Create Physician</a> 
+                </li>
+                <li>
+	           <a href="displayPhysicians">Display Physicians</a>
+                </li>
+
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+
     <c:set var="value" value="Add"/>
     <c:set var="operation" value="addPhysician"/>
     <c:if test="${not empty physician.firstName}">
@@ -24,14 +51,7 @@
       <c:set var="operation" value="updatePhysician"/>
     </c:if>
     <jsp:useBean id="now" class="java.util.Date"/>
-    <fmt:formatDate var="currentDate" value="${now}" pattern="yyyy-MM-dd" />
-    <fmt:formatDate var="currentYear" value="${now}" pattern="yyyy" />
-    <fmt:formatDate var="currentMonth" value="${now}" pattern="MM" />
-    <fmt:formatDate var="currentDay" value="${now}" pattern="dd" />
-    <fmt:parseDate value="${currentYear-18}-${currentMonth}-${currentDay}" pattern="yyyy-MM-dd" var="maxdob" type="date" />
-    <fmt:formatDate value="${maxdob}" var="maxBirthDate" type="date" pattern="yyyy-MM-dd" />
-    <fmt:parseDate value="${currentYear-100}-${currentMonth}-${currentDay}" pattern="yyyy-MM-dd" var="mindob" type="date" />
-    <fmt:formatDate value="${mindob}" var="minBirthDate" type="date" pattern="yyyy-MM-dd" />
+
     <form:form commandName="physician" action="${operation}" method="post" onsubmit="submit_form(this.form)">
       <form:hidden path="id" value="${physician.id}"/>
       <form:hidden path="active" value="${physician.isActive()}"/>
@@ -43,19 +63,23 @@
           <div class="col-sm-6 col-xs-6 create-col-padding">
             <div class="row">
               <div class="col-sm-3 col-xs-3 required">
-                <label for="name">FirstName</label>
+
+                <label for="name">First Name</label>
               </div>
               <div class="col-sm-3 col-xs-3">
-                <form:input type="text" path="firstName" placeholder="FirstName" aria-describedby="basic-addon1" required="required"/>
+                <form:input type="text" path="firstName" placeholder="First Name" aria-describedby="basic-addon1" required="required" maxLength="25"/>
+
                 <br/>
               </div>
             </div>
             <div class="row">
               <div class="col-sm-3 col-xs-3 required">
-                <label for="name">LastName</label>
+
+                <label for="name">Last Name</label>
               </div>
               <div class="col-sm-3 col-xs-3">
-                <form:input type="text" path="lastName" placeholder="LastName" aria-describedby="basic-addon1" required="required"/>
+                <form:input type="text" path="lastName" placeholder="Last Name" aria-describedby="basic-addon1" required="required" maxLength="25"/>
+
                 <br/>
               </div>
             </div>
@@ -73,7 +97,9 @@
                 <label for="name">Mobile Number:</label>
               </div>
               <div class="col-sm-3 col-xs-3">
-                <form:input type="number" path="mobileNumber" placeholder="mobileNumber" aria-describedby="basic-addon1"/>
+
+                <form:input type="number" path="mobileNumber" placeholder="Mobile Number" aria-describedby="basic-addon1" maxLength="10"/>
+
                 <br/>
               </div>
             </div>
@@ -92,7 +118,9 @@
                 <label for="role">Specialisation</label>
               </div>
               <div class="col-sm-3 col-xs-3">
-                <form:input type="text" path="specialisation" placeholder="Specialisation" aria-describedby="basic-addon1" maxLength="50" required="required"/>
+
+                <form:select path="specialisation" items="${specialisations}" />
+
               </div>
             </div>
             <div class="row">
@@ -103,49 +131,76 @@
                 <form:select path="gender" items="${genders}" />
               </div>
             </div>
-              <div class="row">
-              <div class="row">
-                <div class="col-sm-3 col-xs-3">
-                  <form:label class="color-black" path="address.addressLine1" cssErrorClass="invalid">Address Line 1</form:label>
-                </div>
-                <div class="col-sm-3 col-xs-3">
-                  <div class="input">
-                    <form:input type="text"  placeholder="Door Number" path="address.addressLine1" cssErrorClass="invalid " required="required"/>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-3 col-xs-3">
-                  <form:label class="color-black" path="address.addressLine2" cssErrorClass="invalid">address Line 2</form:label>
-                </div>
-                <div class="col-sm-3 col-xs-3">
-                  <div class="input">
-                    <form:input placeholder="addressLine2" path="address.addressLine2" cssErrorClass="invalid "/>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-3 col-xs-3">
-                  <form:label class="color-black" path="address.country" cssErrorClass="invalid">Country</form:label>
-                </div>
-                <div class="col-sm-3 col-xs-3">
-                  <div class="input">
-                    <form:input placeholder="Country" path="address.country" cssErrorClass="invalid " maxLength="50" required="required" />
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-3 col-xs-3">
-                  <form:label class="color-black" path="address.pinCode" cssErrorClass="invalid">PinCode</form:label>
-                </div>
-                <div class="col-sm-3 col-xs-3">
-                  <div class="input">
-                    <form:input placeholder="Pin Code" type="number" min="0" path="address.pinCode" cssErrorClass="invalid" required="required" maxLength="10"/>
-                  </div>
-                </div>
-              </div>
+
           </div>
-        </div>
+           <div class="col-sm-6 col-xs-6">
+            <c:forEach items="${physician.addresses}" varStatus="vs">
+              <c:if test="${vs.index+1 eq 1}"> <c:set var="addrstype" value="Permanent"/></c:if>
+              <c:if test="${vs.index+1 eq 2}"> <c:set var="addrstype" value="Temporary"/></c:if>
+              <div class="row">
+                <div class="col-sm-6 col-xs-6"> 
+                  <b>${addrstype} Address</b>
+                </div>
+              </div>
+               <form:hidden path="addresses[${vs.index}].type" value="${addrstype}"/>
+              <div class="row">
+                <div class="col-sm-3 col-xs-3 required">
+                  <form:label class="color-black" path="addresses[${vs.index}].addressLine1" cssErrorClass="invalid">Address Line 1</form:label>
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                  <div class="input">
+                    <form:input type="TEXT" placeholder="Address Line 1" path="addresses[${vs.index}].addressLine1" cssErrorClass="invalid " required="required"/>
+                    <form:label path="addresses[${vs.index}].addressLine1" cssErrorClass="icon invalid" />
+                    <form:errors path="addresses[${vs.index}].addressLine1" cssClass="inline_invalid" />
+
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3 col-xs-3">
+
+                  <form:label class="color-black" path="addresses[${vs.index}].addressLine2" cssErrorClass="invalid">Address Line 2</form:label>
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                  <div class="input">
+                    <form:input placeholder="Address Line 2" path="addresses[${vs.index}].addressLine2" cssErrorClass="invalid" maxLength="50"/>
+                    <form:label path="addresses[${vs.index}].addressLine2" cssErrorClass="icon invalid" />
+                    <form:errors path="addresses[${vs.index}].addressLine2" cssClass="inline_invalid" />
+
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+
+                <div class="col-sm-3 col-xs-3 required">
+                  <form:label class="color-black" path="addresses[${vs.index}].country" cssErrorClass="invalid">Country</form:label>
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                  <div class="input">
+                    <form:input placeholder="Country" path="addresses[${vs.index}].country" cssErrorClass="invalid " maxLength="50" required="required" />
+                    <form:label path="addresses[${vs.index}].country" cssErrorClass="icon invalid" />
+                    <form:errors path="addresses[${vs.index}].country" cssClass="inline_invalid" />
+
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3 col-xs-3">
+         <form:label class="color-black" path="addresses[${vs.index}].pinCode" cssErrorClass="invalid">PinCode</form:label>
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                  <div class="input">
+                    <form:input placeholder="Pin Code" type="number" min="0" path="addresses[${vs.index}].pinCode" cssErrorClass="invalid" maxLength="10"/>
+                    <form:label path="addresses[${vs.index}].pinCode" cssErrorClass="icon invalid" />
+                    <form:errors path="addresses[${vs.index}].pinCode" cssClass="inline_invalid" />
+                  </div>
+                </div>
+              </div>
+            </c:forEach>
+          </div>
+         Add User Login For Physician : 
+	    <input type="text"  id="autocomplete" value="" name="UserEmail" placeHolder="Enter User Email"/>
+
         <div class="row" align="center">
           <input class="btn margin-format" type="reset" value="Reset"/>     
           <input class="btn-primary" type="submit" value="Submit"/>     
@@ -154,5 +209,14 @@
     </form:form>
     </br>
     </br>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <jsp:include page="footer.jsp"/>
+
   </body>
 </html>

@@ -8,9 +8,12 @@ Hospital Management
 <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
 <META HTTP-EQUIV="Expires" CONTENT="-1">
   <meta charset="UTF-8">
+
+  <link rel="stylesheet" href="static/css/font-awesome.min.css">
+  <link rel="stylesheet" href="static/css/jquery-ui.css">
   <title>Sign-Up/Login Form</title>
 <meta name="_csrf" content="${_csrf.token}"/>
-<sec:csrfMetaTags /> 
+
   <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 		<link href="<c:url value='/static/css/bootstrap.css' />"  rel="stylesheet"></link>
@@ -37,7 +40,9 @@ Hospital Management
           <h1>Welcome Back!</h1>
 		 <form action="${loginUrl}" method="post" class="form-horizontal">
           <div class="field-wrap">
-            <label>
+
+            <label class= "active">
+
               Email Address
             </label>
             <input type="email" name="email" value="${signinEmail}" required autocomplete="off"/>
@@ -70,12 +75,14 @@ Hospital Management
         </div>
         <div id="signup">   
           <form role="form" action="signup" method="post">
-            <div class="field-wrap">
-              <label>
+
+            <div class="field-wrap ">
+              <label class="active">
                 Email Address<span class="req">*</span>
               </label>
-              <input type="email" name="email" required autocomplete="off" />
-            </div>
+              <input type="email" id="signupemail" name="email" required autocomplete="off" />
+            </div> 
+
           <div class="field-wrap">
             <label>
               Password<span class="req">*</span>
@@ -90,12 +97,22 @@ Hospital Management
           </div>
           <button id="register" class="button button-block"/>Get Started</button>
           </form>
+
+<div style="font-size:27px;" id="nonUniqueEmail"></div> 
+
         </div>
       </div>
 </div> 
   <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+
+  <script src="static/script/jquery.min.js"></script>
+  <script src="static/script/bootstrap.min.js"></script>
+<script src="/static/script/jquery-1.10.2.js"></script>
+<script src="/static/script/bootstrap.min.js"></script>
+<script src="/static/script/jquery-1.9.1.min.js"></script>
+<script src="/static/script/jquery-ui.js"></script>
     <script  src="/static/script/index.js"></script>
 </body>
 </html>
-	</body>
-</html>
+

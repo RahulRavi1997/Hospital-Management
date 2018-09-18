@@ -4,6 +4,8 @@ package com.ideas2it.hospitalmanagement.ward.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ideas2it.hospitalmanagement.bed.model.Bed;
+import com.ideas2it.hospitalmanagement.bed.service.BedService;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.room.model.Room;
 import com.ideas2it.hospitalmanagement.room.service.RoomService;
@@ -18,7 +20,16 @@ public class WardServiceImpl implements WardService {
     private static WardDao wardDao;
     private static RoomService roomService;
     private static VisitService visitService;
-  
+    public static BedService getBedService() {
+		return bedService;
+	}
+
+	public static void setBedService(BedService bedService) {
+		WardServiceImpl.bedService = bedService;
+	}
+
+	private static BedService bedService;
+
     public  void setWardDao(WardDao wardDao) {
     	WardServiceImpl.wardDao = wardDao;
 
@@ -31,6 +42,7 @@ public class WardServiceImpl implements WardService {
 	public static VisitService getVisitService() {
 		return visitService;
 	}
+
 
 	public static void setVisitService(VisitService visitService) {
 		WardServiceImpl.visitService = visitService;
@@ -108,4 +120,17 @@ public class WardServiceImpl implements WardService {
 	public List<Visit> getVisitsByPatientType(String string) throws ApplicationException {
 		return visitService.getVisitsByPatientType("InPatient");
 	}	
+	
+	public Visit searchVisitById(int visitId) throws ApplicationException {
+		return visitService.getVisitById(visitId);
+		
+	}
+	
+	public Bed searchBedByVisit(Visit visit) throws ApplicationException{
+		return bedService.searchBedByVisit(visit);
+	}
+	
+	public Boolean dischargePatient(int bedNumber) throws ApplicationException {
+		return bedService.dischargePatient(bedNumber);
+	}
 }

@@ -26,5 +26,6 @@
        <mapping resource="user.hbm.xml"/>
    <mapping resource="address.hbm.xml"/>
    <mapping resource="visit.hbm.xml"/> 
+
     </session-factory>
 </hibernate-configuration>

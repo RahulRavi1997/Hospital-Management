@@ -89,3 +89,4 @@ public interface VisitDao {
 
 	public List<Visit> getVisitsByPatientType(String patientType) throws ApplicationException;
 }
+

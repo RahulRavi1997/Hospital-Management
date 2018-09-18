@@ -219,6 +219,8 @@ public class GenericDao {
         }
     }
 
+
+ 
     /**
      * This Method is used to obtain all objects in a certain class type.
      *
@@ -232,6 +234,7 @@ public class GenericDao {
      *                              obtaining a table from the database.
      */
     public static <T> List<T> getAll(final Class<T> type) throws ApplicationException {
+
         Session session = null;
         try {
             session = getSession();
@@ -281,5 +284,4 @@ public class GenericDao {
         }
     }
 
-    
 }

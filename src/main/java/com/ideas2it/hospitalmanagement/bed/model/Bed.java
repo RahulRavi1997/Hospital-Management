@@ -19,7 +19,12 @@ public class Bed {
 
 	private Integer bedNumber;
 	private String status = "Available";
-
+	public Visit getVisit() {
+		return visit;
+	}
+	public void setVisit(Visit visit) {
+		this.visit = visit;
+	}
 
 	private Visit visit;
 	private Integer roomNumber;
@@ -46,16 +51,7 @@ public class Bed {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-	
-	public Visit getVisit() {
-		return visit;
-	}
-	public void setVisit(Visit visit) {
-		this.visit = visit;
-	}
-	
-	
+
 	public Integer getRoomNumber() {
 		return roomNumber;
 	}

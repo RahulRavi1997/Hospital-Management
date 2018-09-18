@@ -5,100 +5,164 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
    <head>
+
+      <jsp:include page="access.jsp"/>
    </head>
    <body>
-      <center>
-         <h1>Hospital Management</h1>
-      </center>
-      <c:choose>
+      <jsp:include page="header.jsp"/>
+       <div id="wrapper">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="index">
+                        Home
+                    </a>
+                </li>
+                <li>
+             <a href="createVisit">Create Visit </a> 
+                </li>
+             <li>
+              <a href="displayVisits">Display Visits</a> 
+                </li>
+                <li  class="highlight">
+	           <a href="createPatient">Create Patient</a>
+                </li>
+                <li>
+	           <a href="displayPatients">Display Patients</a>
+                </li>
+            </ul>
+        </div>
+        <div id="page-content-wrapper">
+        
+       <c:choose>
          <c:when test="${empty patient.id}">
-            <c:set var="value" value="addpatient"/>
+            <c:set var="value" value="addPatient"/>
          </c:when>
          <c:otherwise>
-            <c:set var="value" value="updatepatient"/>
+            <c:set var="value" value="updatePatient"/>
+
          </c:otherwise>
       </c:choose>
       <div class="row">
          <form:form  action="${value}" commandName="patient">
-            <div class="col-md-6">
+
+                     <legend>
+
                      <c:if test="${empty patient.id}">
                         Add Patient Details
                      </c:if>
                      <c:if test="${not empty patient.id}">
                         Modify Patient Details
                      </c:if>
+
+                     </legend>
+            <div class="col-md-4">
                   <div class="form-group">
-                     <label class="col-sm-2 control-label" for="name">FirstName</label>
-                     <div class="col-sm-10">
-                        <form:input path="firstName" pattern="^[a-zA-Z]{1,20}$" class ="form-control spacing" required="required" />
+                     <label class="col-sm-4 control-label" for="name">FirstName</label>
+                     <div class="col-sm-8">
+                        <form:input path="firstName" pattern="^[a-zA-Z]{1,20}$" class ="form-control inputtext spacing" required="required" />
                      </div>
                   </div>
                   <div class="form-group">
-                     <label class="col-sm-2 control-label" for="name">LastName</label>
-                     <div class="col-sm-10">
-                        <form:input path="lastName" pattern="^[a-zA-Z]{1,20}$" class ="form-control spacing" required="required" />
+                     <label class="col-sm-4 control-label" for="name">LastName</label>
+                     <div class="col-sm-8">
+                        <form:input path="lastName" pattern="^[a-zA-Z]{1,20}$" class ="form-control inputtext spacing" required="required" />
                      </div>
                   </div>
                   <div class="form-group">
-                     <label class="col-sm-2 control-label" for="emailid">EmailId</label>
-                     <div class="col-sm-10">
-                        <form:input type="email" path="emailId" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" class ="form-control spacing" />
+                     <label class="col-sm-4 control-label" for="emailid">EmailId</label>
+                     <div class="col-sm-8">
+                        <form:input type="email" path="emailId" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" class ="form-control inputtext spacing" />
                      </div>
                   </div>
                   <div class="form-group">
-                     <label class="col-sm-2 control-label" for="birthdate">DOB</label>
-                     <div class="col-sm-10">
-                        <form:input type="date" id="DOB" path="birthDate" required="required" class ="form-control spacing" />
+                     <label class="col-sm-4 control-label" for="birthdate">DOB</label>
+                     <div class="col-sm-8">
+                        <form:input type="date" id="DOB" path="birthDate" required="required" class ="form-control inputtext spacing" />
                      </div>
                   </div>
                   <div class="form-group">
-                     <label class="col-sm-2 control-label" for="mobileNumber">MobileNumber</label>
-                     <div class="col-sm-10">
-                        <form:input path="mobileNumber" required="required" class ="form-control spacing" />
+                     <label class="col-sm-4 control-label" for="mobileNumber">PhoneNumber</label>
+                     <div class="col-sm-8">
+                        <form:input path="mobileNumber" required="required" class ="form-control spacing inputtext"/>
                      </div>
                   </div>
                   <div class="form-group">
-                     <label class="col-sm-2 control-label" for="gender">Gender</label>
-                     <div class="col-sm-10">
-                        <form:input  path="gender" class ="form-control spacing" />
+                    <label class="col-sm-4 control-label" for="Gender">Gender</label>
+                     <div class="col-sm-8">
+                       <form:select class ="inputtext" path="gender" items="${genders}" />
                      </div>
                   </div>
                   <c:if test="${not empty patient.id}">
+                     <input type="hidden" name="active" value="${patient.active}" />
                      <input type="hidden" name="id" value="${patient.id}" />
                   </c:if>
             </div>
-            <div class="col-md-6">
-            <br>
-            <div class="form-group">
-            <label class="col-sm-2 control-label" for="addressLine1">Address Line 1</label>
-            <div class="col-sm-10">
-            <form:input path="address.addressLine1" class="form-control spacing"/>
-            <form:errors path="address.addressLine1" placeholder="addressLine1"/>
-            </div>
-            </div>
-            <div class="form-group">
-            <label class="col-sm-2 control-label" for="addressLine2">Address Line 2</label>
-            <div class="col-sm-10">
-            <form:input path="address.addressLine2" class="form-control spacing"/>
-            <form:errors path="address.addressLine2" placeholder="addressLine2"/>
-            </div>
-            </div>
-            <div class="form-group">
-            <label class="col-sm-2 control-label" for="Postcode">Postcode</label>
-            <div class="col-sm-10">
-            <form:input path="address.pinCode" class="form-control spacing"/>
-            <form:errors path="address.pinCode" placeholder="Post Code"/>
-            </div>
-            </div>
-            <div class="form-group">
-            <label class="col-sm-2 control-label" for="country">Country</label>
-            <div class="col-sm-10">
-            <form:input path="address.country" class="form-control spacing"/>
-            <form:errors path="address.country" placeholder="Country"/>
-            </div>
-            </div>
-            </div>
-      </div>
+            <c:forEach items="${patient.addresses}" varStatus="vs">
+                        <div class="col-md-4">
+              <c:if test="${vs.index+1 eq 1}"> <c:set var="addrstype" value="Permanent"/></c:if>
+              <c:if test="${vs.index+1 eq 2}"> <c:set var="addrstype" value="Temporary"/></c:if>
+              <div class="row">
+                <div class="col-sm-6 col-xs-6"> 
+                  <b>${addrstype} Address</b>
+                </div>
+              </div>
+              <br>
+              
+               <form:hidden path="addresses[${vs.index}].type" value="${addrstype}"/>
+              <div class="row">
+                <div class="col-sm-3 col-xs-3">
+                  <form:label class="color-black" path="addresses[${vs.index}].addressLine1" cssErrorClass="invalid">Address Line 1</form:label>
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                  <div class="input">
+                    <form:input type="TEXT" placeholder="Address Line 1" class ="form-control spacing inputtext" path="addresses[${vs.index}].addressLine1" cssErrorClass="invalid " />
+                    <form:label path="addresses[${vs.index}].addressLine1" cssErrorClass="icon invalid" />
+                    <form:errors path="addresses[${vs.index}].addressLine1" cssClass="inline_invalid" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3 col-xs-3">
+                  <form:label class="color-black" path="addresses[${vs.index}].addressLine2" cssErrorClass="invalid">Address Line 2</form:label>
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                  <div class="input">
+                    <form:input placeholder="Address Line 2" class ="form-control spacing inputtext" path="addresses[${vs.index}].addressLine2" cssErrorClass="invalid"/>
+                    <form:label path="addresses[${vs.index}].addressLine2" cssErrorClass="icon invalid" />
+                    <form:errors path="addresses[${vs.index}].addressLine2" cssClass="inline_invalid" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3 col-xs-3">
+                  <form:label class="color-black" path="addresses[${vs.index}].country" cssErrorClass="invalid">Country</form:label>
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                  <div class="input">
+                    <form:input placeholder="Country" class ="form-control spacing inputtext" path="addresses[${vs.index}].country" cssErrorClass="invalid " maxLength="50" />
+                    <form:label path="addresses[${vs.index}].country" cssErrorClass="icon invalid" />
+                    <form:errors path="addresses[${vs.index}].country" cssClass="inline_invalid" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3 col-xs-3">
+                  <form:label class="color-black" path="addresses[${vs.index}].pinCode" cssErrorClass="invalid">PinCode</form:label>
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                  <div class="input">
+                    <form:input placeholder="Pin Code" class ="form-control spacing inputtext" type="number" min="0" path="addresses[${vs.index}].pinCode" cssErrorClass="invalid" maxLength="10"/>
+                    <form:label path="addresses[${vs.index}].pinCode" cssErrorClass="icon invalid" />
+                    <form:errors path="addresses[${vs.index}].pinCode" cssClass="inline_invalid" />
+                  </div>
+                </div>
+              </div>
+                       </div>
+              
+            </c:forEach>
+         </div>
+
       <br>
       <div style="text-align:center">
       <c:choose>
@@ -110,6 +174,16 @@
       </c:otherwise>
       </c:choose>
       </form:form>
+
       </div>
    </body>
+
+            </div>
+                        </div>
+            
+                        </div>
+            
+   </body>
+   <jsp:include page="footer.jsp"/>
+
 </html>

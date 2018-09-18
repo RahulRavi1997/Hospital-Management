@@ -2,6 +2,7 @@ package com.ideas2it.hospitalmanagement.ward.service;
 
 import java.util.List;
 
+import com.ideas2it.hospitalmanagement.bed.model.Bed;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.patient.model.Patient;
 import com.ideas2it.hospitalmanagement.visit.model.Visit;
@@ -75,6 +76,10 @@ public interface WardService {
 	public boolean addRoomsToWard(Ward ward, int numberOfRooms) throws ApplicationException;
 
 	public List<Visit> getVisitsByPatientType(String string) throws ApplicationException;
+	
+	public Visit searchVisitById(int visitId) throws ApplicationException;
+	
+	public Bed searchBedByVisit(Visit visitId) throws ApplicationException;
 
-
+	public Boolean dischargePatient(int bedNumber) throws ApplicationException;
 }

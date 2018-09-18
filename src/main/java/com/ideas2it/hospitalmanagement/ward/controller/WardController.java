@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import com.ideas2it.hospitalmanagement.bed.model.Bed;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.room.model.Room;
+import com.ideas2it.hospitalmanagement.visit.model.Visit;
 import com.ideas2it.hospitalmanagement.ward.model.Ward;
 import com.ideas2it.hospitalmanagement.ward.service.WardService;
 
@@ -74,23 +76,8 @@ public class WardController {
   	  
     }
     
-    @RequestMapping(value="/dischargeButton", method=RequestMethod.POST)
-    public ModelAndView dischargeButton(@RequestParam("visitId")String visitId) {
-  	  
-  	 ModelAndView mav = new ModelAndView("displayWards");
-  	  try {
-          mav.addObject("visitId",visitId);
-          mav.addObject("dischargeButton", "Yes");
-          mav.addObject("wards" , wardService.displayAllWards("All"));
-          mav.addObject("ward" , new Ward());
-          mav.addObject("wardIds" , getWardIds());
+  
 
-        } catch(ApplicationException e) {
-      	  
-        }
-  	  return mav;
-  	  
-    }
 
   @RequestMapping(value="/wardOperation", method=RequestMethod.POST, params="AddWard")
   public ModelAndView createWard(@ModelAttribute("ward") Ward ward ,
@@ -148,9 +135,7 @@ public class WardController {
     public ModelAndView displayAllPatients() {
 		ModelAndView mav = new ModelAndView("nurseHome");
 		try {
-		System.out.println("***************************");
 		mav.addObject("inpatients", wardService.getVisitsByPatientType("InPatient"));
-		System.out.println("***************************"+wardService.getVisitsByPatientType("InPatient"));
 		} catch(ApplicationException e) {
 			  
 		}

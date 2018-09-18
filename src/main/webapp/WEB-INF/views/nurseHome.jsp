@@ -1,5 +1,3 @@
-
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -36,7 +34,7 @@
                <div class="row">
                   <div class="col-lg-12">
                   	
-                  	                  <table class="w3-table-all w3-hoverable sortable">
+                  	<table class="w3-table-all w3-hoverable sortable">
 
                      <thead>
                         <tr>
@@ -58,18 +56,23 @@
                               <td>${inpatient.patientType}</td>
                               <td>
                               <c:if test="${inpatient.patientStatus == 'Admitted'}"> 
+                              <form:form action="vacatePatient" method="post">
+                              <input type="hidden" name="visitId" value="${inpatient.id}"/>
+                              <button type="submit" style="width:27.5%;" class="btn btn-primary">Vacate</button>
+                              </form:form>
                               <form:form action="dischargeButton" method="post">
                               <input type="hidden" name="visitId" value="${inpatient.id}"/>
-                              <button type="button" class="btn btn-danger">Discharge</button>
+                              <button type="submit" style="width:27.5%;"  class="btn btn-danger">Discharge</button> 
                               </form:form>
+                              
                               </c:if>
-                              <c:if test="${inpatient.patientStatus == 'Discharged' } "> 
-                              <button type="button" class="btn btn-danger" disabled>Patient Discharged</button>
+                              <c:if test="${inpatient.patientStatus == 'Discharged'}">
+                              <button type="button" style="width:55%;" class="btn btn-warning" disabled>Patient Discharged</button>
                               </c:if>
-                              <c:if test="${inpatient.patientStatus == 'Yet to admit'}"> 
+                              <c:if test="${inpatient.patientStatus == 'Yet to Admit'}"> 
                               <form:form action="admitButton" method="post">
                               <input type="hidden" name="visitId" value="${inpatient.id}"/>
-                              <button type="submit" class="btn btn-success">Admit</button>
+                              <button type="submit" style="width:55%;"  class="btn btn-success">Admit</button>
                               </form:form>
                               </c:if>
                               </td>

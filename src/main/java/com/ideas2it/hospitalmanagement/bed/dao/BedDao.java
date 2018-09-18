@@ -2,6 +2,7 @@ package com.ideas2it.hospitalmanagement.bed.dao;
 
 import com.ideas2it.hospitalmanagement.bed.model.Bed;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
+import com.ideas2it.hospitalmanagement.visit.model.Visit;
 
 public interface BedDao {
 
@@ -29,4 +30,6 @@ public interface BedDao {
      */
 	public boolean updateBed(Bed bed)throws ApplicationException;
 	
+	public Bed searchBedByVisit(Visit visit)throws ApplicationException;
+
 }

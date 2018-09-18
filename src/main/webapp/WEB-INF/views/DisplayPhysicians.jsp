@@ -8,11 +8,46 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Physician Details</title>
-    <link rel="shortcut icon" href="styles/images/ideas1.jpg"/>
+
+
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
     <META HTTP-EQUIV="Expires" CONTENT="-1">
   </head>
   <body>
+
+  <jsp:include page="header.jsp"/>
+     <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="index">
+                        Home
+                    </a>
+                </li>
+                <li>
+             <a href="createUser">Create User </a> 
+                </li>
+                <li>
+	           <a href="displayUsers">Display Users</a>
+                </li>
+                <li>
+              <a href="createPhysician">Create Physician</a> 
+                </li>
+                <li  class="highlight">
+	           <a href="displayPhysicians">Display Physicians</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+
+
     <c:if test="${not empty message}">
      <div id="snackbar">${message}</div>
     </c:if>
@@ -20,20 +55,27 @@
     <fmt:formatDate var="currentyear" value="${now}" pattern="yyyy" />
       <div class="row full-width">
         <div class="col-sm-4 col-xs-4 text-align-center"> 
-          <a href="createPhysicians">
+
+          <a href="createPhysician">
+
           <button class="btn-margin-format add-button">
           Add New Physician
           </button>
           </a>
         </div>
-        <form action="searchPhysicians" method="GET">
+
+        <form action="searchPhysician" method="GET">
         <div class="col-sm-4 col-xs-4"> 
-          <input name="id" autocomplete="off" id="myInput" class="form-control mr-sm-2" placeholder="Search" required/>
+          <input name="id" autocomplete="off" id="myInput" class="form-control mr-sm-2" placeholder="Search" type="number" required/>
+              <button class="glyphicon glyphicon-search"  type="submit">Search</button>    
+
         </div>
         <div class="col-sm-4 col-xs-4 text-align-center">
           <h4>
             Filter :
-            <select id="choice">
+
+            <select id="filterChoice">
+
               <option value>All</option>
               <option value="Delete">Active</option>
               <option value="Restore">Inactive</option>
@@ -92,7 +134,9 @@
                 ${physician.specialisation}
               </td>
               <td>${physician.birthDate}</td>
-              <td>$${physician.mobileNumber}</td>
+
+              <td>${physician.mobileNumber}</td>
+
               <td>${physician.age} years</td>
               <c:if test="${!physician.isActive()}">
                   <td colspan="2" class="type">
@@ -120,6 +164,18 @@
     </c:if>
     </td>
     </table>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <jsp:include page="footer.jsp"/>
+
+
   </body>
-  <script src="script/script.js"></script>
+
 </html>

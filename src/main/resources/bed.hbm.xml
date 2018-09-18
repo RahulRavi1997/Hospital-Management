@@ -11,8 +11,8 @@
       </id>
 	  <property name = "roomNumber" column = "roomNumber" type = "int" />
       <property name = "status" column = "status" type = "string"/>
-       <many-to-one name = "visit" column = "visit"
-        class="com.ideas2it.hospitalmanagement.visit.model.Visit" not-null="true"/>
+ <many-to-one name = "visit" column = "visit"
+        class="com.ideas2it.hospitalmanagement.visit.model.Visit"  lazy = "false"/>      
       
         <bag name = "bedAllocations" cascade = "all" lazy = "false">
           <key column = "bed"/>

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.utils.DateUtil;
+import com.ideas2it.hospitalmanagement.visit.model.Visit;
 import com.ideas2it.hospitalmanagement.ward.model.Ward;
 import com.ideas2it.hospitalmanagement.bed.model.Bed;
 import com.ideas2it.hospitalmanagement.bed.service.BedService;
@@ -43,28 +45,53 @@ public class BedController {
 	@RequestMapping(value="/admitPatient" , method= RequestMethod.POST)   
     public ModelAndView admitPatient(@RequestParam("bedNumber") 
           int bedNumber,	@RequestParam("visitId") int visitId) {
-    	System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + bedNumber + "visit" + visitId);
-        ModelAndView modelAndView = new ModelAndView("displayWards");
-        try {
-        	if(bedService.admitPatient(visitId, bedNumber)) {
-        		modelAndView.addObject("wards",bedService.getWardsByStatus("All"));
-        		modelAndView.addObject("wardIds" , getWardIds());
-        	} else {
-        		modelAndView.addObject("wards",bedService.getWardsByStatus("All"));
-        		modelAndView.addObject("wardIds" , getWardIds());
-        		modelAndView.addObject("status" , "yesss");
-
-        	}
-        	modelAndView.addObject("ward" , new Ward());
-
-        	return modelAndView;
-        } catch (ApplicationException e) {
-        	//Attach an exception message for model.
-        	return modelAndView;
-		} 
+        ModelAndView modelAndView = new ModelAndView("nurseHome");
+        ModelAndView mav = new ModelAndView("nurseHome");
+		try {
+			bedService.admitPatient(visitId, bedNumber);
+			mav.addObject("inpatients", bedService.getVisitsByPatientType("InPatient"));
+		} catch(ApplicationException e) {
+			  
+		}
+		  return mav;
     }
     
 
+	@RequestMapping(value="/vacatePatient" , method= RequestMethod.POST)   
+    public ModelAndView vacatePatient(@RequestParam("visitId") int visitId) {
+        ModelAndView mav = new ModelAndView("nurseHome");
+		try {
+			Visit visit = bedService.searchvisitByNumber(visitId);
+	   
+			mav.addObject("inpatients", bedService.getVisitsByPatientType("InPatient"));
+		} catch(ApplicationException e) {
+			  
+		}
+		  return mav;
+    }
+	
+	
+	  @RequestMapping(value="/dischargeButton", method=RequestMethod.POST)
+	    public ModelAndView dischargeButton(@RequestParam("visitId")String visitId) {
+	        ModelAndView mav = new ModelAndView("nurseHome");
+	  	  try {
+
+				Visit visit = bedService.searchvisitByNumber(Integer.parseInt(visitId));
+System.out.println("visitIDddddddddddddddddddd" + visit.getId());
+				Bed bed= bedService.searchBedByVisit(visit);
+		  	  	 System.out.println("visitIdddsdsdsdsdssds"  + bed.getBedNumber());
+                bedService.dischargePatient(bed.getBedNumber());
+				mav.addObject("inpatients", bedService.getVisitsByPatientType("InPatient"));
+
+
+	        } catch(ApplicationException e) {
+	      	  
+	        }
+	  	  return mav;
+	  	  
+	    }
+	    
+	
 	/**
      * <p>
      * dischargePatient method is used to discharge a patient from his assigned
@@ -78,32 +105,20 @@ public class BedController {
      */
     @RequestMapping(value="/dischargePatient" , method= RequestMethod.POST)   
     public ModelAndView dischargePatient(@RequestParam("bedNumber") 
-        	int bedNumber) {
-
-        try {
-        	if(bedService.dischargePatient(bedNumber)) {
-                ModelAndView modelAndView = new ModelAndView("displayWards");
-
-        		modelAndView.addObject("ward" , new Ward());
-        		modelAndView.addObject("wards",bedService.getWardsByStatus("All"));
-        		modelAndView.addObject("wardIds" , getWardIds());
-            	return modelAndView;
-            	} else {
-            	       ModelAndView modelAndView = new ModelAndView("displayWards");
-
-            		modelAndView.addObject("ward" , new Ward());
-            		modelAndView.addObject("wards",bedService.getWardsByStatus("All"));
-            		modelAndView.addObject("wardIds" , getWardIds());
-                	return modelAndView;     
-                	}
-        	
-        } catch (ApplicationException e) {
-        	ModelAndView modelAndView = null;
-			//Attach an exception message for model.
-        	return modelAndView;     
-
-		} 
+        	int bedNumber) {        
+        ModelAndView mav = new ModelAndView("nurseHome");
+		try {
+			bedService.dischargePatient(bedNumber);
+			mav.addObject("inpatients", bedService.getVisitsByPatientType("InPatient"));
+		} catch(ApplicationException e) {
+			  
+		}
+		  return mav;
     }
+
+    
+ 
+
     
     /**
      * <p>

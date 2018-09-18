@@ -84,6 +84,8 @@ public class VisitController {
             @RequestParam(Constants.PHYSICIAN_ID) Integer physicianId) {
 
         try {
+        	System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + 
+        visit.getPatientType() + "" + patientId);
         	visitService.addVisit(visit, patientId, physicianId);
             return new ModelAndView(Constants.SEARCH_VISIT_JSP, Constants.
                 VISIT_OBJECT, visit);

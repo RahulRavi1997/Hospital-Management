@@ -6,7 +6,11 @@
 	<title>AccessDenied page</title>
 </head>
 <body>
+
+
 <strong> ${message} </strong>
+	<a href="<c:url value="/index" />">Home</a>
+
 	<a href="<c:url value="/logout" />">Logout</a>
 </body>
 </html>

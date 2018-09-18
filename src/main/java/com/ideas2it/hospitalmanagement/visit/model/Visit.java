@@ -75,4 +75,3 @@ public class Visit {
 		this.patientType = patientType;
 	}
 }
-

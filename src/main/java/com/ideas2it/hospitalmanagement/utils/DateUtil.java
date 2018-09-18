@@ -1,47 +1,32 @@
 package com.ideas2it.hospitalmanagement.utils;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.regex.Pattern;
+import java.util.GregorianCalendar;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+import java.time.LocalDate;
 
 import com.ideas2it.hospitalmanagement.commons.Constants;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 
-
-
 /**
  * <p>
- * Consist of certain methods which performs operations regarding dates like 
- * obtaining the current date, calculating the year difference.
+ * DateUtil is used to make operations on Date datatype such as calculating
+ * age or converting input date into required formats.
  * </p>
  *
- * @author Harish
+ * @author  : Rahul Ravi
+ * @version : 1.0
  */
-public class DateUtil {
+public final class DateUtil {
 
-    private static String PARSEEXCEPTION = "Error: given date cannot be parsed";
-
-  
-    /**
-     * <p>
-     * Converts the given input date to string format using simpledateformat.
-     * </p>
-     *
-     * @param      inputDate     input in the form of date.
-     *
-     * @return                   date which is convert to the string format.
-     */
-    public static String convertDateToString(Date inputDate) {
-       SimpleDateFormat dateFormat =
-            new SimpleDateFormat(Constants.REVERSED_DATE_FORMAT);
-        return (dateFormat.format(inputDate));
+    private DateUtil() {
     }
 
     /**
      * <p>
+<<<<<<< HEAD
      * Converts the given input String  to date format using simpledateformat.
      * </p>
      *
@@ -62,6 +47,25 @@ public class DateUtil {
         }
         return date;
     }
+    
+    
+    private static String PARSEEXCEPTION = "Error: given date cannot be parsed";
+
+    
+    /**
+     * <p>
+     * Converts the given input date to string format using simpledateformat.
+     * </p>
+     *
+     * @param      inputDate     input in the form of date.
+     *
+     * @return                   date which is convert to the string format.
+     */
+    public static String convertDateToString(Date inputDate) {
+       SimpleDateFormat dateFormat =
+            new SimpleDateFormat(Constants.REVERSED_DATE_FORMAT);
+        return (dateFormat.format(inputDate));
+    }
 
     /**
      * <p>
@@ -80,6 +84,8 @@ public class DateUtil {
 
     /**
      * <p>
+=======
+>>>>>>> c9685044de28e7396927885e32058203e0e70b1e
      * This Method is used to calculate the difference(in years) between current
      * date and the given input Date. Returns null if the given input Date is
      * not valid.
@@ -104,6 +110,5 @@ public class DateUtil {
         }
         return (currentYear - inputYear);
     }
-
 
 }
