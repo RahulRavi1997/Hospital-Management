@@ -38,8 +38,16 @@
                     <jsp:include page="ReceptionistHeader.jsp"/>
               
                             <form action="searchVisit" method="post">
-  <input type="number" style="margin-left:42%" name="id" placeholder="Search Visit By Id">
-</form>
+  <input type="number" style="margin-left:42%" name="id" required="required" placeholder="Search Visit By Id">
+</form><div class="col-sm-4 col-xs-4 text-align-center">
+                    <h4>
+                      Filter : 
+                      <select id="filterChoice">
+                        <option value=>All</option>
+                        <option value="${sessionScope.patient.firstName}${sessionScope.patient.emailId}">Patient Visit</option>
+                      </select>
+                    </h4>
+                  </div>
       <div align="center" >
          <table class ="table">
                <caption>
@@ -72,6 +80,11 @@
                      <td>
                         <c:out value="${visit.patient.id}" />
                      </td>
+                     <c:if test="${ visit.patient.id == sessionScope.patient.id }">
+                     <td style="display:none">
+                        <button value="${sessionScope.patient.firstName}${sessionScope.patient.emailId}" />
+                     </td>
+                     </c:if>
                      <td>
                      <c:out value="${visit.patient.firstName} ${visit.patient.lastName}" />
                      </td>

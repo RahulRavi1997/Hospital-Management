@@ -75,8 +75,8 @@
                       <tr>
                         <th>ID</th>
                         <th>Email</th>
-                        <th>#</th>
-                        <th>#</th>
+                        <th>Action</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody id="myTable">

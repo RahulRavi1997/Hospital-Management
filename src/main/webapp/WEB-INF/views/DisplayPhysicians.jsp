@@ -111,7 +111,14 @@
                           <td>${physician.specialisation}</td>
                           <td>${physician.birthDate}</td>
                           <td>${physician.mobileNumber}</td>
-                          <td>${physician.age}years</td>
+                          <c:choose>
+                          <c:when test="${not empty physician.birthDate}">
+                            <td>${physician.age}years</td>
+                          </c:when>
+                          <c:otherwise>
+                             <td>-</td>
+                          </c:otherwise>
+                          </c:choose>
                           <c:if test="${!physician.isActive()}">
                             <td colspan="2" class="type">
                               <form action="restorePhysician" method="POST">

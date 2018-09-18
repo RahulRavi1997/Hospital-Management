@@ -175,11 +175,12 @@ public class VisitController {
      */
     @RequestMapping(value = Constants.SEARCH_VISIT, method = {RequestMethod.POST
         ,RequestMethod.GET})
-    public ModelAndView searchVisit(@RequestParam(Constants.ID)
+    public ModelAndView searchVisit(HttpSession session, @RequestParam(Constants.ID)
             Integer visitId) {
 
         try {
             Visit visit = visitService.getVisitById(visitId);
+            session.setAttribute(Constants.PATIENT_OBJECT,visit.getPatient());
             return new ModelAndView(Constants.SEARCH_VISIT_JSP, Constants.
                 VISIT_OBJECT, visit);
         } catch (ApplicationException e) {
@@ -231,11 +232,10 @@ public class VisitController {
      */
     @RequestMapping(value = Constants.SEARCH_VISIT_BY_PATIENTID, method = {RequestMethod.POST
         ,RequestMethod.GET})
-    public ModelAndView searchVisitByPatientId(HttpSession session, Model model) {
+    public ModelAndView searchVisitByPatientId(@RequestParam Integer patientId, Model model) {
 
         try {
-        	Patient patient = (Patient) session.getAttribute(Constants.PATIENT_OBJECT);
-            Visit visit = visitService.getVisitByPatientId(patient);
+            Visit visit = visitService.getVisitByPatientId(patientId);
             if (null != visit) {
                 return new ModelAndView(Constants.CREATE_VISIT_JSP, Constants.
                     VISIT_OBJECT, visit);

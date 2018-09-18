@@ -109,6 +109,6 @@ public interface VisitService {
      * @exception throws Application Exception when the visit Object is not
      *            searched due to any connection error or visitId not found.
      */
-    public Visit getVisitByPatientId(final Patient patient)
+    public Visit getVisitByPatientId(final Integer patientId)
             throws ApplicationException;
 }

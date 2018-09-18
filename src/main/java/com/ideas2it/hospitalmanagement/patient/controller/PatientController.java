@@ -184,9 +184,9 @@ public class PatientController {
 
         try {
         	patientService.removePatient(patientId);
-            List<Patient> patients = patientService.getPatients();
+        	List<Patient> patients = patientService.getPatients();
             return new ModelAndView(Constants.DISPLAY_PATIENT_JSP, Constants.
-                PATIENTS, patients);
+            		PATIENT_OBJECTS, patients);
         } catch (ApplicationException e) {
             Logger.error(e);
             return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
@@ -205,7 +205,7 @@ public class PatientController {
      * value as ModelAndView Class Object.
      * </p>
      * @param patientId Integer with patientId value from which the Patient
-     *                   Object is obtained from the Database. import org.springframework.web.bind.annotation.RequestMethod;
+     *                   Object is obtained from the Database.
 
      * @return ModelAndView Object which redirects to the Search Patient Page
      *                      with the Patient Object or to the Error Page.

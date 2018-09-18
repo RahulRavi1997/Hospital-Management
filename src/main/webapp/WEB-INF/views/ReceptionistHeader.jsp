@@ -20,7 +20,7 @@
     <div class="col-sm-3 col-md-3  navbar-right">
         <form class="navbar-form" action="searchPatient" method="POST" role="search">
         <div class="input-group">
-            <input type="number" class="form-control" placeholder="Search Patient By Id" name="id">
+            <input type="number" required="required" class="form-control" placeholder="Search Patient By Id" name="id">
             <div class="input-group-btn">
                 <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
             </div>

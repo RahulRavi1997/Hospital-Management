@@ -35,6 +35,7 @@ public class Visit {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+    @DateTimeFormat(pattern = Constants.REVERSED_DATE_FORMAT)
 	public Date getAdmitDate() {
 		return admitDate;
 	}
@@ -42,6 +43,7 @@ public class Visit {
 	public void setAdmitDate(Date admitDate) {
 		this.admitDate = admitDate;
 	}
+    @DateTimeFormat(pattern = Constants.REVERSED_DATE_FORMAT)
 	public Date getDischargeDate() {
 		return dischargeDate;
 	}

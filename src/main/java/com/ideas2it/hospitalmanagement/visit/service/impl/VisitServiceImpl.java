@@ -80,12 +80,8 @@ public class VisitServiceImpl implements VisitService {
 	/**
 	 *  {@inheritDoc}
 	 */
-	public Visit getVisitByPatientId(final Patient patient)
+	public Visit getVisitByPatientId(final Integer patientId)
             throws ApplicationException {
-		if (null != patient ) {
-            return visitDao.searchVisitByPatientId(patient.getId());
-		} else {
-			return null;
-		}
+        return visitDao.searchVisitByPatientId(patientId);
 	}
 }
