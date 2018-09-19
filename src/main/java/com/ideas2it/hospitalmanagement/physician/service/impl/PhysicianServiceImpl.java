@@ -10,6 +10,14 @@ import com.ideas2it.hospitalmanagement.physician.service.PhysicianService;
 import com.ideas2it.hospitalmanagement.user.model.User;
 import com.ideas2it.hospitalmanagement.user.service.UserService;
 
+/**
+ * PhysicianServiceImpl is a Service Class used to implement Business-Logic. All the methods in this
+ * class throw a custom Application Exception. Implementation beans are injected in runtime using
+ * Spring IOC.
+ * 
+ * @author Rahul Ravi
+ * @version 1.0
+ */
 public class PhysicianServiceImpl implements PhysicianService {
 
     public static PhysicianDao physicianDao = null;

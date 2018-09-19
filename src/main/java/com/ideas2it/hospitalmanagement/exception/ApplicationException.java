@@ -1,10 +1,10 @@
 package com.ideas2it.hospitalmanagement.exception;
 
 /**
- * ApplicationException is a custom user-defined Exception class that is defined specifically for
- * the application designed. It can be used to handle multiple exceptions at the same time and avoid
- * application being terminated. Provides Multiple contructors to throw exceptions along with
- * errorCode and customised Error message.
+ * ApplicationException is a custom user-defined Exception class.
+ * It can be used to handle multiple exceptions at the same time and avoid
+ * application being terminated. Provides Multiple constructors to throw
+ * exceptions along with errorCode and customized error messages.
  *
  * @author Rahul Ravi
  * @version 1.0

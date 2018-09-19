@@ -1,10 +1,11 @@
 package com.ideas2it.hospitalmanagement.user.model;
 
 /**
- * User class is the Entity class is having the getters and setter methods which is used to get the
- * values from the user. This class acts as an Model for the User Details.
+ * User class is the Entity class which is used to store and retrieve the details of
+ * a user. Each user has a unique Email Id and a password for authentication
+ * purposes. An Active attribute is provided to implement soft deletion.
  *
- * @author Arul Murugan
+ * @author Rahul Ravi
  * @version 1.0
  */
 public class User {

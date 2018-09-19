@@ -215,4 +215,6 @@ public final class Constants {
     public static final String INVALID_TYPE = "Invalid type: ";
     public static final String INVALID_GENDER = "Invalid Gender: ";
     public static final String PERCENTAGE = "%";
+    public static final String INVALID_ROLE = "Invalid role: ";
+    public static final String INVALID_SPECIALISATION = "Invalid specialisation: ";
 }

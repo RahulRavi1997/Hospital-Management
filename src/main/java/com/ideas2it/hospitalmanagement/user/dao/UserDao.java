@@ -109,12 +109,24 @@ public interface UserDao {
      * This Method is used to obtain an arraylist of all selected users.
      * </p>
      *
-     * @return ids an Array of integers containing the id of users that are to be retrieved.
+     * @param ids an Array of integers containing the id of users that are to be retrieved.
+     * @return users a List consisting of all the required users is returned.
      * @throws ApplicationException An exception created for catching exceptions that occur while
      *                              displaying all users.
      */
     public List<User> getUsersByIds(Integer[] ids) throws ApplicationException;
 
+    /**
+     * <p>
+     * This Method is used to obtain an List of all selected users based on a Query and Role
+     * </p>
+     *
+     * @param query a String indicating the query to be satisfied by user Email.
+     * @param role  a String indicating the role to be satisfied on obtaining.
+     * @return users a List consisting of all the required users is returned.
+     * @throws ApplicationException An exception created for catching exceptions that occur while
+     *                              displaying all users.
+     */
     public List<User> getUsersByQuery(String query, String role) throws ApplicationException;
 
 }

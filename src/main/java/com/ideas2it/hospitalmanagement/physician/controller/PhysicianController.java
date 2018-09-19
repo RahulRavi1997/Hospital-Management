@@ -77,9 +77,9 @@ public class PhysicianController {
      * @return modelAndView a ModelAndView object which is used to add attributes to a model and
      *         redirect it to a view such as a jsp page.
      */
-    @RequestMapping(value=Constants.ADD_PHYSICIAN_MAPPING, method=RequestMethod.POST)
+    @RequestMapping(value = Constants.ADD_PHYSICIAN_MAPPING, method = RequestMethod.POST)
     private ModelAndView createPhysician(@ModelAttribute Physician physician, Model model,
-    		@RequestParam(value=Constants.USER_EMAIL) String userEmail) {
+            @RequestParam(value = Constants.USER_EMAIL) String userEmail) {
         try {
             final User user = physicianService.retrieveUserByEmail(userEmail);
             if (null != user) {
@@ -140,8 +140,8 @@ public class PhysicianController {
         try {
             model.addAttribute(Constants.GENDERS, Gender.values());
             model.addAttribute(Constants.SPECIALISATIONS, Specialisation.values());
-            return new ModelAndView(Constants.CREATE_PHYSICIAN_JSP,Constants.
-                    PHYSICIAN, physicianService.retrievePhysicianById(id));
+            return new ModelAndView(Constants.CREATE_PHYSICIAN_JSP, Constants.PHYSICIAN,
+                    physicianService.retrievePhysicianById(id));
         } catch (ApplicationException e) {
             Logger.error(e);
             return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
@@ -226,20 +226,10 @@ public class PhysicianController {
 
     /**
      * This Method is used to display all details of the physicians.
-     *
-<<<<<<< HEAD
-     * @return response a HttpServletResponse which is used to redirect
-     *                 or send text output.
-     *
-     * @return modelAndView a ModelAndView object which is used to add
-     *                       attributes to a model and redirect it to a view
-     *                       such as a jsp page.
-=======
-     * @return response a HttpServletResponse com.google.gson.internal.bind.TypeAdaptersobject which is
-     *         used to redirect or send text output.
+     * 
+     * @param model a Model object which is used to add the physician as an attribute to the view Layer.
      * @return modelAndView a ModelAndView object which is used to add attributes to a model and
      *         redirect it to a view such as a jsp page.
->>>>>>> 9f5539abc4dd5b2bbc503699925ad1f8023919c2
      */
     @RequestMapping(value = Constants.DISPLAY_PHYSICIAN_MAPPING, method = RequestMethod.GET)
     private ModelAndView displayAllPhysicians(final Model model) {
@@ -256,18 +246,17 @@ public class PhysicianController {
 
     /**
      * This Method is used to display all details of the physicians IN JSON format.
-     *
-     * param specialisation a String indicating the type of specialisation for which
-     * the doctors are retrieved.
-     *
-     * @return String a String object which is used to redirect to a view
-     *                       such as a jsp page.
+     * 
+     * @param model          a Model object which is used to add the physician as an attribute to the
+     *                       view Layer.
+     * @param specialisation a String indicating the type of specialisation for which the doctors are
+     *                       retrieved.
+     * @return String a String object which is used to redirect to a view such as a jsp page.
      */
-    @RequestMapping(value=Constants.DISPLAY_PHYSICIANS_BY_SPECIALISATIONS_MAPPING,
-    		produces={Constants.JSON_TYPE,Constants.XML_TYPE}, consumes="application/json",
-   	headers = Constants.FORM_HEADER, method = RequestMethod.GET)
+    @RequestMapping(value = Constants.DISPLAY_PHYSICIANS_BY_SPECIALISATIONS_MAPPING, produces = { Constants.JSON_TYPE,
+            Constants.XML_TYPE }, consumes = "application/json", headers = Constants.FORM_HEADER, method = RequestMethod.GET)
     private @ResponseBody String displayPhysiciansBySpecialisation(Model model,
-    		@RequestParam(Constants.SPECIALISATION_NAME) String specialisation) {
+            @RequestParam(Constants.SPECIALISATION_NAME) String specialisation) {
         try {
             final List<Physician> physicians = physicianService.retrievePhysiciansBySpecialisation(specialisation);
 

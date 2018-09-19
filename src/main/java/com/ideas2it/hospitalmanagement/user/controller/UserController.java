@@ -31,9 +31,10 @@ import com.ideas2it.hospitalmanagement.user.service.UserService;
 
 /**
  * <p>
- * User Controller is a Controller Class, which is used authorise the user to access the application
+ * User Controller is a Controller Class, which is used authorize the user to access the application
  * and allow them to make modifications to the available data. Provides methods to implement basic
- * user operations like Login, Signup and Logout operations.
+ * user operations like Login, Sign-up and Logout operations. Uses Spring security to implement
+ * session Management.
  * </p>
  *
  * @author Rahul Ravi
@@ -58,11 +59,13 @@ public class UserController {
      * @param email    a String indicating the email Id entered by the user while logging in.
      * @param password a String indicating the password entered by the user while logging in.
      * @param role     a String indicating the role of the user that is logging in.
+     * @return modelAndView a ModelAndView object which is used to add attributes to a model and
+     *         redirect it to a view such as a jsp page.
      */
     @RequestMapping(value = Constants.SIGNUP_PATH, method = RequestMethod.POST)
-    private ModelAndView createUser(final Model model, @RequestParam(Constants.EMAIL) final String email,
-            @RequestParam(Constants.PASSWORD) final String password,
-            @RequestParam(value = Constants.ROLE, required = false) final String role) {
+    private ModelAndView createUser(Model model, @RequestParam(Constants.EMAIL) String email,
+            @RequestParam(Constants.PASSWORD) String password,
+            @RequestParam(value = Constants.ROLE, required = false) String role) {
         try {
             if (null != userService.retrieveUserByEmail(email)) {
                 if (null == role) {
@@ -95,15 +98,17 @@ public class UserController {
 
     /**
      * This Method is used to display all details of the users in JSON format.
-     *
+     * 
+     * @param model a model Object to which the parameters are added to be sent to the view Layer.
+     * @param query a String indicating the query that is to be satisfied which searching the database.
      * @return String a String object which is used to redirect or send text output.
      */
     @RequestMapping(value = Constants.DISPLAY_USERS_MAPPING, produces = { Constants.JSON_TYPE,
             Constants.XML_TYPE }, consumes = Constants.JSON_TYPE, headers = Constants.FORM_HEADER, method = RequestMethod.GET)
-    private @ResponseBody String displayAllUsers(final Model model, @RequestParam(Constants.QUERY) final String query) {
+    private @ResponseBody String displayAllUsers(Model model, @RequestParam(Constants.QUERY) String query) {
         try {
             return new Gson().toJson(userService.retrieveUsersByQuery(query, Role.PHYSICIAN.toString()));
-        } catch (final ApplicationException e) {
+        } catch (ApplicationException e) {
             Logger.error(e);
             return null;
         }
@@ -111,15 +116,17 @@ public class UserController {
 
     /**
      * This Method is used to display details of single user in json Format.
-     *
+     * 
+     * @param model a model Object to which the parameters are added to be sent to the view Layer.
+     * @param email a String indicating the email that is to be satisfied which searching the database.
      * @return String a String object used to redirect it to a view such as a jsp page.
      */
     @RequestMapping(value = Constants.SEARCH_USER_MAPPING, produces = { Constants.JSON_TYPE,
             Constants.XML_TYPE }, consumes = Constants.JSON_TYPE, headers = Constants.FORM_HEADER, method = RequestMethod.GET)
-    private @ResponseBody String searchUser(final Model model, @RequestParam(Constants.EMAIL) final String email) {
+    private @ResponseBody String searchUser(Model model, @RequestParam(Constants.EMAIL) String email) {
         try {
             return new Gson().toJson(userService.retrieveUsersByQuery(email, Role.ADMIN.toString()));
-        } catch (final ApplicationException e) {
+        } catch (ApplicationException e) {
             Logger.error(e);
             return null;
         }
@@ -127,20 +134,23 @@ public class UserController {
 
     /**
      * This Method is used to redirect user to respective login pages based on their roles
-     *
+     * 
+     * @param model     a model Object to which the parameters are added to be sent to the view Layer.
+     * @param principal a Principal object that is used to authorize the user.
+     * @param request   a HttpServletRequest object from which session attributes are modified.
      * @return String a String object which is used to redirect or send text output.
      */
     @RequestMapping(value = Constants.INDEX_MAPPING, method = RequestMethod.GET)
-    public String userInfo(final Model model, final Principal principal, final HttpServletRequest request) {
+    public String userInfo(Model model, Principal principal, HttpServletRequest request) {
         model.addAttribute(Constants.EMAIL, principal.getName());
-        final HttpSession oldSession = request.getSession(Boolean.FALSE);
+        HttpSession oldSession = request.getSession(Boolean.FALSE);
         if (null != oldSession) {
             oldSession.invalidate();
         }
-        final HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
         session.setAttribute(Constants.EMAIL, principal.getName());
         session.setMaxInactiveInterval(Constants.SESSION_ACTIVE_INTERVAL);
-        final Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>) SecurityContextHolder
+        Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>) SecurityContextHolder
                 .getContext().getAuthentication().getAuthorities();
         if (authorities.iterator().next().toString().equals(Constants.ADMIN_ROLE)) {
             return Constants.ADMIN_INDEX;
@@ -157,12 +167,14 @@ public class UserController {
 
     /**
      * This Method is used to display all details of the users.
-     *
+     * 
+     * @param model     a model Object to which the parameters are added to be sent to the view Layer.
+     * @param principal a Principal object that is used to authorize the user.
      * @return modelAndView a ModelAndView object which is used to add attributes to a model and
      *         redirect it to a view such as a jsp page.
      */
     @RequestMapping(Constants.ACCESS_DENIED_MAPPING)
-    public String accessDenied(final Model model, final Principal principal) {
+    public String accessDenied(Model model, Principal principal) {
         if (principal != null) {
             model.addAttribute(Constants.EMAIL, principal.getName());
         }
@@ -171,17 +183,20 @@ public class UserController {
 
     /**
      * This Method is used to redirect the user to Login page.
-     *
-     * @param response a HttpServletResponse object which is used to redirect or send text output.
+     * 
+     * @param model     a model Object to which the parameters are added to be sent to the view Layer.
+     * @param principal a Principal object that is used to authorize the user.
+     * @param request   a HttpServletRequest object from which session attributes are modified.
+     * @param response  a HttpServletResponse object which is used to redirect or send text output.
      * @return modelAndView a ModelAndView object which is used to add attributes to a model and
      *         redirect it to a view such as a jsp page.
      */
     @RequestMapping(value = { Constants.LOGIN_PATH, Constants.EMPTY_URI, Constants.LOGOUT_PATH,
             Constants.LOGOUT_SUCCESS_MAPPING })
-    public String redirectLogin(final Model model, final Principal principal, final HttpServletRequest request,
-            final HttpServletResponse response) {
+    public String redirectLogin(Model model, Principal principal, HttpServletRequest request,
+            HttpServletResponse response) {
         if (principal == null) {
-            final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             if (auth != null) {
                 new SecurityContextLogoutHandler().logout(request, response, auth);
             }
@@ -193,29 +208,34 @@ public class UserController {
 
     /**
      * This Method is used to redirect user to Create User Jsp.
-     *
+     * 
+     * @param model a model Object to which the parameters are added to be sent to the view Layer.
      * @return String a String indicating the view for User Creation.
      */
     @RequestMapping(value = Constants.CREATE_USER_MAPPING)
-    public String redirectCreateUser(final Model model) {
+    public String redirectCreateUser(Model model) {
         model.addAttribute(Constants.ROLES, Role.values());
         model.addAttribute(Constants.USER, new User());
         return Constants.CREATE_USER_JSP;
     }
 
     /**
-     * This Method is used to display all details of the users.
      *
-     * @return modelAndView a ModelAndView object which is used to add attributes to a model and
-     *         redirect it to a view such as a jsp page.
+
      */
+    
+    /**
+     * This Method is used to display all details of the users.
+     * @param model a model Object to which the parameters are added to be sent to the view Layer.
+     * @return modelAndView a ModelAndView object which is used to add attributes to a model and
+     *         redirect it to a view such as a jsp page.     */
     @RequestMapping(value = Constants.DISPLAY_USER_MAPPING, method = RequestMethod.GET)
-    private ModelAndView displayAllUsers(final Model model) {
+    private ModelAndView displayAllUsers(Model model) {
         try {
-            final List<User> users = userService.retrieveAllUsers();
+            List<User> users = userService.retrieveAllUsers();
             model.addAttribute(Constants.NUMBER_OF_USERS, users.size());
             return new ModelAndView(Constants.USER_DISPLAY_JSP, Constants.USERS, users);
-        } catch (final ApplicationException e) {
+        } catch (ApplicationException e) {
             Logger.error(e);
             return null;
         }
@@ -224,13 +244,13 @@ public class UserController {
     /**
      * This Method is used to restore a deleted user. Redirects to display all users on successful
      * restoration.
-     *
-     * @param id an Integer indicating the id of the user to be restored or reactivated.
+     * @param id an Integer indicating the id of the user to be restored.
+     * @param model a model Object to which the parameters are added to be sent to the view Layer.
      * @return modelAndView a ModelAndView object which is used to add attributes to a model and
      *         redirect it to a view such as a jsp page.
      */
     @RequestMapping(value = Constants.RESTORE_USER_MAPPING, method = RequestMethod.POST)
-    private ModelAndView restoreUser(@RequestParam(Constants.ID) final int id, final Model model) {
+    private ModelAndView restoreUser(@RequestParam(Constants.ID) int id, Model model) {
         try {
             if (userService.restoreUser(id)) {
                 model.addAttribute(Constants.MESSAGE, Constants.USER_RESTORE_SUCCESS_MESSAGE);
@@ -238,7 +258,7 @@ public class UserController {
             } else {
                 return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE, Constants.USER_EDIT_EXCEPTION);
             }
-        } catch (final ApplicationException e) {
+        } catch (ApplicationException e) {
             Logger.error(e);
             return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
                     String.format(Constants.USER_RESTORE_EXCEPTION, id));
@@ -250,17 +270,17 @@ public class UserController {
      * Method to update existing User Details. Returns true if the entry is modified successfully, else
      * returns false if the entry is not found.
      * </p>
-     *
      * @param id an Integer indicating the id of the user to be modified.
+     * @param model a model Object to which the parameters are added to be sent to the view Layer.
      * @return modelAndView a ModelAndView object which is used to add attributes to a model and
      *         redirect it to a view such as a jsp page.
      */
     @RequestMapping(value = Constants.MODIFY_USER_MAPPING, method = RequestMethod.GET)
-    private ModelAndView modifyUser(@RequestParam(Constants.ID) final int id, final Model model) {
+    private ModelAndView modifyUser(@RequestParam(Constants.ID) int id, Model model) {
         try {
             model.addAttribute(Constants.ROLES, Role.values());
             return new ModelAndView(Constants.CREATE_USER_JSP, Constants.USER, userService.retrieveUserById(id));
-        } catch (final ApplicationException e) {
+        } catch (ApplicationException e) {
             Logger.error(e);
             return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
                     String.format(Constants.USER_EDIT_EXCEPTION, id));
@@ -272,8 +292,8 @@ public class UserController {
      * Method to update existing User Details. Returns true if the entry is modified successfully, else
      * returns false if the entry is not found.
      * </p>
-     *
      * @param user an User object with the updated details of the user.
+     * @param model a model Object to which the parameters are added to be sent to the view Layer.
      * @return modelAndView a ModelAndView object which is used to add attributes to a model and
      *         redirect it to a view such as a jsp page.
      */
@@ -286,29 +306,29 @@ public class UserController {
             }
             model.addAttribute(Constants.MESSAGE, Constants.USER_UPDATE_SUCCESS_MESSAGE);
             return new ModelAndView(Constants.DISPLAY_USER_JSP, Constants.USERS, userService.retrieveAllUsers());
-        } catch (final ApplicationException e) {
+        } catch (ApplicationException e) {
             Logger.error(e);
             return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
                     String.format(Constants.USER_EDIT_EXCEPTION, user.getId()));
         }
     }
-
+   
     /**
      * This Method is used to remove an existing user by Id given by the user.
-     *
      * @param idToDelete an Integer indicating the id of the user to be deleted.
+     * @param model a model Object to which the parameters are added to be sent to the view Layer.
      * @return modelAndView a ModelAndView object which is used to add attributes to a model and
      *         redirect it to a view such as a jsp page.
      */
     @RequestMapping(value = Constants.DELETE_USER_MAPPING, method = RequestMethod.POST)
-    private ModelAndView removeUser(@RequestParam(Constants.ID) final int idToDelete, final Model model) {
+    private ModelAndView removeUser(@RequestParam(Constants.ID) int idToDelete, Model model) {
         try {
             if (!userService.deleteUser(idToDelete)) {
                 return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE, Constants.USER_DELETE_EXCEPTION);
             }
             model.addAttribute(Constants.MESSAGE, Constants.USER_DELETE_SUCCESS_MESSAGE);
             return new ModelAndView(Constants.DISPLAY_USER_JSP, Constants.USERS, userService.retrieveAllUsers());
-        } catch (final ApplicationException e) {
+        } catch (ApplicationException e) {
             Logger.error(e);
             return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
                     String.format(Constants.USER_DELETE_EXCEPTION, idToDelete));

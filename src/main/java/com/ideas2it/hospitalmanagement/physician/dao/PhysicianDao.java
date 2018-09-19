@@ -5,6 +5,13 @@ import java.util.List;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.physician.model.Physician;
 
+/**
+ * PhysicianDao is a Dao Class used to implement Database related Operations. All the methods in
+ * this class throw a custom Application Exception.
+ * 
+ * @author Rahul Ravi
+ * @version 1.0
+ */
 public interface PhysicianDao {
 
     /**
@@ -88,8 +95,9 @@ public interface PhysicianDao {
      * <p>
      * This Method is used to obtain an arraylist of all selected physicians.
      * </p>
-     *
-     * @return ids an Array of integers containing the id of physicians that are to be retrieved.
+     * 
+     * @param ids an Array of integers containing the id of physicians that are to be retrieved.
+     * @return physicians a List of physician objects obtained.
      * @throws ApplicationException An exception created for catching exceptions that occur while
      *                              displaying all physicians.
      */
