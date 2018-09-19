@@ -1,50 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="
-        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
-    <bean id="physicianDaoImpl" class="com.ideas2it.hospitalmanagement.physician.dao.impl.PhysicianDaoImpl"/>
-
-    <bean id="physicianServiceImpl" class="com.ideas2it.hospitalmanagement.physician.service.impl.PhysicianServiceImpl" >
-        <property name="physicianDao" ref="physicianDaoImpl" />
-        <property name="userService" ref="userServiceImpl" />
-    </bean>
-
-    <bean id="physicianController"  class="com.ideas2it.hospitalmanagement.physician.controller.PhysicianController">
-        <property name="physicianService" ref="physicianServiceImpl" />
-    </bean>
-
-    <bean id="patientDaoImpl" class="com.ideas2it.hospitalmanagement.patient.dao.impl.PatientDaoImpl"/>
- 
-
-    <bean id="patientServiceImpl" class="com.ideas2it.hospitalmanagement.patient.service.impl.PatientServiceImpl" >
-        <property name="patientDao" ref ="patientDaoImpl" />
-
-    </bean>
-
-    <bean id="patientController"  class="com.ideas2it.hospitalmanagement.patient.controller.PatientController" >
-        <property name="patientService" ref="patientServiceImpl" />
-    </bean>
-    <bean id="visitDaoImpl" class="com.ideas2it.hospitalmanagement.visit.dao.impl.VisitDaoImpl"/>
-    <bean id="visitServiceImpl" class="com.ideas2it.hospitalmanagement.visit.service.impl.VisitServiceImpl" >
-        <property name="visitDao" ref="visitDaoImpl"/>
-        <property name="physicianService" ref="physicianServiceImpl" />
-        <property name="patientService" ref="patientServiceImpl" />
-    </bean>
-    <bean id="visitController"  class="com.ideas2it.hospitalmanagement.visit.controller.VisitController" >
-        <property name="visitService" ref="visitServiceImpl"/>
-    </bean>
-    
-    <bean id="userDaoImpl" class="com.ideas2it.hospitalmanagement.user.dao.impl.UserDaoImpl"/>
-
-    <bean id="userServiceImpl" class="com.ideas2it.hospitalmanagement.user.service.impl.UserServiceImpl" >
-        <property name="userDao" ref="userDaoImpl" />
-    </bean>
-
-    <bean id="userController"  class="com.ideas2it.hospitalmanagement.user.controller.UserController">
-        <property name="userService" ref="userServiceImpl" />
-    </bean>
-    
-    
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+  <bean id="physicianDaoImpl" class="com.ideas2it.hospitalmanagement.physician.dao.impl.PhysicianDaoImpl" />
+  <bean id="physicianServiceImpl" class="com.ideas2it.hospitalmanagement.physician.service.impl.PhysicianServiceImpl">
+    <property name="physicianDao" ref="physicianDaoImpl" />
+    <property name="userService" ref="userServiceImpl" />
+  </bean>
+  <bean id="physicianController" class="com.ideas2it.hospitalmanagement.physician.controller.PhysicianController">
+    <property name="physicianService" ref="physicianServiceImpl" />
+  </bean>
+  <bean id="patientDaoImpl" class="com.ideas2it.hospitalmanagement.patient.dao.impl.PatientDaoImpl" />
+  <bean id="patientServiceImpl" class="com.ideas2it.hospitalmanagement.patient.service.impl.PatientServiceImpl">
+    <property name="patientDao" ref="patientDaoImpl" />
+    <property name="visitService" ref="visitServiceImpl" />
+  </bean>
+  <bean id="patientController" class="com.ideas2it.hospitalmanagement.patient.controller.PatientController">
+    <property name="patientService" ref="patientServiceImpl" />
+  </bean>
+  <bean id="visitDaoImpl" class="com.ideas2it.hospitalmanagement.visit.dao.impl.VisitDaoImpl" />
+  <bean id="visitServiceImpl" class="com.ideas2it.hospitalmanagement.visit.service.impl.VisitServiceImpl">
+    <property name="visitDao" ref="visitDaoImpl" />
+    <property name="physicianService" ref="physicianServiceImpl" />
+    <property name="patientService" ref="patientServiceImpl" />
+  </bean>
+  <bean id="visitController" class="com.ideas2it.hospitalmanagement.visit.controller.VisitController">
+    <property name="visitService" ref="visitServiceImpl" />
+  </bean>
+  <bean id="userDaoImpl" class="com.ideas2it.hospitalmanagement.user.dao.impl.UserDaoImpl" />
+  <bean id="userServiceImpl" class="com.ideas2it.hospitalmanagement.user.service.impl.UserServiceImpl">
+    <property name="userDao" ref="userDaoImpl" />
+  </bean>
+  <bean id="userController" class="com.ideas2it.hospitalmanagement.user.controller.UserController">
+    <property name="userService" ref="userServiceImpl" />
+  </bean>
 </beans>

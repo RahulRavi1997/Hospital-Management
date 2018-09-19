@@ -104,10 +104,7 @@
                         <label for="role">Specialisation</label>
                       </div>
                       <div class="col-sm-3 col-xs-3">
-                        <form:select path="specialisation" class="create-col-width" required="required">
-                          <option  selected disabled hidden value="">Select</option>
-                          <form:options items="${specialisations}" />
-                        </form:select>
+                        <form:select path="specialisation" items="${specialisations}" class="create-col-width" />
                       </div>
                     </div>
                     <div class="row">
@@ -115,10 +112,7 @@
                         <label for="salary">Gender</label>
                       </div>
                       <div class="col-sm-3 col-xs-3">
-                         <form:select path="gender" class="create-col-width" required="required">
-                          <option  selected disabled hidden value="">Select</option>
-                          <form:options items="${genders}" />
-                        </form:select>
+                        <form:select path="gender" items="${genders}"  class="create-col-width" />
                       </div>
                     </div>
                   </div>
@@ -132,17 +126,17 @@
                       </c:if>
                       <div class="row">
                         <div class="col-sm-6 col-xs-6"> 
-                          <i>${addrstype} Address</i>
+                          <b>${addrstype} Address</b>
                         </div>
                       </div>
                       <form:hidden path="addresses[${vs.index}].type" value="${addrstype}"/>
                       <div class="row">
-                        <div class="col-sm-3 col-xs-3">
+                        <div class="col-sm-3 col-xs-3 required">
                           <form:label class="color-black" path="addresses[${vs.index}].addressLine1" cssErrorClass="invalid">Address Line 1</form:label>
                         </div>
                         <div class="col-sm-3 col-xs-3">
                           <div class="input">
-                            <form:textarea rows="2" cols="19" type="TEXT" placeholder="Address Line 1" path="addresses[${vs.index}].addressLine1" cssErrorClass="invalid" />
+                            <form:input type="TEXT" placeholder="Address Line 1" path="addresses[${vs.index}].addressLine1" cssErrorClass="invalid " required="required"/>
                             <form:label path="addresses[${vs.index}].addressLine1" cssErrorClass="icon invalid" />
                             <form:errors path="addresses[${vs.index}].addressLine1" cssClass="inline_invalid" />
                           </div>
@@ -154,19 +148,19 @@
                         </div>
                         <div class="col-sm-3 col-xs-3">
                           <div class="input">
-                            <form:textarea rows="2" cols="19" type="TEXT" placeholder="Address Line 2" path="addresses[${vs.index}].addressLine2" cssErrorClass="invalid" maxLength="50"/>
+                            <form:input placeholder="Address Line 2" path="addresses[${vs.index}].addressLine2" cssErrorClass="invalid" maxLength="50"/>
                             <form:label path="addresses[${vs.index}].addressLine2" cssErrorClass="icon invalid" />
                             <form:errors path="addresses[${vs.index}].addressLine2" cssClass="inline_invalid" />
                           </div>
                         </div>
                       </div>
                       <div class="row">
-                        <div class="col-sm-3 col-xs-3">
+                        <div class="col-sm-3 col-xs-3 required">
                           <form:label class="color-black" path="addresses[${vs.index}].country" cssErrorClass="invalid">Country</form:label>
                         </div>
                         <div class="col-sm-3 col-xs-3">
                           <div class="input">
-                            <form:input placeholder="Country" path="addresses[${vs.index}].country" cssErrorClass="invalid " maxLength="50"/>
+                            <form:input placeholder="Country" path="addresses[${vs.index}].country" cssErrorClass="invalid " maxLength="50" required="required" />
                             <form:label path="addresses[${vs.index}].country" cssErrorClass="icon invalid" />
                             <form:errors path="addresses[${vs.index}].country" cssClass="inline_invalid" />
                           </div>
@@ -189,7 +183,7 @@
                   Add User Login For Physician : 
                   <input type="text"  id="autocomplete" value="" name="UserEmail" placeHolder="Enter User Email"/>
                   <div class="row" align="center">
-                    <input class="btn btn-default" type="reset" value="Reset"/>     
+                    <input class="btn margin-format" type="reset" value="Reset"/>     
                     <input class="btn-primary" type="submit" value="Submit"/>     
                   </div>
                 </div>
@@ -199,7 +193,7 @@
             </div>
           </div>
         </div>
-      </div></div>
+      </div>
       <!-- /#page-content-wrapper -->
     </div>
     <jsp:include page="footer.jsp"/>

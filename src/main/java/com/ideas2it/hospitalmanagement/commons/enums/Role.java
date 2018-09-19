@@ -6,20 +6,20 @@ public enum Role {
 
     private final String value;
 
-    Role(String value) {
+    Role(final String value) {
         this.value = value;
     }
 
-    public static Role fromValue(int value) {
-        for (Role role : values()) {  
-            if (role.value.equals(value)) {  
-                return role;  
-            }  
-        }  
-        throw new IllegalArgumentException("Invalid role: " + value);  
+    public static Role fromValue(final int value) {
+        for (final Role role : values()) {
+            if (role.value.equals(value)) {
+                return role;
+            }
+        }
+        throw new IllegalArgumentException("Invalid role: " + value);
     }
 
-    public String toValue(){
+    public String toValue() {
         return value;
     }
 }
