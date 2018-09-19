@@ -71,9 +71,44 @@ public interface BedService {
 	 */
 	public List<Ward> getWardsByStatus(String status) throws ApplicationException;
 
-	public List<Visit> getVisitsByPatientType(String string)throws ApplicationException;
-	
+	/**
+	 * <p>
+	 * getVisitsByPatientType returns all visits based upon the patient type
+	 * </p>
+	 * @param  status   						status of the Ward to be searched.
+	 * 
+	 * @return List<Visit>						List of visits
+	 */
+    public List<Visit> getVisitsByPatientType(String string)throws ApplicationException;
+
+    /**
+	 * <p>
+	 * searchvisitByNumber is used for searching the visit for the given visit Id.
+	 * </p>
+	 * @param  visitId   						Visit ID
+	 * 
+	 * @return Visit 							Visit Object
+	 */
 	public Visit searchvisitByNumber(int visitId) throws ApplicationException;
 	
-	public Bed searchBedByVisit(Visit visit) throws ApplicationException;
+	
+	/**
+	 * <p>
+	 * searchBedByVisit is used for finding the bed for a given visit.
+	 * </p>
+	 * @param  visit   							Visit object
+	 * 
+	 * @return Bed								Bed object
+	 */
+    public Bed searchBedByVisit(Visit visit) throws ApplicationException;
+	
+	/**
+	 * <p>
+	 * display all the wards 
+	 * </p>
+	 * @param  status   status of the Ward to be searched.
+	 * @return
+	 * @throws ApplicationException
+	 */
+	public List<Ward> displayAllWards(String status) throws ApplicationException;
 }

@@ -13,7 +13,7 @@
     
     
     
-          <bag name = "rooms" cascade = "all" lazy = "false">
+          <bag name = "rooms" cascade = "all" lazy = "true">
           <key column = "wardNumber"/>
           <one-to-many class = "com.ideas2it.hospitalmanagement.room.model.Room"/>
       </bag>

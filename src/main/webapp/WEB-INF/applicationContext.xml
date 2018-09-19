@@ -9,7 +9,8 @@
 <bean id="roomDaoImpl" class="com.ideas2it.hospitalmanagement.room.dao.impl.RoomDaoImpl"/>
 
     <bean id="roomServiceImpl" class="com.ideas2it.hospitalmanagement.room.service.impl.RoomServiceImpl" >
-        <property name="roomDao" ref="roomDaoImpl" />        
+        <property name="roomDao" ref="roomDaoImpl" />    
+                    		<property name="bedService" ref="bedServiceImpl"/>    
     </bean>
 
     <bean id="roomController"  class="com.ideas2it.hospitalmanagement.room.controller.RoomController">

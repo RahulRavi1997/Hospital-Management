@@ -1,196 +1,162 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<link rel="stylesheet" href="https://unpkg.com/@coreui/coreui/dist/css/coreui.min.css">
+<style>
+.foo {
+  float: left;
+  width: 140px;
+  height: 120px;
+  margin: 5px;
+  border-radius : 10px;
+  border: 1px solid rgba(0, 0, 0, .2);
+}
+
+.blue {
+  background: #13b4ff;
+}
+
+.purple {
+  background: #ab3fdd;
+}
+
+.wine {
+  background: #ae163e;
+}
+button{
+    background: none;
+    
+    border: none;
+    padding: 0;
+
+}
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+}
+
+#snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+</style>
 <html>
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-      <link rel="stylesheet" type="text/css" href="static/css/Ward.css"/>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-      <title>Welcome page</title>
+      <title>Admin page</title>
    </head>
    <body>
-  
-      <div class = "heading">
-         <div id="mySidenav" class="sidenav">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="color:white;">&times;</a>
-            <a onclick="document.getElementById('addWard').style.display='block'" style="width:auto;">Add Ward</a>
+      <jsp:include page="header.jsp"/>
+      <div id="wrapper">
+         <!-- Sidebar -->
+         <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+               <li class="sidebar-brand highlight">
+                  <a href="index">
+                  Home
+                  </a>
+               </li>
+               <li>
+                  <a href="DisplayAllWards">View Wards</a> 
+               </li>
+               <li>
+               	  <a href="nurseHome">Display In Patients</a>
+               </li>
+            </ul>
          </div>
-         <span style="font-size:30px;cursor:pointer;color:white;" onclick="openNav()">&#9776;</span>
+         <!-- /#sidebar-wrapper -->
+         <!-- Page Content -->
+         <div id="page-content-wrapper">
+         
+            <div class="container-fluid">
+               <div class="row">
+                  <div class="col-lg-12">
+                    <form:form action="AddWard" method="post">
+                  	<button class="btn btn-success" type="submit" style="float:right">Add Wards</button><br><br>
+                    </form:form>
+                    
 
-      </div>
-               <form:form action="nurseHome" method="get">
- 		 <button style="submit"  style="float:right;">Back Home</button>
- 		 </form:form>
-      	 
-      	 <form:form action="searchWard" method ="post">
-      	      Search for a ward : 
-      	 <select name="wardNumber">
-	    <c:forEach items="${wards}" var="ward">
-	        <option value="${ward.wardNumber}">${ward.wardNumber}</option>
-	    </c:forEach>
-		</select><input type="submit" value="Search">
-		</form:form>
-      	 
-      <h2 class = "wardDetails"> Wards Information </h2>
-      <div id="addWard" class="modal">
-         <form:form class="modal-content animate" action = "wardOperation" commandName = "ward" method ="post">
-            <div class="imgcontainer">
-               <span onclick="document.getElementById('addWard').style.display='none'" class="close" title="Close Modal">&times;</span>
+                    
+                   
+                  	<div style="width:1200px; height:600px;padding: 10px;border: 2px solid black;padding: 10px; border-radius: 25px; overflow: auto;"> 
+                  	<h1 style="text-align:center">Ward Informations</h1><br>
+                    <c:choose>
+					    <c:when test="${admitButton == 'Yes'}">
+					    	
+							<c:forEach items="${wards}" var="ward">
+		          			<form action="searchWard" method="post" style="display: inline;">
+	          				 <button>
+	          				 <input type="hidden" value="${visitId}" name="visitId">
+	          				 <input type="hidden" value="${ward.wardNumber}" name="wardNumber">
+	          				 <input type="hidden" value="Yes" name="admitButton">
+		        			 <div class="foo blue" style="text-align:center" >Ward<br><h1>${ward.wardNumber}<h2></div></button>
+		        			</form></c:forEach>
+		   				
+					    </c:when>
+				    <c:otherwise>
+         			<div>
+         			<c:forEach items="${wards}" var="ward">
+	          			<form action="searchWard" method="post" style="display: inline;">
+          				 <button>
+          				 <input type="hidden" value="${ward.wardNumber}" name="wardNumber">
+	        			 <div class="foo blue" style="text-align:center" >Ward<br><h1>${ward.wardNumber}<h2></div></button>
+	        			</form></c:forEach>
+	   				
+					</div>
+				    </c:otherwise>
+				</c:choose>
+
+                  </div>
+               </div>
             </div>
-            <div class="container">
-               <h2 class = "wardDetails" >  Create a ward </h2>
-               Enter the Ward Name :
-               <form:input path="name"  pattern="[A-Za-z]*"  placeholder= "Ward Name " maxlength= "20"  title="Enter a valid Name " required = "required"/>
-               Enter the Number of rooms :
-               <input type="text" pattern =[0-9]* name = "noOfRooms" placeholder= "Number of Rooms " maxlength= "20"   title="Enter a valid number "  required = "required"/>
-               <input class = "addWard" type="submit" name="AddWard" value="Add Ward"/>
-            </div>
-         </form:form>
+         </div>
+         <!-- /#page-content-wrapper -->
       </div>
-
-      <c:forEach items= "${wards}" var = "ward">
-         <h2 class ="wardInformation" > Ward Name : ${ward.name} &nbsp Ward Number : ${ward.wardNumber} </h2>
-         		<div>
-            <form:form action = "openAddMenu" method ="post">
-               <button class="w3-btn w3-orange" style="float:left;"> <input type = "hidden" value = "${ward.wardNumber}" name = "number"><span> Add rooms </span></button></form:form>
-            
-            <c:if test="${ward.status == 'under maintaince'}">
-              
-                  <form:form action = "ChangeWardToFree" method ="post">
-                     <input type = "hidden" value = "${ward.wardNumber}" name = "number">
-                     <button  class="w3-btn w3-orange" style="float:right;" ><span> Free </span></button>
-                  </form:form>
-               
-            </c:if>
-            <c:if test="${ward.status == 'free'}">
-               
-                  <form:form action = "ChangeWardToMaintaince" method ="post">
-                     <input type = "hidden" value = "${ward.wardNumber}" name = "wardNumber">
-                     <button class="w3-btn w3-orange" style="float:right;"><span> Maintaince </span></button>
-                  </form:form>
-               
-            </c:if>
-              
-               
-            
-
-            <c:if test="${addRoomsToWard == 'Yes'}">
-               <script> 
-               window.onload = function() {
-               document.getElementById('addRooms').style.display='block';
-               } 
+              <c:choose>
+         <c:when test="${not empty successMessage}">
+            <div id="snackbar">${successMessage}</div>
+            <script type="text/javascript">window.onload = function() {
+               var x = document.getElementById("snackbar");
+               x.className = "show";
+               setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+               }  
             </script>
-            </c:if></div>
-         <div class = "wardBasicInformation">
-            <c:forEach items= "${ward.rooms}" var = "room">
-               <div class = "roomBasicInformation">
-                  <h2 class ="wardInformation" >Room Number : ${room.roomNumber} </h2>
-                  <table>
-                     <tr>
-                        <td>
-                        <c:forEach items= "${room.beds}" var = "bed">
-
-                            <c:if test="${bed.status == 'Available'}">
-                            <button class="bedType">
-                            <img src="static/bed.png"><br>${bed.bedNumber}</button>
-                            </c:if>
-                            
-                            <c:if  test="${bed.status != 'Available'}">
-                             <button class="bedOccupied">
-                             <img src="static/bed.png"><br>${bed.bedNumber}</button>
-                             </c:if>
-                        </c:forEach>
-                        <td>
-                     </tr>
-                     <tr>
-					<td>
-                        
-                           <c:forEach items= "${room.beds}" var = "bed">
-                              <c:if test="${admitButton == 'Yes'}">
-                              <c:if test="${bed.status == 'Available'}">
-                                  <form:form action="admitPatient" method="post">
-                                      <input type="hidden" value="${visitId}" name="visitId">
-                                      <input type="hidden" value="${bed.bedNumber}" name="bedNumber">
-                                      <button type="submit" style="margin-left:180px;">Admit ${bed.bedNumber}</button>        
-                                  </form:form>
-                                </c:if>
-                              </c:if> 
-                              <c:if test="${admitButton == 'Yes'}">
-                              <c:if test="${bed.status != 'Available'}">
-                                  <form:form action="admitPatient" method="post">
-                                      <input type="hidden" value="${visitId}" name="visitId">
-                                      <input type="hidden" value="${bed.bedNumber}" name="bedNumber">
-                                      <button type="submit" style="margin-left:150px; opacity:0">Discharge</button>        
-                                  </form:form>
-                                </c:if>
-                              </c:if> 
-                              
-
-                              <c:if test="${admitButton != 'Yes'}"> 
-                                  <c:if test="${bed.status != 'Available'}">
-                                      <form:form action="dischargePatient" method="post">
-                                          <input type="hidden" value="${bed.bedNumber}" name="bedNumber">
-                                          <button type="submit" style="margin-left:180px;">
-                                          Discharge</button>    
-                                      </form:form> 
-                                  </c:if> 
-                                  <c:if test="${bed.status == 'Available'}">
-                                      <form:form action="dischargePatient" method="post">
-                                          <input type="hidden" value="${bed.bedNumber}" name="bedNumber">
-                                          <button type="submit" style="margin-left:150px; opacity:0">
-                                          Admit</button>    
-                                      </form:form> 
-                                  </c:if> 
-                              </c:if>
-                           </c:forEach>
-                       </td>
-                     </tr>
-                  </table>
-               </div>
-            </c:forEach>
-         </div>
-
-
-         <div id="addRooms" class="modal">
-            
-               <div class="imgcontainer">
-                  <span onclick="document.getElementById('addRooms').style.display='none'" class="close" title="Close Modal">&times;</span>
-               </div>
-               
-               <div class="container modal-content animate">
-                  <h2 class = "wardDetails" > Add rooms to the ward</h2>
-                  Enter the Number of rooms :
-                <form:form action = "AddRooms" method ="post">
-                  <input type="text" pattern =[0-9]* name = "noOfRooms" placeholder= "Number of Rooms " maxlength= "20"   title="Enter a valid number "  required = "required"/>
-    
-                    <input type = "hidden" value = "${wardNumber}" name = "wardNumber">
-                     <button class="button"><span> Add Rooms </span></button>
-                </form:form>
-               </div>
-            
-         </div>
-      </c:forEach>
-      <script>
-         // Get the modal
-         var modal = document.getElementById('addWard');
-         
-         // When the user clicks anywhere outside of the modal, close it
-         window.onclick = function(event) {
-             if (event.target == modal) {
-                 modal.style.display = "none";
-             }
-         }
-         function openNav() {
-             document.getElementById("mySidenav").style.width = "250px";
-                 document.getElementById("mySidenav").style.height = "150px";
-             
-         }
-         
-         function closeNav() {
-             document.getElementById("mySidenav").style.width = "0";
-         }
-      </script>
+         </c:when>
+      </c:choose>
+      <jsp:include page="footer.jsp"/>
    </body>
 </html>
+

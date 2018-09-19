@@ -5,6 +5,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
+import com.ideas2it.hospitalmanagement.bed.commons.constants.BedConstants;
 import com.ideas2it.hospitalmanagement.bed.dao.BedDao;
 import com.ideas2it.hospitalmanagement.bed.model.Bed;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
@@ -14,15 +15,25 @@ import com.ideas2it.hospitalmanagement.visit.model.Visit;
 
 public class BedDaoImpl extends GenericDao implements BedDao {
 
+	private static final String ERROR_SEARCHING_BED = 
+			"Exception occured while searching bed : ";
+	private static final String ERROR_UPDATING_BED = 
+			"Exception occured while updating bed : ";
+	private static final String ERROR_SEARCHING_BED_BY_VISIT = 
+			"Exception occured while searching bed by visit : ";
+
+	
 	/**
 	 *  {@inheritDoc}
 	 */
 	public Bed searchBedByNumber(int bedNumber) throws ApplicationException {
 		try {
-        	return super.getByAttribute(Bed.class,"bedNumber",bedNumber);
+        	return super.getByAttribute(Bed.class,BedConstants.BEDNUMBER,bedNumber);
         } catch (ApplicationException e) {
-            Logger.error("Exception occured while searching bed", e);
-            throw new ApplicationException("Exception occured while searching bed", e);
+        	String message = new StringBuilder().append(ERROR_SEARCHING_BED).
+					append(bedNumber).toString();
+            Logger.error(message, e);
+            throw new ApplicationException(message);
         }
 	}
 
@@ -33,21 +44,24 @@ public class BedDaoImpl extends GenericDao implements BedDao {
         try {
             return super.update(bed);
         } catch (ApplicationException e) {
-            Logger.error("Bed not updated", e );
-            throw new ApplicationException("Bed not updated", e);
+        	String message = new StringBuilder().append(ERROR_UPDATING_BED).
+									append(bed.getBedNumber()).toString();
+            Logger.error(message, e);
+            throw new ApplicationException(message);
         }
 	}	
-	public Bed searchBedByVisit(Visit visit)throws ApplicationException{
-		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaavisit" + visit.getId());
-		try {
-        	Bed bed =  super.getByAttribute(Bed.class,"visit",visit);
-    		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaavisit" +
-        	bed.getBedNumber());
 
-            return bed;
+	/**
+	 *  {@inheritDoc}
+	 */
+    public Bed searchBedByVisit(Visit visit)throws ApplicationException{
+		try {
+			return  super.getByAttribute(Bed.class,BedConstants.VISIT_LABEL,visit);
         } catch (ApplicationException e) {
-            Logger.error("Exception occured while searching bed", e);
-            throw new ApplicationException("Exception occured while searching bed", e);
+        	String message = new StringBuilder().append(ERROR_SEARCHING_BED_BY_VISIT).
+									append(visit.getId()).toString();
+        	Logger.error(message, e);
+        	throw new ApplicationException(message);
         }
 	}
 

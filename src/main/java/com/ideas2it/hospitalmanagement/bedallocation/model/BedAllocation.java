@@ -13,6 +13,17 @@ public class BedAllocation {
 	private Date admitDate;
 	private Date dischargeDate;
 	private Visit visit;
+	private String status;
+
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
 	
 	public int getBedId() {
 		return bedId;

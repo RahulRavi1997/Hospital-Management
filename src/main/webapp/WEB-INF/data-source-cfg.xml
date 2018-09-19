@@ -11,7 +11,7 @@
       <property name="url"
           value="jdbc:mysql://localhost/HMS?useSSL=false" />
       <property name="username" value="root" />
-      <property name="password" value="ubuntu" />
+      <property name="password" value="root" />
 
   </bean>
 </beans>

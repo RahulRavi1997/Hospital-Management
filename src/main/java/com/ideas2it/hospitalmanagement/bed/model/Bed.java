@@ -3,6 +3,7 @@ package com.ideas2it.hospitalmanagement.bed.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ideas2it.hospitalmanagement.bed.commons.constants.BedConstants;
 import com.ideas2it.hospitalmanagement.bedallocation.model.BedAllocation;
 import com.ideas2it.hospitalmanagement.visit.model.Visit;
 
@@ -18,18 +19,17 @@ import com.ideas2it.hospitalmanagement.visit.model.Visit;
 public class Bed {
 
 	private Integer bedNumber;
-	private String status = "Available";
+	private String status = BedConstants.AVAILABLE;
+	private Visit visit;
+	private Integer roomNumber;
+	private List<BedAllocation> bedAllocations = new ArrayList<BedAllocation>();
+
 	public Visit getVisit() {
 		return visit;
 	}
 	public void setVisit(Visit visit) {
 		this.visit = visit;
 	}
-
-	private Visit visit;
-	private Integer roomNumber;
-	private List<BedAllocation> bedAllocations = new ArrayList<BedAllocation>();
-
 	
 	public List<BedAllocation> getBedAllocations() {
 		return bedAllocations;
@@ -57,14 +57,5 @@ public class Bed {
 	}
 	public void setRoomNumber(Integer roomNumber) {
 		this.roomNumber = roomNumber;
-	}
-
-	public String toString() {
-		StringBuilder stringBuilder = new StringBuilder();
-		for(BedAllocation bedAllocation : bedAllocations) {
-			stringBuilder.append("bedaallocation" +  bedAllocation);
-		}
-		return stringBuilder.toString();
-	}
-	
+	}	
 }

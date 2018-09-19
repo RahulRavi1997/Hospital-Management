@@ -20,15 +20,11 @@ public class WardServiceImpl implements WardService {
     private static WardDao wardDao;
     private static RoomService roomService;
     private static VisitService visitService;
-    public static BedService getBedService() {
-		return bedService;
-	}
-
+	private static BedService bedService;
+    
 	public static void setBedService(BedService bedService) {
 		WardServiceImpl.bedService = bedService;
 	}
-
-	private static BedService bedService;
 
     public  void setWardDao(WardDao wardDao) {
     	WardServiceImpl.wardDao = wardDao;
@@ -39,11 +35,6 @@ public class WardServiceImpl implements WardService {
     	WardServiceImpl.roomService = roomService;
     }
     
-	public static VisitService getVisitService() {
-		return visitService;
-	}
-
-
 	public static void setVisitService(VisitService visitService) {
 		WardServiceImpl.visitService = visitService;
 	}
@@ -52,12 +43,10 @@ public class WardServiceImpl implements WardService {
      * {@inheritDoc}
      */
 	public Ward createWard(Ward ward, int numberOfRooms) throws ApplicationException {
-        System.out.println("servicewardname" + ward.getName() + "" + numberOfRooms);
         List<Room> rooms = new ArrayList<Room>();
 		for (int count = 0; count < numberOfRooms ; count++ ) {
 				ward.getRooms().add(roomService.createRoom(new Room()));		
 		}
-		System.out.println("rooms.size();" + rooms.size() );
 		return wardDao.insertWard(ward);		
 		
 	}
@@ -93,6 +82,9 @@ public class WardServiceImpl implements WardService {
 		
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	public boolean addRooms(Ward ward, int numberOfRooms) throws ApplicationException {
 		for (int count = 0; count < numberOfRooms ; count++ ) {
 			ward.getRooms().add(roomService.createRoom(new Room()));		
@@ -101,36 +93,32 @@ public class WardServiceImpl implements WardService {
 
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	public boolean changeWardToFree(Ward ward) throws ApplicationException {
 		return wardDao.changeWardToFree(ward);
 		
 	}
 	
+    /**
+     * {@inheritDoc}
+     */
 	public boolean addRoomsToWard(Ward ward, int numberOfRooms) throws ApplicationException {
         List<Room> rooms = new ArrayList<Room>();
 		for (int count = 0; count < numberOfRooms ; count++ ) {
 				ward.getRooms().add(roomService.createRoom(new Room()));		
 		}
-		System.out.println("rooms.size();" + rooms.size() );
-
 		return wardDao.addRoomsToWard(ward);
 		
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	public List<Visit> getVisitsByPatientType(String string) throws ApplicationException {
 		return visitService.getVisitsByPatientType("InPatient");
-	}	
-	
-	public Visit searchVisitById(int visitId) throws ApplicationException {
-		return visitService.getVisitById(visitId);
-		
 	}
 	
-	public Bed searchBedByVisit(Visit visit) throws ApplicationException{
-		return bedService.searchBedByVisit(visit);
-	}
-	
-	public Boolean dischargePatient(int bedNumber) throws ApplicationException {
-		return bedService.dischargePatient(bedNumber);
-	}
 }
+	

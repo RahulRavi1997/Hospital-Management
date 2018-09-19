@@ -30,6 +30,17 @@ public interface BedDao {
      */
 	public boolean updateBed(Bed bed)throws ApplicationException;
 	
-	public Bed searchBedByVisit(Visit visit)throws ApplicationException;
+	/**
+     * <p>
+     * searchBedByVisit method is used to search a specific bed associated
+     * with a visit
+     * </p>
+     * 
+     * @param Bed 								Bed object
+     * 
+     * @return boolean 							Indicates whether the bed 
+     *											is updated or not
+     */
+    public Bed searchBedByVisit(Visit visit)throws ApplicationException;
 
 }

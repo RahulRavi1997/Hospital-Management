@@ -284,3 +284,17 @@ margin-left:250px;
   opacity: 1;
   right: 0;
 }
+#historyDetails{
+    display:none;
+}
+.BedInformation{
+
+    margin-top: 30px;
+}
+
+#myTable{
+    overflow: scroll;
+}
+.details{
+margin-left: 500px;
+}

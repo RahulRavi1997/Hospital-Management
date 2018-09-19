@@ -1,12 +1,12 @@
 package com.ideas2it.hospitalmanagement.room.dao.impl;
 
-
-import com.ideas2it.hospitalmanagement.room.dao.RoomDao;
-import com.ideas2it.hospitalmanagement.room.common.Constants;
-import com.ideas2it.hospitalmanagement.room.model.Room;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.genericdao.GenericDao;
 import com.ideas2it.hospitalmanagement.logger.Logger;
+import com.ideas2it.hospitalmanagement.room.common.Constants;
+import com.ideas2it.hospitalmanagement.room.dao.RoomDao;
+import com.ideas2it.hospitalmanagement.room.model.Room;
+;
 /**
  * <p>
  * RoomDAOImpl class takes of creation of rooms.

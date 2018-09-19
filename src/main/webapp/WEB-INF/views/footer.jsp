@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 
 <footer class="footer font-small darkcyan">
 

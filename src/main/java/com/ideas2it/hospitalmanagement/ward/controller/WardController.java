@@ -3,227 +3,304 @@ package com.ideas2it.hospitalmanagement.ward.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import com.ideas2it.hospitalmanagement.exception.ApplicationException;
+import com.ideas2it.hospitalmanagement.logger.Logger;
+import com.ideas2it.hospitalmanagement.room.model.Room;
+import com.ideas2it.hospitalmanagement.ward.commons.constants.WardConstants;
+import com.ideas2it.hospitalmanagement.ward.model.Ward;
+import com.ideas2it.hospitalmanagement.ward.service.WardService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;  
 import org.springframework.web.bind.annotation.RequestMethod;  
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.ideas2it.hospitalmanagement.bed.model.Bed;
-import com.ideas2it.hospitalmanagement.exception.ApplicationException;
-import com.ideas2it.hospitalmanagement.room.model.Room;
-import com.ideas2it.hospitalmanagement.visit.model.Visit;
-import com.ideas2it.hospitalmanagement.ward.model.Ward;
-import com.ideas2it.hospitalmanagement.ward.service.WardService;
 
 @Controller
 public class WardController {
 	
 	private static WardService wardService;
 	
-
-
     public void setWardService(WardService wardService) {
         WardController.wardService = wardService;
     }
 
-
-
-    @RequestMapping(value = "/AddWard", method = RequestMethod.GET)
+    @RequestMapping(value = "/AddWard", method = RequestMethod.POST)
     public ModelAndView showForm() {
-        return new ModelAndView("Ward", "ward", new Ward());
-
+        return new ModelAndView("AddWard", "ward", new Ward());
     }
 
-
+    /**
+     * Display all the wards
+     * 
+     * @return    redirects to the page which shows all the wards.
+     */
     @RequestMapping(value = "/DisplayAllWards", method = RequestMethod.GET)
     public ModelAndView displayAllWards() {
-    	System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-		 ModelAndView mav = new ModelAndView("displayWards");
+        ModelAndView mav = new ModelAndView(WardConstants.DISPLAYWARDS);
     	try {
-        mav.addObject("wards" , wardService.displayAllWards("All"));
-         mav.addObject("ward" , new Ward());
-         mav.addObject("wardIds" , getWardIds());
+            mav.addObject(WardConstants.WARDS , wardService.displayAllWards(WardConstants.ALL));
+            mav.addObject(WardConstants.WARD , new Ward());
+            mav.addObject(WardConstants.WARDIDS , getWards());
     	} catch(ApplicationException e) {
-    		
+    		Logger.error(e);
+            ModelAndView errorMav = new ModelAndView(WardConstants.NURSEHOME);
+            errorMav.addObject(WardConstants.FAILURE_MESSAGE, WardConstants.FAILURE_MESSAGE);
+            return errorMav;
     	}
         return mav;
     }
 
+    /**
+     * Display all the wards for the purpose for admitting the patient.
+     * 
+     *@param   visitId       visitId for which the bed is to be assigned.
+     * 
+     * @return ModelAndView  redirects to the page which displays all
+     *                       the ward details.
+     */
     @RequestMapping(value="/admitButton", method=RequestMethod.POST)
-    public ModelAndView admitButton(@RequestParam("visitId")String visitId) {
-  	  
-  	 ModelAndView mav = new ModelAndView("displayWards");
+    public ModelAndView admitButton(@RequestParam(WardConstants.VISITID)String visitId) {
+  	 ModelAndView mav = new ModelAndView(WardConstants.DISPLAYWARDS);
   	  try {
-          mav.addObject("visitId",visitId);
-          mav.addObject("admitButton", "Yes");
+          mav.addObject(WardConstants.VISITID,visitId);
+          mav.addObject(WardConstants.ADMITBUTTON, WardConstants.YES);
+          mav.addObject(WardConstants.WARDS , wardService.displayAllWards(WardConstants.ALL));
+          mav.addObject(WardConstants.WARD , new Ward());
+          mav.addObject(WardConstants.WARDIDS , getWards());
+        } catch(ApplicationException e) {
+            ModelAndView errorMav = new ModelAndView(WardConstants.NURSEHOME);
+    		Logger.error(e);
+            errorMav.addObject(WardConstants.FAILURE_MESSAGE, WardConstants.FAILURE_MESSAGE);
+            return errorMav;
+        }
+  	    return mav;
+    }
+    
+  
+
+    /**
+     * Allows to create a new ward with the specified number of rooms.
+     * 
+     * @param ward      Ward Information
+     * 
+     * @param noOfRooms Number to rooms to be created in a ward.
+     * 
+     * @return ModelAndView  redirects to the page which displays all
+     *                       the ward details.
+     */
+    @RequestMapping(value="/AddWardInDB", method=RequestMethod.POST)
+    public ModelAndView AddWardInDB(@ModelAttribute("ward") Ward ward ,
+  		   @RequestParam("noOfRooms")String noOfRooms) {
+  		 ModelAndView mav = new ModelAndView("displayWards");
+  	  try {
+          System.out.println("controllerwardname" + ward.getName() + "" + noOfRooms);
+          wardService.createWard(ward, Integer.parseInt(noOfRooms));
           mav.addObject("wards" , wardService.displayAllWards("All"));
           mav.addObject("ward" , new Ward());
-          mav.addObject("wardIds" , getWardIds());
-
         } catch(ApplicationException e) {
       	  
         }
   	  return mav;
-  	  
     }
-    
+
+    /**
+    * Make a ward status to maintaince.  
+    *
+    * @param ward  Ward Information
+    *
+    * @return ModelAndView  redirects to the page which displays all
+    *                       the ward details.
+    */
+   @RequestMapping(value="/ChangeWardToMaintaince", method=RequestMethod.POST)
+   public ModelAndView ChangeWardToMaintaince(@ModelAttribute(WardConstants.WARD) Ward ward) {
+ 
+   ModelAndView mav = new ModelAndView("searchWard");
+   try {
+        wardService.deleteWard(wardService.searchWard(ward.getWardNumber()));
+        ward = wardService.searchWard(ward.getWardNumber());
+           mav.addObject(WardConstants.WARDNUMBER , ward.getWardNumber());
+           mav.addObject(WardConstants.WARD , ward);
+           mav.addObject("rooms", ward.getRooms());
+       } catch(ApplicationException e) {
+     Logger.error(e);
+      mav.addObject(WardConstants.FAILURE_MESSAGE, WardConstants.FAILURE_MESSAGE);    
+       }
+   return mav;
+   }
+ 
+   
+   /**
+    * Make a ward status to free after maintaince.  
+    *
+    * @param ward  Ward Information
+    *
+    * @return ModelAndView  redirects to the page which displays all
+    *                       the ward details.
+    */    @RequestMapping(value="/ChangeWardToFree", method=RequestMethod.POST)
+   public ModelAndView ChangeWardToFree(@RequestParam("number")String wardnumber) {
+   ModelAndView mav = new ModelAndView("searchWard");
+try {
+Ward ward = new Ward();
+       ward = wardService.searchWard(Integer.parseInt(wardnumber));
+    wardService.changeWardToFree(ward);
+    ward = wardService.searchWard(Integer.parseInt(wardnumber));
+           mav.addObject(WardConstants.WARDNUMBER , Integer.parseInt(wardnumber));
+           mav.addObject(WardConstants.WARD , ward);
+           mav.addObject("rooms", ward.getRooms());
+       } catch(ApplicationException e) {
+   Logger.error(e);
+    mav.addObject(WardConstants.FAILURE_MESSAGE, WardConstants.FAILURE_MESSAGE);    
+       }
+   return mav;
+
+    }
   
-
-
-  @RequestMapping(value="/wardOperation", method=RequestMethod.POST, params="AddWard")
-  public ModelAndView createWard(@ModelAttribute("ward") Ward ward ,
-		   @RequestParam("noOfRooms")String noOfRooms) {
-		 ModelAndView mav = new ModelAndView("displayWards");
-	  try {
-        System.out.println("controllerwardname" + ward.getName() + "" + noOfRooms);
-        wardService.createWard(ward, Integer.parseInt(noOfRooms));
-        mav.addObject("wards" , wardService.displayAllWards("All"));
-        mav.addObject("ward" , new Ward());
-        mav.addObject("wardIds" , getWardIds());
-
-      } catch(ApplicationException e) {
-    	  
-      }
-	  return mav;
-  }
-
-  
-  @RequestMapping(value="/ChangeWardToMaintaince", method=RequestMethod.POST)
-  public ModelAndView ChangeWardToMaintaince(@ModelAttribute("ward") Ward ward) {
-	  
-	 ModelAndView mav = new ModelAndView("displayWards");
-	  try {
-      	wardService.deleteWard(wardService.searchWard(ward.getWardNumber()));
-        mav.addObject("wards" , wardService.displayAllWards("All"));
-        mav.addObject("ward" , new Ward());
-        mav.addObject("wardIds" , getWardIds());
-
-      } catch(ApplicationException e) {
-    	  
-      }
-	  return mav;
-	  
-  }
-  
-  @RequestMapping(value="/ChangeWardToFree", method=RequestMethod.POST)
-  public ModelAndView ChangeWardToFree(@RequestParam("number")String wardnumber) {
-	  Ward ward = new Ward();
-	  ModelAndView mav = new ModelAndView("displayWards");
-		  try {
-	        ward = wardService.searchWard(Integer.parseInt(wardnumber));
-     		wardService.changeWardToFree(ward);
-            mav.addObject("wards" , wardService.displayAllWards("All"));
-            mav.addObject("ward" , new Ward());
-            mav.addObject("wardIds" , getWardIds());
-      } catch(ApplicationException e) {
-    	  
-      }
-	  return mav;
-	  
-  }
-  
+    /**
+     *  Displays all the inpatient details.
+     *  
+     * @return ModelAndView  redirects to the page which displays all
+     *                       the Inpatient details.
+     *                       
+     */
 	@RequestMapping(value="/nurseHome" , method= RequestMethod.GET)   
-    public ModelAndView displayAllPatients() {
-		ModelAndView mav = new ModelAndView("nurseHome");
+    public ModelAndView displayAllInPatients() {
+		ModelAndView mav = new ModelAndView(WardConstants.NURSEHOME);
 		try {
-		mav.addObject("inpatients", wardService.getVisitsByPatientType("InPatient"));
+		    mav.addObject(WardConstants.INPATIENTS, wardService.getVisitsByPatientType("InPatient"));
 		} catch(ApplicationException e) {
-			  
+		    Logger.error(e);
+	    	mav.addObject(WardConstants.FAILURE_MESSAGE, WardConstants.FAILURE_MESSAGE);  	  
 		}
-		  return mav;
+		return mav;
+    }
+    /**
+     * Get all the ward details.
+     * 
+     * @return       List of ward details
+     * 
+     * @throws ApplicationException
+     */
+    public List<Integer> getWards() throws ApplicationException {
+        List<Integer> wards = new ArrayList<Integer>();
+        for(Ward wardIterator : wardService.displayAllWards(WardConstants.ALL)) {
+         	wards.add(wardIterator.getWardNumber());
+        }
+        return wards;
+    }
+ 
+    /**
+     * Allows to create rooms to the existing wards.
+     * 
+     * @param roomnumber Number of rooms to be added.
+     * 
+     * @return ModelAndView  redirects to the page which displays 
+     *                       the ward details.
+     */
+    @RequestMapping(value="/openAddMenu", method=RequestMethod.POST)
+    public ModelAndView openAddRooms(@RequestParam("number")String roomnumber) {
+	    ModelAndView mav = new ModelAndView(WardConstants.DISPLAYWARDS);
+	    try {
+            mav.addObject(WardConstants.WARDS , wardService.displayAllWards(WardConstants.ALL));
+            mav.addObject(WardConstants.ADDROOMSTOWARD , WardConstants.YES);
+            mav.addObject(WardConstants.WARDNUMBER , Integer.parseInt(roomnumber));
+            mav.addObject(WardConstants.WARD , new Ward());
+            mav.addObject(WardConstants.WARDIDS , getWards());
+        } catch(ApplicationException e) {
+		    Logger.error(e);
+	    	mav.addObject(WardConstants.FAILURE_MESSAGE, WardConstants.FAILURE_MESSAGE);  	  
+        }
+        return mav;
+    }
+  
+    /**
+     * Search a particular ward inforamtion with the help of ward number.
+     * 
+     * @param wardnumber ward number to be searched
+     * 
+     * @return ModelAndView  redirects to the page which displays all
+     *                       the Inpatient details.
+     */
+    @RequestMapping(value="/searchWard", method=RequestMethod.POST)
+    public ModelAndView searchWard(@RequestParam(WardConstants.WARDNUMBER)String wardnumber,HttpServletRequest request ) {
+	    Ward ward = null;
+	    ModelAndView mav = new ModelAndView("searchWard");
+	    try {
+	    	String admitPatient = request.getParameter("admitButton");
+	    	if(null != admitPatient) {
+	    		mav.addObject(WardConstants.ADMITBUTTON, WardConstants.YES);
+	    		mav.addObject("visitId",request.getParameter("visitId"));
+	    	}
+		    ward = wardService.searchWard(Integer.parseInt(wardnumber));
+            mav.addObject(WardConstants.WARDNUMBER , Integer.parseInt(wardnumber));
+            mav.addObject(WardConstants.WARD , ward);
+            mav.addObject("rooms", ward.getRooms());
+        } catch(ApplicationException e) {
+		    Logger.error(e);
+	    	mav.addObject(WardConstants.FAILURE_MESSAGE, WardConstants.FAILURE_MESSAGE);  	  	  
+        }
+        return mav;
     }
     
-  public List<Integer> getWardIds() throws ApplicationException {
-      List<Integer> wardIds = new ArrayList<Integer>();
-      for(Ward wardIterator : wardService.displayAllWards("All")) {
-      	wardIds.add(wardIterator.getWardNumber());
-      }
-      return wardIds;
-  }
+    /**
+     * Display all the rooms which are present in the ward.
+     * 
+     * @param ward ward information
+     * 
+     * @return     List of rooms present in the ward.
+     * 
+     * @throws ApplicationException
+     */
+    public List<Integer> getRooms(Ward ward) throws ApplicationException{
+	     List<Integer> roomIds = new ArrayList<Integer>();
+	     for(Room room : ward.getRooms()) {
+		     roomIds.add(room.getRoomNumber());
+	     }
+	     return roomIds;
+    }
   
-  @RequestMapping(value="/openAddMenu", method=RequestMethod.POST)
-  public ModelAndView openAddRooms(@RequestParam("number")String wardnumber) {
-	 ModelAndView mav = new ModelAndView("displayWards");
-	  try {
-        mav.addObject("wards" , wardService.displayAllWards("All"));
-        mav.addObject("addRoomsToWard" , "Yes");
-        mav.addObject("wardNumber" , Integer.parseInt(wardnumber));
-        mav.addObject("ward" , new Ward());
-        mav.addObject("wardIds" , getWardIds());
-  } catch(ApplicationException e) {
-	  
-  }
-  return mav;
-}
-  
-  @RequestMapping(value="/searchWard", method=RequestMethod.POST)
-  public ModelAndView searchWard(@RequestParam("wardNumber")String wardnumber) {
-	 Ward ward = new Ward();
-	 ModelAndView mav = new ModelAndView("searchWard");
-	  try {
-		ward = wardService.searchWard(Integer.parseInt(wardnumber));
-        mav.addObject("wardNumber" , Integer.parseInt(wardnumber));
-        mav.addObject("ward" , ward);
-        mav.addObject("rooms", ward.getRooms());
-  } catch(ApplicationException e) {
-	  
-  }
-  return mav;
-}
-  public List<Integer> getRoomIds(Ward ward) throws ApplicationException{
-	  List<Integer> roomIds = new ArrayList<Integer>();
-	  for(Room room : ward.getRooms()) {
-		  roomIds.add(room.getRoomNumber());
-	  }
-	  return roomIds;
-  }
-  
-  @RequestMapping(value="/AddRooms", method=RequestMethod.POST)
-  public ModelAndView addRoomsToWard(@RequestParam("wardNumber")String wardnumber,
-		   @RequestParam("noOfRooms")String noOfRooms) {
-	  Ward ward;
-	 ModelAndView mav = new ModelAndView("displayWards");
-	  try {
-      ward = wardService.searchWard(Integer.parseInt(wardnumber));
-      wardService.addRoomsToWard(ward, Integer.parseInt(noOfRooms));
-      mav.addObject("wards" , wardService.displayAllWards("All"));
-      mav.addObject("ward" , new Ward());
-      mav.addObject("wardIds" , getWardIds());
-      System.out.println("rooms in ward" + ward);
-      } catch(ApplicationException e) {
-    	  
-      }
-	  return mav;
-	  
-  }
-  
-  @RequestMapping(value="/wardOperation", method=RequestMethod.POST, params="SearchWard")
-  public ModelAndView SearchWard(@RequestParam("number")String wardnumber) {
-	  Ward ward = new Ward();
-	  System.out.println("wwwwwwwwwwwwwwwww" + wardnumber);
-	 ModelAndView mav = new ModelAndView("displayWards");
-	  try {
-      ward = 	wardService.searchWard(Integer.parseInt(wardnumber));
-      mav.addObject("wards" , wardService.displayAllWards("All"));
-      mav.addObject("ward" , new Ward());
-      mav.addObject("wardIds" , getWardIds());
-      System.out.println("rooms in ward" + ward);
-      } catch(ApplicationException e) {
-    	  
-      }
-	  return mav;
-	  
-  }
+    @RequestMapping(value="/AddRooms", method=RequestMethod.POST)
+    public ModelAndView addRoomsToWard(@RequestParam(WardConstants.WARDNUMBER)String wardnumber,
+   @RequestParam("noOfRooms")String noOfRooms) {
+    ModelAndView mav = new ModelAndView("searchWard");
+    try {
+            Ward ward = wardService.searchWard(Integer.parseInt(wardnumber));
+            wardService.addRoomsToWard(ward, Integer.parseInt(noOfRooms));
+    ward = wardService.searchWard(Integer.parseInt(wardnumber));
+            mav.addObject(WardConstants.WARDNUMBER , Integer.parseInt(wardnumber));
+            mav.addObject(WardConstants.WARD , ward);
+            mav.addObject("rooms", ward.getRooms());
+        } catch(ApplicationException e) {
+        Logger.error(e);
+            mav.addObject(WardConstants.FAILURE_MESSAGE, WardConstants.FAILURE_MESSAGE);      
+        }
+    return mav;
+ }
     
-
-    
+    /**
+     * Search a particular ward information with the specified ward number
+     * 
+     * @param wardnumber ward number to be searched
+     * 
+     * @return ModelAndView  redirects to the page which displays 
+     *                       the ward details.
+     */
+    @RequestMapping(value="/wardOperation", method=RequestMethod.POST, params="SearchWard")
+    public ModelAndView SearchWard(@RequestParam("number")String wardnumber) {
+	    Ward ward = new Ward();
+	    ModelAndView mav = new ModelAndView(WardConstants.DISPLAYWARDS);
+	    try {
+            ward = wardService.searchWard(Integer.parseInt(wardnumber));
+            mav.addObject(WardConstants.WARDS , wardService.displayAllWards(WardConstants.ALL));
+            mav.addObject(WardConstants.WARD , new Ward());
+            mav.addObject(WardConstants.WARDIDS , getWards());
+        } catch(ApplicationException e) {
+    	    Logger.error(e);
+            mav.addObject(WardConstants.FAILURE_MESSAGE, WardConstants.FAILURE_MESSAGE);
+        }
+	    return mav;  
+    }   
 }
