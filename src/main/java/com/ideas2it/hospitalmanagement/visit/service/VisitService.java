@@ -27,6 +27,8 @@ public interface VisitService {
      * </p>
      *
      * @param visit visit object type contains the visit details that needs to be added.
+     * @param patientId Integer with patientId value from which the Patient Object is obtained.
+     * @param physicianId Integer with physicianId value from which the physician Object is obtained.
      * @return boolean returns true when visit object added successfully and return false when addition
      *         operation fails .
      * @exception throws Application Exception when the visit Object is not inserted due to any
@@ -91,7 +93,7 @@ public interface VisitService {
      * searched visit Object.
      * </p>
      *
-     * @param visitId a int datatype which contains the visit id that needs to be searched.
+     * @param patientId a int datatype which contains the patientId that needs to be searched.
      * @return returns visit object when id is found and null when not found.
      * @exception throws Application Exception when the visit Object is not searched due to any
      *            connection error or visitId not found.
@@ -104,7 +106,8 @@ public interface VisitService {
      * searched visit Object.
      * </p>
      *
-     * @param visitId a int datatype which contains the visit id that needs to be searched.
+     * @param patientId a int datatype which contains the patientId that needs to be searched.
+     * @param session HttpSession which is used to set the Patient Object to session level.
      * @return returns visit object when id is found and null when not found.
      * @exception throws Application Exception when the visit Object is not searched due to any
      *            connection error or visitId not found.

@@ -74,6 +74,8 @@ public class VisitController {
      * </p>
      *
      * @param visit visit Object which is added to the Database.
+     * @param patientId Integer with patientId value from which the Patient Object is obtained.
+     * @param physicianId Integer with physicianId value from which the physician Object is obtained.
      * @return ModelAndView Object which redirects to the Search visit Page or Error Page.
      */
     @RequestMapping(value = Constants.ADD_VISIT, method = { RequestMethod.POST, RequestMethod.GET })
@@ -101,6 +103,7 @@ public class VisitController {
      *
      * @param visitId Integer with visitId value from which the visit Object is obtained from the
      *                Database.
+     * @param model a Model object which is used to add the Visit as an attribute to the view Layer.
      * @return ModelAndView Object which redirects to the Create visit Page with the visitObject or to
      *         the Error Page.
      */
@@ -122,7 +125,7 @@ public class VisitController {
      * This method is called when the request value is updateVisit and this is the Post method which
      * contains the visit Object Details that needs to be updated in the Database. It redirects to the
      * Search visit page to display the Updated visit Object when successfully Updated or redirects to
-     * the Error Page when any failure in Modifing the visit Object to Database.This method returns the
+     * the Error Page when any failure in Modifying the visit Object to Database.This method returns the
      * value as ModelAndView Object.
      * </p>
      *
@@ -152,6 +155,7 @@ public class VisitController {
      *
      * @param visitId Integer with visitId value from which the visit Object is obtained from the
      *                Database.
+     * @param session HttpSession which is used to set the Patient Object to session level.
      * @return ModelAndView Object which redirects to the Search visit Page with the visit Object or to
      *         the Error Page.
      */
@@ -201,6 +205,7 @@ public class VisitController {
      *
      * @param visitId Integer with visitId value from which the visit Object is obtained from the
      *                Database.
+     * @param session HttpSession which is used to set the Patient Object to session level.
      * @return ModelAndView Object which redirects to the Search visit Page with the visit Object or to
      *         the Error Page.
      */
@@ -234,8 +239,10 @@ public class VisitController {
      * occurs. This method returns the value as ModelAndView Class Object.
      * </p>
      *
-     * @param visitId Integer with visitId value from which the visit Object is obtained from the
+     * @param patientId Integer with patientId value from which the Patient Object is obtained from the
      *                Database.
+     * @param session HttpSession which is used to set the Patient Object to session level.
+     * @param model Model Object of the ModelAndView class.
      * @return ModelAndView Object which redirects to the Search visit Page with the visit Object or to
      *         the Error Page.
      */

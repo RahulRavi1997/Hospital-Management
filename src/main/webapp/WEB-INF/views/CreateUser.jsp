@@ -7,7 +7,7 @@
     <title>Admin page</title>
   </head>
   <body>
-    <jsp:include page="header.jsp"/>
+    <jsp:include page="Header.jsp"/>
     <div id="wrapper">
       <!-- Sidebar -->
       <div id="sidebar-wrapper">
@@ -68,6 +68,6 @@
       </div>
       <!-- /#page-content-wrapper -->
     </div>
-    <jsp:include page="footer.jsp"/>
+    <jsp:include page="Footer.jsp"/>
   </body>
 </html>

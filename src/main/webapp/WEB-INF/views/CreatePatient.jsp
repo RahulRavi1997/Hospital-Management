@@ -5,10 +5,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
-    <jsp:include page="access.jsp"/>
+    <jsp:include page="Access.jsp"/>
   </head>
   <body>
-    <jsp:include page="header.jsp"/>
+    <jsp:include page="Header.jsp"/>
     <div id="wrapper">
       <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
@@ -175,5 +175,5 @@
       </div>
     </div>
   </body>
-  <jsp:include page="footer.jsp"/>
+  <jsp:include page="Footer.jsp"/>
 </html>

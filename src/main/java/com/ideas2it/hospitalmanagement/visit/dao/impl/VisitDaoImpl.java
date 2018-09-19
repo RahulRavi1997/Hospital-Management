@@ -111,13 +111,7 @@ public class VisitDaoImpl extends GenericDao implements VisitDao {
     }
 
     /**
-     * <p>
-     * Method to search the visit Id in the database.This method is using the visitId to search the
-     * visit and is searched in the database.
-     * </p>
-     *
-     * @param visitId a int datatype which contains the visit id that needs to be searched.
-     * @return visit returns visit object when id is found and null when not found.
+     * {@inheritDoc}
      */
     public Visit searchVisitByPatientId(final Integer patientId) throws ApplicationException {
         Session session = null;

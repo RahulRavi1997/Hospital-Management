@@ -7,7 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import com.google.gson.Gson;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.ideas2it.hospitalmanagement.commons.Constants;
 import com.ideas2it.hospitalmanagement.commons.enums.Role;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
@@ -73,7 +74,7 @@ public class UserController {
                     return new ModelAndView(Constants.ADMIN, Constants.USER_FAIL, Constants.MESSAGE);
                 }
             } else {
-                User user = new User();
+                final User user = new User();
                 user.setEmail(email);
                 user.setPassword(password);
                 if (null == role) {
@@ -89,7 +90,7 @@ public class UserController {
                     return new ModelAndView(Constants.ADMIN, Constants.MESSAGE, Constants.SIGN_UP_FAIL_MESSAGE);
                 }
             }
-        } catch (ApplicationException e) {
+        } catch (final ApplicationException e) {
             Logger.error(e);
             return new ModelAndView(Constants.LOGIN_JSP, Constants.SIGN_UP_FAIL, Constants.USER_ADD_EXCEPTION);
         }
@@ -130,10 +131,6 @@ public class UserController {
             return null;
         }
     }
-
-    /**
-     *
-     */
 
     /**
      * This Method is used to redirect user to respective login pages based on their roles
@@ -268,17 +265,6 @@ public class UserController {
         }
     }
 
-    /**
-     * <p>
-     * Method to update existing User Details. Returns true if the entry is modified successfully, else
-     * returns false if the entry is not found.
-     * </p>
-     *
-     * @param id an Integer indicating the id of the user to be modified.
-     * @return modelAndView a ModelAndView object which is used to add attributes to a model and
-     *         redirect it to a view such as a jsp page.
-     */
-    
     /**
      * <p>
      * Method to update existing User Details. Returns true if the entry is modified successfully, else

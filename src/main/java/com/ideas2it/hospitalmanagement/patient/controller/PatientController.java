@@ -54,7 +54,7 @@ public class PatientController {
      * Class Object contains the Model having the Patient object with List as Address Object.
      * </p>
      *
-     * @param model a Model object which is used to add the patient as an attribute to the view Layer.
+     * @param model a Model object which is used to add the genders as an attribute to the view Layer.
      * @return ModelAndView Object which redirects to the Create Patient Page.
      */
     @RequestMapping(value = Constants.CREATE_PATIENT, method = RequestMethod.GET)
@@ -103,6 +103,7 @@ public class PatientController {
      *
      * @param patientId Integer with PatientId value from which the Patient Object is obtained from the
      *                  Database.
+     * @param model a Model object which is used to add the genders as an attribute to the view Layer.
      * @return ModelAndView Object which redirects to the Create Patient Page with the PatientObject or
      *         to the Error Page.
      */
@@ -155,7 +156,7 @@ public class PatientController {
      * @param patientId Integer with patientId value from which the Patient Object is obtained from the
      *                  Database.
      * @return ModelAndView Object which redirects to the Display Patient Page with the Patient Object
-     *         or to the Error Page.
+     *         or to the Error Page.Search
      */
     @RequestMapping(value = Constants.DELETE_PATIENT, method = { RequestMethod.POST, RequestMethod.GET })
     public ModelAndView removePatient(@RequestParam(Constants.ID) final Integer patientId) {
@@ -181,11 +182,13 @@ public class PatientController {
      *
      * @param patientId Integer with patientId value from which the Patient Object is obtained from the
      *                  Database.
-     * @return ModelAndView Object which redirects to the Search Patient Page with the Patient Object or
+     * @param request HttpRequest which is used to set the Patient Object to session level.
+     * @return ModelAndView Object whiSearchch redirects to the Search Patient Page with the Patient Object or
      *         to the Error Page.
      */
     @RequestMapping(value = Constants.SEARCH_PATIENT, method = { RequestMethod.POST, RequestMethod.GET })
-    public ModelAndView searchPatient(@RequestParam(Constants.ID) final Integer patientId, final HttpServletRequest request) {
+    public ModelAndView searchPatient(@RequestParam(Constants.ID) final Integer patientId,
+            final HttpServletRequest request) {
 
         try {
             final Patient patient = patientService.getPatientById(patientId);
@@ -231,7 +234,7 @@ public class PatientController {
      *
      * @param patientId Integer with PatientId value from which the Patient Object is obtained from the
      *                  Database.
-     * @return ModelAndView Object which redirects to the SearchPatient Page with the PatientObject or
+     * @return ModelAndView Object which redirects to the DisplayPatient Page with the List of PatientObject or
      *         to the Error Page.
      */
     @RequestMapping(value = Constants.ACTIVATE_PATIENT, method = { RequestMethod.POST, RequestMethod.GET })
@@ -246,8 +249,21 @@ public class PatientController {
         }
     }
 
+    /**
+     * <p>
+     * This method is called when the request value is searchPatientByName and this is the Get method which
+     * gets the name from which the Patient is searched and returns the List of patients in that name.
+     * This method is used for the Ajax function to get the List of Patients in String format and the
+     * given data is in JSON format.
+     * </p>
+     *
+     * @param name String name which is used to searched the Patients with that name.
+     * @return searchedPatients String format which contains the list of Patients in JSON
+     *         Format.
+     */
     @RequestMapping(value = Constants.SEARCH_PATIENT_BY_NAME, produces = { Constants.JSON_FORMAT,
-            Constants.XML_FORMAT }, consumes = Constants.JSON_FORMAT, headers = Constants.JSON_HEADERS, method = RequestMethod.GET)
+            Constants.XML_FORMAT }, consumes = Constants.JSON_FORMAT, headers = Constants.JSON_HEADERS,
+            method = RequestMethod.GET)
     @ResponseBody
     public String searchPatientByName(@RequestParam(Constants.NAME) final String name) {
         String searchedPatients = null;
