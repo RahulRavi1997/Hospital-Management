@@ -90,8 +90,8 @@
                         <th>DOB</th>
                         <th>Mobile Number</th>
                         <th>Age</th>
-                        <th>#</th>
-                        <th>#</th>
+                        <th>Action</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody id="myTable">
