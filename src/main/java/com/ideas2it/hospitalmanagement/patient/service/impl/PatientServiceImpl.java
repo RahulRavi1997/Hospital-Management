@@ -11,7 +11,7 @@ import com.ideas2it.hospitalmanagement.visit.model.Visit;
 import com.ideas2it.hospitalmanagement.visit.service.VisitService;
 
 /**
- * PatientServiceImpl is the Service class implementing the EmployeeService interface and this
+ * PatientServiceImpl is the Service class implementing the PatientService interface and this
  * implements all the methods of the interface program.
  * <p>
  * It processes all the business logic operations and calls the Dao class to do the data accessing

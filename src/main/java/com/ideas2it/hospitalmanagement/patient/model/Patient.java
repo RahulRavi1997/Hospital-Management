@@ -10,8 +10,8 @@ import com.ideas2it.hospitalmanagement.address.model.Address;
 import com.ideas2it.hospitalmanagement.commons.Constants;
 
 /**
- * Patient class is the Patient class is having the getters and setter methods which is used to get
- * the values from the user. This class acts as an Model for the Patient Details.
+ * Patient class is the model class containing the getters and setter methods for Patient Model
+ * which is used to getthe values from the user.
  *
  * @author Arul Murugan
  * @version 1.0

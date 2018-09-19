@@ -11,7 +11,7 @@
     <META HTTP-EQUIV="Expires" CONTENT="-1">
   </head>
   <body>
-    <jsp:include page="header.jsp"/>
+    <jsp:include page="Header.jsp"/>
     <div id="wrapper">
     <div id="sidebar-wrapper">
       <ul class="sidebar-nav">
@@ -198,6 +198,6 @@
       </div>
       </div>
     </div>
-    <jsp:include page="footer.jsp"/>
+    <jsp:include page="Footer.jsp"/>
   </body>
 </html>

@@ -9,13 +9,13 @@ package com.ideas2it.hospitalmanagement.commons;
  */
 public final class Constants {
 
-	private Constants() {
-	}
+    private Constants() {
+    }
 
 
-	public static final String DISPLAY_PHYSICIANS_BY_SPECIALISATIONS_MAPPING = "/displayPhysiciansBySpecialisation";
-	public static final String SPECIALISATION_NAME = "specialisationName";
-	public static final String LOGOUT_PATH = "/logout";
+    public static final String DISPLAY_PHYSICIANS_BY_SPECIALISATIONS_MAPPING = "/displayPhysiciansBySpecialisation";
+    public static final String SPECIALISATION_NAME = "specialisationName";
+    public static final String LOGOUT_PATH = "/logout";
     public static final String ID_NOT_NULL = "Input Id is Null.";
     public static final String REVERSED_DATE_FORMAT = "yyyy-MM-dd";
     public static final String LOGGER_PROPERTIES_LOCATION = "src/main/resources/log4j.xml";
@@ -52,9 +52,9 @@ public final class Constants {
     public static final String CREATE_PHYSICIAN_JSP = "CreatePhysician";
     public static final String PHYSICIANS = "physicians";
     public static final String DISPLAY_PHYSICIAN_JSP = "DisplayPhysicians";
-    public static final String ERROR_JSP = "error";
+    public static final String ERROR_JSP = "Error";
     public static final String ERROR_MESSAGE = "errorMessage";
-    public static final String PHYSICIAN = "physician";
+    public static final String PHYSICIAN = "Physician";
     public static final String SEARCH_PHYSICIAN_JSP = "SearchPhysician";
     public static final String ID = "id";
     public static final String FAIL_MESSAGE = "failMessage";
@@ -184,11 +184,11 @@ public final class Constants {
     public static final String FORM_HEADER = "content-type=application/x-www-form-urlencoded";
     public static final String DISPLAY_USERS_MAPPING = "displayUserAutocomplete";
     public static final String INDEX_MAPPING = "/index";
-    public static final String ADMIN_INDEX = "admin";
-    public static final String PHYSICIAN_INDEX = "physician";
-    public static final String NURSE_INDEX = "nurse";
-    public static final String RECEPTIONIST_INDEX = "receptionist";
-    public static final String ACCESS_DENIED_JSP = "accessDenied";
+    public static final String ADMIN_INDEX = "Admin";
+    public static final String PHYSICIAN_INDEX = "Physician";
+    public static final String NURSE_INDEX = "Nurse";
+    public static final String RECEPTIONIST_INDEX = "Receptionist";
+    public static final String ACCESS_DENIED_JSP = "AccessDenied";
     public static final Object ADMIN_ROLE = "ROLE_ADMIN";
     public static final Object PHYSICIAN_ROLE = "ROLE_PHYSICIAN";
     public static final Object NURSE_ROLE = "ROLE_NURSE";
@@ -212,4 +212,7 @@ public final class Constants {
     public static final String JSON_FORMAT = "application/json";
     public static final String XML_FORMAT = "application/xml";
     public static final String JSON_HEADERS = "content-type=application/x-www-form-urlencoded";
+    public static final String INVALID_TYPE = "Invalid type: ";
+    public static final String INVALID_GENDER = "Invalid Gender: ";
+    public static final String PERCENTAGE = "%";
 }

@@ -7,10 +7,10 @@
     <link rel="shortcut icon" href="images/i2i.png" />
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
     <META HTTP-EQUIV="Expires" CONTENT="-1">
-    <jsp:include page="access.jsp"/>
+    <jsp:include page="Access.jsp"/>
   </head>
   <body>
-    <jsp:include page="header.jsp"/>
+    <jsp:include page="Header.jsp"/>
     <div id="wrapper">
       <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
@@ -145,5 +145,5 @@
       </div>
     </div>
   </body>
-  <jsp:include page="footer.jsp"/>
+  <jsp:include page="Footer.jsp"/>
 </html>

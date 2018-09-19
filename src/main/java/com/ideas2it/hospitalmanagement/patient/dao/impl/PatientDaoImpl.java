@@ -141,7 +141,7 @@ public class PatientDaoImpl extends GenericDao implements PatientDao {
         try {
             session = super.getSession();
             final Query query = session.createQuery(PATIENTS_IN_NAMES);
-            query.setParameter(NAME, name + "%");
+            query.setParameter(NAME, name + Constants.PERCENTAGE);
             return query.list();
         } catch (final ApplicationException e) {
             Logger.error(Constants.PATIENT_DISPLAY_EXCEPTION, e);

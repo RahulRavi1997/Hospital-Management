@@ -1,5 +1,19 @@
 package com.ideas2it.hospitalmanagement.commons.enums;
 
+import com.ideas2it.hospitalmanagement.commons.Constants;
+
+/**
+ * Gender Class is the Enumeration class contains the constant
+ * values of types of Gender that can be stored in this Application.
+ * <ul>
+ * <li>Male></li>
+ * <li>Female</li>
+ * <li>Other</li>
+ * </ul>
+ *
+ * @author Arul Murugan
+ * @version 1.0
+ */
 public enum Gender {
 
     Male("Male"), Female("Female"), Other("Other");
@@ -16,7 +30,7 @@ public enum Gender {
                 return gender;
             }
         }
-        throw new IllegalArgumentException("Invalid gender: " + value);
+        throw new IllegalArgumentException(Constants.INVALID_GENDER + value);
     }
 
     public String toValue() {

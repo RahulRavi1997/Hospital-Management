@@ -80,7 +80,8 @@ public interface VisitDao {
      * visit and is searched in the database.
      * </p>
      *
-     * @param visitId a int datatype which contains the visit id that needs to be searched.
+     * @param patientId a int datatype which contains the patientId and corresponding visit
+     *             is searched.
      * @return visit returns visit object when id is found and null when not found.
      */
     public Visit searchVisitByPatientId(final Integer patientId) throws ApplicationException;
