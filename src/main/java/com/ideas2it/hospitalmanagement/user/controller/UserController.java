@@ -104,29 +104,39 @@ public class UserController {
 			}
 		} catch (ApplicationException e) {
 			Logger.error(e);
-			return new ModelAndView(Constants.LOGIN_JSP, Constants.SIGN_UP_FAIL, Constants.USER_ADD_EXCEPTION);
+			return new ModelAndView(Constants.LOGIN_JSP, Constants.SIGN_UP_FAIL,
+					Constants.USER_ADD_EXCEPTION);
 		}
 	}
 
 	/**
-	 * This Method is used to display all details of the users.
+	 * This Method is used to display all details of the users in JSON format.
 	 *
-	 * @return response a HttpServletResponse object which is used to redirect or
+	 * @return String a String object which is used to redirect or
 	 *         send text output.
 	 */
 	@RequestMapping(value = Constants.DISPLAY_USERS_MAPPING, produces = { Constants.JSON_TYPE,
-			Constants.XML_TYPE }, consumes = Constants.JSON_TYPE, headers = Constants.FORM_HEADER, method = RequestMethod.GET)
-	private @ResponseBody String displayAllUsers(Model model, @RequestParam(Constants.QUERY) String query) {
+			Constants.XML_TYPE }, consumes = Constants.JSON_TYPE,
+			headers = Constants.FORM_HEADER, method = RequestMethod.GET)
+	private @ResponseBody String displayAllUsers(Model model,
+			@RequestParam(Constants.QUERY) String query) {
 		try {
-			return new Gson().toJson(userService.retrieveUsersByQuery(query, Role.PHYSICIAN.toString()));
+			return new Gson().toJson(userService.retrieveUsersByQuery(
+					query, Role.PHYSICIAN.toString()));
 		} catch (ApplicationException e) {
 			Logger.error(e);
 			return null;
 		}
 	}
 
+	/**
+	 * This Method is used to display details of single user in json Format.
+	 *
+	 * @return String a String object used to redirect it to a view such as a jsp page.
+	 */
 	@RequestMapping(value = Constants.SEARCH_USER_MAPPING, produces = { Constants.JSON_TYPE,
-			Constants.XML_TYPE }, consumes = Constants.JSON_TYPE, headers = Constants.FORM_HEADER, method = RequestMethod.GET)
+			Constants.XML_TYPE }, consumes = Constants.JSON_TYPE, headers = Constants.FORM_HEADER,
+			method = RequestMethod.GET)
 	private @ResponseBody String searchUser(Model model, @RequestParam(Constants.EMAIL) String email) {
 		try {
 			return new Gson().toJson(userService.retrieveUsersByQuery(email, Role.ADMIN.toString()));
@@ -136,6 +146,13 @@ public class UserController {
 		}
 	}
 
+	/**
+	 * This Method is used to redirect user to respective login pages based on their
+	 * roles
+	 *
+	 * @return String a String object which is used to redirect or
+	 *         send text output.
+	 */
 	@RequestMapping(value = Constants.INDEX_MAPPING, method = RequestMethod.GET)
 	public String userInfo(Model model, Principal principal, HttpServletRequest request) {
 		model.addAttribute(Constants.EMAIL, principal.getName());
@@ -146,21 +163,31 @@ public class UserController {
 		HttpSession session = request.getSession();
 		session.setAttribute(Constants.EMAIL, principal.getName());
 		session.setMaxInactiveInterval(Constants.SESSION_ACTIVE_INTERVAL);
-		Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>) SecurityContextHolder
-				.getContext().getAuthentication().getAuthorities();
-		if (authorities.iterator().next().toString().equals(Constants.ADMIN_ROLE)) {
+		Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>)
+				SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+		if (authorities.iterator().next().toString().
+				equals(Constants.ADMIN_ROLE)) {
 			return Constants.ADMIN_INDEX;
-		} else if (authorities.iterator().next().toString().equals(Constants.PHYSICIAN_ROLE)) {
+		} else if (authorities.iterator().next().toString().
+				equals(Constants.PHYSICIAN_ROLE)) {
 			return Constants.PHYSICIAN_INDEX;
-		} else if (authorities.iterator().next().toString().equals(Constants.NURSE_ROLE)) {
+		} else if (authorities.iterator().next().toString().
+				equals(Constants.NURSE_ROLE)) {
 			return Constants.NURSE_INDEX;
-		} else if (authorities.iterator().next().toString().equals(Constants.RECEPTIONIST_ROLE)) {
+		} else if (authorities.iterator().next().toString().
+				equals(Constants.RECEPTIONIST_ROLE)) {
 			return Constants.RECEPTIONIST_INDEX;
 		} else {
 			return Constants.ACCESS_DENIED_JSP;
 		}
 	}
 
+	/**
+	 * This Method is used to display all details of the users.
+	 *
+	 * @return modelAndView a ModelAndView object which is used to add attributes to
+	 *         a model and redirect it to a view such as a jsp page.
+	 */
 	@RequestMapping(Constants.ACCESS_DENIED_MAPPING)
 	public String accessDenied(Model model, Principal principal) {
 		if (principal != null) {
@@ -169,8 +196,19 @@ public class UserController {
 		return Constants.ACCESS_DENIED_JSP;
 	}
 
-	@RequestMapping(value = { Constants.LOGIN_PATH, Constants.EMPTY_URI, "/logout", Constants.LOGOUT_SUCCESS_MAPPING })
-	public String redirectLogin(Model model, Principal principal, HttpServletRequest request, HttpServletResponse response) {
+	/**
+	 * This Method is used to redirect the user to Login page.
+	 *
+	 * @param response a HttpServletResponse object which is used to redirect or
+	 *        send text output.
+	 *        
+	 * @return modelAndView a ModelAndView object which is used to add attributes to
+	 *         a model and redirect it to a view such as a jsp page.
+	 */
+	@RequestMapping(value = { Constants.LOGIN_PATH, Constants.EMPTY_URI, Constants.LOGOUT_PATH,
+			Constants.LOGOUT_SUCCESS_MAPPING })
+	public String redirectLogin(Model model, Principal principal, HttpServletRequest request,
+			HttpServletResponse response) {
 		if (principal == null) {
 		    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		    if (auth != null){
@@ -182,6 +220,11 @@ public class UserController {
 		}
 	}
 
+	/**
+	 * This Method is used to redirect user to Create User Jsp.
+	 *
+	 * @return String a String indicating the view for User Creation.
+	 */
 	@RequestMapping(value = Constants.CREATE_USER_MAPPING)
 	public String redirectCreateUser(Model model) {
 		model.addAttribute(Constants.ROLES, Role.values());
@@ -192,8 +235,8 @@ public class UserController {
 	/**
 	 * This Method is used to display all details of the users.
 	 *
-	 * @return response a HttpServletResponse object which is used to redirect or
-	 *         send text output.
+	 * @return modelAndView a ModelAndView object which is used to add attributes to
+	 *         a model and redirect it to a view such as a jsp page.
 	 */
 	@RequestMapping(value = Constants.DISPLAY_USER_MAPPING, method = RequestMethod.GET)
 	private ModelAndView displayAllUsers(Model model) {
@@ -222,9 +265,11 @@ public class UserController {
 		try {
 			if (userService.restoreUser(id)) {
 				model.addAttribute(Constants.MESSAGE, Constants.USER_RESTORE_SUCCESS_MESSAGE);
-				return new ModelAndView(Constants.DISPLAY_USER_JSP, Constants.USERS, userService.retrieveAllUsers());
+				return new ModelAndView(Constants.DISPLAY_USER_JSP, Constants.USERS,
+						userService.retrieveAllUsers());
 			} else {
-				return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE, Constants.USER_EDIT_EXCEPTION);
+				return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
+						Constants.USER_EDIT_EXCEPTION);
 			}
 		} catch (ApplicationException e) {
 			Logger.error(e);
@@ -248,7 +293,8 @@ public class UserController {
 	private ModelAndView modifyUser(@RequestParam(Constants.ID) int id, Model model) {
 		try {
 			model.addAttribute(Constants.ROLES, Role.values());
-			return new ModelAndView(Constants.CREATE_USER_JSP, Constants.USER, userService.retrieveUserById(id));
+			return new ModelAndView(Constants.CREATE_USER_JSP, Constants.USER,
+					userService.retrieveUserById(id));
 		} catch (ApplicationException e) {
 			Logger.error(e);
 			return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
@@ -272,10 +318,12 @@ public class UserController {
 
 		try {
 			if (!userService.modifyUser(user)) {
-				return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE, Constants.EDIT_FAILED);
+				return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
+						Constants.EDIT_FAILED);
 			}
 			model.addAttribute(Constants.MESSAGE, Constants.USER_UPDATE_SUCCESS_MESSAGE);
-			return new ModelAndView(Constants.DISPLAY_USER_JSP, Constants.USERS, userService.retrieveAllUsers());
+			return new ModelAndView(Constants.DISPLAY_USER_JSP, Constants.USERS,
+					userService.retrieveAllUsers());
 		} catch (ApplicationException e) {
 			Logger.error(e);
 			return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
@@ -296,10 +344,12 @@ public class UserController {
 	private ModelAndView removeUser(@RequestParam(Constants.ID) int idToDelete, Model model) {
 		try {
 			if (!userService.deleteUser(idToDelete)) {
-				return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE, Constants.USER_DELETE_EXCEPTION);
+				return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
+						Constants.USER_DELETE_EXCEPTION);
 			}
 			model.addAttribute(Constants.MESSAGE, Constants.USER_DELETE_SUCCESS_MESSAGE);
-			return new ModelAndView(Constants.DISPLAY_USER_JSP, Constants.USERS, userService.retrieveAllUsers());
+			return new ModelAndView(Constants.DISPLAY_USER_JSP, Constants.USERS,
+					userService.retrieveAllUsers());
 		} catch (ApplicationException e) {
 			Logger.error(e);
 			return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,

@@ -21,6 +21,8 @@
         <intercept-url pattern="/.css" access="permitAll()" />
         <intercept-url pattern="/.js" access="permitAll()" />
         <intercept-url pattern="/fonts/" access="permitAll()" />
+        <intercept-url pattern="/searchUser" access="permitAll()" />
+        
         
         <intercept-url pattern="/index"
             access="hasAnyRole('ROLE_NURSE', 'ROLE_ADMIN', 'ROLE_RECEPTIONIST', 'ROLE_PHYSICIAN')" />

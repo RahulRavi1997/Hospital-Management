@@ -66,8 +66,8 @@ public class PhysicianController {
         addresses.add(new Address());
         addresses.add(new Address());
         physician.setAddresses(addresses);
-        model.addAttribute("genders", Gender.values());
-        model.addAttribute("specialisations", Specialisation.values());
+        model.addAttribute(Constants.GENDERS, Gender.values());
+        model.addAttribute(Constants.SPECIALISATIONS, Specialisation.values());
         return new ModelAndView(Constants.CREATE_PHYSICIAN_JSP, Constants.PHYSICIAN, physician);
     }
 
@@ -85,7 +85,7 @@ public class PhysicianController {
      */
     @RequestMapping(value=Constants.ADD_PHYSICIAN_MAPPING, method=RequestMethod.POST)
     private ModelAndView createPhysician(@ModelAttribute Physician physician, Model model,
-    		@RequestParam(value="UserEmail") String userEmail) {
+    		@RequestParam(value=Constants.USER_EMAIL) String userEmail) {
         try {
         	User user = physicianService.retrieveUserByEmail(userEmail);
         	if (null != user) {
@@ -153,8 +153,8 @@ public class PhysicianController {
     private ModelAndView modifyPhysician(Model model,
     		@RequestParam(Constants.ID) int id) {
         try {
-            model.addAttribute("genders", Gender.values());
-            model.addAttribute("specialisations", Specialisation.values());
+            model.addAttribute(Constants.GENDERS, Gender.values());
+            model.addAttribute(Constants.SPECIALISATIONS, Specialisation.values());
             return new ModelAndView(Constants.CREATE_PHYSICIAN_JSP,Constants.
                     PHYSICIAN, physicianService.retrievePhysicianById(id));
         } catch (ApplicationException e) {
@@ -256,7 +256,7 @@ public class PhysicianController {
     /**
      * This Method is used to display all details of the physicians.
      *
-     * @return response a HttpServletResponse com.google.gson.internal.bind.TypeAdaptersobject which is used to redirect
+     * @return response a HttpServletResponse which is used to redirect
      *                 or send text output.
      *
      * @return modelAndView a ModelAndView object which is used to add
@@ -277,11 +277,21 @@ public class PhysicianController {
         }
     }
     
-    @RequestMapping(value="/displayPhysiciansBySpecialisation",
-    		produces={"application/json","application/xml"}, consumes="application/json",
-   	headers = "content-type=application/x-www-form-urlencoded", method = RequestMethod.GET)
+    
+    /**
+     * This Method is used to display all details of the physicians IN JSON format.
+     *
+     * param specialisation a String indicating the type of specialisation for which
+     * the doctors are retrieved.
+     *
+     * @return String a String object which is used to redirect to a view
+     *                       such as a jsp page.
+     */
+    @RequestMapping(value=Constants.DISPLAY_PHYSICIANS_BY_SPECIALISATIONS_MAPPING,
+    		produces={Constants.JSON_TYPE,Constants.XML_TYPE}, consumes="application/json",
+   	headers = Constants.FORM_HEADER, method = RequestMethod.GET)
     private @ResponseBody String displayPhysiciansBySpecialisation(Model model,
-    		@RequestParam("specialisationName") String specialisation) {
+    		@RequestParam(Constants.SPECIALISATION_NAME) String specialisation) {
         try {
         	List<Physician> physicians = physicianService.retrievePhysiciansBySpecialisation(specialisation);        
 
