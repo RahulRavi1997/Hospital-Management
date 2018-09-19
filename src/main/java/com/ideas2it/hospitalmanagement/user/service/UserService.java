@@ -116,8 +116,30 @@ public interface UserService {
      * @throws ApplicationException An exception created for catching exceptions that occur while
      *                              displaying all users.
      */
+
+    /**
+     * <p>
+     * This Method is used to retrieve an list of all selected users.
+     * </p>
+     * 
+     * @param ids an Array of integers containing the id of users that are to be retrieved.
+     * @return users A list of user Objects returned with the required set of Users.
+     * @throws ApplicationException An exception created for catching exceptions that occur while
+     *                              displaying all users.
+     */
     public List<User> retrieveUsersByIds(Integer[] ids) throws ApplicationException;
 
+    /**
+     * <p>
+     * This Method is used to retrieve an list of all selected users.
+     * </p>
+     * 
+     * @param query a String indicating the query for which the email id is to be matched.
+     * @param role  a String indicating the role of the user to be matched in the database query.
+     * @return users A list of user Objects returned with the required set of Users.
+     * @throws ApplicationException An exception created for catching exceptions that occur while
+     *                              displaying all users.
+     */
     public List<User> retrieveUsersByQuery(String query, String role) throws ApplicationException;
 
 }

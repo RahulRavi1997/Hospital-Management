@@ -135,6 +135,9 @@ public class UserDaoImpl extends GenericDao implements UserDao {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public List<User> getUsersByQuery(final String autoCompleteQuery, final String role) throws ApplicationException {
 
         try {

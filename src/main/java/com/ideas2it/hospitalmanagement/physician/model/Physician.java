@@ -11,6 +11,15 @@ import com.ideas2it.hospitalmanagement.commons.Constants;
 import com.ideas2it.hospitalmanagement.user.model.User;
 import com.ideas2it.hospitalmanagement.utils.DateUtil;
 
+/**
+ * Physician is an Entity class which is used to store and retrieve the details of a
+ * physician. A Physician can have multiple addresses and a user Login. 
+ * Active field is provided to implement soft deletion.
+ * 
+ * @author Rahul Ravi
+ * @version 1.0
+ *
+ */
 public class Physician {
 
     private Integer id;

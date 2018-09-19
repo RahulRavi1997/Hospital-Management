@@ -212,4 +212,6 @@ public final class Constants {
     public static final String JSON_FORMAT = "application/json";
     public static final String XML_FORMAT = "application/xml";
     public static final String JSON_HEADERS = "content-type=application/x-www-form-urlencoded";
+    public static final String INVALID_ROLE = "Invalid role: ";
+    public static final String INVALID_SPECIALISATION = "Invalid specialisation: ";
 }

@@ -12,6 +12,13 @@ import com.ideas2it.hospitalmanagement.logger.Logger;
 import com.ideas2it.hospitalmanagement.physician.dao.PhysicianDao;
 import com.ideas2it.hospitalmanagement.physician.model.Physician;
 
+/**
+ * PhysicianDaoImpl is a Dao Implementation Class used to implement Database related Operations. All
+ * the methods in this class throw a custom Application Exception.
+ * 
+ * @author Rahul Ravi
+ * @version 1.0
+ */
 public class PhysicianDaoImpl extends GenericDao implements PhysicianDao {
 
     String PHYSICIAN_IN_QUERY = "from Physician where id in (:ids)";

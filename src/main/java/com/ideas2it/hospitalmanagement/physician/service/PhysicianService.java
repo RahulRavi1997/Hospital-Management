@@ -6,6 +6,14 @@ import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.physician.model.Physician;
 import com.ideas2it.hospitalmanagement.user.model.User;
 
+/**
+ * PhysicianService is a Service Class used to implement Business-Logic. All the methods in this
+ * class throw a custom Application Exception. Implementation beans are injected in runtime using
+ * Spring IOC.
+ * 
+ * @author Rahul Ravi
+ * @version 1.0
+ */
 public interface PhysicianService {
 
     /**
@@ -104,11 +112,8 @@ public interface PhysicianService {
     public List<Physician> retrieveAllPhysicians() throws ApplicationException;
 
     /**
-     * <p>
-     * This Method is used to retrieve an list of all selected physicians.
-     * </p>
-     *
-     * @return ids an Array of integers containing the id of physicians that are to be retrieved.
+     * @param ids an Array of integers containing the id of physicians that are to be retrieved.
+     * @return physicians a List of Physicians obtained after obtaining the resultSet from the database.
      * @throws ApplicationException An exception created for catching exceptions that occur while
      *                              displaying all physicians.
      */
@@ -119,7 +124,7 @@ public interface PhysicianService {
      * This Method is used to search a User Entry and return the User object. It returns null if no
      * match is found.
      * </p>
-     *
+     * 
      * @param email a String indicating the email of the user that is to be searched an returned.
      * @return user an User object is returned if a valid match is found, else returns null.
      * @throws ApplicationException A Custom Exception created for catching exceptions that occur while
