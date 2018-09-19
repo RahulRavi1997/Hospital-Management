@@ -3,27 +3,26 @@ package com.ideas2it.hospitalmanagement.user.service.impl;
 import java.util.List;
 
 import com.ideas2it.hospitalmanagement.commons.Constants;
+import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.user.dao.UserDao;
 import com.ideas2it.hospitalmanagement.user.model.User;
 import com.ideas2it.hospitalmanagement.user.service.UserService;
-import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 
 /**
  * </p>
- * UserServiceImpl is a Service-class used to provide logic to User operations.
- * All the methods in this class throws Application Exception. Exceptions are
- * thrown if the input data is null.
- * Beans are injected during runtime using Spring IOC.
+ * UserServiceImpl is a Service-class used to provide logic to User operations. All the methods in
+ * this class throws Application Exception. Exceptions are thrown if the input data is null. Beans
+ * are injected during runtime using Spring IOC.
  * </p>
  *
- * @author    Rahul Ravi
- * @version   1.0
+ * @author Rahul Ravi
+ * @version 1.0
  */
 public class UserServiceImpl implements UserService {
 
     public UserDao userDao = null;
 
-    public void setUserDao(UserDao userDao) {
+    public void setUserDao(final UserDao userDao) {
         this.userDao = userDao;
     }
 
@@ -31,11 +30,10 @@ public class UserServiceImpl implements UserService {
         return this.userDao;
     }
 
-
     /**
-     *  {@inheritDoc}
+     * {@inheritDoc}
      */
-    public Boolean addUser(User user) throws ApplicationException {
+    public Boolean addUser(final User user) throws ApplicationException {
 
         if (null == user) {
             throw new ApplicationException(Constants.INVALID_INPUT);
@@ -44,10 +42,9 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     *  {@inheritDoc}
+     * {@inheritDoc}
      */
-    public User retrieveUserByEmail(String email)
-            throws ApplicationException {
+    public User retrieveUserByEmail(final String email) throws ApplicationException {
 
         if (null == email) {
             throw new ApplicationException(Constants.ID_NOT_NULL);
@@ -55,28 +52,26 @@ public class UserServiceImpl implements UserService {
         return userDao.searchUserByEmail(email);
     }
 
-	/**
-	 *  {@inheritDoc}
-	 */
-	public List<User> retrieveAllUsers() throws ApplicationException {
+    /**
+     * {@inheritDoc}
+     */
+    public List<User> retrieveAllUsers() throws ApplicationException {
 
-		return userDao.getAllUsers();
-	}
-	
-	/**
-	 *  {@inheritDoc}
-	 */
-	public List<User> retrieveUsersByQuery(String query, String role) throws ApplicationException {
-
-		return userDao.getUsersByQuery(query, role);
-	}
-	
+        return userDao.getAllUsers();
+    }
 
     /**
-     *  {@inheritDoc}
+     * {@inheritDoc}
      */
-    public boolean modifyUser(User user)
-            throws ApplicationException {
+    public List<User> retrieveUsersByQuery(final String query, final String role) throws ApplicationException {
+
+        return userDao.getUsersByQuery(query, role);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public boolean modifyUser(final User user) throws ApplicationException {
 
         if (null == user) {
             throw new ApplicationException(Constants.ID_NOT_NULL);
@@ -85,38 +80,35 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     *  {@inheritDoc}
+     * {@inheritDoc}
      */
-    public boolean restoreUser(int id) throws ApplicationException {
-        User user = retrieveUserById(id);
-        if(null == user) {
+    public boolean restoreUser(final int id) throws ApplicationException {
+        final User user = retrieveUserById(id);
+        if (null == user) {
             return Boolean.FALSE;
         }
         return userDao.restoreUser(user);
     }
 
-
     /**
-     *  {@inheritDoc}
+     * {@inheritDoc}
      */
-    public boolean deleteUser(Integer id)
-            throws ApplicationException {
+    public boolean deleteUser(final Integer id) throws ApplicationException {
 
         if (null == id) {
             throw new ApplicationException(Constants.ID_NOT_NULL);
         }
-        User user = retrieveUserById(id);
-        if(null == user) {
+        final User user = retrieveUserById(id);
+        if (null == user) {
             return Boolean.FALSE;
         }
         return userDao.deleteUser(user);
     }
 
     /**
-     *  {@inheritDoc}
+     * {@inheritDoc}
      */
-    public User retrieveUserById(Integer id)
-            throws ApplicationException {
+    public User retrieveUserById(final Integer id) throws ApplicationException {
 
         if (null == id) {
             throw new ApplicationException(Constants.ID_NOT_NULL);
@@ -125,10 +117,9 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     *  {@inheritDoc}
+     * {@inheritDoc}
      */
-    public List<User> retrieveUsersByIds(Integer[] ids) throws ApplicationException {
+    public List<User> retrieveUsersByIds(final Integer[] ids) throws ApplicationException {
         return userDao.getUsersByIds(ids);
     }
 }
-

@@ -2,32 +2,25 @@ package com.ideas2it.hospitalmanagement.user.controller;
 
 import java.security.Principal;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.springframework.http.MediaType;
+import com.google.gson.Gson;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.Gson;
 import com.ideas2it.hospitalmanagement.commons.Constants;
 import com.ideas2it.hospitalmanagement.commons.enums.Role;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
@@ -37,27 +30,26 @@ import com.ideas2it.hospitalmanagement.user.service.UserService;
 
 /**
  * <p>
- * User Controller is a Controller Class, which is used authorise the user to
- * access the application and allow them to make modifications to the available
- * data. Provides methods to implement basic user operations like Login, Signup
- * and Logout operations.
+ * User Controller is a Controller Class, which is used authorise the user to access the application
+ * and allow them to make modifications to the available data. Provides methods to implement basic
+ * user operations like Login, Signup and Logout operations.
  * </p>
- * 
+ *
  * @author Rahul Ravi
  * @version 1.0
  */
 @Controller
 public class UserController {
 
-	private UserService userService = null;
+    private UserService userService = null;
 
-	public void setUserService(UserService userService) {
-		this.userService = userService;
-	}
+    public void setUserService(final UserService userService) {
+        this.userService = userService;
+    }
 
-	public UserService getUserService() {
-		return this.userService;
-	}
+    public UserService getUserService() {
+        return this.userService;
+    }
 
 	/**
 	 * This Method is used to obtain the user Credentials during login and create a
@@ -302,19 +294,18 @@ public class UserController {
 		}
 	}
 
-	/**
-	 * <p>
-	 * Method to update existing User Details. Returns true if the entry is modified
-	 * successfully, else returns false if the entry is not found.
-	 * </p>
-	 *
-	 * @param user an User object with the updated details of the user.
-	 *
-	 * @return modelAndView a ModelAndView object which is used to add attributes to
-	 *         a model and redirect it to a view such as a jsp page.
-	 */
-	@RequestMapping(value = Constants.UPDATE_USER_MAPPING, method = RequestMethod.POST)
-	private ModelAndView updateUser(@ModelAttribute User user, Model model) {
+    /**
+     * <p>
+     * Method to update existing User Details. Returns true if the entry is modified successfully, else
+     * returns false if the entry is not found.
+     * </p>
+     *
+     * @param user an User object with the updated details of the user.
+     * @return modelAndView a ModelAndView object which is used to add attributes to a model and
+     *         redirect it to a view such as a jsp page.
+     */
+    @RequestMapping(value = Constants.UPDATE_USER_MAPPING, method = RequestMethod.POST)
+    private ModelAndView updateUser(@ModelAttribute final User user, final Model model) {
 
 		try {
 			if (!userService.modifyUser(user)) {
@@ -329,8 +320,7 @@ public class UserController {
 			return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
 					String.format(Constants.USER_EDIT_EXCEPTION, user.getId()));
 		}
-
-	}
+    }
 
 	/**
 	 * This Method is used to remove an existing user by Id given by the user.

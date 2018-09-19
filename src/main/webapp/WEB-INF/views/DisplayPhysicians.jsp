@@ -44,12 +44,13 @@
                   Physician</button>
                   </a>
                 </div>
-        <div class="col-sm-4 col-xs-4 search-bar-display">
-           <form  autocomplete="off" class="form-inline" action="searchPhysician" method="get">
-              <input name="id"  type="number" class="form-control mr-sm-2" placeholder="Search"  required>
-              <button class="glyphicon glyphicon-search"  type="submit">Search</button>    
-            </form>
-        </div>
+                <form action="searchPhysician" method="GET">
+                  <div class="col-sm-4 col-xs-4">
+                    <input name="id" autocomplete="off" id="myInput"
+                      class="form-control mr-sm-2" placeholder="Search"
+                      type="number" required />
+                    <button class="glyphicon glyphicon-search" type="submit">Search</button>
+                  </div>
                   <div class="col-sm-4 col-xs-4 text-align-center">
                     <h4>
                       Filter : 
@@ -60,6 +61,7 @@
                       </select>
                     </h4>
                   </div>
+                </form>
               </div>
               <c:if test="${empty physicians}">
                 <h2 align="center">No Physicians are available/present at
@@ -109,7 +111,14 @@
                           <td>${physician.specialisation}</td>
                           <td>${physician.birthDate}</td>
                           <td>${physician.mobileNumber}</td>
-                          <td>${physician.age}years</td>
+                          <c:choose>
+                            <c:when test="${not empty physician.birthDate}">
+                              <td>${physician.age}years</td>
+                            </c:when>
+                            <c:otherwise>
+                              <td>-</td>
+                            </c:otherwise>
+                          </c:choose>
                           <c:if test="${!physician.isActive()}">
                             <td colspan="2" class="type">
                               <form action="restorePhysician" method="POST">
