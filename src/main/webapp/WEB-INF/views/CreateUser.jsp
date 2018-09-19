@@ -5,6 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Admin page</title>
+    <jsp:include page="Access.jsp"/>
   </head>
   <body>
     <jsp:include page="Header.jsp"/>

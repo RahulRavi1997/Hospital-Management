@@ -27,7 +27,7 @@ public final class Constants {
     public static final String IMAGES = "images";
     public static final String SCRIPT = "script";
     public static final String SIGNUP = "signup";
-    public static final String LOGIN = "login";
+    public static final String LOGIN = "Login";
     public static final String LOGIN_PATH = "/login";
     public static final String INDEX_PATH = "/WEB-INF/views/index.jsp";
     public static final String SIGNIN_EMAIL = "signinEmail";

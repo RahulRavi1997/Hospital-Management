@@ -9,6 +9,7 @@
     <title>PhysicianForm</title>
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
     <META HTTP-EQUIV="Expires" CONTENT="-1">
+    <jsp:include page="Access.jsp"/>
   </head>
   <body>
     <jsp:include page="Header.jsp"/>

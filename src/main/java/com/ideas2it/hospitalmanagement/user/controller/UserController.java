@@ -71,7 +71,7 @@ public class UserController {
                 if (null == role) {
                     return new ModelAndView(Constants.LOGIN, Constants.USER_FAIL, Constants.SIGNIN_USER_FAIL_MESSAGE);
                 } else {
-                    return new ModelAndView(Constants.ADMIN, Constants.USER_FAIL, Constants.MESSAGE);
+                    return new ModelAndView(Constants.ADMIN_INDEX, Constants.USER_FAIL, Constants.MESSAGE);
                 }
             } else {
                 final User user = new User();
@@ -83,11 +83,11 @@ public class UserController {
                     user.setRole(role);
                 }
                 if (userService.addUser(user)) {
-                    return new ModelAndView(Constants.ADMIN, Constants.MESSAGE, Constants.SIGN_UP_SUCCESS_MESSAGE);
+                    return new ModelAndView(Constants.ADMIN_INDEX, Constants.MESSAGE, Constants.SIGN_UP_SUCCESS_MESSAGE);
                 } else if (null == role) {
                     return new ModelAndView(Constants.LOGIN, Constants.USER_FAIL, Constants.SIGN_UP_FAIL_MESSAGE);
                 } else {
-                    return new ModelAndView(Constants.ADMIN, Constants.MESSAGE, Constants.SIGN_UP_FAIL_MESSAGE);
+                    return new ModelAndView(Constants.ADMIN_INDEX, Constants.MESSAGE, Constants.SIGN_UP_FAIL_MESSAGE);
                 }
             }
         } catch (final ApplicationException e) {
@@ -200,7 +200,7 @@ public class UserController {
             if (auth != null) {
                 new SecurityContextLogoutHandler().logout(request, response, auth);
             }
-            return "login";
+            return Constants.LOGIN;
         } else {
             return userInfo(model, principal, request);
         }
@@ -220,15 +220,12 @@ public class UserController {
     }
 
     /**
-     *
-
-     */
-    
-    /**
      * This Method is used to display all details of the users.
+     * 
      * @param model a model Object to which the parameters are added to be sent to the view Layer.
      * @return modelAndView a ModelAndView object which is used to add attributes to a model and
-     *         redirect it to a view such as a jsp page.     */
+     *         redirect it to a view such as a jsp page.
+     */
     @RequestMapping(value = Constants.DISPLAY_USER_MAPPING, method = RequestMethod.GET)
     private ModelAndView displayAllUsers(Model model) {
         try {
@@ -244,7 +241,8 @@ public class UserController {
     /**
      * This Method is used to restore a deleted user. Redirects to display all users on successful
      * restoration.
-     * @param id an Integer indicating the id of the user to be restored.
+     * 
+     * @param id    an Integer indicating the id of the user to be restored.
      * @param model a model Object to which the parameters are added to be sent to the view Layer.
      * @return modelAndView a ModelAndView object which is used to add attributes to a model and
      *         redirect it to a view such as a jsp page.
@@ -270,7 +268,8 @@ public class UserController {
      * Method to update existing User Details. Returns true if the entry is modified successfully, else
      * returns false if the entry is not found.
      * </p>
-     * @param id an Integer indicating the id of the user to be modified.
+     * 
+     * @param id    an Integer indicating the id of the user to be modified.
      * @param model a model Object to which the parameters are added to be sent to the view Layer.
      * @return modelAndView a ModelAndView object which is used to add attributes to a model and
      *         redirect it to a view such as a jsp page.
@@ -292,7 +291,8 @@ public class UserController {
      * Method to update existing User Details. Returns true if the entry is modified successfully, else
      * returns false if the entry is not found.
      * </p>
-     * @param user an User object with the updated details of the user.
+     * 
+     * @param user  an User object with the updated details of the user.
      * @param model a model Object to which the parameters are added to be sent to the view Layer.
      * @return modelAndView a ModelAndView object which is used to add attributes to a model and
      *         redirect it to a view such as a jsp page.
@@ -312,11 +312,12 @@ public class UserController {
                     String.format(Constants.USER_EDIT_EXCEPTION, user.getId()));
         }
     }
-   
+
     /**
      * This Method is used to remove an existing user by Id given by the user.
+     * 
      * @param idToDelete an Integer indicating the id of the user to be deleted.
-     * @param model a model Object to which the parameters are added to be sent to the view Layer.
+     * @param model      a model Object to which the parameters are added to be sent to the view Layer.
      * @return modelAndView a ModelAndView object which is used to add attributes to a model and
      *         redirect it to a view such as a jsp page.
      */
