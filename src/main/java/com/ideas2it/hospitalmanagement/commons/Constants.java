@@ -54,7 +54,7 @@ public final class Constants {
     public static final String DISPLAY_PHYSICIAN_JSP = "DisplayPhysicians";
     public static final String ERROR_JSP = "Error";
     public static final String ERROR_MESSAGE = "errorMessage";
-    public static final String PHYSICIAN = "Physician";
+    public static final String PHYSICIAN = "physician";
     public static final String SEARCH_PHYSICIAN_JSP = "SearchPhysician";
     public static final String ID = "id";
     public static final String FAIL_MESSAGE = "failMessage";

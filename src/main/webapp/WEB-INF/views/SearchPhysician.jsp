@@ -70,18 +70,7 @@
               </div>
               <jsp:useBean id="now" class="java.util.Date" />
               <fmt:formatDate var="currentyear" value="${now}" pattern="yyyy" />
-              <div class="container">
-                <ul class="pager">
-                  <input type="hidden" id="pager-id" value="${physician.id}"/>
-                  <c:set var="previd" value="${physician.id-1}"/>
-                  <c:if test="${physician.id == 1}">
-                    <c:set var="previd" value="1"/>
-                  </c:if>
-                  <li id="previous" class="previous"><a id="previous-link" href="searchPhysician?id=${previd}">Previous</a></li>
-                  <li> <b>Physician Details</b></li>
-                  <li id="next" class="next"><a href="searchPhysician?id=${physician.id+1}">Next</a></li>
-                </ul>
-              </div>
+              <div align="center"><h3> <b>Physician Details</b></h3></div>
               <c:if  test="${empty physician.id}">
                 <h2 align="center">${failMessage}.</h2>
               </c:if>

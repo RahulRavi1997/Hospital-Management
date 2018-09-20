@@ -40,7 +40,7 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-lg-12">
-              Dear <strong>${sessionScope.email}</strong>, Welcome to Admin Page.
+              Dear <strong>${sessionScope.email}</strong>, Welcome to ${role} Page. 
             </div>
           </div>
         </div>

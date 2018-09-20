@@ -36,7 +36,7 @@
         <jsp:include page="ReceptionistHeader.jsp"/>
         <c:choose>
          <c:when test="${PatientInActive == null}">
-                 <h4>Welcome to Receptionist Page-${email}</h4>
+                 <h4>Welcome to ${role} Page-${email}</h4>
          </c:when>
         <c:otherwise>
            <h3> <c:out value=" ${PatientInActive}"/></h3>
