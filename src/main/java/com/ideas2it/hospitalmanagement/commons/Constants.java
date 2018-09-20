@@ -160,6 +160,7 @@ public final class Constants {
     public static final String CREATE_VISIT_JSP = "CreateVisit";
     public static final String SEARCH_VISIT_JSP = "SearchVisit";
     public static final String DISPLAY_VISIT_JSP = "DisplayVisit";
+    public static final String UPDATE_VISIT_JSP = "UpdateVisit";
 
     public static final String VISIT_ADD_FAILED = "Visit Addition Failed";
     public static final String VISIT_UPDATE_FAILED = "Visit Updation Failed";
@@ -217,4 +218,6 @@ public final class Constants {
     public static final String PERCENTAGE = "%";
     public static final String INVALID_ROLE = "Invalid role: ";
     public static final String INVALID_SPECIALISATION = "Invalid specialisation: ";
+    public static final String PATIENT_INACTIVE = "PatientInActive";
+    public static final String PATIENT_INACTIVE_MESSAGE= "Patient is Not Active. Visit Cannot be Created";
 }

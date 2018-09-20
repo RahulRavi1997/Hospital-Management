@@ -34,7 +34,14 @@
       </div>
       <div id="page-content-wrapper">
         <jsp:include page="ReceptionistHeader.jsp"/>
-        <h4>Welcome to Receptionist Page-${email}</h4>
+        <c:choose>
+         <c:when test="${PatientInActive == null}">
+                 <h4>Welcome to Receptionist Page-${email}</h4>
+         </c:when>
+        <c:otherwise>
+           <h3> <c:out value=" ${PatientInActive}"/></h3>
+        </c:otherwise>
+        </c:choose>
       </div>
     </div>
   </body>

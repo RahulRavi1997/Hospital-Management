@@ -56,7 +56,8 @@ public class PatientServiceImpl implements PatientService {
         if (null != visit) {
             visit.setDischargeDate(new Date());
             visit.getPatient().setActive(Boolean.FALSE);
-            return visitService.modifyVisit(visit);
+            return visitService.modifyVisit(visit, visit.getPatient().getId(),
+                    visit.getPhysician().getId());
         } else {
             final Patient patient = patientDao.searchPatientById(patientId);
             return patientDao.deletePatient(patient);

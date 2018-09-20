@@ -54,7 +54,10 @@ public class VisitServiceImpl implements VisitService {
     /**
      * {@inheritDoc}
      */
-    public boolean modifyVisit(final Visit visit) throws ApplicationException {
+    public boolean modifyVisit(final Visit visit, final Integer patientId, final Integer physicianId)
+            throws ApplicationException {
+        visit.setPatient(patientService.getPatientById(patientId));
+        visit.setPhysician(physicianService.retrievePhysicianById(physicianId));
         return visitDao.updateVisit(visit);
     }
 

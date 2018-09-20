@@ -113,7 +113,8 @@ public class VisitController {
         try {
             final Visit visit = visitService.getVisitById(visitId);
             model.addAttribute(Constants.TYPES, PatientType.values());
-            return new ModelAndView(Constants.CREATE_VISIT_JSP, Constants.VISIT_OBJECT, visit);
+            model.addAttribute(Constants.SPECIALISATIONS, Specialisation.values());
+            return new ModelAndView(Constants.UPDATE_VISIT_JSP, Constants.VISIT_OBJECT, visit);
         } catch (final ApplicationException e) {
             Logger.error(e);
             return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE, Constants.VISIT_SEARCH_FAILED);
@@ -133,10 +134,11 @@ public class VisitController {
      * @return ModelAndView Object which redirects to the Search visit Page or to the Error Page.
      */
     @RequestMapping(value = Constants.UPDATE_VISIT, method = { RequestMethod.POST, RequestMethod.GET })
-    private ModelAndView updateVisit(@ModelAttribute(Constants.VISIT) final Visit visit) {
-
+    private ModelAndView updateVisit(@ModelAttribute(Constants.VISIT) final Visit visit,
+            @RequestParam(Constants.PATIENT_ID) final Integer patientId,
+            @RequestParam(Constants.PHYSICIAN_ID) final Integer physicianId) {
         try {
-            visitService.modifyVisit(visit);
+            visitService.modifyVisit(visit, patientId, physicianId);
             return new ModelAndView(Constants.SEARCH_VISIT_JSP, Constants.VISIT_OBJECT, visit);
         } catch (final ApplicationException e) {
             Logger.error(e);
@@ -214,7 +216,12 @@ public class VisitController {
 
         try {
             final Patient patient = (Patient) session.getAttribute(Constants.PATIENT_OBJECT);
-            if (null != patient) {
+            if (null != patient ) {
+                if (Boolean.FALSE == patient.isActive()) {
+                    return new ModelAndView(Constants.RECEPTIONIST_INDEX, Constants.PATIENT_INACTIVE,
+                            Constants.PATIENT_INACTIVE_MESSAGE);
+                }
+
                 final Visit visit = visitService.getVisitByPatientId(patient.getId());
                 if (null != visit) {
                     return new ModelAndView(Constants.CREATE_VISIT_JSP, Constants.VISIT_OBJECT, visit);

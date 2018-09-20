@@ -62,6 +62,14 @@
                 <td>
                   <c:out value="${visit.patientType}" />
                 </td>
+                <c:if test="${null == visit.dischargeDate}">
+                  <form action="modifyVisit" method="GET">
+                    <input type="hidden" name="id" value="${visit.id}" />
+                     <td><input type="submit" class="btn btn-primary"
+                           value="Update"></td>
+                  </form>
+                </c:if>
+                
               </tr>
             </tbody>
           </table>
