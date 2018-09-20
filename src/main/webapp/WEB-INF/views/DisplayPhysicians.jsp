@@ -2,6 +2,8 @@
   pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
   "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -40,18 +42,14 @@
               <fmt:formatDate var="currentyear" value="${now}" pattern="yyyy" />
               <div class="row full-width">
                 <div class="col-sm-4 col-xs-4 text-align-center">
-                  <a href="createPhysician">
-                  <button class="btn-margin-format add-button">Add New
-                  Physician</button>
-                  </a>
                 </div>
                 <form action="searchPhysician" method="GET">
-                  <div class="col-sm-4 col-xs-4">
-                    <input name="id" autocomplete="off" id="myInput"
-                      class="form-control mr-sm-2" placeholder="Search"
-                      type="number" required />
-                    <button class="glyphicon glyphicon-search" type="submit">Search</button>
-                  </div>
+                <div class="col-sm-4 col-xs-4 search-bar-display">
+                  <form  autocomplete="off" class="form-inline" action="searchPhysician" method="get">
+                    <input name="id"  type="number" class="form-control mr-sm-2 width-search" placeholder="Search"  required>
+                    <button class="glyphicon glyphicon-search"  type="submit">Search</button>    
+                  </form>
+                </div>
                   <div class="col-sm-4 col-xs-4 text-align-center">
                     <h4>
                       Filter : 
@@ -72,7 +70,7 @@
               <c:if test="${not empty physicians}">
                 <div class="row full-width">
                   <div class="col-xs-9 margin-left-30">
-                    <b>Physician Details</b>
+                    <b>Physician Details        </b><button id="createButton" class="fa fa-close fa-plus btn-success large" onclick="displayCreate();"></button>
                   </div>
                   <div class="col-xs-2">
                     <b>Number Of Physicians- [${numberOfPhysicians}]</b>
@@ -96,8 +94,54 @@
                       </tr>
                     </thead>
                     <tbody id="myTable">
-                      <tr>
+                      <jsp:useBean id="physician" class="com.ideas2it.hospitalmanagement.physician.model.Physician" scope="request"/>
+                      <form:form commandName="physician" action="addPhysician" method="post">
+                      <tr id="createTr" class="hidden">
+                          <td>#
+                          </td>
+                          <td>
+                   <form:input type="text" path="firstName" placeHolder="First Name"/>
+                      <form:input type="text" path="lastName" placeHolder="Last Name"/>
+                          </td>
+                          <td>
+                          <form:input type="email" path="email" placeHolder="Email"/>
+                           </td>
+                          <td>
+                          <form:select path="gender">
+                            <form:option value="Male">Male</form:option>
+                            <form:option value="Female">Female</form:option>
+                            <form:option value="Other">Other</form:option>
+                          </form:select>
+                          </td>
+                          <td>
+                          <form:select path="specialisation">
+                            <form:option value="Cardiologist">Cardiologist</form:option>
+                            <form:option value="Neurologist">Neurologist</form:option>
+                            <form:option value="Ophthalmologist">Ophthalmologist</form:option>
+                            <form:option value="Surgeon">Surgeon</form:option>
+                            <form:option value="Pediatrician">Pediatrician</form:option>
+                            <form:option value="Dermatologist">Dermatologist</form:option>
+                            <form:option value="Immunologist">Immunologist</form:option>
+                            <form:option value="Psychiatrist">Psychiatrist</form:option>
+                          </form:select>
+                          </td>
+                          <td>
+                          <form:input type="date" id="birthDate" path="birthDate" placeHolder="Birthdate"/>
+                          </td>
+                          <td>
+                          <form:input type="number" path="mobileNumber" placeHolder="Mobile Number"/>
+                          </td>
+                         <td>
+                          <input type="text" id="age" placeHolder="Age" readOnly/>
+                          </td>
+                           <td colspan="2" class="type">
+                                <button type="submit" class="btn btn-success">Add</button>
+                            </td>
+                      </tr>
+                       <input type="hidden" name="UserEmail" value=""/>
+                      </form:form>
                         <c:forEach var="physician" items="${physicians}">
+                         <tr>
                           <td>${physician.id}</td>
                           <td>
                             <form action="searchPhysician" method="get"
@@ -114,7 +158,7 @@
                           <td>${physician.mobileNumber}</td>
                           <c:choose>
                             <c:when test="${not empty physician.birthDate}">
-                              <td>${physician.age}years</td>
+                              <td>${physician.age} years</td>
                             </c:when>
                             <c:otherwise>
                               <td>-</td>
@@ -137,7 +181,7 @@
                             <form action="deletePhysician" method="POST">
                               <input type="hidden" name="id" value="${physician.id}" />
                               <td class="type"><button type="submit"
-                                class="btn-danger"
+                                class="btn btn-danger"
                                 onclick="return confirm('Delete physician id : ${physician.id} ?')">Delete
                                 </button>
                               </td>

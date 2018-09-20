@@ -12,6 +12,15 @@
     <jsp:include page="Access.jsp"/>
   </head>
   <body>
+    <jsp:useBean id="now" class="java.util.Date"/>
+    <fmt:formatDate var="currentDate" value="${now}" pattern="yyyy-MM-dd" />
+    <fmt:formatDate var="currentYear" value="${now}" pattern="yyyy" />
+    <fmt:formatDate var="currentMonth" value="${now}" pattern="MM" />
+    <fmt:formatDate var="currentDay" value="${now}" pattern="dd" />
+    <fmt:parseDate value="${currentYear-18}-${currentMonth}-${currentDay}" pattern="yyyy-MM-dd" var="maxdob" type="date" />
+    <fmt:formatDate value="${maxdob}" var="maxBirthDate" type="date" pattern="yyyy-MM-dd" />
+    <fmt:parseDate value="${currentYear-100}-${currentMonth}-${currentDay}" pattern="yyyy-MM-dd" var="mindob" type="date" />
+    <fmt:formatDate value="${mindob}" var="minBirthDate" type="date" pattern="yyyy-MM-dd" />
     <jsp:include page="Header.jsp"/>
     <div id="wrapper">
     <div id="sidebar-wrapper">
@@ -47,7 +56,6 @@
         <c:set var="value" value="Edit"/>
         <c:set var="operation" value="updatePhysician"/>
       </c:if>
-      <jsp:useBean id="now" class="java.util.Date"/>
       <form:form commandName="physician" action="${operation}" method="post">
         <form:hidden path="id" value="${physician.id}"/>
         <form:hidden path="active" value="${physician.isActive()}"/>
@@ -72,7 +80,13 @@
               <div class="form-group">
                 <label class="col-sm-4 control-label" for="birthdate">BirthDate</label>
                 <div class="col-sm-8">
-                  <form:input type="date" id="DOB" path="birthDate" class ="form-control inputtext spacing" />
+                  <form:input type="date" path="birthDate" id="birthDate" min="${minBirthDate}" max="${maxBirthDate}" class ="form-control inputtext spacing" />
+                </div>
+              </div>
+                <div class="form-group">
+                <label class="col-sm-4 control-label">Age</label>
+                <div class="col-sm-8">
+                  <input type="text" id="age" class ="form-control inputtext spacing" readonly/>
                 </div>
               </div>
               <div class="form-group">
@@ -99,7 +113,10 @@
               <div class="form-group">
                 <label class="col-sm-4 control-label" for="Gender">Gender</label>
                 <div class="col-sm-8">
-                  <form:select class ="inputtext form-control" path="gender" items="${genders}" />
+                  <form:select path="gender" class ="form-control spacing inputtext">
+                    <option  selected disabled hidden value="">Select</option>
+                    <form:options items="${genders}" />
+                  </form:select>
                 </div>
               </div>
               <c:if test="${not empty physician.id}">
@@ -185,19 +202,19 @@
           <div style="text-align:center">
             <c:choose>
               <c:when test="${empty physician.id}">
-                <input type="submit" class="btn btn-info center" value="Add Physician"/ >
+                <input type="submit" class="btn btn-success center" value="Add Physician"/ >
               </c:when>
               <c:otherwise>
-                <input type="submit" class="btn btn-info center" value="Modify Physician"/>
+                <input type="submit" class="btn btn-success center" value="Modify Physician"/>
               </c:otherwise>
             </c:choose>
+           </div>
+          </div>
+         </div>
         </div>
-        </div>
-        </div>
-        </div>
-      </form:form>
+       </form:form>
       </div>
-      </div>
+     </div>
     </div>
     <jsp:include page="Footer.jsp"/>
   </body>

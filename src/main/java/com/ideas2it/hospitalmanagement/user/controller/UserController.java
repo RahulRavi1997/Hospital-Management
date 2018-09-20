@@ -153,12 +153,16 @@ public class UserController {
         Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>) SecurityContextHolder
                 .getContext().getAuthentication().getAuthorities();
         if (authorities.iterator().next().toString().equals(Constants.ADMIN_ROLE)) {
+            session.setAttribute(Constants.ROLE, Constants.ADMIN_INDEX);
             return Constants.ADMIN_INDEX;
         } else if (authorities.iterator().next().toString().equals(Constants.PHYSICIAN_ROLE)) {
+            session.setAttribute(Constants.ROLE, Constants.PHYSICIAN_INDEX);
             return Constants.PHYSICIAN_INDEX;
         } else if (authorities.iterator().next().toString().equals(Constants.NURSE_ROLE)) {
+            session.setAttribute(Constants.ROLE, Constants.NURSE_INDEX);
             return Constants.NURSE_INDEX;
         } else if (authorities.iterator().next().toString().equals(Constants.RECEPTIONIST_ROLE)) {
+            session.setAttribute(Constants.ROLE, Constants.RECEPTIONIST_INDEX);
             return Constants.RECEPTIONIST_INDEX;
         } else {
             return Constants.ACCESS_DENIED_JSP;

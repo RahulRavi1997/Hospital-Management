@@ -34,7 +34,7 @@
       </div>
       <div id="page-content-wrapper">
         <jsp:include page="ReceptionistHeader.jsp"/>
-        <h4>Welcome to Receptionist Page-${email}</h4>
+        <h4>Welcome to ${role} Page-${email}</h4>
       </div>
     </div>
   </body>

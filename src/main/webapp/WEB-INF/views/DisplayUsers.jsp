@@ -105,7 +105,7 @@
                             <form action="deleteUser" method="POST">
                               <input type="hidden" name="id" value="${user.id}" />
                               <td class="type"><button type="submit"
-                                class="btn-danger"
+                                class="btn btn-danger"
                                 onclick="return confirm('Delete user id : ${user.id} ?')">Delete
                                 </button>
                               </td>

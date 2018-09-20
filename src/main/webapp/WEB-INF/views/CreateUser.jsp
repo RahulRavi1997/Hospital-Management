@@ -56,12 +56,15 @@
                   <form:password class="form-control width200px" path="password" id="password" required="required" autocomplete="off"/>
                 </div>
                 <div class="form-group">
-                  <label class="active">
-                  Role
+                  <label class="required">
+                    Role
                   </label>
-                  <form:select class="form-control width200px" path="role" items="${roles}"/>
+                  <form:select path="role" class="form-control width200px" required="required">
+                    <option  selected disabled hidden value="">Select</option>
+                    <form:options items="${roles}" />
+                  </form:select>
                 </div>
-                <button id="register" class="button button-block"/>${operation} User</button>
+                <button id="register" class="btn btn-success"/>${operation} User</button>
               </form:form>
             </div>
           </div>

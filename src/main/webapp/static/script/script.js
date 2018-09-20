@@ -146,3 +146,40 @@ $(document).ready(function(){
 	    }
     });
 });
+
+
+$("#createButton").click(function (e) {
+	  e.preventDefault();
+	  $("#createTr").toggleClass("hidden");
+	  $("#createButton").toggleClass("fa-plus");
+	});
+
+$(document).ready(function () {
+    document.getElementById("age").value = GetAge()==0?"":GetAge();
+       function onchange() {
+           var birthDate = $('#birthDate');
+           var age = $('#age');
+           var a = GetAge(birthDate.val());
+           if (a == 0) {
+        	   age.val("");
+           } else {
+               age.val(a);
+           }
+       }
+       $('#birthDate').on('change', onchange);
+   });
+
+function GetAge() {
+   var today = new Date();
+   var birthDate = new Date(document.getElementById('birthDate').value);
+   var age = today.getFullYear() - birthDate.getFullYear();
+   var m = today.getMonth() - birthDate.getMonth();
+   if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+       age--;
+   }
+   if (isNaN(age)) {
+	   age=0;
+   }
+   return age;
+}
+

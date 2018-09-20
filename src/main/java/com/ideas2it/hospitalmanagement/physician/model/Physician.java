@@ -57,7 +57,8 @@ public class Physician {
     public void setLastName(final String lastName) {
         this.lastName = lastName;
     }
-
+    
+    @DateTimeFormat(pattern = Constants.REVERSED_DATE_FORMAT)
     public Date getBirthDate() {
         return birthDate;
     }
