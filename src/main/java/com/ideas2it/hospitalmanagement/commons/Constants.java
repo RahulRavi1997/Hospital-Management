@@ -17,12 +17,12 @@ public final class Constants {
         "Email-%s already exists! \nError while adding client\n";
     
     public static final String DIAGNOSIS = "diagnosis";
-    public static final String SEARCH_DIAGNOSIS_JSP = "display_diagnosis";
+    public static final String SEARCH_DIAGNOSIS_JSP = "DisplayDiagosis";
     public static final String ADD_DIAGNOSIS_MAPPING = "/add_diagnosis";
     public static final String DIAGNOSIS_ADDITION_EXCEPTION = 
             "Error while adding the Diagnosis information ID:%d\n";
 
-    public static final String CREATE_DIAGNOSIS_JSP = "create_diagnosis";
+    public static final String CREATE_DIAGNOSIS_JSP = "CreateDiagnosis";
 
   
     
@@ -171,12 +171,15 @@ public final class Constants {
    public static final String SEARCH_PATIENT = "/searchpatient";
    public static final String DISPLAY_PATIENTS = "/displaypatients";
    public static final String ACTIVATE_PATIENT = "/activatepatient";
+
    
    public static final String PATIENT = "/patient";
    public static final String PATIENTS = "/patients";
    public static final String CREATE_PATIENT_JSP ="CreatePatient";
    public static final String SEARCH_PATIENT_JSP ="SearchPatient";
+
    public static final String DISPLAY_PATIENT_JSP ="DisplayPatient";
+
 
    public static final String PATIENT_ADD_FAILED = "Patient Addition Failed";
    public static final String PATIENT_UPDATE_FAILED = "Patient Updation Failed";
@@ -198,6 +201,8 @@ public final class Constants {
    public static final String PATIENT_RESTORE_EXCEPTION = 
            "Error while restoring patient id %d\n";
    public static final String PATIENT_OBJECT = "patient";
+
+
 
    public static final String SIGNUP_PATH = "/signup";
    public static final String PASSWORD = "password";
@@ -224,7 +229,75 @@ public final class Constants {
    public static final String DIAGONSIS_ADD_SUCCESS_MESSAGE = 
 		 "diagnosis added succesfully..";
 
+ public static final String PATIENT_ID = "patientId";
+   public static final String PHYSICIAN_ID = "physicianId";
+   public static final String PATIENT_OBJECTS = "patients";
 
+   public static final String CREATE_VISIT = "/createVisit";
+   public static final String ADD_VISIT = "/addVisit";
+   public static final String MODIFY_VISIT = "/modifyVisit";
+   public static final String UPDATE_VISIT = "/updateVisit";
+   public static final String DELETE_VISIT = "/deleteVisit";
+   public static final String SEARCH_VISIT = "/searchVisit";
+   public static final String DISPLAY_VISITS = "/displayVisits";
+   public static final String ACTIVATE_VISIT = "/activateVisit";
+   
+   public static final String VISIT = "/visit";
+   public static final String VISITS = "/visits";
+   public static final String CREATE_VISIT_JSP ="CreateVisit";
+   public static final String SEARCH_VISIT_JSP ="SearchVisit";
+   public static final String DISPLAY_VISIT_JSP ="displayVisit";
 
+   public static final String VISIT_ADD_FAILED = "Visit Addition Failed";
+   public static final String VISIT_UPDATE_FAILED = "Visit Updation Failed";
+   public static final String VISIT_DELETE_FAILED = "Visit Deletion Failed";
+   public static final String VISIT_SEARCH_FAILED = "Visit Search Failed";
+   public static final String VISIT_DISPLAY_FAILED = "Visit Display Failed";
+   public static final String VISIT_ACTIVATION_FAILED = "Visit Activation Failed";
+   
+   public static final String VISIT_ADDITION_EXCEPTION = 
+           "Error while adding a visit- Name:%s %s\n";
+   public static final String VISIT_SEARCH_EXCEPTION = 
+           "Error while searching visit id %d\n";
+   public static final String VISIT_DELETE_EXCEPTION = 
+           "Error while deleting visit id %d\n";
+   public static final String VISIT_EDIT_EXCEPTION = 
+           "Error while modifying visit id %d\n";
+   public static final String VISIT_DISPLAY_EXCEPTION = 
+           "Error while displaying visits\n";
+   public static final String VISIT_RESTORE_EXCEPTION = 
+           "Error while restoring visit id %d\n";
+   public static final String VISIT_OBJECT = "visit";
+   public static final String VISIT_OBJECTS = "visits";
+
+   public static final String USER_EMAIL = "";
+
+   public static final String DISPLAY_USER_MAPPING = "/displayUsers";
+   public static final String USER_DISPLAY_EXCEPTION = "Error while displaying users\n";
+   public static final String RESTORE_USER_MAPPING = "/restoreUsers";
+   public static final String ACTIVE = "active";
+   public static final String USERS = "users";
+   public static final String DISPLAY_USERS_JSP = "DisplayUsers";
+   public static final String USER_EDIT_EXCEPTION = "Error Occured while updating User %d";
+   public static final String USER_RESTORE_SUCCESS_MESSAGE = "User Restored Successfully!";
+   public static final String SEARCH_USER_JSP = "SearchUser";
+   public static final String USER = "user";
+   public static final String USER_RESTORE_EXCEPTION = "Error Occured while restoring User- %d ";
+   public static final String MODIFY_USER_MAPPING = "/modifyUser";
+   public static final String CREATE_USER_JSP = "CreateUser";
+   public static final String UPDATE_USER_MAPPING = "/updateUser";
+   public static final String USER_UPDATE_SUCCESS_MESSAGE = "User Updated Successfully!";
+   public static final String DELETE_USER_MAPPING = "/deleteUser";
+   public static final String USER_DELETE_EXCEPTION = "Error Occured while deleting User- %d ";
+   public static final String USER_DELETE_SUCCESS_MESSAGE = "User deleted Successfully!";
+   public static final String DISPLAY_USER_JSP = "DisplayUsers";
+   public static final String DIAGNOSIS_UPDATE_SUCCESS_MESSAGE = "Updated Successfully...";
+   public static final String UPDATE_DIAGNOSIS_MAPPING = "updateDiagnosis";
+
+   public static final String ADD_ITEM_MASTER_MAPPING = "/addItemMaster";
+
+   public static final String UPDATE_ITEM_MASTER_MAPPING = "updateItemMaster";
+
+   public static final String ITEM_MASTER = "itemMaster";
 }
 

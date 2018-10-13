@@ -1,6 +1,7 @@
 package com.ideas2it.hospitalmanagement.diagnosis.service.impl;
 
 import java.util.List;
+import java.util.Date;
 
 import org.springframework.stereotype.Service;
 
@@ -9,18 +10,7 @@ import com.ideas2it.hospitalmanagement.diagnosis.dao.DiagnosisDao;
 import com.ideas2it.hospitalmanagement.diagnosis.model.Diagnosis;
 import com.ideas2it.hospitalmanagement.diagnosis.service.DiagnosisService;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
-import java.util.Date;
-import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.query.Query;
-
-import com.ideas2it.hospitalmanagement.commons.Constants;
-import com.ideas2it.hospitalmanagement.diagnosis.dao.DiagnosisDao;
-import com.ideas2it.hospitalmanagement.diagnosis.model.Diagnosis;
-import com.ideas2it.hospitalmanagement.exception.ApplicationException;
-import com.ideas2it.hospitalmanagement.genericdao.GenericDao;
-import com.ideas2it.hospitalmanagement.logger.Logger;
 /**
  * <p>
  * DiagonisServiceImplementation is a Service-class used to provide logic to
@@ -49,17 +39,17 @@ public class DiagnosisServiceImplementation implements DiagnosisService {
 	 * {@inheritDoc}
 	 */
 	public boolean createDiagnosis(Diagnosis diagnosis) throws ApplicationException {
-
 		return diagnosisDao.insertDiagnosis(diagnosis);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<Diagnosis> retrieveDiagnosisByDate(Date date,int patientId) throws ApplicationException {
-	    return diagnosisDao.fetchDiagnosisByDate(date, patientId);
-	
+	public List<Diagnosis> retrieveDiagnosisByDate(Date date, int patientId) throws ApplicationException {
+		return diagnosisDao.fetchDiagnosisByDate(date, patientId);
+
 	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -69,13 +59,26 @@ public class DiagnosisServiceImplementation implements DiagnosisService {
 
 	/**
 	 * {@inheritDoc}
-	 * 
-	 * @return
 	 */
 	public boolean modifyDiagnosis(Diagnosis diagnosis) throws ApplicationException {
 		if (diagnosis == null) {
 			throw new ApplicationException(Constants.ID_NOT_NULL);
 		}
 		return diagnosisDao.updateDiagnosis(diagnosis);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public Diagnosis retrieveDiagnosisById(int id) throws ApplicationException {
+		return diagnosisDao.searchDiagnosisById(id);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public List<Diagnosis> retrieveDiagnosisByVisit(int visitId) throws ApplicationException {
+		return diagnosisDao.fetchDiagnosisByVisit(visitId);
+
 	}
 }

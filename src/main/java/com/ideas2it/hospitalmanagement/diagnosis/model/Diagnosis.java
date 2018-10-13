@@ -3,42 +3,54 @@ package com.ideas2it.hospitalmanagement.diagnosis.model;
 import java.util.Date;
 
 import javax.enterprise.inject.Model;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import com.ideas2it.hospitalmanagement.commons.Constants;
+
+/**
+ * <p>
+ * Diagonsis class is having the getters and setter methods which is used to get
+ * the values and set values. This class acts as an Model for the Diagnosis
+ * Details.
+ * <p>
+ * 
+ * @author navaneeth and hari
+ */
 @Model
 public class Diagnosis {
-
-	private Integer id;
-	private Integer doctorId;
+	private int id;
+	private int visitId;
 	private Date date;
 	private String bloodGroup;
 	private double height;
 	private double weight;
 	private double bloodSugar;
-	private double cholestrol;
-	private double bloodPressure;
-	private boolean bodyTemperature;
-	public Integer getId() {
+	private double bodyTemperature;
+
+	public int getId() {
 		return id;
 	}
-	
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getVisitId() {
+		return visitId;
+	}
+
+	public void setVisitId(int visitId) {
+		this.visitId = visitId;
+	}
+
+	@DateTimeFormat(pattern = Constants.REVERSED_DATE_FORMAT)
 	public Date getDate() {
 		return date;
 	}
 
+	@DateTimeFormat(pattern = Constants.REVERSED_DATE_FORMAT)
 	public void setDate(Date date) {
 		this.date = date;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public Integer getDoctorId() {
-		return doctorId;
-	}
-
-	public void setDoctorId(Integer doctorId) {
-		this.doctorId = doctorId;
 	}
 
 	public String getBloodGroup() {
@@ -73,28 +85,11 @@ public class Diagnosis {
 		this.bloodSugar = bloodSugar;
 	}
 
-	public double getCholestrol() {
-		return cholestrol;
-	}
-
-	public void setCholestrol(double cholestrol) {
-		this.cholestrol = cholestrol;
-	}
-
-	public double getBloodPressure() {
-		return bloodPressure;
-	}
-
-	public void setBloodPressure(double bloodPressure) {
-		this.bloodPressure = bloodPressure;
-	}
-
-	public boolean isBodyTemperature() {
+	public double getBodyTemperature() {
 		return bodyTemperature;
 	}
 
-	public void setBodyTemperature(boolean bodyTemperature) {
+	public void setBodyTemperature(double bodyTemperature) {
 		this.bodyTemperature = bodyTemperature;
 	}
-	
 }

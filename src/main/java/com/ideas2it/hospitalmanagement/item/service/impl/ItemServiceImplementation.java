@@ -12,14 +12,13 @@ import com.ideas2it.hospitalmanagement.item.service.ItemService;
 
 /**
  * <p>
- * DiagonisServiceImplementation is a Service-class used to provide logic to
- * Diagnosis operations. All the methods in this class throws Application
- * Exception. Exceptions are thrown if the input data is null. Beans are
- * injected during runtime using Spring IOC.
+ * ItemService is a Service-class used to provide logic to Item operations. All
+ * the methods in this class throws Application Exception. Exceptions are thrown
+ * if the input data is null. Beans are injected during runtime using Spring
+ * IOC.
  * </p>
  *
- * @author Hariharasudan K S
- * @version 1.0
+ * @author Hariharasudan K S and navaneeth.
  */
 @Service
 public class ItemServiceImplementation implements ItemService {
@@ -45,9 +44,17 @@ public class ItemServiceImplementation implements ItemService {
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<Item> retrieveItemByName(String name) throws ApplicationException {
-		return itemDao.fetchItemByName(name);
+	public List<String> retrieveItemByName(String name) throws ApplicationException {
+		return itemDao.fetchAllItemsMaster(name);
 
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public Item retriveItemNameById(int id) throws ApplicationException {
+
+		return itemDao.searchItemById(id);
 	}
 
 	/**
@@ -59,8 +66,6 @@ public class ItemServiceImplementation implements ItemService {
 
 	/**
 	 * {@inheritDoc}
-	 * 
-	 * @return
 	 */
 	public boolean modifyItemById(Item item) throws ApplicationException {
 		if (item == null) {
@@ -69,11 +74,17 @@ public class ItemServiceImplementation implements ItemService {
 		return itemDao.updateItem(item);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public List<Item> retrieveAllItems() throws ApplicationException {
 		return itemDao.fetchAllItems();
 
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public boolean modifyItem(Item item) throws ApplicationException {
 		if (null == item) {
 			throw new ApplicationException(Constants.ID_NOT_NULL);
@@ -81,9 +92,11 @@ public class ItemServiceImplementation implements ItemService {
 		return itemDao.updateItem(item);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public Item retrieveItemById(int id) throws ApplicationException {
 		return itemDao.searchItemById(id);
 	}
 
-	
 }

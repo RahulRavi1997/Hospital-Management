@@ -1,5 +1,7 @@
 package com.ideas2it.hospitalmanagement.user.service.impl;
 
+import java.util.List;
+
 import com.ideas2it.hospitalmanagement.commons.Constants;
 import com.ideas2it.hospitalmanagement.user.dao.UserDao;
 import com.ideas2it.hospitalmanagement.user.model.User;
@@ -19,7 +21,7 @@ import com.ideas2it.hospitalmanagement.exception.ApplicationException;
  */
 public class UserServiceImpl implements UserService {
 
-    public static UserDao userDao = null;
+    public UserDao userDao = null;
 
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
@@ -53,4 +55,80 @@ public class UserServiceImpl implements UserService {
         return userDao.searchUserByEmail(email);
     }
 
+	/**
+	 *  {@inheritDoc}
+	 */
+	public List<User> retrieveAllUsers() throws ApplicationException {
+
+		return userDao.getAllUsers();
+	}
+	
+	/**
+	 *  {@inheritDoc}
+	 */
+	public List<User> retrieveUsersByQuery(String query, String role) throws ApplicationException {
+
+		return userDao.getUsersByQuery(query, role);
+	}
+	
+
+    /**
+     *  {@inheritDoc}
+     */
+    public boolean modifyUser(User user)
+            throws ApplicationException {
+
+        if (null == user) {
+            throw new ApplicationException(Constants.ID_NOT_NULL);
+        }
+        return userDao.updateUser(user);
+    }
+
+    /**
+     *  {@inheritDoc}
+     */
+    public boolean restoreUser(int id) throws ApplicationException {
+        User user = retrieveUserById(id);
+        if(null == user) {
+            return Boolean.FALSE;
+        }
+        return userDao.restoreUser(user);
+    }
+
+
+    /**
+     *  {@inheritDoc}
+     */
+    public boolean deleteUser(Integer id)
+            throws ApplicationException {
+
+        if (null == id) {
+            throw new ApplicationException(Constants.ID_NOT_NULL);
+        }
+        User user = retrieveUserById(id);
+        if(null == user) {
+            return Boolean.FALSE;
+        }
+        return userDao.deleteUser(user);
+    }
+
+    /**
+     *  {@inheritDoc}
+     */
+    public User retrieveUserById(Integer id)
+            throws ApplicationException {
+
+        if (null == id) {
+            throw new ApplicationException(Constants.ID_NOT_NULL);
+        }
+        return userDao.searchUserById(id);
+    }
+
+    /**
+     *  {@inheritDoc}
+     */
+    public List<User> retrieveUsersByIds(Integer[] ids) throws ApplicationException {
+        return userDao.getUsersByIds(ids);
+    }
 }
+

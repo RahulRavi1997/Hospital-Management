@@ -1,13 +1,7 @@
 package com.ideas2it.hospitalmanagement.item.controller;
 
-import java.security.Principal;
-import java.util.Collection;
 import java.util.List;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.ideas2it.hospitalmanagement.commons.Constants;
 import com.ideas2it.hospitalmanagement.logger.Logger;
@@ -32,7 +24,7 @@ import com.ideas2it.hospitalmanagement.item.service.ItemService;
  * and Logout operations.
  * </p>
  * 
- * @author Rahul Ravi
+ * @author Hariharasudan K S
  * @version 1.0
  */
 @Controller
@@ -50,11 +42,19 @@ public class ItemController {
 
 	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
 	private String homePage() {
-
-		return "index";
+        return "index";
 	}
 
-	@RequestMapping(value = "/viewAllItems", method = RequestMethod.GET)
+    /**
+	 * This Method is used to display items from database and show client view.
+	 *
+	 * @param model
+	 *            a Model object which is used to add the diagnosis information as
+	 *            an attribute to the view Layer.
+	 * @return modelAndView a ModelAndView object which is used to add attributes to
+	 *         a model and redirect it to a view such as a jsp page.
+	 */
+	@RequestMapping(value = "/viewItems", method = RequestMethod.GET)
 	public ModelAndView viewAllItems() {
 		try {
 			List<Item> allItems = itemService.retrieveAllItems();
@@ -69,9 +69,9 @@ public class ItemController {
 	 * This Method is used to redirect user to the webpage with the form used to
 	 * create and add a new Diagnosis.
 	 *
-	 * @param model a Model object which is used to add the diagnosis information as
-	 *              an attribute to the view Layer.
-	 *
+	 * @param model
+	 *            a Model object which is used to add the diagnosis information as
+	 *            an attribute to the view Layer.
 	 * @return modelAndView a ModelAndView object which is used to add attributes to
 	 *         a model and redirect it to a view such as a jsp page.
 	 */
@@ -86,9 +86,9 @@ public class ItemController {
 	 * This Method is used to add a new diagnosis after obtaining all the details
 	 * from the doctor. Redirects to error page if any error occurs.
 	 *
-	 * @param diagnosis an Diagnnosis object with all the diagnosis information to
-	 *                  be added.
-	 *
+	 * @param diagnosis
+	 *            an Diagnnosis object with all the diagnosis information to be
+	 *            added.
 	 * @return modelAndView a ModelAndView object which is used to add attributes to
 	 *         a model and redirect it to a view such as a jsp page.
 	 */
@@ -115,9 +115,9 @@ public class ItemController {
 	 * modified successfully, else returns false if the entry is not found.
 	 * </p>
 	 *
-	 * @param id an Integer indicating the id of the diagnosis information to be
-	 *           modified.
-	 *
+	 * @param id
+	 *            an Integer indicating the id of the diagnosis information to be
+	 *            modified.
 	 * @return modelAndView a ModelAndView object which is used to add attributes to
 	 *         a model and redirect it to a view such as a jsp page.
 	 */
@@ -130,23 +130,6 @@ public class ItemController {
 			return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
 					String.format(Constants.ITEM_EDIT_EXCEPTION, id));
 		}
-	}
-
-	@RequestMapping(value = Constants.UPDATE_ITEM_MAPPING, method = RequestMethod.POST)
-	private ModelAndView updateEmployee(@ModelAttribute Item item, Model model) {
-
-		try {
-			if (!itemService.modifyItem(item)) {
-				return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE, Constants.EDIT_FAILED);
-			}
-			model.addAttribute(Constants.MESSAGE, Constants.ITEM_UPDATE_SUCCESS_MESSAGE);
-			return new ModelAndView(Constants.SEARCH_ITEM_JSP, Constants.ITEM, item);
-		} catch (ApplicationException e) {
-			Logger.error(e);
-			return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
-					String.format(Constants.ITEM_EDIT_EXCEPTION, item.getId()));
-		}
-
 	}
 
 }

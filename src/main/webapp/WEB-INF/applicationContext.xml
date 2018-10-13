@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
@@ -16,7 +17,14 @@
 		class="com.ideas2it.hospitalmanagement.diagnosis.controller.DiagnosisController">
 		<property name="diagnosisService" ref="diagnosisService" />
 	</bean>
+	<bean id="itemMasterDao"
+		class="com.ideas2it.hospitalmanagement.itemMaster.dao.impl.ItemMasterDaoImplementation" />
 	
+	
+	<bean id="itemMasterService"
+		class="com.ideas2it.hospitalmanagement.itemMaster.service.impl.ItemMasterServiceImplementation">
+		<property name="itemMasterDao" ref="itemMasterDao" />
+	</bean>
 	
 	<bean id="itemDao"
 		class="com.ideas2it.hospitalmanagement.item.dao.impl.ItemDaoImplementation" />
@@ -35,20 +43,75 @@
     </bean>
     <bean id="prescriptionService" class="com.ideas2it.hospitalmanagement.prescription.service.impl.PrescriptionServiceImpl">
     <property name="prescriptionDao" ref="prescriptionDao"></property> 
+    <property name="itemMasterService" ref ="itemMasterService"></property> 
     </bean>
-    <bean id="PrescriptionController" class="com.ideas2it.hospitalmanagement.prescription.controller.PrescriptionController">
+    <bean id="prescriptionController" class="com.ideas2it.hospitalmanagement.prescription.controller.PrescriptionController">
     <property name="prescriptionService" ref="prescriptionService"></property> 
+    <property name="visitService" ref="visitServiceImpl"/>
 	</bean>
-	 <bean id="dosageDao" class="com.ideas2it.hospitalmanagement.dosage.dao.impl.DosageDaoImpl">
+	
+	<bean id="dosageDao" class="com.ideas2it.hospitalmanagement.dosage.dao.impl.DosageDaoImpl">
     </bean>
+    
     <bean id="dosageService" class="com.ideas2it.hospitalmanagement.dosage.service.impl.DosageServiceImpl">
     <property name="dosageDao" ref="dosageDao"></property> 
     </bean>
-    <bean id="DosageController" class="com.ideas2it.hospitalmanagement.dosage.controller.DosageController">
+    
+    <bean id="dosageController" class="com.ideas2it.hospitalmanagement.dosage.controller.DosageController">
     <property name="dosageService" ref="dosageService"></property> 
 	</bean>
+	
+    <bean id="physicianDaoImpl" class="com.ideas2it.hospitalmanagement.physician.dao.impl.PhysicianDaoImpl"/>
+
+    <bean id="physicianServiceImpl" class="com.ideas2it.hospitalmanagement.physician.service.impl.PhysicianServiceImpl" >
+        <property name="physicianDao" ref="physicianDaoImpl" />
+        <property name="userService" ref="userServiceImpl" />
+    </bean>
+
+    <bean id="physicianController"  class="com.ideas2it.hospitalmanagement.physician.controller.PhysicianController">
+        <property name="physicianService" ref="physicianServiceImpl" />
+    </bean>
+
+    <bean id="patientDaoImpl" class="com.ideas2it.hospitalmanagement.patient.dao.impl.PatientDaoImpl"/>
+ 
+
+    <bean id="patientServiceImpl" class="com.ideas2it.hospitalmanagement.patient.service.impl.PatientServiceImpl" >
+        <property name="patientDao" ref ="patientDaoImpl" />
+
+    </bean>
+
+    <bean id="patientController"  class="com.ideas2it.hospitalmanagement.patient.controller.PatientController" >
+        <property name="patientService" ref="patientServiceImpl" />
+    </bean>
+    <bean id="visitDaoImpl" class="com.ideas2it.hospitalmanagement.visit.dao.impl.VisitDaoImpl"/>
+    <bean id="visitServiceImpl" class="com.ideas2it.hospitalmanagement.visit.service.impl.VisitServiceImpl" >
+        <property name="visitDao" ref="visitDaoImpl"/>
+        <property name="physicianService" ref="physicianServiceImpl" />
+        <property name="patientService" ref="patientServiceImpl" />
+    </bean>
+    <bean id="visitController"  class="com.ideas2it.hospitalmanagement.visit.controller.VisitController" >
+        <property name="visitService" ref="visitServiceImpl"/>
+    </bean>
+    
+    <bean id="userDaoImpl" class="com.ideas2it.hospitalmanagement.user.dao.impl.UserDaoImpl"/>
+
+    <bean id="userServiceImpl" class="com.ideas2it.hospitalmanagement.user.service.impl.UserServiceImpl" >
+        <property name="userDao" ref="userDaoImpl" />
+    </bean>
+
+  
 	<bean id="userController"  class="com.ideas2it.hospitalmanagement.user.controller.UserController">
     </bean>
+    
+    <bean id="dosageMasterDao" class="com.ideas2it.hospitalmanagement.dosageMaster.dao.impl.DosageMasterDaoImpl">
+    </bean>
+    
+    <bean id="dosageMasterService" class="com.ideas2it.hospitalmanagement.dosageMaster.service.impl.DosageMasterServiceImpl">
+    <property name="dosageMasterDao" ref="dosageMasterDao"></property> 
+    </bean>
+    
+    <bean id="dosageMasterController" class="com.ideas2it.hospitalmanagement.dosageMaster.controller.DosageMasterController">
+    <property name="dosageMasterService" ref="dosageMasterService"></property> 
+	</bean>
 </beans>
-	
 

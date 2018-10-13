@@ -1,14 +1,11 @@
 package com.ideas2it.hospitalmanagement.item.dao.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import com.ideas2it.hospitalmanagement.commons.Constants;
-import com.ideas2it.hospitalmanagement.diagnosis.dao.DiagnosisDao;
-import com.ideas2it.hospitalmanagement.diagnosis.model.Diagnosis;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.genericdao.GenericDao;
 import com.ideas2it.hospitalmanagement.item.dao.ItemDao;
@@ -28,12 +25,13 @@ import com.ideas2it.hospitalmanagement.logger.Logger;
  * @author Hariharasudan K S
  * @version 1.0
  */
-
-
 public class ItemDaoImplementation extends GenericDao implements ItemDao {
 
-	String ITEM_IN_QUERY = "from item where id in (:ids)";
+	String ITEM_IN_QUERY = "from Item where id in (:ids)";
 	String IDS = "ids";
+
+	String ITEMS_IN_NAMES = "from Item where itemName like :name";
+	String NAMES = "name";
 
 	public ItemDaoImplementation() {
 		super();
@@ -43,7 +41,6 @@ public class ItemDaoImplementation extends GenericDao implements ItemDao {
 	 * {@inheritDoc}
 	 */
 	public boolean insertItem(Item item) throws ApplicationException {
-		// diagnosis.setActive(Boolean.TRUE);
 		try {
 			return (null != super.save(item));
 		} catch (ApplicationException e) {
@@ -68,11 +65,27 @@ public class ItemDaoImplementation extends GenericDao implements ItemDao {
 	/**
 	 * {@inheritDoc}
 	 */
+	public List<String> fetchAllItemsMaster(String name) throws ApplicationException {
+		try {
+			Session session = super.getSession();
+			Query query = session.createQuery(ITEMS_IN_NAMES);
+			query.setParameter(NAMES, name + "%");
+			return query.list();
+		} catch (ApplicationException e) {
+			Logger.error(Constants.DIAGNOSIS_DISPLAY_EXCEPTION, e);
+			throw new ApplicationException(Constants.DIAGNOSIS_DISPLAY_EXCEPTION, e);
+		}
+
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public List<Item> fetchItemByName(String name) throws ApplicationException {
 		try {
 			Session session = super.getSession();
-			Query query = session.createQuery(ITEM_IN_QUERY);
-			query.setParameter(IDS, name);
+			Query query = session.createQuery(ITEMS_IN_NAMES);
+			query.setParameter(NAMES, name + "%");
 			return query.list();
 		} catch (ApplicationException e) {
 			Logger.error(Constants.DIAGNOSIS_DISPLAY_EXCEPTION, e);
@@ -80,27 +93,27 @@ public class ItemDaoImplementation extends GenericDao implements ItemDao {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public boolean updateItem(Item item) throws ApplicationException {
-		 try {
-	            return super.update(item);
-	        } catch (ApplicationException e) {
-	            Logger.error(String.format(
-	                Constants.ITEM_EDIT_EXCEPTION, item.getId()), e);
-	            throw new ApplicationException(String.format(
-	                Constants.ITEM_EDIT_EXCEPTION, item.getId()), e);
-	        }
+		try {
+			return super.update(item);
+		} catch (ApplicationException e) {
+			Logger.error(String.format(Constants.ITEM_EDIT_EXCEPTION, item.getId()), e);
+			throw new ApplicationException(String.format(Constants.ITEM_EDIT_EXCEPTION, item.getId()), e);
+		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public Item searchItemById(int id) throws ApplicationException {
 		try {
-            return super.get(Item.class, id);
-        } catch (ApplicationException e) {
-            Logger.error(String.format(Constants.ITEM_SEARCH_EXCEPTION, id), e);
-            throw new ApplicationException(String.format(Constants.ITEM_SEARCH_EXCEPTION, id));
-        }
+			return super.get(Item.class, id);
+		} catch (ApplicationException e) {
+			Logger.error(String.format(Constants.ITEM_SEARCH_EXCEPTION, id), e);
+			throw new ApplicationException(String.format(Constants.ITEM_SEARCH_EXCEPTION, id));
+		}
 	}
-
-	
-
-	
 }

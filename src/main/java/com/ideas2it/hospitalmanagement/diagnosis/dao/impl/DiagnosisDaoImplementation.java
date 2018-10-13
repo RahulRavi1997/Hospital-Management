@@ -26,12 +26,10 @@ import com.ideas2it.hospitalmanagement.logger.Logger;
  * @author Hariharasudan K S
  * @version 1.0
  */
-
-
 public class DiagnosisDaoImplementation extends GenericDao implements DiagnosisDao {
 
-	String DIAGNOSIS_IN_QUERY = "from Diagnosis where id in (:ids)";
-	String IDS = "ids";
+	String DIAGNOSIS_IN_QUERY = "from Diagnosis where visitId in (:id)";
+	String ID = "id";
 
 	public DiagnosisDaoImplementation() {
 		super();
@@ -41,7 +39,6 @@ public class DiagnosisDaoImplementation extends GenericDao implements DiagnosisD
 	 * {@inheritDoc}
 	 */
 	public boolean insertDiagnosis(Diagnosis diagnosis) throws ApplicationException {
-		// diagnosis.setActive(Boolean.TRUE);
 		try {
 			return (null != super.save(diagnosis));
 		} catch (ApplicationException e) {
@@ -67,8 +64,7 @@ public class DiagnosisDaoImplementation extends GenericDao implements DiagnosisD
 	 * {@inheritDoc}
 	 */
 	public boolean updateDiagnosis(Diagnosis diagnosis) throws ApplicationException {
-
-		try {
+        try {
 			return super.update(diagnosis);
 		} catch (ApplicationException e) {
 			Logger.error(String.format(Constants.DIAGNOSIS_EDIT_EXCEPTION, diagnosis.getId()), e);
@@ -83,11 +79,39 @@ public class DiagnosisDaoImplementation extends GenericDao implements DiagnosisD
 		try {
 			Session session = super.getSession();
 			Query query = session.createQuery(DIAGNOSIS_IN_QUERY);
-			query.setParameter(IDS, patientId);
+			query.setParameter(ID, patientId);
 			return query.list();
 		} catch (ApplicationException e) {
 			Logger.error(Constants.DIAGNOSIS_DISPLAY_EXCEPTION, e);
 			throw new ApplicationException(Constants.DIAGNOSIS_DISPLAY_EXCEPTION, e);
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+
+	public List<Diagnosis> fetchDiagnosisByVisit(int visitId) throws ApplicationException {
+		try {
+			Session session = super.getSession();
+			Query query = session.createQuery(DIAGNOSIS_IN_QUERY);
+			query.setParameter(ID, visitId);
+			return query.list();
+		} catch (ApplicationException e) {
+			Logger.error(Constants.DIAGNOSIS_DISPLAY_EXCEPTION, e);
+			throw new ApplicationException(Constants.DIAGNOSIS_DISPLAY_EXCEPTION, e);
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public Diagnosis searchDiagnosisById(int id) throws ApplicationException {
+		try {
+			return super.get(Diagnosis.class, id);
+		} catch (ApplicationException e) {
+			Logger.error(String.format(Constants.ITEM_SEARCH_EXCEPTION, id), e);
+			throw new ApplicationException(String.format(Constants.ITEM_SEARCH_EXCEPTION, id));
 		}
 	}
 

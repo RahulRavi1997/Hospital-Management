@@ -5,8 +5,8 @@
 <hibernate-mapping>
 	<class name="com.ideas2it.hospitalmanagement.item.model.Item" table="item">
 		<id name="id" column="Id">
-	    <generator class="increment"></generator>
+	    <generator class= "increment"></generator>
 		</id>
-		<property name="itemName"  column="ITEM_NAME"  type="string" />
+		<property name="itemName" column="ITEM_NAME"  type="string" />
 	</class>
 </hibernate-mapping>
