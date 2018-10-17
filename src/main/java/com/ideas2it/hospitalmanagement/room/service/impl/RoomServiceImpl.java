@@ -44,10 +44,8 @@ public class RoomServiceImpl implements RoomService {
      */
 	public Room createRoom(Room room) throws ApplicationException {
 		Bed bed;
-		for(int i = 0; i < 5; i++) {
-			bed = new Bed();
-			room.getBeds().add(bed);
-		}
+		bed = new Bed();
+		room.getBeds().add(bed);
 	    return room;
 	}
 	
@@ -82,7 +80,7 @@ public class RoomServiceImpl implements RoomService {
     /**
      *  {@inheritDoc}
      */
-	public Bed getBedByNumber(int bedNumber) throws ApplicationException{
+	public Bed getBedByNumber(int bedNumber) throws ApplicationException {
 		return bedService.searchBedByNumber(bedNumber);
 	}
 }

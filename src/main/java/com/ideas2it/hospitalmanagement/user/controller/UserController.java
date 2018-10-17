@@ -141,12 +141,16 @@ public class UserController {
         session.setMaxInactiveInterval(Constants.SESSION_ACTIVE_INTERVAL);
         Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>)SecurityContextHolder.getContext().getAuthentication().getAuthorities();
         if (authorities.iterator().next().toString().equals("ROLE_ADMIN")) {
+            session.setAttribute("Role","Admin");
             return "admin";
         } else if (authorities.iterator().next().toString().equals("ROLE_PHYSICIAN")) {
+            session.setAttribute("Role","Physician");
             return "physician";
         } else if (authorities.iterator().next().toString().equals("ROLE_NURSE")) {
-            return "nurse";
+            session.setAttribute("Role","Nurse");
+            return "nurseHome";
         } else if (authorities.iterator().next().toString().equals("ROLE_RECEPTIONIST")) {
+            session.setAttribute("Role","Receptionist");
             return "receptionist";
         } else {
             return "accessDenied";

@@ -42,11 +42,7 @@ public class WardServiceImpl implements WardService {
     /**
      * {@inheritDoc}
      */
-	public Ward createWard(Ward ward, int numberOfRooms) throws ApplicationException {
-        List<Room> rooms = new ArrayList<Room>();
-		for (int count = 0; count < numberOfRooms ; count++ ) {
-				ward.getRooms().add(roomService.createRoom(new Room()));		
-		}
+	public Ward createWard(Ward ward) throws ApplicationException {
 		return wardDao.insertWard(ward);		
 		
 	}

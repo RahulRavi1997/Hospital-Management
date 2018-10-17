@@ -6,22 +6,23 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.ideas2it.hospitalmanagement.bed.commons.constants.BedConstants;
 import com.ideas2it.hospitalmanagement.bed.model.Bed;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.logger.Logger;
 import com.ideas2it.hospitalmanagement.room.common.Constants;
-import com.ideas2it.hospitalmanagement.room.dao.RoomDao;
 import com.ideas2it.hospitalmanagement.room.model.Room;
 import com.ideas2it.hospitalmanagement.room.service.RoomService;
 import com.ideas2it.hospitalmanagement.room.service.impl.RoomServiceImpl;
 import com.ideas2it.hospitalmanagement.ward.commons.constants.WardConstants;
-import com.ideas2it.hospitalmanagement.ward.model.Ward;
 
 @Controller
 public class RoomController{
@@ -91,4 +92,46 @@ public class RoomController{
 	    }
 	  	return mav; 
 	}
+    
+     @RequestMapping(value="/searchRoomByNumber",
+             produces={"application/json","application/xml"}, consumes="application/json",
+     headers = "content-type=application/x-www-form-urlencoded", method = RequestMethod.GET)
+     public @ResponseBody String searchWard(Model model,
+             @RequestParam("roomNumber") String roomNumber) {
+         try {
+             Room room = roomService.searchRoomByNumber(Integer.parseInt(roomNumber));
+             return new Gson().toJson(room.getBeds());
+         } catch (ApplicationException e) {
+             Logger.error(e);
+             return null;
+         }
+
+     }
+   
+     /**
+      * <p>
+      * Display the patient details who corresponds to the particular bed.
+      * </p>
+      * 
+      * @param visitId							Visit Id
+      * 
+      * @return ModelAndView 					Used for displaying the view for the 
+      *                               			application user.
+      */	@RequestMapping(value="/AddBeds", method=RequestMethod.POST)
+ 	public ModelAndView AddBeds(@RequestParam("wardNumber") String wardNumber,
+ 									@RequestParam("roomNumber")String roomNumber) {
+  		ModelAndView mav = new ModelAndView(Constants.SEARCHROOM);
+
+ 	    try {
+ 			 Room room = roomService.searchRoomByNumber(Integer.parseInt(roomNumber));
+             room.getBeds().add(new Bed());
+             roomService.updateRoom(room);
+             room = roomService.searchRoomByNumber(Integer.parseInt(roomNumber));
+             mav.addObject("room",room);
+             mav.addObject("wardNumber", wardNumber);
+ 	        } catch(ApplicationException e) {
+ 			mav.addObject(BedConstants.FAIL_MESSAGE,e);  
+ 	    }
+ 	  	return mav; 
+ 	}
 }

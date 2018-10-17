@@ -14,7 +14,7 @@
 }
 
 .blue {
-  background: #13b4ff;
+  background: #cecba9;
 }
 
 .purple {
@@ -84,30 +84,35 @@ button{
          <!-- Sidebar -->
          <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
+ 				<ul class="sidebar-nav">
                <li class="sidebar-brand highlight">
                   <a href="index">
                   Home
                   </a>
-               </li>
                <li>
                   <a href="DisplayAllWards">View Wards</a> 
                </li>
+                <c:if test="${Role == 'Nurse'}">
                <li>
                	  <a href="nurseHome">Display In Patients</a>
-               </li>
+               </li></c:if>
             </ul>
          </div>
          <!-- /#sidebar-wrapper -->
          <!-- Page Content -->
          <div id="page-content-wrapper">
-         
+          <c:if test="${Role == 'Nurse'}">
+          <br>
+          </c:if>
             <div class="container-fluid">
                <div class="row">
                   <div class="col-lg-12">
-                    <form:form action="AddWard" method="post">
-                  	<button class="btn btn-success" type="submit" style="float:right">Add Wards</button><br><br>
+                   <c:if test="${Role == 'Admin'}">
+                    <form:form action="AddWardInDB" style="float:right" method="post">
+                    <input type = "text" name= "wardName" placeholder="Enter ward name.." >
+                  	<button class="btn btn-success" type="submit" >Add Ward</button><br>
                     </form:form>
-                    
+					</c:if>                    
 
                     
                    
@@ -122,17 +127,23 @@ button{
 	          				 <input type="hidden" value="${visitId}" name="visitId">
 	          				 <input type="hidden" value="${ward.wardNumber}" name="wardNumber">
 	          				 <input type="hidden" value="Yes" name="admitButton">
-		        			 <div class="foo blue" style="text-align:center" >Ward<br><h1>${ward.wardNumber}<h2></div></button>
+		        			 <div class="foo blue" style="text-align:center" >
+		        			 <span style="margin-top:15px;">Ward</span>
+		        			 <br><h1>${ward.wardNumber}</h1><h5>${ward.name}</h5>
+		        			 </div></button>
 		        			</form></c:forEach>
 		   				
 					    </c:when>
 				    <c:otherwise>
+				   
          			<div>
          			<c:forEach items="${wards}" var="ward">
 	          			<form action="searchWard" method="post" style="display: inline;">
           				 <button>
           				 <input type="hidden" value="${ward.wardNumber}" name="wardNumber">
-	        			 <div class="foo blue" style="text-align:center" >Ward<br><h1>${ward.wardNumber}<h2></div></button>
+	        			 <div class="foo blue" style="text-align:center" >
+	        			 <span style="margin-top:15px;">Ward</span><br>
+	        			 <h1>${ward.wardNumber}</h1><h5>${ward.name}</h5></div></button>
 	        			</form></c:forEach>
 	   				
 					</div>

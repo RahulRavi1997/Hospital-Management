@@ -14,15 +14,13 @@ public interface WardService {
 	 * <p>
 	 * Create a new ward with all the basic information.
 	 * </p>
-	 * @param   ward           ward information 
-	 *
-	 * @param   numberOfRooms  Number of rooms to be in a ward. 
+	 * @param   ward           ward information
 	 * 	 
-	 * @return                 ward information after creation
+	 * @return  ward           ward information after creation
 	 * 
 	 * @throws ApplicationException
 	 */
-	public Ward createWard(Ward ward, int numberOfRooms) throws ApplicationException;
+	public Ward createWard(Ward ward) throws ApplicationException;
 	
 	/**
 	 * <p>

@@ -38,7 +38,7 @@
 	           <a href="displayPhysicians">Display Physicians</a>
                 </li>
 <li>
-	<a href="nurseHome">Nurse Home </a><br>
+<a href="DisplayAllWards">Display Wards</a><br>
 </li>
             </ul>
         </div>

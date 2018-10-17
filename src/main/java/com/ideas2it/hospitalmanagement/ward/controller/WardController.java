@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.google.gson.Gson;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.logger.Logger;
 import com.ideas2it.hospitalmanagement.room.model.Room;
@@ -12,10 +13,12 @@ import com.ideas2it.hospitalmanagement.ward.commons.constants.WardConstants;
 import com.ideas2it.hospitalmanagement.ward.model.Ward;
 import com.ideas2it.hospitalmanagement.ward.service.WardService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;  
 import org.springframework.web.bind.annotation.RequestMethod;  
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -53,6 +56,33 @@ public class WardController {
     	}
         return mav;
     }
+    
+    /**
+     * Display all the wards
+     * 
+     * @return    redirects to the page which shows all the wards.
+     */
+    @RequestMapping(value = "/DisplayAllWards", method = RequestMethod.POST)
+    public ModelAndView displayWards(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView(WardConstants.DISPLAYWARDS);
+    	try {
+	    	String admitPatient = request.getParameter("admitButton");
+	    	if(null != admitPatient) {
+	    		mav.addObject(WardConstants.ADMITBUTTON, WardConstants.YES);
+	    		mav.addObject("visitId",request.getParameter("visitId"));
+	    	}
+            mav.addObject(WardConstants.WARDS , wardService.displayAllWards(WardConstants.ALL));
+            mav.addObject(WardConstants.WARD , new Ward());
+            mav.addObject(WardConstants.WARDIDS , getWards());
+    	} catch(ApplicationException e) {
+    		Logger.error(e);
+            ModelAndView errorMav = new ModelAndView(WardConstants.NURSEHOME);
+            errorMav.addObject(WardConstants.FAILURE_MESSAGE, WardConstants.FAILURE_MESSAGE);
+            return errorMav;
+    	}
+        return mav;
+    }
+    
 
     /**
      * Display all the wards for the purpose for admitting the patient.
@@ -80,8 +110,21 @@ public class WardController {
   	    return mav;
     }
     
-  
 
+    @RequestMapping(value="/searchWardByNumber",
+            produces={"application/json","application/xml"}, consumes="application/json",
+    headers = "content-type=application/x-www-form-urlencoded", method = RequestMethod.GET)
+    public @ResponseBody String searchWard(Model model,
+            @RequestParam("wardNumber") String wardNumber) {
+        try {
+            Ward ward = wardService.searchWard(Integer.parseInt(wardNumber));
+            return new Gson().toJson(ward.getRooms());
+        } catch (ApplicationException e) {
+            Logger.error(e);
+            return null;
+        }
+
+    }
     /**
      * Allows to create a new ward with the specified number of rooms.
      * 
@@ -93,12 +136,12 @@ public class WardController {
      *                       the ward details.
      */
     @RequestMapping(value="/AddWardInDB", method=RequestMethod.POST)
-    public ModelAndView AddWardInDB(@ModelAttribute("ward") Ward ward ,
-  		   @RequestParam("noOfRooms")String noOfRooms) {
+    public ModelAndView AddWardInDB(@RequestParam("wardName")String wardName) {
   		 ModelAndView mav = new ModelAndView("displayWards");
   	  try {
-          System.out.println("controllerwardname" + ward.getName() + "" + noOfRooms);
-          wardService.createWard(ward, Integer.parseInt(noOfRooms));
+  		  Ward ward = new Ward();
+  		  ward.setName(wardName);
+          wardService.createWard(ward);
           mav.addObject("wards" , wardService.displayAllWards("All"));
           mav.addObject("ward" , new Ward());
         } catch(ApplicationException e) {
@@ -269,7 +312,7 @@ Ward ward = new Ward();
     try {
             Ward ward = wardService.searchWard(Integer.parseInt(wardnumber));
             wardService.addRoomsToWard(ward, Integer.parseInt(noOfRooms));
-    ward = wardService.searchWard(Integer.parseInt(wardnumber));
+            ward = wardService.searchWard(Integer.parseInt(wardnumber));
             mav.addObject(WardConstants.WARDNUMBER , Integer.parseInt(wardnumber));
             mav.addObject(WardConstants.WARD , ward);
             mav.addObject("rooms", ward.getRooms());

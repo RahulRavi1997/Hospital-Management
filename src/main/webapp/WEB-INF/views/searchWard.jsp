@@ -22,7 +22,10 @@
 }
 
 .wine {
-  background: #ffb413;
+  background: #e9ca94;
+}
+.grey {
+  background: #ECF0F1;
 }
 button{
     background: none;
@@ -30,6 +33,14 @@ button{
     border: none;
     padding: 0;
 
+}
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+ 
+input[type="number"] {
+    -moz-appearance: textfield;
 }
 #snackbar {
     visibility: hidden;
@@ -83,7 +94,7 @@ button{
       <div id="wrapper">
          <!-- Sidebar -->
          <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
+ <ul class="sidebar-nav">
                <li class="sidebar-brand highlight">
                   <a href="index">
                   Home
@@ -92,9 +103,10 @@ button{
                <li>
                   <a href="DisplayAllWards">View Wards</a> 
                </li>
+                <c:if test="${Role == 'Nurse'}">
                <li>
                	  <a href="nurseHome">Display In Patients</a>
-               </li>
+               </li></c:if>
             </ul>
          </div>
          <!-- /#sidebar-wrapper -->
@@ -102,44 +114,24 @@ button{
             <div id="page-content-wrapper">
 
 
-                               		<form action="DisplayAllWards" method="get" style="display: inline;">
-            
+                               		<form action="DisplayAllWards" method="post" style="display: inline;">
+            		<c:choose>	<c:when test="${admitButton == 'Yes'}">
+            			<input type="hidden" name="admitButton" value="Yes">
+            			<input type="hidden" name="visitId" value="${visitId}">
+            			</c:when> </c:choose>
                     	<button class="btn btn-success" type="submit" style="float:left">Back to Wards</button>
                     	</form>
                     	
-                    	
-     			 <c:if test="${ward.status == 'undermaintaince'}">
-              
-                  <form:form action = "ChangeWardToFree" method ="post">
-                     <input type = "hidden" value = "${ward.wardNumber}" name = "number">
-                     <button  class="w3-btn w3-orange" style="float:left;margin-left:10px;" ><span> Free </span></button>
-                  </form:form>
-               
-            </c:if>
-            <c:if test="${ward.status == 'free'}">
-               
-                  <form:form action = "ChangeWardToMaintaince" method ="post">
-                     <input type = "hidden" value = "${ward.wardNumber}" name = "wardNumber">
-                     <button class="w3-btn w3-orange" style="float:left;margin-left:10px;"><span> Maintaince </span></button>
-                  </form:form>
-               
-            </c:if>
-            
-            <form style="float:right;" method="post" action="AddRooms">
-                    	<input type="hidden" name="wardNumber" value="${ward.wardNumber}">
-                    	<input type="text" name="noOfRooms" pattern =[0-9]* name = "noOfRooms" placeholder= "Number of Rooms " maxlength= "2" required></input>&ensp;
-                    	<button class="btn btn-success" type="submit" style="float:right">Add Rooms</button>
-                    </form>
+
+<c:set var = "max" scope = "session" value = "${20 - ward.rooms.size()}"/>
+
 </div>
          
          <div id="page-content-wrapper">
             <div class="container-fluid">
                <div class="row">
-                  <div class="col-lg-12">
-                                                		
-                    	
-                   
-                  	<div style="width:1200px; height:600px;padding: 10px;border: 2px solid black;padding: 10px; border-radius: 25px; overflow: auto;"> 
+                  <div class="col-lg-12">	
+                  <div style="width:1200px; height:600px;padding: 10px;border: 2px solid black;padding: 10px; border-radius: 25px; overflow: auto;"> 
                   	<h1 style="text-align:center">Ward : ${ward.wardNumber}</h1>
                   	<c:choose>
 					    <c:when test="${admitButton == 'Yes'}">
@@ -165,13 +157,15 @@ button{
                   	 </c:forEach>
                   	 </c:when>
                   	 <c:otherwise>
-                  	 
-                  	 <c:forEach items="${ward.rooms}" var="room">
+                  	 <form action="searchRoom" method="post" style="display: inline;">
+                  	 <c:forEach items="${rooms}" var="room">
           			     
           				<form action="searchRoom" method="post" style="display: inline;">
           				 <button>
           				 <input type="hidden" name="wardNumber" value="${ward.wardNumber}">
           				 <input type="hidden" name="roomNumber" value="${room.roomNumber}">
+         
+          				 <input type="hidden" value="${visitId}" name="visitId">
 	        			 <div class="foo wine" style="text-align:center" >
 	        			 Room<br>
 	        			 <h1>${room.roomNumber}</h1>
@@ -182,11 +176,22 @@ button{
 	        			 	</c:if>
 	   					</c:forEach>
 	   					 Available Beds : <c:out value = "${count}"/></div></button></form>
-                  	 </c:forEach>
+                  	 </c:forEach></form>
+                  	 <c:if test="${Role == 'Admin'}">
+					<c:if test="${max gt 0}">             
+                  	 <form method="post" action="AddRooms" style="display: inline;">
+                    	<input type="hidden" name="wardNumber" value="${ward.wardNumber}">
+                    	<input type="hidden" name="noOfRooms" value="1">
+                  	<button title="Add Room">
+                  	<div class="foo grey" style="text-align:center" >
+                  	<i class="fa fa-plus" style="text-align:center; margin-top:17px;font-size:90px; color:#D2D7D3;" aria-hidden="true">
+                  	</i></div></button>
+                  	</form>
+                  	</c:if></c:if>
                   	 </c:otherwise>
                   	 </c:choose>
                   	 </div>
-                  </div>
+                  </div> 
                </div>
             </div>
          </div>
