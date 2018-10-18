@@ -50,7 +50,7 @@ public class DosageMasterServiceImpl implements DosageMasterService {
 	}
 
 	/** {@inheritDoc} */
-	public List<DosageMaster> getAllDosage(String name) throws ApplicationException {
+	public List<DosageMaster> getAllDosage(String name) {
 		return dosageMasterDao.retrieveDosages(name);
 	}
 }

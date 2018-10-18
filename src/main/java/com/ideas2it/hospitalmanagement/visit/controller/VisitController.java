@@ -222,8 +222,6 @@ public class VisitController {
      */
     @RequestMapping(value = "/physicianVisits", method = RequestMethod.GET)
     private ModelAndView displayVisitByPhysicianId() {
-      
-            return new ModelAndView("displayVisit");
-        
+         return new ModelAndView("displayVisit");
     }
 }

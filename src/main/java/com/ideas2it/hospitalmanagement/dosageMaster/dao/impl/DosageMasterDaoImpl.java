@@ -59,7 +59,7 @@ public class DosageMasterDaoImpl extends GenericDao implements DosageMasterDao {
 	}
 
 	/** {@inheritDoc} */
-	public List<DosageMaster> retrieveDosages(String dosageName) throws ApplicationException {
+	public List<DosageMaster> retrieveDosages(String dosageName) {
 		try {
 			Session session = super.getSession();
 			Query query = session.createQuery(DOSAGE_IN_NAMES);
@@ -67,7 +67,7 @@ public class DosageMasterDaoImpl extends GenericDao implements DosageMasterDao {
 			return query.list();
 		} catch (ApplicationException e) {
 			Logger.error(SEARCH_ERROR_INFO + dosageName, e);
-			throw new ApplicationException(e);
+			return null;
 		}
 	}
 }

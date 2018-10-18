@@ -74,6 +74,9 @@ public class VisitServiceImpl implements VisitService {
 		return visitDao.getVisitsByIds(ids);
 	}
 	
+	/**
+	 *  {@inheritDoc}
+	 */
 	public List<Visit> getVisitsByPhysicianId(Integer physicianId) throws ApplicationException{
 		return visitDao.retrieveByPhysicianId(physicianId);
 	}

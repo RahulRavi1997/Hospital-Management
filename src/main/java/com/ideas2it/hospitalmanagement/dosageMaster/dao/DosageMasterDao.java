@@ -60,5 +60,5 @@ public interface DosageMasterDao {
 	 *            string to be matched with master items
 	 * @return List of all dosageMaster items which has matched
 	 */
-	public List<DosageMaster> retrieveDosages(String name) throws ApplicationException;
+	public List<DosageMaster> retrieveDosages(String name);
 }

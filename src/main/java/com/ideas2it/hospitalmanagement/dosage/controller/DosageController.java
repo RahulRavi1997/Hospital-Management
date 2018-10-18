@@ -1,5 +1,6 @@
 package com.ideas2it.hospitalmanagement.dosage.controller;
 
+import com.ideas2it.hospitalmanagement.commons.Constants;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.dosage.model.Dosage;
 import com.ideas2it.hospitalmanagement.dosage.service.DosageService;
@@ -23,7 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class DosageController {
 
-	private DosageService dosageService;
+    private DosageService dosageService;
 
 	public DosageService getDosageService() {
 		return dosageService;
@@ -40,18 +41,17 @@ public class DosageController {
 	 * Client view whether it is added or not.
 	 * </p>
 	 * 
-	 * @param dosage
-	 *            It is a dosage object which have a dosage details.
+	 * @param dosage It is a dosage object which have a dosage details.
 	 * @return ModelAndView Used to represents the View which will be displayed to
 	 *         the client.
 	 */
-	@RequestMapping(value = "/addDosage", method = RequestMethod.POST)
-	public ModelAndView addDosage(@ModelAttribute("dosage") Dosage dosage) {
+	@RequestMapping(value = Constants.CREATE_DOSAGE_MAPPING, method = RequestMethod.POST)
+	public ModelAndView addDosage(@ModelAttribute(Constants.DOSAGE) Dosage dosage) {
 		try {
 			dosageService.addDosage(dosage);
-			return new ModelAndView("Dosage.jsp", "add-msg", "Prescribed Successfully...");
+			return new ModelAndView(Constants.DOSAGE_JSP, Constants.DOSAGE_ADD_MESSAGE, Constants.PRESCRIPTION_SUCCESS);
 		} catch (ApplicationException e) {
-			return new ModelAndView("error", "Error", "E");
+			return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR, Constants.DOSAGE_ADD_ERROR );
 		}
 	}
 
@@ -61,17 +61,16 @@ public class DosageController {
 	 * for edit and update details.
 	 * </p>
 	 * 
-	 * @param dosageId
-	 *            Unique Id of dosage.
+	 * @param dosageId Unique Id of dosage.
 	 * @return ModelAndView Used to represents the View which will be displayed to
 	 *         the client.
 	 */
-	@RequestMapping(value = "/displayDosage", method = RequestMethod.POST)
-	public ModelAndView displayDosage(@RequestParam("dosageId") Integer dosageId) {
+	@RequestMapping(value = Constants.DISPLAY_DOSAGE_MAPPING, method = RequestMethod.POST)
+	public ModelAndView displayDosage(@RequestParam(Constants.DOSAGE_ID) Integer dosageId) {
 		try {
-			return new ModelAndView("Dosage.jsp", "dosage", dosageService.serchDosageById(dosageId));
+			return new ModelAndView(Constants.DOSAGE_JSP, Constants.DOSAGE, dosageService.serchDosageById(dosageId));
 		} catch (ApplicationException e) {
-			return new ModelAndView();
+			return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR, Constants.DOSAGE_DISPLAY_ERROR );
 		}
 	}
 }

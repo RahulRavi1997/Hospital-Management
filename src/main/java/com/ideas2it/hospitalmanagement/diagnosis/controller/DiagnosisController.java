@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ideas2it.hospitalmanagement.commons.Constants;
 import com.ideas2it.hospitalmanagement.diagnosis.model.Diagnosis;
 import com.ideas2it.hospitalmanagement.diagnosis.service.DiagnosisService;
-import com.ideas2it.hospitalmanagement.logger.Logger;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 
 /**
@@ -43,9 +42,8 @@ public class DiagnosisController {
 	 * This Method is used to redirect user to the webpage with the form used to
 	 * create and add a new Diagnosis.
 	 *
-	 * @param model
-	 *            a Model object which is used to add the diagnosis information as
-	 *            an attribute to the view Layer.
+	 * @param model a Model object which is used to add the diagnosis information as
+	 *              an attribute to the view Layer.
 	 * @return modelAndView a ModelAndView object which is used to add attributes to
 	 *         a model and redirect it to a view such as a jsp page.
 	 */
@@ -62,9 +60,8 @@ public class DiagnosisController {
 	 * This Method is used to add a new diagnosis after obtaining all the details
 	 * from the doctor. Redirects to error page if any error occurs.
 	 *
-	 * @param diagnosis
-	 *            an Diagnnosis object with all the diagnosis information to be
-	 *            added.
+	 * @param diagnosis an Diagnnosis object with all the diagnosis information to
+	 *                  be added.
 	 * @return modelAndView a ModelAndView object which is used to add attributes to
 	 *         a model and redirect it to a view such as a jsp page.
 	 */
@@ -76,7 +73,6 @@ public class DiagnosisController {
 			model.addAttribute(Constants.MESSAGE, Constants.DIAGONSIS_ADD_SUCCESS_MESSAGE);
 			return modelAndView;
 		} catch (ApplicationException e) {
-			Logger.error(e);
 			return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
 					String.format(Constants.DIAGNOSIS_ADDITION_EXCEPTION, diagnosis.getId()));
 		}
@@ -96,7 +92,6 @@ public class DiagnosisController {
 			System.out.println(diagnosis);
 			return new ModelAndView("DisplayAllDiagnosis", "diagnosis", diagnosis);
 		} catch (ApplicationException e) {
-			Logger.error(e);
 			return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE, Constants.ITEM_DISPLAY_EXCEPTION);
 		}
 	}
@@ -107,9 +102,8 @@ public class DiagnosisController {
 	 * modified successfully, else returns false if the entry is not found.
 	 * </p>
 	 *
-	 * @param id
-	 *            an Integer indicating the id of the diagnosis information to be
-	 *            modified.
+	 * @param id an Integer indicating the id of the diagnosis information to be
+	 *           modified.
 	 * @return modelAndView a ModelAndView object which is used to add attributes to
 	 *         a model and redirect it to a view such as a jsp page.
 	 */
@@ -119,8 +113,7 @@ public class DiagnosisController {
 			return new ModelAndView(Constants.CREATE_DIAGNOSIS_JSP, Constants.DIAGNOSIS,
 					diagnosisService.retrieveDiagnosisById(id));
 		} catch (ApplicationException e) {
-			Logger.error(e);
-			return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
+            return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
 					String.format(Constants.DIAGNOSIS_EDIT_EXCEPTION, id));
 		}
 
@@ -132,8 +125,7 @@ public class DiagnosisController {
 	 * entry is modified successfully, else returns false if the entry is not found.
 	 * </p>
 	 *
-	 * @param a
-	 *            modified Diagnosis object to be saved.
+	 * @param a modified Diagnosis object to be saved.
 	 * @return modelAndView a ModelAndView object which is used to list all
 	 *         diagnosis in a list
 	 */
@@ -146,8 +138,7 @@ public class DiagnosisController {
 			modelAndView = viewAllDiagnosis();
 			return modelAndView;
 		} catch (ApplicationException e) {
-			Logger.error(e);
-			return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
+            return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
 					String.format(Constants.DIAGNOSIS_EDIT_EXCEPTION, diagnosis.getId()));
 		}
 
