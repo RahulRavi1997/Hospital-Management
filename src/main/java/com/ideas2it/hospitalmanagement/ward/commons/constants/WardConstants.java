@@ -16,7 +16,7 @@ public class WardConstants {
 	public static final String ADDROOMSTOWARD = "addRoomsToWard";
 
 	public static final String NUMBEROFROOMS = "noOfRooms";
-	
+        public static final String ROOMS = "rooms";
 	public static final String VISITID = "visitId";
 	public static final String NURSEHOME = "nurseHome";
 	public static final String ADMITBUTTON = "admitButton";

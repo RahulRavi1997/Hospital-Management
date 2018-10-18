@@ -60,10 +60,10 @@ public class BedServiceImpl extends GenericDao implements BedService {
         		addBedAllocationDetails(visit, bed);
 				return bedDao.updateBed(bed);
 			} else {
-				return false;
+				return Boolean.FALSE;
 			}
 		} else {
-			return false;
+			return Boolean.FALSE;
 		}
 	}
 	
@@ -134,10 +134,10 @@ public class BedServiceImpl extends GenericDao implements BedService {
 				visitService.modifyVisit(visit);
 				return bedDao.updateBed(bed);
 			} else {
-				return false;
+				return Boolean.FALSE;
 			}
 		} else {
-			return false;
+			return Boolean.FALSE;
 		}
 	}
 	

@@ -1,10 +1,5 @@
 package com.ideas2it.hospitalmanagement.bed.dao.impl;
 
-import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
-
 import com.ideas2it.hospitalmanagement.bed.commons.constants.BedConstants;
 import com.ideas2it.hospitalmanagement.bed.dao.BedDao;
 import com.ideas2it.hospitalmanagement.bed.model.Bed;

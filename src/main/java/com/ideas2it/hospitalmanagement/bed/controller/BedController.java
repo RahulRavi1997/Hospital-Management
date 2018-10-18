@@ -9,17 +9,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ideas2it.hospitalmanagement.exception.ApplicationException;
-import com.ideas2it.hospitalmanagement.visit.model.Visit;
-import com.ideas2it.hospitalmanagement.ward.commons.constants.WardConstants;
-import com.ideas2it.hospitalmanagement.ward.model.Ward;
 import com.ideas2it.hospitalmanagement.bed.commons.constants.BedConstants;
 import com.ideas2it.hospitalmanagement.bed.model.Bed;
 import com.ideas2it.hospitalmanagement.bed.service.BedService;
 import com.ideas2it.hospitalmanagement.bed.service.impl.BedServiceImpl;
+import com.ideas2it.hospitalmanagement.exception.ApplicationException;
+import com.ideas2it.hospitalmanagement.visit.model.Visit;
+import com.ideas2it.hospitalmanagement.ward.commons.constants.WardConstants;
+import com.ideas2it.hospitalmanagement.ward.model.Ward;
+
 
 @Controller
 public class BedController {
+
 	private static BedService bedService;
 	
 	public static BedService getBedService() {
@@ -107,7 +109,7 @@ public class BedController {
 			Visit visit = bedService.searchvisitByNumber(Integer.parseInt(visitId));
 			Bed bed= bedService.searchBedByVisit(visit);
             bedService.dischargePatient(bed.getBedNumber());
-			mav.addObject("inpatients", bedService.getVisitsByPatientType(BedConstants.INPATIENT));
+			mav.addObject(BedConstants.INPATIENTS, bedService.getVisitsByPatientType(BedConstants.INPATIENT));
 	    } catch(ApplicationException e) {
 			mav.addObject(BedConstants.FAIL_MESSAGE,e);  
 	    }
@@ -127,7 +129,7 @@ public class BedController {
 	     *                               			application user.
 	     */
     @RequestMapping(value="/dischargePatient" , method= RequestMethod.POST)   
-	public ModelAndView dischargePatient(@RequestParam("bedNumber") 
+	public ModelAndView dischargePatient(@RequestParam(BedConstants.BEDNUMBER) 
 	        int bedNumber) {        
 	    ModelAndView mav = new ModelAndView(BedConstants.NURSEHOME);
 		try {
@@ -155,7 +157,7 @@ public class BedController {
      *                               			application user.
      */
     @RequestMapping(value="/makeBedAvailable" , method= RequestMethod.POST)   
-    public ModelAndView makeBedAvailable(@RequestParam("bedNumber") int bedNumber) {
+    public ModelAndView makeBedAvailable(@RequestParam(BedConstants.BEDNUMBER) int bedNumber) {
         ModelAndView modelAndView = new ModelAndView(BedConstants.NURSEHOME);
         try {
             modelAndView.addObject(BedConstants.INPATIENTS, 
@@ -198,7 +200,7 @@ public class BedController {
      *                               			application user.
      */ 
     @RequestMapping(value="/performBedMaintanence" , method= RequestMethod.POST)   
-    public ModelAndView performBedMaintanence(@RequestParam("bedNumber") int bedNumber) {
+    public ModelAndView performBedMaintanence(@RequestParam(BedConstants.BEDNUMBER) int bedNumber) {
     	
         ModelAndView modelAndView = new ModelAndView(BedConstants.NURSEHOME);
         try {

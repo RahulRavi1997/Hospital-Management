@@ -148,6 +148,7 @@ public class UserController {
             return "physician";
         } else if (authorities.iterator().next().toString().equals("ROLE_NURSE")) {
             session.setAttribute("Role","Nurse");
+
             return "nurseHome";
         } else if (authorities.iterator().next().toString().equals("ROLE_RECEPTIONIST")) {
             session.setAttribute("Role","Receptionist");

@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.google.gson.Gson;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.logger.Logger;
 import com.ideas2it.hospitalmanagement.room.model.Room;
@@ -33,7 +32,7 @@ public class WardController {
 
     @RequestMapping(value = "/AddWard", method = RequestMethod.POST)
     public ModelAndView showForm() {
-        return new ModelAndView("AddWard", "ward", new Ward());
+        return new ModelAndView("AddWard", WardConstants.WARD, new Ward());
     }
 
     /**
@@ -51,7 +50,7 @@ public class WardController {
     	} catch(ApplicationException e) {
     		Logger.error(e);
             ModelAndView errorMav = new ModelAndView(WardConstants.NURSEHOME);
-            errorMav.addObject(WardConstants.FAILURE_MESSAGE, WardConstants.FAILURE_MESSAGE);
+            errorMav.addObject(WardConstants.FAILURE_MESSAGE,e);
             return errorMav;
     	}
         return mav;
@@ -66,10 +65,10 @@ public class WardController {
     public ModelAndView displayWards(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView(WardConstants.DISPLAYWARDS);
     	try {
-	    	String admitPatient = request.getParameter("admitButton");
+	    	String admitPatient = request.getParameter(WardConstants.ADMITBUTTON);
 	    	if(null != admitPatient) {
 	    		mav.addObject(WardConstants.ADMITBUTTON, WardConstants.YES);
-	    		mav.addObject("visitId",request.getParameter("visitId"));
+	    		mav.addObject(WardConstants.VISITID,request.getParameter(WardConstants.VISITID));
 	    	}
             mav.addObject(WardConstants.WARDS , wardService.displayAllWards(WardConstants.ALL));
             mav.addObject(WardConstants.WARD , new Ward());
@@ -77,7 +76,8 @@ public class WardController {
     	} catch(ApplicationException e) {
     		Logger.error(e);
             ModelAndView errorMav = new ModelAndView(WardConstants.NURSEHOME);
-            errorMav.addObject(WardConstants.FAILURE_MESSAGE, WardConstants.FAILURE_MESSAGE);
+            errorMav.addObject(WardConstants.FAILURE_MESSAGE,e);
+
             return errorMav;
     	}
         return mav;
@@ -104,27 +104,13 @@ public class WardController {
         } catch(ApplicationException e) {
             ModelAndView errorMav = new ModelAndView(WardConstants.NURSEHOME);
     		Logger.error(e);
-            errorMav.addObject(WardConstants.FAILURE_MESSAGE, WardConstants.FAILURE_MESSAGE);
+            errorMav.addObject(WardConstants.FAILURE_MESSAGE,e);
             return errorMav;
         }
   	    return mav;
     }
     
 
-    @RequestMapping(value="/searchWardByNumber",
-            produces={"application/json","application/xml"}, consumes="application/json",
-    headers = "content-type=application/x-www-form-urlencoded", method = RequestMethod.GET)
-    public @ResponseBody String searchWard(Model model,
-            @RequestParam("wardNumber") String wardNumber) {
-        try {
-            Ward ward = wardService.searchWard(Integer.parseInt(wardNumber));
-            return new Gson().toJson(ward.getRooms());
-        } catch (ApplicationException e) {
-            Logger.error(e);
-            return null;
-        }
-
-    }
     /**
      * Allows to create a new ward with the specified number of rooms.
      * 
@@ -142,9 +128,10 @@ public class WardController {
   		  Ward ward = new Ward();
   		  ward.setName(wardName);
           wardService.createWard(ward);
-          mav.addObject("wards" , wardService.displayAllWards("All"));
-          mav.addObject("ward" , new Ward());
+          mav.addObject(WardConstants.WARDS , wardService.displayAllWards("All"));
+          mav.addObject(WardConstants.WARD , new Ward());
         } catch(ApplicationException e) {
+            mav.addObject(WardConstants.FAILURE_MESSAGE,e);
       	  
         }
   	  return mav;
@@ -167,10 +154,10 @@ public class WardController {
         ward = wardService.searchWard(ward.getWardNumber());
            mav.addObject(WardConstants.WARDNUMBER , ward.getWardNumber());
            mav.addObject(WardConstants.WARD , ward);
-           mav.addObject("rooms", ward.getRooms());
+           mav.addObject(WardConstants.ROOMS, ward.getRooms());
        } catch(ApplicationException e) {
-     Logger.error(e);
-      mav.addObject(WardConstants.FAILURE_MESSAGE, WardConstants.FAILURE_MESSAGE);    
+
+            mav.addObject(WardConstants.FAILURE_MESSAGE,e);
        }
    return mav;
    }
@@ -193,10 +180,10 @@ Ward ward = new Ward();
     ward = wardService.searchWard(Integer.parseInt(wardnumber));
            mav.addObject(WardConstants.WARDNUMBER , Integer.parseInt(wardnumber));
            mav.addObject(WardConstants.WARD , ward);
-           mav.addObject("rooms", ward.getRooms());
+           mav.addObject(WardConstants.ROOMS, ward.getRooms());
        } catch(ApplicationException e) {
-   Logger.error(e);
-    mav.addObject(WardConstants.FAILURE_MESSAGE, WardConstants.FAILURE_MESSAGE);    
+
+            mav.addObject(WardConstants.FAILURE_MESSAGE,e);
        }
    return mav;
 
@@ -215,8 +202,8 @@ Ward ward = new Ward();
 		try {
 		    mav.addObject(WardConstants.INPATIENTS, wardService.getVisitsByPatientType("InPatient"));
 		} catch(ApplicationException e) {
-		    Logger.error(e);
-	    	mav.addObject(WardConstants.FAILURE_MESSAGE, WardConstants.FAILURE_MESSAGE);  	  
+
+                   mav.addObject(WardConstants.FAILURE_MESSAGE,e);
 		}
 		return mav;
     }
@@ -254,7 +241,8 @@ Ward ward = new Ward();
             mav.addObject(WardConstants.WARDIDS , getWards());
         } catch(ApplicationException e) {
 		    Logger.error(e);
-	    	mav.addObject(WardConstants.FAILURE_MESSAGE, WardConstants.FAILURE_MESSAGE);  	  
+
+            mav.addObject(WardConstants.FAILURE_MESSAGE,e);
         }
         return mav;
     }
@@ -272,18 +260,19 @@ Ward ward = new Ward();
 	    Ward ward = null;
 	    ModelAndView mav = new ModelAndView("searchWard");
 	    try {
-	    	String admitPatient = request.getParameter("admitButton");
+	    	String admitPatient = request.getParameter(WardConstants.ADMITBUTTON);
 	    	if(null != admitPatient) {
 	    		mav.addObject(WardConstants.ADMITBUTTON, WardConstants.YES);
-	    		mav.addObject("visitId",request.getParameter("visitId"));
+	    		mav.addObject(WardConstants.VISITID,request.getParameter(WardConstants.VISITID));
 	    	}
 		    ward = wardService.searchWard(Integer.parseInt(wardnumber));
             mav.addObject(WardConstants.WARDNUMBER , Integer.parseInt(wardnumber));
             mav.addObject(WardConstants.WARD , ward);
-            mav.addObject("rooms", ward.getRooms());
+            mav.addObject(WardConstants.ROOMS, ward.getRooms());
         } catch(ApplicationException e) {
 		    Logger.error(e);
-	    	mav.addObject(WardConstants.FAILURE_MESSAGE, WardConstants.FAILURE_MESSAGE);  	  	  
+
+            mav.addObject(WardConstants.FAILURE_MESSAGE,e);
         }
         return mav;
     }
@@ -315,10 +304,11 @@ Ward ward = new Ward();
             ward = wardService.searchWard(Integer.parseInt(wardnumber));
             mav.addObject(WardConstants.WARDNUMBER , Integer.parseInt(wardnumber));
             mav.addObject(WardConstants.WARD , ward);
-            mav.addObject("rooms", ward.getRooms());
+            mav.addObject(WardConstants.ROOMS, ward.getRooms());
         } catch(ApplicationException e) {
-        Logger.error(e);
-            mav.addObject(WardConstants.FAILURE_MESSAGE, WardConstants.FAILURE_MESSAGE);      
+
+
+            mav.addObject(WardConstants.FAILURE_MESSAGE,e);
         }
     return mav;
  }
@@ -341,8 +331,9 @@ Ward ward = new Ward();
             mav.addObject(WardConstants.WARD , new Ward());
             mav.addObject(WardConstants.WARDIDS , getWards());
         } catch(ApplicationException e) {
-    	    Logger.error(e);
-            mav.addObject(WardConstants.FAILURE_MESSAGE, WardConstants.FAILURE_MESSAGE);
+
+
+            mav.addObject(WardConstants.FAILURE_MESSAGE,e);
         }
 	    return mav;  
     }   
