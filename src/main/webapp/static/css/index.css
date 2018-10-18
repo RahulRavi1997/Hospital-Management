@@ -1,6 +1,4 @@
-*,
-*:before,
-*:after {
+*, *:before, *:after {
   box-sizing: border-box;
 }
 
@@ -13,13 +11,11 @@ body {
   font-family: 'Titillium Web', sans-serif;
   background: url('images/bg-image1.jpg');
 }
-
 a {
   text-decoration: none;
   color: #1ab188;
   transition: .5s ease;
 }
-
 a:hover {
   color: #179b77;
 }
@@ -38,13 +34,11 @@ a:hover {
   padding: 0;
   margin: 0 0 40px 0;
 }
-
 .tab-group:after {
   content: "";
   display: table;
   clear: both;
 }
-
 .tab-group li a {
   display: block;
   text-decoration: none;
@@ -58,12 +52,10 @@ a:hover {
   cursor: pointer;
   transition: .5s ease;
 }
-
 .tab-group li a:hover {
   background: #179b77;
   color: #ffffff;
 }
-
 .tab-group .active a {
   background: #1ab188;
   color: #ffffff;
@@ -91,7 +83,6 @@ label {
   pointer-events: none;
   font-size: 22px;
 }
-
 label .req {
   margin: 2px;
   color: red;
@@ -158,7 +149,6 @@ select {
   border-radius: 0;
   transition: border-color .25s ease, box-shadow .25s ease;
 }
-
 select:focus {
   outline: 0;
   border-color: #1ab188;

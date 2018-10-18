@@ -74,7 +74,8 @@ public class PatientServiceImpl implements PatientService {
     /**
      * {@inheritDoc}
      */
-    public List<Patient> getPatients() throws ApplicationException {
+    public List<Patient> getPatients()
+            throws ApplicationException {
         return patientDao.getAllPatients();
     }
 

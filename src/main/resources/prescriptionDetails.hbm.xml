@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 5.3//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-5.3.dtd">
+<hibernate-mapping>
+    <class name="com.ideas2it.hospitalmanagement.prescriptionDetails.model.PrescriptionDetails"  table="prescriptiondetails">
+    <id name = "id">
+    <column name ="ID"/>
+    <generator class ="increment"></generator>
+    </id> 
+    <many-to-one name = "item" class="com.ideas2it.hospitalmanagement.item.model.Item" column="ITEM" cascade="all" fetch="select" lazy="false" not-null="true" />
+    <many-to-one name = "dosage" class="com.ideas2it.hospitalmanagement.dosage.model.Dosage" column="DOSAGE" fetch="select" lazy="false" cascade="all" not-null="true" />
+    <many-to-one name = "prescription" class="com.ideas2it.hospitalmanagement.prescription.model.Prescription"  cascade="all" column="PRESCRIPTION_ID" />
+    <property name="days" column="days" type="int"/>
+    </class>
+</hibernate-mapping>
