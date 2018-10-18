@@ -44,7 +44,7 @@ public class RoomController{
 	    Room room;
 		ModelAndView mav = new ModelAndView(Constants.SEARCHROOM);
 		try { 
-	    	String admitPatient = request.getParameter(Constants.);
+	    	String admitPatient = request.getParameter(Constants.ADMITBUTTON);
 	    	if(null != admitPatient) {
 	    		mav.addObject(Constants.ADMITBUTTON, Constants.YES);
 	    		mav.addObject(Constants.VISITID,request.getParameter(Constants.VISITID));

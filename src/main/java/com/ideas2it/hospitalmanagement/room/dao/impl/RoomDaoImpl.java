@@ -32,7 +32,7 @@ public class RoomDaoImpl extends GenericDao implements RoomDao{
             Logger.error(Constants.ROOM_NOT_ADDED, e); 
             StringBuilder errorMessage = new StringBuilder();
             errorMessage.append(ERROR_SEARCHING_ROOM).append(roomNumber);
-            throw new ApplicationException(errorMessage);
+            throw new ApplicationException(errorMessage.toString());
         }
     }
  	
@@ -45,8 +45,8 @@ public class RoomDaoImpl extends GenericDao implements RoomDao{
         } catch (ApplicationException e) {
             Logger.error(Constants.ROOM_NOT_UPDATED, e );
             StringBuilder errorMessage = new StringBuilder();
-            errorMessage.append(ERROR_UPDATING_ROOM).append(room.getBedNumber());
-            throw new ApplicationException(errorMessage);
+            errorMessage.append(ERROR_UPDATING_ROOM).append(room.getRoomNumber());
+            throw new ApplicationException(errorMessage.toString());
         }
     }
  }
