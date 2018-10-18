@@ -6,7 +6,6 @@ import com.ideas2it.hospitalmanagement.physician.service.PhysicianService;
 import com.ideas2it.hospitalmanagement.user.model.User;
 import com.ideas2it.hospitalmanagement.user.service.UserService;
 import com.ideas2it.hospitalmanagement.physician.model.Physician;
-import com.ideas2it.hospitalmanagement.physician.dao.impl.PhysicianDaoImpl;
 import com.ideas2it.hospitalmanagement.physician.dao.PhysicianDao;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.commons.Constants;

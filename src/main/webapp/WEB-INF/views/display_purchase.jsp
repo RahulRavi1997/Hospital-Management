@@ -15,7 +15,7 @@
 
 <style>
 table{ 
-    width: 100%;
+    width: 65%;
     background-color: white;
     border-collapse: collapse;
 }
@@ -43,20 +43,27 @@ button {
 </style>
 </head>
 <body>  
-<div class="topnav">
-
-  <form action="display_purchase" method="post">
-
-<h2 align="center">Purchase Management</h2>
+<jsp:include page="header.jsp"/>
+     <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+        <form action="display_purchase" method="post">
 
 <div align="left">
 <button class="btn">Home</button>
 </div>
 </div>
-</form>
+</form>  
+                </li>
+            </ul>
+        </div>    
+
+<h2 align="center">Purchase Management</h2>
 
 <h3 class="w3-center" align="center">Purchase</h3>
-<table>
+<table align="center">
 <tbody>
 <tr>
     <th>ID</th>
@@ -72,23 +79,23 @@ button {
 </tbody>
 </table>
 
-<table>
+<table align="center">
 <tbody>
 
-<h3 class="w3-center" align="center">Items</h3>
+<h3 class="w3-center" align="center">Medicines</h3>
 
 <tr>
     <th>ID</th>
-    <th>Item Name</th>
+    <th>Medicine Name</th>
     <th>Quantity</th>
     
 </tr>  
-<c:forEach var="purchaseDetails" items="${purchase.getListOfItems()}">  
+<c:forEach var="purchaseDetails" items="${purchase.getListOfMedicines()}">  
 
     <input type="hidden" name="id" value="${purchase.id}"> 
     <tr>
     <td>${purchaseDetails.id}</td>
-    <td>${purchaseDetails.itemName}</td>
+    <td>${purchaseDetails.medicineName}</td>
     <td>${purchaseDetails.quantity}</td>
     
 </tr>
@@ -97,4 +104,5 @@ button {
 
 
 </body>
+   <jsp:include page="footer.jsp"/>
 </html>

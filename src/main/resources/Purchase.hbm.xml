@@ -1,20 +1,22 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE hibernate-configuration PUBLIC
-          "-//Hibernate/Hibernate Configuration DTD 5.3//EN"
-          "http://hibernate.sourceforge.net/hibernate-configuration-5.3.dtd">
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 5.3//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-5.3.dtd">
 
 
  <hibernate-mapping>
-  <class name="com.ideas2it.hospitalmanagement.pharmacy.model.Purchase" table="purchase">
-    <id name="id" column = "ID" type="int">
+  <class name="com.ideas2it.hospitalmanagement.purchase.model.Purchase" table="purchase">
+    <id name="id" column = "PURCHASE_ID" type="int">
      <generator class="increment"/>   
     </id>
     <property name="dealerName" column="DEALER_NAME" type="string"></property>
     <property name="dateOfPurchase" column="DATE_OF_PURCHASE" type="date"></property>
     <property name="active" column="ACTIVE" type="boolean"></property>
-    <bag name="listOfItems" cascade="all" fetch="join" lazy="false">
-        <key column="PURCHASE_ID"/>
-        <one-to-many class="com.ideas2it.hospitalmanagement.pharmacy.model.PurchaseDetails"/>
+    <bag name="listOfMedicines" cascade="all" fetch="select" lazy="false">
+             <key>
+                <column name="PURCHASE_ID" />
+            </key>
+        <one-to-many class="com.ideas2it.hospitalmanagement.purchaseDetails.model.PurchaseDetails"/>
     </bag>
   </class>
  </hibernate-mapping>

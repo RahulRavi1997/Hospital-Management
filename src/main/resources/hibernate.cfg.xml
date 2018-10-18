@@ -13,8 +13,6 @@
         <property name="connection.release_mode">auto</property>
         <property name="connection.show_sql">true</property>
         <property name="javax.persistence.validation.mode">none</property>
-        <property name="hbm2ddl.auto">create</property>
-        <property name="hbm2ddl.auto">update</property>
         
         <mapping resource="address.hbm.xml"/>
         <mapping resource="physician.hbm.xml"/>
@@ -22,16 +20,9 @@
         <mapping resource="user.hbm.xml"/>
         <mapping resource="address.hbm.xml"/>
         <mapping resource="visit.hbm.xml"/> 
-        <mapping resource="Item.hbm.xml"></mapping>
+        <mapping resource="Medicine.hbm.xml"></mapping>
         <mapping resource="Purchase.hbm.xml"></mapping>    
         <mapping resource="PurchaseDetails.hbm.xml"></mapping>        
 
- 
-  <!--
-
-    <mapping resource="bed.hbm.xml"/>
-    <mapping resource="prescription.hbm.xml"/>
-    <mapping resource="diagnosis.hbm.xml"/>
-  -->
     </session-factory>
 </hibernate-configuration>

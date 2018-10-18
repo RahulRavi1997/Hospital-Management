@@ -186,31 +186,32 @@ public final class Constants {
    public static final String VISIT_OBJECTS = "visits";
    public static final int SESSION_ACTIVE_INTERVAL = 30*60;
 
-   public static final String ITEM_ADDITION_EXCEPTION = 
-            "Error while adding an item item = %s";
-    public static final String ITEM_SEARCH_EXCEPTION = 
-            "Error while searching item itemId = %d";
-    public static final String ITEM_DELETE_EXCEPTION = 
-            "Error while deleting item itemId = %d";
-    public static final String ITEM_UPDATE_EXCEPTION = 
-            "Error while modifying item itemId = %d";
-    public static final String ITEM_DISPLAY_EXCEPTION = 
-            "Error while displaying items itemId = %d";
+   public static final String MEDICINE_ADDITION_EXCEPTION = 
+            "Error while adding an medicine medicine = %s";
+    public static final String MEDICINE_SEARCH_EXCEPTION = 
+            "Error while searching medicine medicineId = %d";
+    public static final String MEDICINE_DELETE_EXCEPTION = 
+            "Error while deleting medicine medicineId = %d";
+    public static final String MEDICINE_UPDATE_EXCEPTION = 
+            "Error while modifying medicine medicineId = %d";
+    public static final String MEDICINE_DISPLAY_EXCEPTION = 
+            "Error while displaying medicines medicineId = %d";
     public static final String ERROR = "error"; 
-    public static final String ITEMS = "items";
-    public static final String ITEM = "item";
-    public static final String ITEM_MAIN_JSP = "item_main";
-    public static final String CREATE_ITEM_JSP = "create_item";
-    public static final String DISPLAY_ITEM_JSP = "display_item";
-    public static final String UPDATE_ITEM_JSP = "update_item";
-    public static final String CREATE_ITEM_MAPPING = "/create_item";
-    public static final String ADD_ITEM_MAPPING = "/add_item";
-    public static final String DISPLAY_ITEM_MAPPING = "/display_item"; 
-    public static final String SEARCH_ITEM_MAPPING = "/search_item";
-    public static final String UPDATE_ITEM_MAPPING = "/update_item";
-    public static final String MODIFY_ITEM_MAPPING = "/modify_item";
-    public static final String DELETE_ITEM_MAPPING = "/delete_item";
-    
+    public static final String MEDICINES = "medicines";
+    public static final String MEDICINE = "medicine";
+    public static final String MEDICINE_MAIN_JSP = "medicine_main";
+    public static final String CREATE_MEDICINE_JSP = "create_medicine";
+    public static final String DISPLAY_MEDICINE_JSP = "display_medicine";
+    public static final String UPDATE_MEDICINE_JSP = "update_medicine";
+    public static final String CREATE_MEDICINE_MAPPING = "/create_medicine";
+    public static final String ADD_MEDICINE_MAPPING = "/add_medicine";
+    public static final String DISPLAY_MEDICINE_MAPPING = "/display_medicine"; 
+    public static final String SEARCH_MEDICINE_MAPPING = "/search_medicine";
+    public static final String UPDATE_MEDICINE_MAPPING = "/update_medicine";
+    public static final String MODIFY_MEDICINE_MAPPING = "/modify_medicine";
+    public static final String DELETE_MEDICINE_MAPPING = "/delete_medicine";
+    public static final String RESTORE_MEDICINE_MAPPING = "/restore_medicine";
+
     public static final String PURCHASE_ADDITION_EXCEPTION = 
             "Error while adding an purchase purchase = %s";
     public static final String PURCHASE_SEARCH_EXCEPTION = 
@@ -220,7 +221,7 @@ public final class Constants {
     public static final String PURCHASE_UPDATE_EXCEPTION = 
             "Error while modifying purchase purchaseId = %d";
     public static final String PURCHASE_DISPLAY_EXCEPTION = 
-            "Error while displaying items purchaseId = %d";
+            "Error while displaying medicines purchaseId = %d";
     public static final String PURCHASES = "purchases";
     public static final String PURCHASE = "purchase";
     public static final String PURCHASE_MAIN_JSP = "purchase_main";
@@ -234,4 +235,5 @@ public final class Constants {
     public static final String UPDATE_PURCHASE_MAPPING = "/update_purchase";
     public static final String MODIFY_PURCHASE_MAPPING = "/modify_purchase";
     public static final String DELETE_PURCHASE_MAPPING = "/delete_purchase";   
+    public static final String RESTORE_PURCHASE_MAPPING = "/restore_purchase";
 }
