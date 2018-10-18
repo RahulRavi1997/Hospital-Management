@@ -22,7 +22,7 @@
 </style>
 <body>
 	<br>
-	<jsp:include page="header.jsp" />
+	<jsp:include page="Header.jsp" />
 	            <br>
 	            <input id="myInput" type="text" placeholder="Search..">
 	            

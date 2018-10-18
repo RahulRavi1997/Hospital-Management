@@ -14,7 +14,7 @@
 </head>
 <body>
 	<br>
-	<jsp:include page="header.jsp" />
+	<jsp:include page="Header.jsp" />
 	<div class="row">
 		<form:form commandName="diagnosis" action = "displayVisits" >
 			<form:input path="id" type="hidden" />

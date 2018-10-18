@@ -109,6 +109,21 @@ public class VisitDaoImpl extends GenericDao implements VisitDao {
             GenericDao.close(session);
         }
     }
+    
+   /**
+    *  {@inheritDoc}
+    */
+   public List<Visit> retrieveByPhysicianId(Integer physicianId) throws ApplicationException {
+    try {
+        final Session session = super.getSession();
+        String sql = "SELECT * FROM visit where PHYSICIAN =" + physicianId;
+        Query query = session.createSQLQuery(sql);
+        return query.list();
+    } catch (final ApplicationException e) {
+        Logger.error(String.format(Constants.VISIT_DISPLAY_EXCEPTION, physicianId), e);
+        throw new ApplicationException(String.format(Constants.VISIT_DISPLAY_EXCEPTION, physicianId));
+    }
+   }
 
     /**
      * {@inheritDoc}

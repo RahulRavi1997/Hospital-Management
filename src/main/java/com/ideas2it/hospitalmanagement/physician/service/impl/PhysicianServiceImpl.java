@@ -99,16 +99,21 @@ public class PhysicianServiceImpl implements PhysicianService {
     /**
      * {@inheritDoc}
      */
-    public List<Physician> retrieveAllPhysicians() throws ApplicationException {
+    public Integer retrievePhysicianByUserId(final Integer userId) throws ApplicationException {
 
-        return physicianDao.getAllPhysicians();
+        if (null == userId) {
+            throw new ApplicationException(Constants.ID_NOT_NULL);
+        }
+        return physicianDao.searchPhysicianByUserId(userId);
     }
+
 
     /**
      * {@inheritDoc}
      */
-    public List<Physician> retrievePhysiciansByIds(final Integer[] ids) throws ApplicationException {
-        return physicianDao.getPhysiciansByIds(ids);
+    public List<Physician> retrieveAllPhysicians() throws ApplicationException {
+
+        return physicianDao.getAllPhysicians();
     }
 
     /**

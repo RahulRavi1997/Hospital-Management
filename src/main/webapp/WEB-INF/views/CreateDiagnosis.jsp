@@ -65,7 +65,7 @@ input[type=number]::-webkit-outer-spin-button {
 </style>
 <body>
     <br>
-	<jsp:include page="header.jsp" />
+	<jsp:include page="Header.jsp" />
 	<div class="row animated slideInRight">
 		
 					<div class="col-sm-4">

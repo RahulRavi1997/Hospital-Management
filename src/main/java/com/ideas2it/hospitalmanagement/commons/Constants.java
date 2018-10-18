@@ -61,7 +61,7 @@ public final class Constants {
     public static final String DISPLAY_USERS_MAPPING = "displayUserAutocomplete";
     public static final String INDEX_MAPPING = "/index";
     public static final String ADMIN_INDEX = "Admin";
-    public static final String PHYSICIAN_INDEX = "Physician";
+    public static final String PHYSICIAN_INDEX = "displayVisit";
     public static final String NURSE_INDEX = "Nurse";
     public static final String RECEPTIONIST_INDEX = "Receptionist";
     public static final String ACCESS_DENIED_JSP = "AccessDenied";
@@ -164,7 +164,7 @@ public final class Constants {
     public static final String IMAGES = "images";
     public static final String SCRIPT = "script";
     public static final String SIGNUP = "signup";
-    public static final String LOGIN = "login";
+    public static final String LOGIN = "Login";
     public static final String LOGIN_PATH = "/login";
     public static final String INDEX_PATH = "/WEB-INF/views/index.jsp";
     public static final String SIGNIN_EMAIL = "signinEmail";
@@ -196,7 +196,7 @@ public final class Constants {
     public static final String CREATE_PHYSICIAN_JSP = "CreatePhysician";
     public static final String PHYSICIANS = "physicians";
     public static final String DISPLAY_PHYSICIAN_JSP = "DisplayPhysicians";
-    public static final String ERROR_JSP = "error";
+    public static final String ERROR_JSP = "Error";
     public static final String ERROR_MESSAGE = "errorMessage";
     public static final String PHYSICIAN = "physician";
     public static final String SEARCH_PHYSICIAN_JSP = "SearchPhysician";
@@ -218,14 +218,14 @@ public final class Constants {
     public static final String PHYSICIAN_UPDATE_SUCCESS_MESSAGE =
     		"Physician Updated Successfully";
 
-   public static final String CREATE_PATIENT = "/createpatient";
-   public static final String ADD_PATIENT = "/addpatient";
-   public static final String MODIFY_PATIENT = "/modifypatient";
-   public static final String UPDATE_PATIENT = "/updatepatient";
-   public static final String DELETE_PATIENT = "/deletepatient";
-   public static final String SEARCH_PATIENT = "/searchpatient";
-   public static final String DISPLAY_PATIENTS = "/displaypatients";
-   public static final String ACTIVATE_PATIENT = "/activatepatient";
+   public static final String CREATE_PATIENT = "/createPatient";
+   public static final String ADD_PATIENT = "/addPatient";
+   public static final String MODIFY_PATIENT = "/modifyPatient";
+   public static final String UPDATE_PATIENT = "/updatePatient";
+   public static final String DELETE_PATIENT = "/deletePatient";
+   public static final String SEARCH_PATIENT = "/searchPatient";
+   public static final String DISPLAY_PATIENTS = "/displayPatients";
+   public static final String ACTIVATE_PATIENT = "/activatePatient";
 
    
    public static final String PATIENT = "/patient";
@@ -233,7 +233,7 @@ public final class Constants {
    public static final String CREATE_PATIENT_JSP ="CreatePatient";
    public static final String SEARCH_PATIENT_JSP ="SearchPatient";
 
-   public static final String DISPLAY_PATIENT_JSP ="DisplayPatient";
+   public static final String DISPLAY_PATIENT_JSP ="DisplayPatients";
 
 
    public static final String PATIENT_ADD_FAILED = "Patient Addition Failed";
@@ -296,12 +296,14 @@ public final class Constants {
    public static final String SEARCH_VISIT = "/searchVisit";
    public static final String DISPLAY_VISITS = "/displayVisits";
    public static final String ACTIVATE_VISIT = "/activateVisit";
+   public static final String PHYSICIAN_VISITS = "/physicianVisit";
    
    public static final String VISIT = "/visit";
    public static final String VISITS = "/visits";
    public static final String CREATE_VISIT_JSP ="CreateVisit";
    public static final String SEARCH_VISIT_JSP ="SearchVisit";
-   public static final String DISPLAY_VISIT_JSP ="displayVisit";
+   public static final String PHYSICIAN_DISPLAY_VISIT_JSP ="displayVisit";
+   public static final String DISPLAY_VISIT_JSP ="DisplayVisit";
 
    public static final String VISIT_ADD_FAILED = "Visit Addition Failed";
    public static final String VISIT_UPDATE_FAILED = "Visit Updation Failed";
@@ -325,7 +327,7 @@ public final class Constants {
    public static final String VISIT_OBJECT = "visit";
    public static final String VISIT_OBJECTS = "visits";
 
-   public static final String USER_EMAIL = "";
+   public static final String USER_EMAIL = "UserEmail";
 
    public static final String DISPLAY_USER_MAPPING = "/displayUsers";
    public static final String USER_DISPLAY_EXCEPTION = "Error while displaying users\n";
@@ -354,5 +356,6 @@ public final class Constants {
    public static final String UPDATE_ITEM_MASTER_MAPPING = "updateItemMaster";
 
    public static final String ITEM_MASTER = "itemMaster";
+   public static final String USER_ID = "userId";
 }
 

@@ -72,7 +72,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 </style>
 <body>
-    <jsp:include page ="header.jsp"/> 
+    <jsp:include page ="Header.jsp"/> 
 	<br>
 	<div class="row">
 		<div class="col">
@@ -188,7 +188,7 @@ input[type=number]::-webkit-outer-spin-button {
 		</div>
 		<div id="snackbar">${addmsg}</div>
 </body>
-  <jsp:include page ="footer.jsp"/> 
+  <jsp:include page ="Footer.jsp"/> 
 <script src="static/script/jquery.min.js"></script>
 <script src="/static/script/jquery-1.10.2.js"></script>
 <script src="/static/script/bootstrap.min.js"></script>

@@ -64,12 +64,6 @@ button:hover {
 span.psw {
 	float: right;
 	padding-top: 16px;
-}
-
-/* The Modal (background) */
-.modal {
-	display: none; /* Hidden by default */
-	position: fixed; /* Stay in place */
 	z-index: 1; /* Sit on top */
 	left: 0;
 	top: 0;
@@ -155,9 +149,12 @@ to {
 </style>
 </head>
 <body>
-	<jsp:include page="header.jsp" />
-
+	<jsp:include page="header.jsp" />${sessionScope.id}
 	<div class="left_div">
+		<form action="/physicianVisit" method = "get">
+			<input type="hidden" name="id" value=${sessionScope.id}>
+		<button class="btn btn-success"> Display Visits </button>
+		</form>
 		<c:if test="${visits.size() == 0 }">
 			<div class="row">
 				<div class="col-sm-2"></div>
@@ -200,7 +197,7 @@ to {
 									<td>${visit.id}</td>
 									<td>${visit.admitDate}</td>
 									<td>${visit.dischargeDate}</td>
-									<td>${visit.patient}</td>
+									<td>${visit.patient.id}</td>
 									<td>${visit.patientType}</td>
 									<td>
 									    <c:if test ="${visit.patientType=='Out Patient'}">
@@ -328,7 +325,7 @@ to {
 	</div>
 <div id="snackbar">${message}</div>
 </body>
-<jsp:include page="footer.jsp" />
+<jsp:include page="Footer.jsp" />
 <script>
 <c:choose>
 <c:when test="${prescriptions!=null}">

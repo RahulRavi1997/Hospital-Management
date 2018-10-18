@@ -69,6 +69,19 @@ public interface PhysicianDao {
 
     /**
      * <p>
+     * This Method is used to search for an physician by User Id. Returns the physician object if a match is found
+     * with same id, else returns null.
+     * </p>
+     *
+     * @param userId an Integer to identify the required Physician Object by the userID of Physician.
+     * @return Integer an Integer object which has same id is returned.
+     * @throws ApplicationException An exception created for catching exceptions that occur while
+     *                              searching an physician.
+     */
+    public Integer searchPhysicianByUserId(Integer userId) throws ApplicationException;
+
+    /**
+     * <p>
      * This Method is used to re-activate an physician who has been deleted. Returns true if the
      * operation is successful.
      * </p>

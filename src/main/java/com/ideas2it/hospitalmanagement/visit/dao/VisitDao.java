@@ -76,6 +76,18 @@ public interface VisitDao {
 
     /**
      * <p>
+     * This Method is used to get all the visit Details that were stored in the Database. It gives the
+     * visit details as an List.
+     * </p>
+     *
+     * @param physicianId a int datatype which contains the physicianId and corresponding visit
+     *             is searched.
+     * @return visits List with visit datatype containing visit details.
+     */
+    public List<Visit> retrieveByPhysicianId(Integer physicianId) throws ApplicationException;
+
+    /**
+     * <p>
      * Method to search the visit Id in the database.This method is using the visitId to search the
      * visit and is searched in the database.
      * </p>

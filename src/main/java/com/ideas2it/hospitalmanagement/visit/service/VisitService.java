@@ -107,6 +107,19 @@ public interface VisitService {
      * searched visit Object.
      * </p>
      *
+     * @param physicianId a int datatype which contains the physicianId that needs to be searched.
+     * @return returns visit object when id is found and null when not found.
+     * @exception throws Application Exception when the visit Object is not searched due to any
+     *            connection error or visitId not found.
+     */
+	public List<Visit> getVisitsByPhysicianId(Integer physicianId) throws ApplicationException;
+
+    /**
+     * <p>
+     * Method to search the Existing visit Id.This method is using the visitId to search and returns the
+     * searched visit Object.
+     * </p>
+     *
      * @param patientId a int datatype which contains the patientId that needs to be searched.
      * @param session HttpSession which is used to set the Patient Object to session level.
      * @return returns visit object when id is found and null when not found.

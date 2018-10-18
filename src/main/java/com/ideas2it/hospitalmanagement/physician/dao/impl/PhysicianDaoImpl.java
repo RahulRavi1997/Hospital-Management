@@ -82,7 +82,6 @@ public class PhysicianDaoImpl extends GenericDao implements PhysicianDao {
      * {@inheritDoc}
      */
     public Physician searchPhysicianById(final Integer id) throws ApplicationException {
-
         try {
             return super.get(Physician.class, id);
         } catch (final ApplicationException e) {
@@ -135,5 +134,21 @@ public class PhysicianDaoImpl extends GenericDao implements PhysicianDao {
             throw new ApplicationException(Constants.PHYSICIAN_DISPLAY_EXCEPTION, e);
         }
 
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Integer searchPhysicianByUserId(final Integer userId) throws ApplicationException {
+
+        try {
+            final Session session = super.getSession();
+            String sql = "SELECT id FROM physicians where USER_ID =" + userId;
+            Query query = session.createSQLQuery(sql);
+            return (Integer)query.uniqueResult();
+        } catch (final ApplicationException e) {
+            Logger.error(String.format(Constants.PHYSICIAN_SEARCH_EXCEPTION, userId), e);
+            throw new ApplicationException(String.format(Constants.PHYSICIAN_SEARCH_EXCEPTION, userId));
+        }
     }
 }

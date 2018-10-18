@@ -196,6 +196,29 @@ public class VisitController {
         }
     }
 
+     /**
+     * <p>
+     * This method is called when the request value is displayVisits and this  
+     * is the Get method which gets all the visit Object Details and is
+     * displayed to the user. It is redirected to the Display visit page or
+     * to the Error page if any error occurs.This method returns the value as 
+     * ModelAndView Class Object.
+     * </p>
+     *
+     * @return ModelAndView Object which redirects to the DisplayVisit Page
+     *                      with the visitObject List or to the Error Page.
+     */
+    @RequestMapping(value = Constants.PHYSICIAN_VISITS, method = RequestMethod.GET)
+    private ModelAndView displayVisitByPhysicianId(@RequestParam(Constants.ID) final Integer physicianId) {
+        try {
+            final List<Visit> visits = visitService.getVisitsByPhysicianId(physicianId);
+            return new ModelAndView(Constants.PHYSICIAN_DISPLAY_VISIT_JSP, Constants.VISIT_OBJECTS, visits);
+        } catch (final ApplicationException e) {
+            Logger.error(e);
+            return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE, Constants.VISIT_DISPLAY_FAILED);
+        }
+    }
+
     /**
      * <p>
      * This method is called when the request value is search Visit and this is the Get method which

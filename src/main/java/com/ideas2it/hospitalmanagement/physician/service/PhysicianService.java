@@ -86,6 +86,19 @@ public interface PhysicianService {
 
     /**
      * <p>
+     * This Method is used to search a Physician Entry and return using UserId. It returns null
+     * if no match is found.
+     * </p>
+     *
+     * @param userId an Integer indicating the user Id of the physician that is to be searched an returned.
+     * @return Integer an Physician object is returned if a valid match is found, else returns null.
+     * @throws ApplicationException A Custom Exception created for catching exceptions that occur while
+     *                              retrieving an physician.
+     */
+    public Integer retrievePhysicianByUserId(Integer userId) throws ApplicationException;
+
+    /**
+     * <p>
      * This Method is used to search an Physician Entry and return the Physician objects. It returns
      * null if no match is found.
      * </p>
@@ -110,14 +123,6 @@ public interface PhysicianService {
      *                              retrieving all physicians.
      */
     public List<Physician> retrieveAllPhysicians() throws ApplicationException;
-
-    /**
-     * @param ids an Array of integers containing the id of physicians that are to be retrieved.
-     * @return physicians a List of Physicians obtained after obtaining the resultSet from the database.
-     * @throws ApplicationException An exception created for catching exceptions that occur while
-     *                              displaying all physicians.
-     */
-    public List<Physician> retrievePhysiciansByIds(Integer[] ids) throws ApplicationException;
 
     /**
      * <p>

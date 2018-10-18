@@ -49,6 +49,6 @@
     <param-value>/WEB-INF/spring-security.xml</param-value>
   </context-param>
   <welcome-file-list>
-    <welcome-file>/WEB-INF/views/login.jsp</welcome-file>
+    <welcome-file>/WEB-INF/views/Login.jsp</welcome-file>
   </welcome-file-list>
 </web-app>

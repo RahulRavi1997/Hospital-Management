@@ -157,6 +157,11 @@ public class UserController {
             return Constants.ADMIN_INDEX;
         } else if (authorities.iterator().next().toString().equals(Constants.PHYSICIAN_ROLE)) {
             session.setAttribute(Constants.ROLE, Constants.PHYSICIAN_INDEX);
+            try {
+                session.setAttribute(Constants.ID,(userService.retrieveUserByEmail(principal.getName()).getId()));
+            } catch (ApplicationException e){
+                return  Constants.LOGIN_JSP;
+            }
             return Constants.PHYSICIAN_INDEX;
         } else if (authorities.iterator().next().toString().equals(Constants.NURSE_ROLE)) {
             session.setAttribute(Constants.ROLE, Constants.NURSE_INDEX);
