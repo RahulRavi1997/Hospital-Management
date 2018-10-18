@@ -6,55 +6,84 @@
   <version>1.0.0</version>
   <packaging>war</packaging>
   <name>HospitalManagement</name>
-  <properties>
-    <springframework.version>4.1.6.RELEASE</springframework.version>
-    <springsecurity.version>4.0.1.RELEASE</springsecurity.version>
-    <jackson.version>1.9.10</jackson.version>
-  </properties>
-  <dependencies>
-    <!-- Spring -->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-core</artifactId>
-      <version>${springframework.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-web</artifactId>
-      <version>${springframework.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-webmvc</artifactId>
-      <version>${springframework.version}</version>
-    </dependency>
-    <!-- Spring Security -->
-    <dependency>
-      <groupId>org.springframework.security</groupId>
-      <artifactId>spring-security-web</artifactId>
-      <version>${springsecurity.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.security</groupId>
-      <artifactId>spring-security-config</artifactId>
-      <version>${springsecurity.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>3.1.0</version>
-    </dependency>
-    <dependency>
-      <groupId>javax.servlet.jsp</groupId>
-      <artifactId>javax.servlet.jsp-api</artifactId>
-      <version>2.3.1</version>
-    </dependency>
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>jstl</artifactId>
-      <version>1.2</version>
-    </dependency>
-    <!-- My Dependencies -->
+
+	<properties>
+		<springframework.version>4.1.6.RELEASE</springframework.version>
+		<springsecurity.version>4.0.1.RELEASE</springsecurity.version>
+				<jackson.version>1.9.10</jackson.version>
+ <maven.compiler.source>1.6</maven.compiler.source>
+    <maven.compiler.target>1.6</maven.compiler.target>
+
+		
+	</properties>
+
+   
+	<dependencies>
+<dependency>
+    <groupId>javax.xml.bind</groupId>
+    <artifactId>jaxb-api</artifactId>
+    <version>2.2.11</version>
+</dependency>
+<dependency>
+    <groupId>com.sun.xml.bind</groupId>
+    <artifactId>jaxb-core</artifactId>
+    <version>2.2.11</version>
+</dependency>
+<dependency>
+    <groupId>com.sun.xml.bind</groupId>
+    <artifactId>jaxb-impl</artifactId>
+    <version>2.2.11</version>
+</dependency>
+<dependency>
+    <groupId>javax.activation</groupId>
+    <artifactId>activation</artifactId>
+    <version>1.1.1</version>
+</dependency>
+		<!-- Spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+
+		<!-- Spring Security -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${springsecurity.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${springsecurity.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>javax.servlet.jsp-api</artifactId>
+			<version>2.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+<!-- My Dependencies -->
     <dependency>
       <groupId>antlr</groupId>
       <artifactId>antlr</artifactId>

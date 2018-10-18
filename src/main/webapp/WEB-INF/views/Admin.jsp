@@ -32,6 +32,9 @@
           <li>
             <a href="displayPhysicians">Display Physicians</a>
           </li>
+          <li>
+            <a href="pharmacy">Pharmacy</a>
+          </li>
         </ul>
       </div>
       <!-- /#sidebar-wrapper -->
