@@ -90,6 +90,7 @@
 
     <bean id="userController"  class="com.ideas2it.hospitalmanagement.user.controller.UserController">
         <property name="userService" ref="userServiceImpl" />
+ 	<property name="visitService" ref="visitServiceImpl"/>
     </bean>
     
 

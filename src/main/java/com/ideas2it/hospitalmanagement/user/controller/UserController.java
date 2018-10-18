@@ -28,6 +28,8 @@ import com.ideas2it.hospitalmanagement.commons.Constants;
 import com.ideas2it.hospitalmanagement.commons.enums.Role;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.logger.Logger;
+import com.ideas2it.hospitalmanagement.visit.service.VisitService;
+import com.ideas2it.hospitalmanagement.visit.service.impl.VisitServiceImpl;
 import com.ideas2it.hospitalmanagement.user.model.User;
 import com.ideas2it.hospitalmanagement.user.service.UserService;
 
@@ -53,6 +55,16 @@ public class UserController {
 
     public UserService getUserService() {
         return this.userService;
+    }
+
+    private VisitService visitService = null;
+
+    public void setVisitService(VisitService visitService) {
+        this.visitService = visitService;
+    }
+
+    public VisitService getVisitService() {
+        return this.visitService;
     }
 
     /**
@@ -147,9 +159,15 @@ public class UserController {
             session.setAttribute("Role","Physician");
             return "physician";
         } else if (authorities.iterator().next().toString().equals("ROLE_NURSE")) {
+            try {
             session.setAttribute("Role","Nurse");
-
-            return "nurseHome";
+            session.setAttribute("inpatients",visitService.getVisitsByPatientType("InPatient"));
+            return "nurseHome"; 
+		}
+            catch(ApplicationException e) {
+		
+		}
+ 	return "accessDenied";
         } else if (authorities.iterator().next().toString().equals("ROLE_RECEPTIONIST")) {
             session.setAttribute("Role","Receptionist");
             return "receptionist";

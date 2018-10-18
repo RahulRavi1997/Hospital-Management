@@ -29,7 +29,7 @@ $(document).ready(function(){
                     <div class="col-sm-10">
                       <select class="inputtext" id='warddd'>
                                                   <option value="0">- Select -</option>
-                      
+ 
                         <c:forEach items="${wards}" var="ward">
                           <c:if test="${ward != selected}">
                           
@@ -74,10 +74,7 @@ $(document).ready(function(){
                   Home
                   </a>
                </li>
-          
-               <li>
-               	  <a href="nurseHome">Display In Patients</a>
-               </li>
+
             </ul>
          </div>
          <!-- /#sidebar-wrapper -->
@@ -85,8 +82,7 @@ $(document).ready(function(){
          <div id="page-content-wrapper">
             <div class="container-fluid">
                <div class="row">
-                  <div class="col-lg-12">
-                  	
+                  <div class="col-lg-12">           	
                   	<table class="w3-table-all w3-hoverable sortable">
 
                      <thead>
@@ -132,6 +128,7 @@ $(document).ready(function(){
                         </c:forEach>
                      </tbody>
                   </table>
+
                   	
                   </div>
                </div>

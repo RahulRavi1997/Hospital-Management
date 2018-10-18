@@ -68,7 +68,6 @@ public class VisitDaoImpl extends GenericDao implements VisitDao {
 	}
 
 	/**
-<<<<<<< HEAD
 	 * {@inheritDoc}
 	 */
 	public List<Visit> getVisitsByPatientType(String patientType) throws ApplicationException {
@@ -81,8 +80,6 @@ public class VisitDaoImpl extends GenericDao implements VisitDao {
 	}
 
 	/**
-=======
->>>>>>> c9685044de28e7396927885e32058203e0e70b1e
 	 *  {@inheritDoc}
 	 */
 	public Visit searchVisitById(Integer visitId) throws ApplicationException {

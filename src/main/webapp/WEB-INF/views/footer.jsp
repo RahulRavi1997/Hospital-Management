@@ -6,7 +6,7 @@
 </footer>
 
     <div class="footer">
-  <b>That's the spirit!.</b> Contact Us- <i class="fa fa-facebook-official w3-hover-opacity"></i>
+  Contact Us- <i class="fa fa-facebook-official w3-hover-opacity"></i>
 
   <i class="fa fa-instagram w3-hover-opacity"></i>
   <i class="fa fa-snapchat w3-hover-opacity"></i>
