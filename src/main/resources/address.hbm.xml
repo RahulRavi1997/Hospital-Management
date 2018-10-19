@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 5.3//EN" "http://hibernate.sourceforge.net/hibernate-mapping-5.3.dtd">
+<hibernate-mapping>
+  <class name="com.ideas2it.hospitalmanagement.address.model.Address" table="addresses">
+    <id name="id" column="id">
+      <generator class="increment" />
+    </id>
+    <property name="type" column="TYPE" />
+    <property name="addressLine1" column="ADDRESS_LINE_1" type="string" />
+    <property name="addressLine2" column="ADDRESS_LINE_2" type="string" />
+    <property name="country" column="COUNTRY" />
+    <property name="pinCode" column="PIN_CODE" />
+    <property name="physicianId" column="PHYSICIAN_ID" />
+    <property name="patientId" column="PATIENT_ID" />
+  </class>
+</hibernate-mapping>

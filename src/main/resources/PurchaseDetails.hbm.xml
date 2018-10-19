@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+          "-//Hibernate/Hibernate Configuration DTD 5.3//EN"
+          "http://hibernate.sourceforge.net/hibernate-configuration-5.3.dtd">
+
+
+ <hibernate-mapping>
+  <class name="com.ideas2it.hospitalmanagement.purchaseDetails.model.PurchaseDetails" table="purchase_details">
+    <id name="id" column = "ITEM_ID" type="int">
+     <generator class="increment"/>   
+    </id>
+    <property name="medicineName" column="NAME" type="string"></property>
+    <property name="quantity" column="QUANTITY" type="double"></property>
+    <property name="active" column="ACTIVE" type="boolean"></property>
+    
+    <many-to-one name="purchase" class="com.ideas2it.hospitalmanagement.purchase.model.Purchase"
+            fetch="select" cascade="all">
+      <column name="PURCHASE_ID" />
+    </many-to-one>
+  </class>
+ </hibernate-mapping>
+

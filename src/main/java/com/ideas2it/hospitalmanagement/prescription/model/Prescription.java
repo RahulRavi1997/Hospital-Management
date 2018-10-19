@@ -1,54 +1,55 @@
 package com.ideas2it.hospitalmanagement.prescription.model;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.ideas2it.hospitalmanagement.prescriptionDetails.model.PrescriptionDetails;
 
+/**
+ * <p>
+ * Prescription class is having the getters and setter methods which is used to
+ * get the values and set values. This class acts as an Model for the
+ * Prescription Details.
+ * <p>
+ * 
+ * @author navaneeth and hari
+ */
 public class Prescription {
-    private int id;
-    private int doctorId;
-    private int patientId;
-    private int visitId; 
-    private List <PrescriptionDetails> prescriptions;
-    
+	private int id;
+	private int visitId;
+	private Date prescriptionDate;
+	private List<PrescriptionDetails> prescriptionDetails = new ArrayList<PrescriptionDetails>();
+
 	public int getId() {
 		return id;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public int getVisitId() {
 		return visitId;
 	}
-	
+
 	public void setVisitId(int visitId) {
 		this.visitId = visitId;
 	}
-	
-	public int getDoctorId() {
-		return doctorId;
+
+	public List<PrescriptionDetails> getPrescriptionDetails() {
+		return prescriptionDetails;
 	}
-	
-	public void setDoctorId(int doctorId) {
-		this.doctorId = doctorId;
+
+	public void setPrescriptionDetails(List<PrescriptionDetails> prescriptionDetails) {
+		this.prescriptionDetails = prescriptionDetails;
 	}
-	
-	public int getPatientId() {
-		return patientId;
+
+	public Date getPrescriptionDate() {
+		return new Date();
 	}
-	
-	public void setPatientId(int patientId) {
-		this.patientId = patientId;
+
+	public void setPrescriptionDate(Date prescriptionDate) {
+		this.prescriptionDate = prescriptionDate;
 	}
-	
-	public List <PrescriptionDetails> getPrescriptions() {
-		return prescriptions;
-	}
-	
-	public void setPrescription(List <PrescriptionDetails> prescriptions) {
-		this.prescriptions = prescriptions;
-	}
-	
 }

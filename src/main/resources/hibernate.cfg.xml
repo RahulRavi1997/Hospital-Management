@@ -2,19 +2,32 @@
 <!DOCTYPE hibernate-configuration PUBLIC
           "-//Hibernate/Hibernate Configuration DTD 5.3//EN"
           "http://hibernate.sourceforge.net/hibernate-configuration-5.3.dtd">
-
 <hibernate-configuration>
-    <session-factory>
-        <property name="dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
-        <property name="connection.url">jdbc:mysql://localhost/Emp?useSSL=false</property>
-        <property name="connection.username">root</property>
-        <property name="connection.password">password</property>
-        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.release_mode">auto</property>
-        <property name="connection.show_sql">true</property>
-
-   
-    <mapping resource="user.hbm.xml"/>
-    <mapping resource="ward.hbm.xml"/>
-    </session-factory>
+<session-factory>
+<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+<property name="connection.url">jdbc:mysql://localhost:3306/Hms</property>
+<property name="connection.user">root</property>
+<property name="connection.password">ubuntu</property>
+<property name="show_sql">true </property>
+<property name="dialet">org.hibernate.dialect.MySQL5Dialect</property>
+<property name="hbm2ddl.auto">update</property>
+<property name="connection.release_mode">auto</property>
+<property name="connection.show_sql">true</property>
+    <mapping resource="address.hbm.xml" />
+    <mapping resource="physician.hbm.xml" />
+    <mapping resource="patient.hbm.xml" />
+    <mapping resource="user.hbm.xml" />
+    <mapping resource="visit.hbm.xml" />
+    <mapping resource="prescription.hbm.xml"/>
+    <mapping resource="prescriptionDetails.hbm.xml"/>
+    <mapping resource="dosage.hbm.xml"/>
+    <mapping resource="dosageMaster.hbm.xml"/>
+    <mapping resource="item.hbm.xml"/>
+    <mapping resource="itemMaster.hbm.xml"/>
+    <mapping resource="diagnosis.hbm.xml"/>
+    <mapping resource="bedAllocation.hbm.xml"/>
+   <mapping resource="ward.hbm.xml"/>
+   <mapping resource="bed.hbm.xml"/>
+   <mapping resource="room.hbm.xml"/>
+</session-factory>
 </hibernate-configuration>

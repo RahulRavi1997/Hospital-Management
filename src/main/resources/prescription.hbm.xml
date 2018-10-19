@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 5.3//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-5.3.dtd">
+<hibernate-mapping>
+	<class
+		name="com.ideas2it.hospitalmanagement.prescription.model.Prescription"
+		table="prescription">
+		<id name="id" type="int" column="PRESCRIPTION_ID">
+			<generator class="increment" />
+		</id>
+		<property name="visitId" column="VISIT_ID" type="int" />
+		<property name="prescriptionDate" column ="PRESCRIPTION_DATE" type="date"/>
+		<bag name="prescriptionDetails" cascade="all"
+		   fetch="select" lazy="false">
+		   <key column="PRESCRIPTION_ID" />
+		   <one-to-many
+		   class="com.ideas2it.hospitalmanagement.prescriptionDetails.model.PrescriptionDetails"/>
+		</bag>
+	</class>
+</hibernate-mapping>

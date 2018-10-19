@@ -1,0 +1,21 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name = "com.ideas2it.hospitalmanagement.bedallocation.model.BedAllocation" table = "BedAllocations">
+      <id name = "bedAllocationId" type = "int">
+         <column name= "bedAllocationId" default = "0" />
+         <generator class="increment"/>
+      </id>
+<many-to-one name = "bed" column = "bed"
+        class="com.ideas2it.hospitalmanagement.bed.model.Bed" not-null="true"/>
+      
+	  <many-to-one name = "visit" column = "visit"
+        class="com.ideas2it.hospitalmanagement.visit.model.Visit" not-null="true"/>
+      <property name = "admitDate" column = "admitDate" type = "date"/>
+      <property name = "dischargeDate" column = "dischargeDate" type = "date"/>
+      
+   </class>
+</hibernate-mapping>

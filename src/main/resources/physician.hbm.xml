@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 5.3//EN" "http://hibernate.sourceforge.net/hibernate-mapping-5.3.dtd">
+<hibernate-mapping>
+  <class name="com.ideas2it.hospitalmanagement.physician.model.Physician" table="physicians">
+    <id name="id" column="id">
+      <generator class="increment" />
+    </id>
+    <property name="firstName" column="FIRST_NAME" type="string" />
+    <property name="lastName" column="LAST_NAME" type="string" />
+    <property name="birthDate" column="BIRTH_DATE" type="date" />
+    <property name="mobileNumber" column="MOBILE_NUMBER" type="long" />
+    <property name="email" column="EMAIL" type="string" />
+    <property name="specialisation" column="SPECIALISATION" type="string" />
+    <property name="active" column="ACTIVE" type="boolean" />
+    <property name="gender" column="GENDER" type="string" />
+    <bag name="addresses" cascade="all" fetch="select" lazy="false">
+      <key column="PHYSICIAN_ID" />
+      <one-to-many class="com.ideas2it.hospitalmanagement.address.model.Address" />
+    </bag>
+    <many-to-one name="user" column="USER_ID" class="com.ideas2it.hospitalmanagement.user.model.User" fetch="select" cascade="all" lazy="false" />
+  </class>
+</hibernate-mapping>

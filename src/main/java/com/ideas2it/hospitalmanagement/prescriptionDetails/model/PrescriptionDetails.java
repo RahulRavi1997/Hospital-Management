@@ -1,42 +1,62 @@
 package com.ideas2it.hospitalmanagement.prescriptionDetails.model;
 
-import java.util.List;
+import com.ideas2it.hospitalmanagement.dosage.model.Dosage;
+import com.ideas2it.hospitalmanagement.item.model.Item;
+import com.ideas2it.hospitalmanagement.prescription.model.Prescription;
 
+/**
+ * <p>
+ * PrescriptionDetails class is having the getters and setter methods which is
+ * used to get the values and set values. This class acts as an Model for the
+ * PrescriptionDetails.
+ * <p>
+ * 
+ * @author navaneeth and hari
+ */
 public class PrescriptionDetails {
-	int prescriptionId;
-	int itemId;
-    int dosageId;
-    int quenatity;
-    
-	public int getPrescriptionId() {
-		return prescriptionId;
+	private int id;
+	private Prescription prescription;
+	private Item item = new Item();
+	private Dosage dosage = new Dosage();
+	private int days;
+
+	public int getId() {
+		return id;
 	}
-	
-	public void setPrescriptionId(int prescriptionId) {
-		this.prescriptionId = prescriptionId;
+
+	public void setId(int id) {
+		this.id = id;
 	}
-	
-	public int getItemId() {
-		return itemId;
+
+	public Item getItem() {
+		return item;
 	}
-	
-	public void setItemId(int itemId) {
-		this.itemId = itemId;
+
+	public void setItem(Item item) {
+		this.item = item;
 	}
-	
-	public int getDosageId() {
-		return dosageId;
+
+	public Dosage getDosage() {
+		return dosage;
 	}
-	
-	public void setDosageId(int dosageId) {
-		this.dosageId = dosageId;
+
+	public void setDosage(Dosage dosage) {
+		this.dosage = dosage;
 	}
-	
-	public int getQuenatity() {
-		return quenatity;
+
+	public Prescription getPrescription() {
+		return prescription;
 	}
-	
-	public void setQuenatity(int quenatity) {
-		this.quenatity = quenatity;
+
+	public void setPrescription(Prescription prescription) {
+		this.prescription = prescription;
+	}
+
+	public int getDays() {
+		return days;
+	}
+
+	public void setDays(int days) {
+		this.days = days;
 	}
 }
