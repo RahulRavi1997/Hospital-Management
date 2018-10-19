@@ -26,6 +26,8 @@ import com.ideas2it.hospitalmanagement.commons.Constants;
 import com.ideas2it.hospitalmanagement.commons.enums.Role;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.logger.Logger;
+import com.ideas2it.hospitalmanagement.visit.service.VisitService;
+import com.ideas2it.hospitalmanagement.visit.service.impl.VisitServiceImpl;
 import com.ideas2it.hospitalmanagement.user.model.User;
 import com.ideas2it.hospitalmanagement.user.service.UserService;
 
@@ -51,6 +53,16 @@ public class UserController {
 
     public UserService getUserService() {
         return this.userService;
+    }
+
+    private VisitService visitService = null;
+
+    public void setVisitService(VisitService visitService) {
+        this.visitService = visitService;
+    }
+
+    public VisitService getVisitService() {
+        return this.visitService;
     }
 
     /**
@@ -165,6 +177,7 @@ public class UserController {
             return Constants.PHYSICIAN_INDEX;
         } else if (authorities.iterator().next().toString().equals(Constants.NURSE_ROLE)) {
             session.setAttribute(Constants.ROLE, Constants.NURSE_INDEX);
+            session.setAttribute("inpatients",visitService.getVisitsByPatientType("InPatient"));
             return Constants.NURSE_INDEX;
         } else if (authorities.iterator().next().toString().equals(Constants.RECEPTIONIST_ROLE)) {
             session.setAttribute(Constants.ROLE, Constants.RECEPTIONIST_INDEX);

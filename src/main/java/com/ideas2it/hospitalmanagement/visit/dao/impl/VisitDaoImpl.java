@@ -124,7 +124,17 @@ public class VisitDaoImpl extends GenericDao implements VisitDao {
         throw new ApplicationException(String.format(Constants.VISIT_DISPLAY_EXCEPTION, physicianId));
     }
    }
-
+	/**
+	 * {@inheritDoc}
+	 */
+	public List<Visit> getVisitsByPatientType(String patientType) throws ApplicationException {
+		try {
+            return super.getAll(Visit.class);
+		} catch (ApplicationException e) {
+			Logger.error(Constants.VISIT_DISPLAY_EXCEPTION, e);
+			throw new ApplicationException(Constants.VISIT_DISPLAY_EXCEPTION, e);
+		}
+	}
     /**
      * {@inheritDoc}
      */

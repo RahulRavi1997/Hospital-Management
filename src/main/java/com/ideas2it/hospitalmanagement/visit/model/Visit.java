@@ -25,21 +25,25 @@ public class Visit {
     private Date dischargeDate;
     private Patient patient;
     private Physician physician;
-    private String patientType;
+	private String patientType;
+	private String patientStatus;
+	
+    public String getPatientStatus() {
+		return patientStatus;
+	}
+	public void setPatientStatus(String patientStatus) {
+		this.patientStatus = patientStatus;
+	}
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(final Integer id) {
-        this.id = id;
-    }
-
-    @DateTimeFormat(pattern = Constants.REVERSED_DATE_FORMAT)
-    public Date getAdmitDate() {
-        return admitDate;
-    }
-
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public Date getAdmitDate() {
+		return admitDate;
+	}
     @DateTimeFormat(pattern = Constants.REVERSED_DATE_FORMAT)
     public void setAdmitDate(final Date admitDate) {
         this.admitDate = admitDate;
@@ -72,10 +76,9 @@ public class Visit {
     }
 
     public String getPatientType() {
-        return patientType;
-    }
-
-    public void setPatientType(final String patientType) {
-        this.patientType = patientType;
-    }
+		return patientType;
+	}
+	public void setPatientType(String patientType) {
+		this.patientType = patientType;
+	}
 }

@@ -71,7 +71,17 @@ public class VisitServiceImpl implements VisitService {
     /**
      * {@inheritDoc}
      */
-    public List<Visit> getVisits() throws ApplicationException {
+    public List<Visit> getVisitsByPatientType(String patientType)
+            throws ApplicationException {
+  
+        return visitDao.getVisitsByPatientType(patientType);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public List<Visit> getVisits()
+            throws ApplicationException {
         return visitDao.getAllVisits();
     }
 
@@ -99,7 +109,8 @@ public class VisitServiceImpl implements VisitService {
     /**
      * {@inheritDoc}
      */
-    public Visit getVisitForPatientId(final Integer patientId, final HttpSession session) throws ApplicationException {
+    public Visit getVisitForPatientId(final Integer patientId, final HttpSession session)
+            throws ApplicationException {
         session.setAttribute(Constants.PATIENT_OBJECT, patientService.getPatientById(patientId));
         return visitDao.searchVisitByPatientId(patientId);
     }

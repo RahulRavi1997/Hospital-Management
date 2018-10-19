@@ -97,4 +97,17 @@ public interface VisitDao {
      * @return visit returns visit object when id is found and null when not found.
      */
     public Visit searchVisitByPatientId(final Integer patientId) throws ApplicationException;
+
+    /**
+     * <p>
+     * This Method is used to obtain an List of all selected visits by patient Type.
+     * </p>
+     *
+     * @param patientType containing the patient Type.
+     * @return visits an List of Visit containing the id of visits that are to be retrieved.
+     * @throws ApplicationException An exception created for catching exceptions that occur while
+     *                              displaying all visits.
+     */
+	public List<Visit> getVisitsByPatientType(String patientType) throws ApplicationException;
 }
+

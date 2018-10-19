@@ -88,8 +88,15 @@ label .req {
   color: red;
 }
 
+<<<<<<< HEAD
 #nonUniqueEmail {
   color: red;
+=======
+
+
+#nonUniqueEmail{
+  color:red;
+>>>>>>> 7fffb58a1ef5a527112a50d6601b2b7962a6c01b
 }
 
 label.active {

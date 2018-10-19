@@ -189,6 +189,11 @@ public class GenericDao {
         }
     }
 
+<<<<<<< HEAD
+=======
+
+ 
+>>>>>>> 7fffb58a1ef5a527112a50d6601b2b7962a6c01b
     /**
      * This Method is used to obtain all objects in a certain class type based on the value of its
      * attribute.
@@ -200,8 +205,12 @@ public class GenericDao {
      * @throws ApplicationException A Custom Exception created for catching Hibernate exceptions that
      *                              occur while obtaining a table from the database.
      */
+<<<<<<< HEAD
     public static <T> List<T> getAllByAttribute(final Class<T> type, final String attributeName,
             final Object attributeValue) throws ApplicationException {
+=======
+    public static <T> List<T> getAll(final Class<T> type) throws ApplicationException {
+>>>>>>> 7fffb58a1ef5a527112a50d6601b2b7962a6c01b
 
         Session session = null;
         try {
@@ -216,7 +225,12 @@ public class GenericDao {
             close(session);
         }
     }
+<<<<<<< HEAD
 
+=======
+    
+    
+>>>>>>> 7fffb58a1ef5a527112a50d6601b2b7962a6c01b
     /**
      * This Method is used to obtain all objects in a certain class type.
      *
@@ -238,4 +252,8 @@ public class GenericDao {
             close(session);
         }
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7fffb58a1ef5a527112a50d6601b2b7962a6c01b
 }

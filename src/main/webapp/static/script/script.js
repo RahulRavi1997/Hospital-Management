@@ -77,8 +77,6 @@ $(document).ready(function () {
           },
           dataType: "json",
           success: function (data) {
-
-
             response($.map(data, function (value, key) {
               if (value == []) {
                 return {

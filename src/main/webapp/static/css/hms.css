@@ -39,9 +39,20 @@ body {
     content: " *";
     color: red;
 }
+<<<<<<< HEAD
 
 .highlight {
     background-color: #424242;
+=======
+
+
+ .required:after { content:" *";
+                   color:red; }
+
+
+.highlight{
+  background-color:#424242;
+>>>>>>> 7fffb58a1ef5a527112a50d6601b2b7962a6c01b
 }
 
 .sidebar-btn {
@@ -51,10 +62,17 @@ body {
     margin-bottom: 10px;
 }
 
+
+
 .width200px {
     width: 300px;
 }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 7fffb58a1ef5a527112a50d6601b2b7962a6c01b
 .footer {
     text-align: center;
     background-color: #d0ccf3;
@@ -449,6 +467,10 @@ background-image: repeating-linear-gradient(25deg, #fff, #fff 20px, #c1dfff 20px
     animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7fffb58a1ef5a527112a50d6601b2b7962a6c01b
 .inputtext {
     width: 200px;
     margin-bottom: 10px;
@@ -730,3 +752,11 @@ width: 80%; float:right;  height:92vh;
 .font18px {
   font-size: 18px;
 }
+<<<<<<< HEAD
+=======
+.buttn{
+	margin-top:15px;
+	margin-left:150px;
+}
+
+>>>>>>> 7fffb58a1ef5a527112a50d6601b2b7962a6c01b

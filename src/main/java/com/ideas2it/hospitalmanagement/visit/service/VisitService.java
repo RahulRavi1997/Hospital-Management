@@ -127,4 +127,17 @@ public interface VisitService {
      *            connection error or visitId not found.
      */
     public Visit getVisitForPatientId(final Integer patientId, HttpSession session) throws ApplicationException;
+
+    /**
+     * <p>
+     * This Method is used to obtain an List of all selected visits by patient Type.
+     * </p>
+     *
+     * @param patientType containing the patient Type.
+     * @return visits an List of Visit containing the id of visits that are to be retrieved.
+     * @throws ApplicationException An exception created for catching exceptions that occur while
+     *                              displaying all visits.
+     */
+    public List<Visit> getVisitsByPatientType(String patientType)
+        throws ApplicationException;
 }

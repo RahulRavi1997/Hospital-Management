@@ -1,13 +1,19 @@
 package com.ideas2it.hospitalmanagement.commons;
 
 /**
+<<<<<<< HEAD
  * Constants Class is used to store all the constants in other parts of the application. It is
  * created to reduce repeated Strings and code Size.
+=======
+ * Constants Class is used to store all the constants in other parts of the
+ * application. It is created to reduce repeated Strings and code Size.
+>>>>>>> 7fffb58a1ef5a527112a50d6601b2b7962a6c01b
  *
  * @author Rahul Ravi
  * @version 1.0
  */
 public final class Constants {
+<<<<<<< HEAD
 
     private Constants() {
     }
@@ -217,6 +223,8 @@ public final class Constants {
     		"Physician deleted Successfully";
     public static final String PHYSICIAN_UPDATE_SUCCESS_MESSAGE =
     		"Physician Updated Successfully";
+=======
+>>>>>>> 7fffb58a1ef5a527112a50d6601b2b7962a6c01b
 
    public static final String CREATE_PATIENT = "/createPatient";
    public static final String ADD_PATIENT = "/addPatient";
@@ -326,6 +334,7 @@ public final class Constants {
            "Error while restoring visit id %d\n";
    public static final String VISIT_OBJECT = "visit";
    public static final String VISIT_OBJECTS = "visits";
+<<<<<<< HEAD
 
    public static final String USER_EMAIL = "UserEmail";
 
@@ -357,5 +366,8 @@ public final class Constants {
 
    public static final String ITEM_MASTER = "itemMaster";
    public static final String USER_ID = "userId";
+=======
+   public static final int SESSION_ACTIVE_INTERVAL = 30*60;
+>>>>>>> 7fffb58a1ef5a527112a50d6601b2b7962a6c01b
 }
 

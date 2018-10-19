@@ -8,6 +8,8 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Physician Details</title>
+
+
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
     <META HTTP-EQUIV="Expires" CONTENT="-1">
     <jsp:include page="Access.jsp"/>
@@ -167,4 +169,5 @@
     </div>
     <jsp:include page="Footer.jsp"/>
   </body>
+
 </html>

@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import com.ideas2it.hospitalmanagement.commons.Constants;
+import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 
 /**
  * <p>
@@ -25,6 +26,66 @@ public final class DateUtil {
      * <p>
      * This Method is used to calculate the difference(in years) between current date and the given
      * input Date. Returns null if the given input Date is not valid.
+     * Converts the given input String  to date format using simpledateformat.
+     * </p>
+     *
+     * @param      inputString     input in the form of string.
+     *
+     * @return     date            string which is convert to the date format.
+     */
+    public static Date convertStringToDate(String inputString) 
+            throws ApplicationException {
+
+        SimpleDateFormat dateFormat =
+            new SimpleDateFormat(Constants.REVERSED_DATE_FORMAT);
+        Date date= null;
+        try {
+            date = dateFormat.parse(inputString);
+        } catch (ParseException exception) {
+            throw new ApplicationException(PARSEEXCEPTION, exception);
+        }
+        return date;
+    }
+    
+    
+    private static String PARSEEXCEPTION = "Error: given date cannot be parsed";
+
+    
+    /**
+     * <p>
+     * Converts the given input date to string format using simpledateformat.
+     * </p>
+     *
+     * @param      inputDate     input in the form of date.
+     *
+     * @return                   date which is convert to the string format.
+     */
+    public static String convertDateToString(Date inputDate) {
+       SimpleDateFormat dateFormat =
+            new SimpleDateFormat(Constants.REVERSED_DATE_FORMAT);
+        return (dateFormat.format(inputDate));
+    }
+
+    /**
+     * <p>
+     *  Get current date.
+     * </p>
+     *
+     * @param     current date 
+     */
+    public static Date getCurrentDate() throws ApplicationException {
+        SimpleDateFormat dateFormat = 
+            new SimpleDateFormat(Constants.REVERSED_DATE_FORMAT);
+	Date date = new Date();
+        return convertStringToDate(dateFormat.format(date));
+    }
+
+
+    /**
+     * <p>
+     * This Method is used to calculate the difference(in years) between current
+     * date and the given input Date. Returns null if the given input Date is
+     * not valid.
      * </p>
      *
      * @param inputDate Date datetype containing input Date given by the user.
@@ -45,4 +106,5 @@ public final class DateUtil {
         }
         return (currentYear - inputYear);
     }
+
 }

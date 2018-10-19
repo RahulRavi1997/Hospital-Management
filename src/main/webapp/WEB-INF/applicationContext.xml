@@ -31,6 +31,7 @@
   </bean>
   <bean id="userController" class="com.ideas2it.hospitalmanagement.user.controller.UserController">
     <property name="userService" ref="userServiceImpl" />
+ 	<property name="visitService" ref="visitServiceImpl"/>
   </bean>
 	<bean id="diagnosisDao"
 		class="com.ideas2it.hospitalmanagement.diagnosis.dao.impl.DiagnosisDaoImplementation" />
@@ -76,7 +77,50 @@
     <property name="prescriptionService" ref="prescriptionService"></property> 
     <property name="visitService" ref="visitServiceImpl"/>
 	</bean>
-	
+	<bean id="roomDaoImpl" class="com.ideas2it.hospitalmanagement.room.dao.impl.RoomDaoImpl"/>
+
+    <bean id="roomServiceImpl" class="com.ideas2it.hospitalmanagement.room.service.impl.RoomServiceImpl" >
+        <property name="roomDao" ref="roomDaoImpl" />    
+                    		<property name="bedService" ref="bedServiceImpl"/>    
+    </bean>
+
+    <bean id="roomController"  class="com.ideas2it.hospitalmanagement.room.controller.RoomController">
+        <property name="roomService" ref="roomServiceImpl" />
+    </bean>
+
+
+<bean id="bedDaoImpl" class="com.ideas2it.hospitalmanagement.bed.dao.impl.BedDaoImpl"/>
+
+    <bean id="bedServiceImpl" class="com.ideas2it.hospitalmanagement.bed.service.impl.BedServiceImpl" >
+        <property name="bedDao" ref="bedDaoImpl" />
+                 <property name="visitService" ref="visitServiceImpl" />
+        
+         <property name="wardService" ref="wardServiceImpl" />
+    </bean>
+
+    <bean id="bedController"  class="com.ideas2it.hospitalmanagement.bed.controller.BedController">
+        <property name="bedService" ref="bedServiceImpl" />
+    </bean>
+
+
+
+  <bean id="wardDaoImpl" class="com.ideas2it.hospitalmanagement.ward.dao.impl.WardDaoImpl"/>
+
+    <bean id="wardServiceImpl" class="com.ideas2it.hospitalmanagement.ward.service.impl.WardServiceImpl" >
+        <property name="wardDao" ref="wardDaoImpl" />
+                <property name="roomService" ref="roomServiceImpl" />
+        		<property name="visitService" ref="visitServiceImpl"/>
+        		        		<property name="bedService" ref="bedServiceImpl"/>
+        		
+    </bean>
+
+    <bean id="wardController"  class="com.ideas2it.hospitalmanagement.ward.controller.WardController">
+        <property name="wardService" ref="wardServiceImpl" />
+        
+    </bean>
+    
+    
+
 	<bean id="dosageDao" class="com.ideas2it.hospitalmanagement.dosage.dao.impl.DosageDaoImpl">
     </bean>
     
