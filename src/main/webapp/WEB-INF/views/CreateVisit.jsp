@@ -88,7 +88,7 @@
                   </legend>
                   <input type="hidden" name="patientId"
                     value="${sessionScope.patient.id}">
-                  <div class="form-group">
+                  <div class="row form-group">
                     <label class="col-sm-2 control-label" for="Specialisation">Specialisation</label>
                     <div class="col-sm-10">
                       <select class="inputtext" id='specialisation'>
@@ -100,7 +100,7 @@
                       </select>
                     </div>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group row">
                     <label class="col-sm-2 control-label" for="Physician">Physician</label>
                     <div class="col-sm-10">
                       <select class="inputtext" id="sel_user">
@@ -109,11 +109,13 @@
                       <input type="hidden" name="physicianId" id="physicianId" />
                     </div>
                   </div>
+                  <div class="row">
                   <label class="col-sm-2 control-label" for="PatientType">Patient
                   Type</label>
                   <div class="col-sm-10">
                     <form:select class="inputtext" path="patientType"
                       items="${types}" />
+                  </div>
                   </div>
                   <c:if test="${not empty visit.id}">
                     <input type="hidden" name="id" value="${visit.id}" />

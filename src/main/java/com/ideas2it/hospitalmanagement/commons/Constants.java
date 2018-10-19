@@ -329,7 +329,7 @@ public final class Constants {
 
    public static final String DISPLAY_USER_MAPPING = "/displayUsers";
    public static final String USER_DISPLAY_EXCEPTION = "Error while displaying users\n";
-   public static final String RESTORE_USER_MAPPING = "/restoreUsers";
+   public static final String RESTORE_USER_MAPPING = "/restoreUser";
    public static final String ACTIVE = "active";
    public static final String USERS = "users";
    public static final String DISPLAY_USERS_JSP = "DisplayUsers";

@@ -39,10 +39,14 @@
           <div class="row">
             <div class="col-lg-12">
               <c:set var="operation" value="Create"/>
+              <c:set var="action" value="signup"/>
               <c:if test="${not empty user.email}">
                 <c:set var="operation" value="Edit"/>
+                <c:set var="action" value="updateUser"/>
               </c:if>
-              <form:form commandName="user" action="signup" method="post">
+              <form:form commandName="user" action="${action}" method="post">
+               <form:hidden path="id"/>
+               <form:hidden path="active"/>
                 <div class="form-group">
                   <label class="required">
                   Email Address
