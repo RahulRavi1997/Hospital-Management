@@ -27,7 +27,7 @@
                <li>
                   <a href="DisplayAllWards">View Wards</a> 
                </li>
-                <c:if test="${Role == 'Nurse'}">
+                <c:if test="${role == 'Nurse'}">
                <li>
                	  <a href="nurseHome">Display In Patients</a>
                </li></c:if>
@@ -128,7 +128,7 @@
 	   				 </c:if>
                        </c:forEach>
                        <c:set var = "max" scope = "session" value = "${5-room.beds.size()}"/>
-             		<c:if test="${Role == 'Admin'}">
+             		<c:if test="${role == 'Admin'}">
 					 <c:if test="${max gt 0}">             
                   	 <form method="post" action="AddBeds" style="display: inline;">
                     	<input type="hidden" name="roomNumber" value="${room.roomNumber}">
@@ -140,7 +140,7 @@
                   	</c:if></c:if>
                     
  </div>				<c:if test="${PatientDetails != null}">
- 					 <c:if test="${Role == 'Admin'}"> 
+ 					 <c:if test="${role == 'Admin'}"> 
  					 <c:if test="${visitDetails.id == null}">
                               <input type="hidden" name="bedNumber" value="${bedDetails.bedNumber}"/>
 <br><button style="margin-left: 540px;" onclick = "myFunction()" style="width:75%;"  class="btn btn-primary">View History</button> 
@@ -199,8 +199,8 @@
                            <td>Mobile Number</td>
                            <td>BirthDate</td>
                            <td>Gender</td>
-                                     <c:if test="${Role == 'Nurse'}">   <td>Action</td> </c:if>
-                                        <c:if test="${Role == 'Admin'}">  <td>Action</td> </c:if>
+                                     <c:if test="${role == 'Nurse'}">   <td>Action</td> </c:if>
+                                        <c:if test="${role == 'Admin'}">  <td>Action</td> </c:if>
                            
                         </tr>
                      </thead>
@@ -214,13 +214,13 @@
                               <td>${visitDetails.patient.mobileNumber}</td>
                               <td>${visitDetails.patient.birthDate}</td>
                               <td>${visitDetails.patient.gender}</td>
-                            <c:if test="${Role == 'Nurse'}">      <td>
+                            <c:if test="${role == 'Nurse'}">      <td>
 							<form:form action="dischargePatient" method="post" >
                               <input type="hidden" name="bedNumber" value="${bedDetails.bedNumber}"/>
                  <button type="submit" style="width:70%;" onClick="return confirm('Are you sure you want to discharge Visit ${visitDetails.id}');" class="btn btn-danger">Discharge</button> 
                               </form:form>
 </td></c:if>
- <c:if test="${Role == 'Admin'}"> <td>
+ <c:if test="${role == 'Admin'}"> <td>
                               <input type="hidden" name="bedNumber" value="${bedDetails.bedNumber}"/>
                               <button onclick = "myFunction()" style="width:75%;"  class="btn btn-primary">View History</button> 
 		</td></c:if>

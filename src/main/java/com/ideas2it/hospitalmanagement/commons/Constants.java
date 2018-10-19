@@ -1,23 +1,16 @@
 package com.ideas2it.hospitalmanagement.commons;
 
 /**
-<<<<<<< HEAD
  * Constants Class is used to store all the constants in other parts of the application. It is
  * created to reduce repeated Strings and code Size.
-=======
- * Constants Class is used to store all the constants in other parts of the
- * application. It is created to reduce repeated Strings and code Size.
->>>>>>> 7fffb58a1ef5a527112a50d6601b2b7962a6c01b
  *
  * @author Rahul Ravi
  * @version 1.0
  */
 public final class Constants {
-<<<<<<< HEAD
 
     private Constants() {
     }
-
 
     public static final String DISPLAY_PHYSICIANS_BY_SPECIALISATIONS_MAPPING = "/displayPhysiciansBySpecialisation";
     public static final String SPECIALISATION_NAME = "specialisationName";
@@ -68,7 +61,7 @@ public final class Constants {
     public static final String INDEX_MAPPING = "/index";
     public static final String ADMIN_INDEX = "Admin";
     public static final String PHYSICIAN_INDEX = "displayVisit";
-    public static final String NURSE_INDEX = "Nurse";
+    public static final String NURSE_INDEX = "nurseHome";
     public static final String RECEPTIONIST_INDEX = "Receptionist";
     public static final String ACCESS_DENIED_JSP = "AccessDenied";
     public static final Object ADMIN_ROLE = "ROLE_ADMIN";
@@ -223,8 +216,6 @@ public final class Constants {
     		"Physician deleted Successfully";
     public static final String PHYSICIAN_UPDATE_SUCCESS_MESSAGE =
     		"Physician Updated Successfully";
-=======
->>>>>>> 7fffb58a1ef5a527112a50d6601b2b7962a6c01b
 
    public static final String CREATE_PATIENT = "/createPatient";
    public static final String ADD_PATIENT = "/addPatient";
@@ -234,7 +225,6 @@ public final class Constants {
    public static final String SEARCH_PATIENT = "/searchPatient";
    public static final String DISPLAY_PATIENTS = "/displayPatients";
    public static final String ACTIVATE_PATIENT = "/activatePatient";
-
    
    public static final String PATIENT = "/patient";
    public static final String PATIENTS = "/patients";
@@ -319,7 +309,7 @@ public final class Constants {
    public static final String VISIT_SEARCH_FAILED = "Visit Search Failed";
    public static final String VISIT_DISPLAY_FAILED = "Visit Display Failed";
    public static final String VISIT_ACTIVATION_FAILED = "Visit Activation Failed";
-   
+
    public static final String VISIT_ADDITION_EXCEPTION = 
            "Error while adding a visit- Name:%s %s\n";
    public static final String VISIT_SEARCH_EXCEPTION = 
@@ -334,7 +324,6 @@ public final class Constants {
            "Error while restoring visit id %d\n";
    public static final String VISIT_OBJECT = "visit";
    public static final String VISIT_OBJECTS = "visits";
-<<<<<<< HEAD
 
    public static final String USER_EMAIL = "UserEmail";
 
@@ -366,8 +355,5 @@ public final class Constants {
 
    public static final String ITEM_MASTER = "itemMaster";
    public static final String USER_ID = "userId";
-=======
-   public static final int SESSION_ACTIVE_INTERVAL = 30*60;
->>>>>>> 7fffb58a1ef5a527112a50d6601b2b7962a6c01b
 }
 

@@ -35,6 +35,9 @@
           <li>
             <a href="pharmacy">Pharmacy</a>
           </li>
+<li>
+<a href="DisplayAllWards">Display Wards</a><br>
+</li>
         </ul>
       </div>
       <!-- /#sidebar-wrapper -->

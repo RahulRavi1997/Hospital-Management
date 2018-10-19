@@ -24,7 +24,7 @@
                <li>
                   <a href="DisplayAllWards">View Wards</a> 
                </li>
-                <c:if test="${Role == 'Nurse'}">
+                <c:if test="${role == 'Nurse'}">
                <li>
                	  <a href="nurseHome">Display In Patients</a>
                </li></c:if>
@@ -33,13 +33,13 @@
          <!-- /#sidebar-wrapper -->
          <!-- Page Content -->
          <div id="page-content-wrapper">
-          <c:if test="${Role == 'Nurse'}">
+          <c:if test="${role == 'Nurse'}">
           <br>
           </c:if>
             <div class="container-fluid">
                <div class="row">
                   <div class="col-lg-12">
-                   <c:if test="${Role == 'Admin'}">
+                   <c:if test="${role == 'Admin'}">
                     <form:form action="AddWardInDB" class = "float-right" method="post">
                     <input type = "text" name= "wardName" placeholder="Enter ward name.." >
                   	<button class="btn btn-success" type="submit" >Add Ward</button><br>

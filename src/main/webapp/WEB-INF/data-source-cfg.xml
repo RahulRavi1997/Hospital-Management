@@ -6,3 +6,4 @@
     <property name="username" value="root" />
     <property name="password" value="ubuntu" />
   </bean>
+  </beans>

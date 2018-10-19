@@ -23,7 +23,7 @@
                <li>
                   <a href="DisplayAllWards">View Wards</a> 
                </li>
-                <c:if test="${Role == 'Nurse'}">
+                <c:if test="${role == 'Nurse'}">
                <li>
                	  <a href="nurseHome">Display In Patients</a>
                </li></c:if>
@@ -97,7 +97,7 @@
 	   					</c:forEach>
 	   					 Available Beds : <c:out value = "${count}"/></div></button></form>
                   	 </c:forEach></form>
-                  	 <c:if test="${Role == 'Admin'}">
+                  	 <c:if test="${role == 'Admin'}">
 					<c:if test="${max gt 0}">             
                   	 <form method="post" action="AddRooms" style="display: inline;">
                     	<input type="hidden" name="wardNumber" value="${ward.wardNumber}">

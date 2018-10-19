@@ -177,7 +177,11 @@ public class UserController {
             return Constants.PHYSICIAN_INDEX;
         } else if (authorities.iterator().next().toString().equals(Constants.NURSE_ROLE)) {
             session.setAttribute(Constants.ROLE, Constants.NURSE_INDEX);
-            session.setAttribute("inpatients",visitService.getVisitsByPatientType("InPatient"));
+            try {
+                session.setAttribute("inpatients",visitService.getVisitsByPatientType("InPatient"));
+            } catch (ApplicationException e){
+                return  Constants.LOGIN_JSP;
+            }
             return Constants.NURSE_INDEX;
         } else if (authorities.iterator().next().toString().equals(Constants.RECEPTIONIST_ROLE)) {
             session.setAttribute(Constants.ROLE, Constants.RECEPTIONIST_INDEX);

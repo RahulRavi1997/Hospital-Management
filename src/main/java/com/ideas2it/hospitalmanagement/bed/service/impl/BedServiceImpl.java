@@ -56,7 +56,7 @@ public class BedServiceImpl extends GenericDao implements BedService {
 				bed.setStatus(BedConstants.OCCUPIED);
 				visit.setPatientStatus(BedConstants.ADMITTED);
 		    	visit.setDischargeDate(null);
-				visitService.modifyVisit(visit);
+				visitService.modifyVisit(visit,visit.getPatient().getId(),visit.getPhysician().getId());
         		addBedAllocationDetails(visit, bed);
 				return bedDao.updateBed(bed);
 			} else {
@@ -131,7 +131,7 @@ public class BedServiceImpl extends GenericDao implements BedService {
 				bed.setStatus(BedConstants.AVAILABLE);
 				visit.setPatientStatus(BedConstants.DISCHARGED);
         		addBedDischargeDetails(bed.getVisit(), bed);
-				visitService.modifyVisit(visit);
+				visitService.modifyVisit(visit,visit.getPatient().getId(),visit.getPhysician().getId());
 				return bedDao.updateBed(bed);
 			} else {
 				return Boolean.FALSE;
