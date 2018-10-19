@@ -1,7 +1,7 @@
 package com.ideas2it.hospitalmanagement.dosageMaster.controller;
 
+import com.ideas2it.hospitalmanagement.commons.Constants;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
-import com.ideas2it.hospitalmanagement.logger.Logger;
 import com.ideas2it.hospitalmanagement.dosageMaster.model.DosageMaster;
 import com.ideas2it.hospitalmanagement.dosageMaster.service.DosageMasterService;
 
@@ -26,7 +26,8 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class DosageMasterController {
-
+    
+	
 	private DosageMasterService dosageMasterService;
 
 	public DosageMasterService getDosageMasterService() {
@@ -46,9 +47,9 @@ public class DosageMasterController {
 	 * @return ModelAndView Used to represents the View which will be displayed to
 	 *         the client.
 	 */
-	@RequestMapping(value = "/createDosage", method = RequestMethod.GET)
+	@RequestMapping(value = Constants.CREATE_DOSAGE, method = RequestMethod.GET)
 	public ModelAndView createDosage() {
-		ModelAndView modalAndView = new ModelAndView("welcome");
+		ModelAndView modalAndView = new ModelAndView(Constants.WELCOME_URL);
 		DosageMaster dosage = new DosageMaster();
 		return modalAndView;
 	}
@@ -60,18 +61,17 @@ public class DosageMasterController {
 	 * Client view whether it is added or not.
 	 * </p>
 	 * 
-	 * @param dosage
-	 *            It is a dosage object which have a dosage details.
+	 * @param dosage It is a dosage object which have a dosage details.
 	 * @return ModelAndView Used to represents the View which will be displayed to
 	 *         the client.
 	 */
-	@RequestMapping(value = "/getDosage", method = RequestMethod.POST)
-	public ModelAndView getDosage(@ModelAttribute("dosage") DosageMaster dosage) {
+	@RequestMapping(value = Constants.DOSAGE_URL, method = RequestMethod.POST)
+	public ModelAndView getDosage(@ModelAttribute(Constants.DOSAGE) DosageMaster dosage) {
 		try {
 			dosageMasterService.addDosage(dosage);
-			return new ModelAndView("Dosage.jsp", "dosage-add-msg", "Prescribed Successfully...");
+			return new ModelAndView(Constants.DOSAGE_PAGE, Constants.DOSAGE_ADD_MESSAGE, Constants.PRESCRIPTION_SUCCESS);
 		} catch (ApplicationException e) {
-			return new ModelAndView("error");
+			return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR, Constants.DOSAGE_ADD_ERROR);
 		}
 	}
 
@@ -81,18 +81,17 @@ public class DosageMasterController {
 	 * and send response back to Client view whether it is updated or not.
 	 * </p>
 	 * 
-	 * @param dosage
-	 *            It is a dosage object which have a updated dosage details.
+	 * @param dosage It is a dosage object which have a updated dosage details.
 	 * @return ModelAndView Used to represents the View which will be displayed to
 	 *         the client.
 	 */
-	@RequestMapping(value = "updateDosage", method = RequestMethod.POST)
-	public ModelAndView getUpdatedDosage(@ModelAttribute("dosage") DosageMaster dosage) {
+	@RequestMapping(value = Constants.UPDATE_DOSAGE_URL, method = RequestMethod.POST)
+	public ModelAndView getUpdatedDosage(@ModelAttribute(Constants.DOSAGE) DosageMaster dosage) {
 		try {
 			dosageMasterService.modifyDosage(dosage);
-			return new ModelAndView("Dosage.jsp", "dosage-update-msg", "Dosage Updated...");
+			return new ModelAndView(Constants.DOSAGE_PAGE, Constants.ADD_DOSAGE_MSG, Constants.UPDATE_MSG);
 		} catch (ApplicationException e) {
-			return new ModelAndView("error");
+			return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR,  Constants.DOSAGE_UPDATE_ERROR);
 		}
 	}
 
@@ -101,17 +100,12 @@ public class DosageMasterController {
 	 * Used to show all dosage details to client View.
 	 * </p>
 	 * 
-	 * @param dosage
-	 *            It is a dosage name.
+	 * @param dosage It is a dosage name.
 	 * @return String Used to represents the dosages in the form of json string.
 	 */
-	@RequestMapping(value = "/getAllDosage", produces = { "application/json",
-			"application/xml" }, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded", method = RequestMethod.GET)
-	private @ResponseBody String getAllDosage(Model model, @RequestParam("dosage") String name) {
-		try {
-			return new Gson().toJson(dosageMasterService.getAllDosage(name));
-		} catch (ApplicationException e) {
-			return null;
-		}
+	@RequestMapping(value = Constants.DISPLAY_URL, produces = { Constants.JSON,
+			Constants.APP }, consumes = Constants.JSON, headers = Constants.JSON_CONFIG, method = RequestMethod.GET)
+	private @ResponseBody String getAllDosage(Model model, @RequestParam(Constants.DOSAGE) String name) {
+		return new Gson().toJson(dosageMasterService.getAllDosage(name));
 	}
 }

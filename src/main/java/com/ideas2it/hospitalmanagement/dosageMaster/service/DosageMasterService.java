@@ -58,6 +58,6 @@ public interface DosageMasterService {
 	 *            String that is used to match the dosage name
 	 * @return List of all dosage details.
 	 */
-	public List<DosageMaster> getAllDosage(String name) throws ApplicationException;
+	public List<DosageMaster> getAllDosage(String name);
 
 }

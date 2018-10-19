@@ -22,16 +22,15 @@ import com.ideas2it.hospitalmanagement.logger.Logger;
  * while deleting an employee, setting the status as inactive.
  * </p>
  * 
- * @author Hariharasudan K S
+ * @author Hariharasudan K S and navaneeth
  * @version 1.0
  */
 public class ItemDaoImplementation extends GenericDao implements ItemDao {
 
-	String ITEM_IN_QUERY = "from Item where id in (:ids)";
-	String IDS = "ids";
-
-	String ITEMS_IN_NAMES = "from Item where itemName like :name";
-	String NAMES = "name";
+	public static final String ITEM_IN_QUERY = "from Item where id in (:ids)";
+	public static final String IDS = "ids";
+    public static final String ITEMS_IN_NAMES = "from Item where itemName like :name";
+	public static final String NAMES = "name";
 
 	public ItemDaoImplementation() {
 		super();
@@ -44,8 +43,8 @@ public class ItemDaoImplementation extends GenericDao implements ItemDao {
 		try {
 			return (null != super.save(item));
 		} catch (ApplicationException e) {
-			Logger.error(String.format(Constants.ITEM_ADDITION_EXCEPTION, item.getId()), e);
-			throw new ApplicationException(String.format(Constants.DIAGNOSIS_ADDITION_EXCEPTION, item.getId()), e);
+			Logger.error(Constants.ITEM_ADDITION_EXCEPTION, e);
+			throw new ApplicationException(String.format(Constants.DIAGNOSIS_ADDITION_EXCEPTION, item.getId()));
 		}
 
 	}
@@ -58,7 +57,7 @@ public class ItemDaoImplementation extends GenericDao implements ItemDao {
 			return super.getAll(Item.class);
 		} catch (ApplicationException e) {
 			Logger.error(Constants.ITEM_DISPLAY_EXCEPTION, e);
-			throw new ApplicationException(Constants.ITEM_DISPLAY_EXCEPTION, e);
+			throw new ApplicationException(Constants.ITEM_DISPLAY_EXCEPTION);
 		}
 	}
 
@@ -72,8 +71,8 @@ public class ItemDaoImplementation extends GenericDao implements ItemDao {
 			query.setParameter(NAMES, name + "%");
 			return query.list();
 		} catch (ApplicationException e) {
-			Logger.error(Constants.DIAGNOSIS_DISPLAY_EXCEPTION, e);
-			throw new ApplicationException(Constants.DIAGNOSIS_DISPLAY_EXCEPTION, e);
+			Logger.error(Constants.ITEM_DISPLAY_EXCEPTION+name, e);
+			throw new ApplicationException(Constants.ITEM_DISPLAY_EXCEPTION);
 		}
 
 	}
@@ -88,8 +87,8 @@ public class ItemDaoImplementation extends GenericDao implements ItemDao {
 			query.setParameter(NAMES, name + "%");
 			return query.list();
 		} catch (ApplicationException e) {
-			Logger.error(Constants.DIAGNOSIS_DISPLAY_EXCEPTION, e);
-			throw new ApplicationException(Constants.DIAGNOSIS_DISPLAY_EXCEPTION, e);
+			Logger.error(Constants.ITEM_DISPLAY_EXCEPTION+name, e);
+			throw new ApplicationException(Constants.ITEM_DISPLAY_EXCEPTION);
 		}
 	}
 
@@ -101,7 +100,7 @@ public class ItemDaoImplementation extends GenericDao implements ItemDao {
 			return super.update(item);
 		} catch (ApplicationException e) {
 			Logger.error(String.format(Constants.ITEM_EDIT_EXCEPTION, item.getId()), e);
-			throw new ApplicationException(String.format(Constants.ITEM_EDIT_EXCEPTION, item.getId()), e);
+			throw new ApplicationException(String.format(Constants.ITEM_EDIT_EXCEPTION, item.getId()));
 		}
 	}
 

@@ -10,7 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ideas2it.hospitalmanagement.commons.Constants;
-import com.ideas2it.hospitalmanagement.logger.Logger;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.itemMaster.model.ItemMaster;
 import com.ideas2it.hospitalmanagement.itemMaster.service.ItemMasterService;
@@ -27,12 +26,14 @@ import com.ideas2it.hospitalmanagement.itemMaster.service.ItemMasterService;
  */
 @Controller
 public class ItemMasterController {
-
+	
+	public static final String ADD_ITEM_JSP="addItemsMaster";
+   
 	private ItemMasterService itemMasterService = null;
 
 	public void setItemMasterService(ItemMasterService itemMasterService) {
 		this.itemMasterService = itemMasterService;
-	}
+	} 
 
 	public ItemMasterService getItemMasterService() {
 		return this.itemMasterService;
@@ -45,13 +46,12 @@ public class ItemMasterController {
 	 * @return modelAndView a ModelAndView object which is used to add attributes to
 	 *         a model and redirect it to a view such as a jsp page.
 	 */
-	@RequestMapping(value = "/viewAllItems", method = RequestMethod.GET)
+	@RequestMapping(value = Constants.VIEW_ALL_ITEMS, method = RequestMethod.GET)
 	public ModelAndView viewAllItemMaster() {
 		try {
 			List<ItemMaster> allItems = itemMasterService.retrieveAllItems();
-			return new ModelAndView("displayAllItems", "allItems", allItems);
+			return new ModelAndView(Constants.DISPLAY_ITEMS, Constants.ALL_ITEMS, allItems);
 		} catch (ApplicationException e) {
-			Logger.error(e);
 			return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE, Constants.ITEM_DISPLAY_EXCEPTION);
 		}
 	}
@@ -66,11 +66,10 @@ public class ItemMasterController {
 	 * @return modelAndView a ModelAndView object which is used to add attributes to
 	 *         a model and redirect it to a view such as a jsp page.
 	 */
-	@RequestMapping(value = "/create_item_master", method = RequestMethod.GET)
+	@RequestMapping(value = Constants.CREATE_ITEM_MASTER, method = RequestMethod.GET)
 	private ModelAndView redirectToCreateItem() {
-
 		ItemMaster itemMaster = new ItemMaster();
-		return new ModelAndView("addItemsMaster", Constants.ITEM_MASTER, itemMaster);
+		return new ModelAndView(ADD_ITEM_JSP, Constants.ITEM_MASTER, itemMaster);
 	}
 
 	/**
@@ -92,9 +91,8 @@ public class ItemMasterController {
 			model = viewAllItemMaster();
 			return model;
 		} catch (ApplicationException e) {
-			Logger.error(e);
 			return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
-					String.format(Constants.ITEM_ADDITION_EXCEPTION, item.getId()));
+					    String.format(Constants.ITEM_ADDITION_EXCEPTION, item.getId()));
 		}
 
 	}
@@ -111,14 +109,13 @@ public class ItemMasterController {
 	 * @return modelAndView a ModelAndView object which is used to add attributes to
 	 *         a model and redirect it to a view such as a jsp page.
 	 */
-	@RequestMapping(value = "/edit_item_master", method = RequestMethod.GET)
+	@RequestMapping(value = Constants.EDIT_ITEM_MASTER, method = RequestMethod.GET)
 	private ModelAndView redirectToEditItem(@RequestParam(Constants.ID) int id) {
 		try {
-			return new ModelAndView("addItemsMaster", Constants.ITEM_MASTER, itemMasterService.retrieveItemByName(id));
+			return new ModelAndView(Constants.ADD_ITEMS, Constants.ITEM_MASTER, itemMasterService.retrieveItemByName(id));
 		} catch (ApplicationException e) {
-			Logger.error(e);
 			return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
-					String.format(Constants.ITEM_EDIT_EXCEPTION, id));
+					                            String.format(Constants.ITEM_EDIT_EXCEPTION, id));
 		}
 	}
 
@@ -133,7 +130,7 @@ public class ItemMasterController {
 	 */
 
 	@RequestMapping(value = Constants.UPDATE_ITEM_MASTER_MAPPING, method = RequestMethod.POST)
-	private ModelAndView updateEmployee(@ModelAttribute ItemMaster item, ModelAndView model) {
+	private ModelAndView updateItemMaster(@ModelAttribute ItemMaster item, ModelAndView model) {
 		try {
 			if (!itemMasterService.modifyItem(item)) {
 				return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE, Constants.EDIT_FAILED);
@@ -141,9 +138,8 @@ public class ItemMasterController {
 			model = viewAllItemMaster();
 			return model;
 		} catch (ApplicationException e) {
-			Logger.error(e);
 			return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
-					String.format(Constants.ITEM_EDIT_EXCEPTION, item.getId()));
+					                 String.format(Constants.ITEM_EDIT_EXCEPTION, item.getId()));
 		}
 
 	}

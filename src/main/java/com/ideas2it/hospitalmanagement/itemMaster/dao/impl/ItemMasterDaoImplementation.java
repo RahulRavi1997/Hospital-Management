@@ -28,10 +28,9 @@ import com.ideas2it.hospitalmanagement.logger.Logger;
 
 public class ItemMasterDaoImplementation extends GenericDao implements ItemMasterDao {
 
-	String ITEMS_IN_NAMES = "from ItemMaster where itemName like :name";
-	String NAMES = "name";
-
-	String ITEMS_IN_LIST = "from ItemMaster";
+	public static final String ITEMS_IN_NAMES = "from ItemMaster where itemName like :name";
+	public static final String NAMES = "name";
+    public static final String ITEMS_IN_LIST = "from ItemMaster";
 
 	public ItemMasterDaoImplementation() {
 		super();
@@ -47,7 +46,7 @@ public class ItemMasterDaoImplementation extends GenericDao implements ItemMaste
 			query.setParameter(NAMES, name + "%");
 			return query.list();
 		} catch (ApplicationException e) {
-			Logger.error(Constants.DIAGNOSIS_DISPLAY_EXCEPTION, e);
+			Logger.error(Constants.DIAGNOSIS_DISPLAY_EXCEPTION+name, e);
 			throw new ApplicationException(Constants.DIAGNOSIS_DISPLAY_EXCEPTION, e);
 		}
 	}
@@ -98,6 +97,5 @@ public class ItemMasterDaoImplementation extends GenericDao implements ItemMaste
 			Logger.error(Constants.ITEM_DISPLAY_EXCEPTION, e);
 			throw new ApplicationException(Constants.ITEM_DISPLAY_EXCEPTION, e);
 		}
-
-	}
+    }
 }
