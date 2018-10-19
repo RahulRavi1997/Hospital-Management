@@ -26,13 +26,11 @@ public interface PrescriptionDao {
 	 * successfully, else returns false.
 	 * </p>
 	 *
-	 * @param prescription
-	 *            a prescription object consisting of the details of the new
-	 *            diagnosis provided by the physician.
+	 * @param prescription a prescription object consisting of the details of the
+	 *                     new diagnosis provided by the physician.
 	 * @return int the id of the Prescription that is inserted.
-	 * @throws ApplicationException
-	 *             An exception created for catching exceptions that occur while
-	 *             adding an Prescription.
+	 * @throws ApplicationException An exception created for catching exceptions
+	 *                              that occur while adding an Prescription.
 	 */
 	public int insertPrescription(Prescription prescription) throws ApplicationException;
 
@@ -42,13 +40,12 @@ public interface PrescriptionDao {
 	 * the entry is modified, else returns false.
 	 * <p>
 	 *
-	 * @param Prescription
-	 *            an Prescription object is passed with the details to be updated.
+	 * @param Prescription an Prescription object is passed with the details to be
+	 *                     updated.
 	 * @return boolean a boolean value is returned whether the operation is
 	 *         successful or not.
-	 * @throws ApplicationException
-	 *             An exception created for catching exceptions that occur while
-	 *             updating an Dosage.
+	 * @throws ApplicationException An exception created for catching exceptions
+	 *                              that occur while updating an Dosage.
 	 */
 	public boolean updatePrescription(Prescription prescription) throws ApplicationException;
 
@@ -56,12 +53,10 @@ public interface PrescriptionDao {
 	 * <p>
 	 * This Method is used to retrieve all prescriptions by visitID
 	 * 
-	 * @param visitID
-	 *            id of patient whose prescription is to be searched
+	 * @param visitID id of patient whose prescription is to be searched
 	 * @return List of Prescription objects which matches the string passed
-	 * @throws ApplicationException
-	 *             An exception created for catching exceptions that occur while
-	 *             searching an Prescription.
+	 * @throws ApplicationException An exception created for catching exceptions
+	 *                              that occur while searching an Prescription.
 	 */
 	public List<Prescription> retrivePrescriptionsByVisitId(int visitId) throws ApplicationException;
 
@@ -69,12 +64,10 @@ public interface PrescriptionDao {
 	 * <p>
 	 * This Method is used to retrieve prescriptions by prescriptionID
 	 * 
-	 * @param ,prescriptionID
-	 *            id of patient whose prescription is to be searched
+	 * @param ,prescriptionID id of patient whose prescription is to be searched
 	 * @return prescription Prescription objects which matches the id.
-	 * @throws ApplicationException
-	 *             An exception created for catching exceptions that occur while
-	 *             searching an Prescription.
+	 * @throws ApplicationException An exception created for catching exceptions
+	 *                              that occur while searching an Prescription.
 	 */
 	public Prescription searchPrescription(int prescriptionId) throws ApplicationException;
 }

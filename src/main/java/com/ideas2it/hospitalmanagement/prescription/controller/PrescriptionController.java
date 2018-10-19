@@ -1,13 +1,5 @@
 package com.ideas2it.hospitalmanagement.prescription.controller;
 
-import com.google.gson.Gson;
-import com.ideas2it.hospitalmanagement.exception.ApplicationException;
-import com.ideas2it.hospitalmanagement.logger.Logger;
-import com.ideas2it.hospitalmanagement.prescription.model.Prescription;
-import com.ideas2it.hospitalmanagement.prescription.service.PrescriptionService;
-import com.ideas2it.hospitalmanagement.prescriptionDetails.model.PrescriptionDetails;
-import com.ideas2it.hospitalmanagement.visit.service.VisitService;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +11,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import com.google.gson.Gson;
+
+import com.ideas2it.hospitalmanagement.commons.Constants;
+import com.ideas2it.hospitalmanagement.exception.ApplicationException;
+import com.ideas2it.hospitalmanagement.prescription.model.Prescription;
+import com.ideas2it.hospitalmanagement.prescription.service.PrescriptionService;
+import com.ideas2it.hospitalmanagement.prescriptionDetails.model.PrescriptionDetails;
+import com.ideas2it.hospitalmanagement.visit.service.VisitService;
 
 /**
  * PrescriptionController
@@ -27,11 +27,13 @@ import org.springframework.web.servlet.ModelAndView;
  * details like tablets , syrub are get from doctor and managed in this class.
  * <P>
  *
- * @author Navaneeth and Hari
+ * @author Navaneeth
  */
 @Controller
 public class PrescriptionController {
-	private PrescriptionService prescriptionService;
+
+    private PrescriptionService prescriptionService;
+
 	private VisitService visitService;
 
 	public PrescriptionService getPrescriptionService() {
@@ -59,69 +61,47 @@ public class PrescriptionController {
 	 * @return ModelAndView Used to represents the View which will be displayed to
 	 *         the client.
 	 */
-	@RequestMapping(value = "/createPrescription", method = RequestMethod.POST)
-	public ModelAndView createPrescription(@RequestParam("visitId") Integer visitId,
-			@RequestParam("visitType") String visitType) {
+	@RequestMapping(value = Constants.CREATE_PRESCRIPTION_MAPPING, method = RequestMethod.POST)
+	public ModelAndView createPrescription(@RequestParam(Constants.VISIT_ID) Integer visitId,
+			@RequestParam(Constants.VISIT_TYPE) String visitType) {
 		ModelAndView modelAndView;
 		try {
-			if (visitType.equals("Out Patient")
-					&& prescriptionService.fetchPrescriptionsByVisitId(visitId).size() != 0) {
-				modelAndView = new ModelAndView("displayVisit");
-				modelAndView.addObject("visits", visitService.getVisits());
-				modelAndView.addObject("message", "Already Prescribed...");
+			if (visitType.equals(Constants.OUT_PATIENT) && prescriptionService.fetchPrescriptionsByVisitId(visitId).size() != 0) {
+				modelAndView = new ModelAndView(Constants.DISPLAY_VISIT);
+				modelAndView.addObject(Constants.VISITS, visitService.getVisits());
+				modelAndView.addObject(Constants.MESSAGE, Constants.CREATE_ERROR);
 				return modelAndView;
 			} else {
 				Prescription prescription = new Prescription();
 				prescription.setVisitId(visitId);
 				prescription.getPrescriptionDetails().add(new PrescriptionDetails());
-				modelAndView = new ModelAndView("create_prescription");
-				modelAndView.addObject("prescription", prescription);
-				modelAndView.addObject("visitType", "Out Patient");
+				modelAndView = new ModelAndView(Constants.CREATE_PRESCRIPTION);
+				modelAndView.addObject(Constants.PRESCRIPTION, prescription);
+				modelAndView.addObject(Constants.VISIT_TYPE, Constants.OUT_PATIENT);
 				return modelAndView;
 			}
 		} catch (ApplicationException e) {
-			return new ModelAndView("error", "Error", e.getMessage());
+			return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR, e.getMessage());
 		}
 
 	}
 
 	/**
 	 * <p>
-	 * Used to get all medicine name using ajax call which is used to load
-	 * Prescription form to client View.
+	 * Used to create a plain new PrescriptionItemDetails Object and which is used
+	 * to load PrescriptionDetails form to client View.
 	 * </p>
 	 * 
-	 * @param name
-	 *            Medicine Name.
-	 * @return String it had all medicine which is available.
-	 */
-	@RequestMapping(value = "/getAllMedicines", produces = { "application/json",
-			"application/xml" }, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded", method = RequestMethod.GET)
-	private @ResponseBody String createPrescription(Model model, @RequestParam("search") String name) {
-		try {
-			return new Gson().toJson(prescriptionService.getAllItemsByName(name));
-		} catch (ApplicationException e) {
-			Logger.error(e);
-			return null;
-		}
-	}
-
-	/**
-	 * <p>
-	 * Used to create a plain new PrescriptionDetails Object and which is used to
-	 * load PrescriptionDetails form to client View.
-	 * </p>
-	 * 
-	 * @param prescription
-	 *            It is a prescription object which have a prescription details.
+	 * @param prescription It is a prescription object which have a prescription
+	 *                     details.
 	 * @return ModelAndView Used to represents the View which will be displayed to
 	 *         the client.
 	 */
-	@RequestMapping(value = "/createItem", method = RequestMethod.POST)
+	@RequestMapping(value = Constants.CREATE_PRESCRIPTION_ITEM_MAPPING, method = RequestMethod.POST)
 	public ModelAndView createItem(@ModelAttribute("prescription") Prescription prescription)
 			throws ApplicationException {
 		prescription.getPrescriptionDetails().add(new PrescriptionDetails());
-		return new ModelAndView("create_prescription", "prescription", prescription);
+		return new ModelAndView(Constants.CREATE_PRESCRIPTION, Constants.PRESCRIPTION, prescription);
 	}
 
 	/**
@@ -131,30 +111,30 @@ public class PrescriptionController {
 	 * Client view whether it is added or not.
 	 * </p>
 	 * 
-	 * @param prescription
-	 *            It is a prescription object which have a prescription details.
-	 * @param Model
-	 *            Used to represents the View which will be displayed to the client
+	 * @param prescription It is a prescription object which have a prescription
+	 *                     details.
+	 * @param Model        Used to represents the View which will be displayed to
+	 *                     the client
 	 * @return ModelAndView Used to represents the View which will be displayed to
 	 *         the client.
 	 */
-	@RequestMapping(value = "/addPrescription", method = RequestMethod.POST)
-	public ModelAndView addPrescription(@ModelAttribute("prescription") Prescription prescription, Model model,
-			@RequestParam("visitType") String visitType) {
-		ModelAndView modalAndView = new ModelAndView("displayVisit");
+	@RequestMapping(value = Constants.ADD_PRESCRIPTION_MAPPING, method = RequestMethod.POST)
+	public ModelAndView addPrescription(@ModelAttribute(Constants.PRESCRIPTION) Prescription prescription, Model model,
+			@RequestParam(Constants.VISIT_TYPE) String visitType) {
+		ModelAndView modalAndView = new ModelAndView(Constants.DISPLAY_VISIT);
 		try {
 			prescriptionService.addPrescription(prescription);
-			if (visitType.equals("In Patient")) {
+			if (visitType.equals(Constants.IN_PATIENT)) {
 				modalAndView = createPrescription(prescription.getVisitId(), visitType);
-				model.addAttribute("addmsg", "Prescribed Successfully...");
+				model.addAttribute(Constants.ADD_MESSAGE, Constants.PRESCRIPTION_SUCCESS);
 				return modalAndView;
 			} else {
-				modalAndView.addObject("visits", visitService.getVisits());
-				modalAndView.addObject("message", "Already Prescribed...");
+				modalAndView.addObject(Constants.VISITS, visitService.getVisits());
+				modalAndView.addObject(Constants.MESSAGE, Constants.CREATE_ERROR);
 				return modalAndView;
 			}
 		} catch (ApplicationException e) {
-			return modalAndView.addObject("error", e.getMessage());
+			return modalAndView.addObject(Constants.ERROR, e.getMessage());
 		}
 	}
 
@@ -164,16 +144,15 @@ public class PrescriptionController {
 	 * operation and send response back to Client view whether it is removed or not.
 	 * </p>
 	 * 
-	 * @param prescriptionId
-	 *            It is a prescription Id which is unique.
+	 * @param prescriptionId It is a prescription Id which is unique.
 	 * @return ModelAndView Used to represents the View which will be displayed to
 	 *         the client.
 	 */
-	@RequestMapping(value = "/removePrescriptionDetail", method = RequestMethod.POST)
-	public ModelAndView removePrescription(@ModelAttribute("prescription") Prescription prescription,
-			@RequestParam("index") Integer index) {
+	@RequestMapping(value = Constants.REMOVE_PRESCRIPTION_MAPPING, method = RequestMethod.POST)
+	public ModelAndView removePrescription(@ModelAttribute(Constants.PRESCRIPTION) Prescription prescription,
+			@RequestParam(Constants.INDEX) Integer index) {
 		System.out.println(prescription.getPrescriptionDetails().remove((int) index));
-		return new ModelAndView("create_prescription", "prescription", prescription);
+		return new ModelAndView(Constants.CREATE_PRESCRIPTION,Constants.PRESCRIPTION, prescription);
 	}
 
 	/**
@@ -182,19 +161,19 @@ public class PrescriptionController {
 	 * which used for editing prescription.
 	 * </p>
 	 * 
-	 * @param prescription
-	 *            It is a prescription object which have a prescription details.
+	 * @param prescription It is a prescription object which have a prescription
+	 *                     details.
 	 * @return ModelAndView Used to represents the View which will be displayed to
 	 *         the client.
 	 */
-	@RequestMapping(value = "/editPrescription", method = RequestMethod.POST)
-	public ModelAndView editPrescription(@ModelAttribute("prescription") Prescription prescription,
-			@RequestParam("id") Integer prescriptionId) {
+	@RequestMapping(value = Constants.EDIT_PRESCRIPTION_MAPPING, method = RequestMethod.POST)
+	public ModelAndView editPrescription(@ModelAttribute(Constants.PRESCRIPTION) Prescription prescription,
+			@RequestParam(Constants.ID) Integer prescriptionId) {
 		try {
 			prescription = prescriptionService.serchPrescriptionById(prescriptionId);
-			return new ModelAndView("create_prescription", "prescription", prescription);
+			return new ModelAndView(Constants.CREATE_PRESCRIPTION, Constants.PRESCRIPTION, prescription);
 		} catch (ApplicationException e) {
-			return new ModelAndView("error", "Error", "Error occured while display Prescription");
+			return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR, Constants.PRESCRIPTION_DISPLAY_ERROR);
 		}
 	}
 
@@ -204,19 +183,18 @@ public class PrescriptionController {
 	 * View for edit and update details.
 	 * </p>
 	 * 
-	 * @param prescriptionId
-	 *            Unique Id of prescription.
+	 * @param prescriptionId Unique Id of prescription.
 	 * @return ModelAndView Used to represents the View which will be displayed to
 	 *         the client.
 	 */
-	@RequestMapping(value = "/ViewPrescriptions", method = RequestMethod.POST)
-	public ModelAndView displayPrescriptionByVisitId(@RequestParam("visitId") Integer visitId) {
+	@RequestMapping(value = Constants.VIEW_PRESCRIPTION_MAPPING, method = RequestMethod.POST)
+	public ModelAndView displayPrescriptionByVisitId(@RequestParam(Constants.VISIT_ID) Integer visitId) {
 		ModelAndView modelView = null;
 		try {
-			return new ModelAndView("displayVisit", "prescriptions",
+			return new ModelAndView(Constants.VIEW_VISIT,Constants.PRESCRIPTIONS,
 					prescriptionService.fetchPrescriptionsByVisitId(visitId));
 		} catch (ApplicationException e) {
-			return new ModelAndView("error", "Error", "Error occured while " + "displaying prescription");
+			return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR, Constants.PRESCRIPTION_DISPLAY_ERROR);
 		}
 	}
 
@@ -227,22 +205,39 @@ public class PrescriptionController {
 	 * to Client view whether it is updated or not.
 	 * </p>
 	 * 
-	 * @param prescription
-	 *            It is a prescription object which have a updated prescription
-	 *            details.
+	 * @param prescription It is a prescription object which have a updated
+	 *                     prescription details.
 	 * @return ModelAndView Used to represents the View which will be displayed to
 	 *         the client.
 	 */
-	@RequestMapping(value = "/updatePrescription", method = RequestMethod.POST)
+	@RequestMapping(value = Constants.UPDATE_PRESCRIPTION_MAPPING, method = RequestMethod.POST)
 	public ModelAndView getUpdatedPrescription(@ModelAttribute("prescription") Prescription prescription) {
 		try {
 			prescriptionService.modifyPrescription(prescription);
 			List<Prescription> prescriptions = new ArrayList<Prescription>();
 			prescriptions.add(prescriptionService.serchPrescriptionById(prescription.getId()));
-			return new ModelAndView("displayVisit", "prescriptions", prescriptions);
+			return new ModelAndView(Constants.VIEW_VISIT, Constants.PRESCRIPTIONS, prescriptions);
 		} catch (ApplicationException e) {
-			return new ModelAndView("error", "Error", "Error occured while Updating prescription");
+			return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR, Constants.PRESCRIPTION_UPDATE_ERROR);
 		}
 	}
-
+	
+	/**
+	 * <p>
+	 * Used to get all medicine name using ajax call which is used to load
+	 * Prescription form to client View.
+	 * </p>
+	 * 
+	 * @param name Medicine Name.
+	 * @return String it had all medicine which is available.
+	 */
+	@RequestMapping(value = Constants.GET_MEDICINES_MAPPING, produces = { Constants.JSON,
+			Constants.APP }, consumes = Constants.JSON, headers = Constants.JSON_CONFIG, method = RequestMethod.GET)
+	private @ResponseBody String createPrescription(Model model, @RequestParam("search") String name) {
+		try {
+			return new Gson().toJson(prescriptionService.getAllItemsByName(name));
+		} catch (ApplicationException e) {
+			return null;
+		}
+	}
 }

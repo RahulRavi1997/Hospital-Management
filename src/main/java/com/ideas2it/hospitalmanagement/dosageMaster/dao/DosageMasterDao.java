@@ -22,8 +22,7 @@ public interface DosageMasterDao {
 	 * Used to add new dosages to master table which by the admin
 	 * </p>
 	 *
-	 * @param dosage
-	 *            DosageMaster that is used to store a dosage details.
+	 * @param dosage DosageMaster that is used to store a dosage details.
 	 * @return dosageId Adds dosageMaster and returns dosage unique Id.
 	 */
 	public int insertDosage(DosageMaster dosage) throws ApplicationException;
@@ -33,8 +32,7 @@ public interface DosageMasterDao {
 	 * Used to modify a particular dosage details from Master.
 	 * </p>
 	 * 
-	 * @param Dosage
-	 *            Updated dosagemaster details
+	 * @param Dosage Updated dosagemaster details
 	 * @return boolean Returns wheather its updated or not...
 	 */
 
@@ -45,8 +43,7 @@ public interface DosageMasterDao {
 	 * Used to search a particular dosage details from master table by dosageId
 	 * </p>
 	 * 
-	 * @param dosageId
-	 *            dosageId that is used to fetch a particular dosage details.
+	 * @param dosageId dosageId that is used to fetch a particular dosage details.
 	 * @return dosage dosage details.
 	 */
 	public DosageMaster searchDosage(int dosageId) throws ApplicationException;
@@ -56,9 +53,8 @@ public interface DosageMasterDao {
 	 * Used to get all dosageMaster items required for AJAX call
 	 * </p>
 	 * 
-	 * @param name
-	 *            string to be matched with master items
+	 * @param name string to be matched with master items
 	 * @return List of all dosageMaster items which has matched
 	 */
-	public List<DosageMaster> retrieveDosages(String name) throws ApplicationException;
+	public List<DosageMaster> retrieveDosages(String name);
 }
