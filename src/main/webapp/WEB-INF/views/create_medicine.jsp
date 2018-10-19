@@ -6,29 +6,53 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>create item</title>
+<title>create medicine</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<style>
+h3 {
+  font-size: 25px;
+}
+h3 {
+  width: 50%;
+  height: 60px;
+  margin: 10px;
+  padding: 20px;
+}
 
+button {
+    padding: 5px 5px; 
+    font-size: 15px;
+      margin: 20px;
+    cursor: pointer; 
+}
+</style>​
 </head>
 <body>  
-     
-<h2 align="center">Item Management</h2>
+ <jsp:include page="header.jsp"/>
+     <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+        <form action="display_medicine" method="post">
+        <div align="left">
+        <button class="btn">Home</button>
+        </div>
+        </form>   
+                </li>
+            </ul>
+        </div>    
+<h2 align="center">Medicine Management</h2>
  
-<form action="display_item" method="post">
-<div align="left">
-<button class="btn">Home</button>
-</div>
-</form>
-
-<form:form method="post" action="add_item" modelAttribute="item">
+<form:form method="post" action="add_medicine" modelAttribute="medicine">
 <div class="container">
 	<div class="row"> 
 	  <form role="form">
-        <h3>Item</h3> 
+        <h3>Medicine</h3> 
 
 <form:hidden path="active" value="1"/>    
  <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
@@ -48,8 +72,9 @@
         <form:input type="Number" class="form-control" path="amount" placeholder="Amount" required="required"/>
         </div>
 <div class="clearfix"></div>
+<div id="snackbar">Added successfully</div>
 <p class="w3-center" align="left">
-<button class="w3-button w3-section w3-blue w3-ripple"> Add </button>
+<button class="w3-button w3-section w3-blue w3-ripple" onclick="myFunction()"> Add </button>
 </p>
 <br /><br />
 	</div>
@@ -58,4 +83,5 @@
 </form:form>
 
 </body>
+   <jsp:include page="footer.jsp"/>
 </html>

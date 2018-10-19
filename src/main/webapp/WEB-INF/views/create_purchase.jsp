@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
@@ -9,27 +8,67 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>create purchase</title>
 
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<style>
+h3 {
+  font-size: 25px;
+}
+h3 {
+  width: 50%;
+  height: 60px;
+  margin: 10px;
+  padding: 20px;
+}
+
+button {
+    padding: 5px 5px; 
+    font-size: 15px;
+      margin: 20px;
+    cursor: pointer; 
+}
+</style>​
 </head>
-<body>  
-     
+<body>
+<script>
+
+function chgAction( action_name )
+    {
+        if( action_name=="add_purchase" ) {
+            document.forms[0].action = "/add_purchase";
+        }
+        else if( action_name=="add_more_medicine" ) {
+            document.forms[1].action = "/add_more_medicine";
+        }
+        else if( action_name=="remove_medicine" ) {
+            document.forms[2].action = "/remove_medicine";
+        }
+    }
+</script>
+
+<jsp:include page="header.jsp"/>
+     <div id="wrapper">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+        <form action="display_purchase" method="post">
+        <div align="left">
+        <button class="btn">Home</button>
+        </div>
+        </form>   
+                </li>
+            </ul>
+        </div>        
 <h2 align="center">Purchase Management</h2>
- 
-<form action="display_purchase" method="post">
-<div align="left">
-<button class="btn">Home</button>
-</div>
-</form>
 
 <form:form method="post" action="add_purchase" modelAttribute="purchase">
 <div class="container">
 	<div class="row"> 
 	  <form role="form">
         <h3>Purchase</h3> 
-
 
 <form:hidden path="active" value="1"/>    
  <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
@@ -44,47 +83,40 @@
         </div>
 
 <div class="clearfix"></div>
-        <h3>Order Item</h3> 
+        <h3>Order Medicine</h3> 
 
-
-<c:forEach items="${purchase.listOfItems}" varStatus="vs">
+<c:forEach items="${purchase.listOfMedicines}" varStatus="vs">
 
 <div class="clearfix"></div>
 
-<form:hidden path="listOfItems[${vs.index}].active" value="1"/>
+<form:hidden path="listOfMedicines[${vs.index}].active" value="1"/>
+
 <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
-<form:label  path="listOfItems[${vs.index}].itemName" cssErrorClass="invalid">Item Name</form:label>
-                    <form:input placeholder="Item Name" type="text" path="listOfItems[${vs.index}].itemName" cssErrorClass="invalid " required="required" />
-                    <form:label path="listOfItems[${vs.index}].itemName" cssErrorClass="icon invalid" />
-                    <form:errors path="listOfItems[${vs.index}].itemName" cssClass="inline_invalid" />
+<form:label path="listOfMedicines[${vs.index}].medicineName">Medicine Name</form:label>
+        <form:input id="searchMedicine" placeholder="Medicine Name" type="text" path="listOfMedicines[${vs.index}].medicineName"  required="required"/>                    
                 </div>
     
 <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
-<form:label  path="listOfItems[${vs.index}].quantity" cssErrorClass="invalid">Quantity</form:label>
-                    <form:input placeholder="Quantity" type="number" path="listOfItems[${vs.index}].quantity" cssErrorClass="invalid "  required="required"/>
-                    <form:label path="listOfItems[${vs.index}].quantity" cssErrorClass="icon invalid" />
-                    <form:errors path="listOfItems[${vs.index}].quantity" cssClass="inline_invalid" />
+<form:label  path="listOfMedicines[${vs.index}].quantity">Quantity</form:label>
+                    <form:input placeholder="Quantity" type="number" path="listOfMedicines[${vs.index}].quantity"  required="required"/>
                   </div>
+
 </c:forEach>
 
-
+<p class="w3-center" align="left">
+<button class="w3-button w3-section w3-blue w3-ripple" value="add_more_medicine" onclick="chgAction(this.value);"> Add more medicine </button>
+</p>
             
 <div class="clearfix"></div>
 <p class="w3-center" align="left">
-<button class="w3-button w3-section w3-blue w3-ripple"> Add </button>
+<button class="w3-button w3-section w3-blue w3-ripple" value="add_purchase" type=
+"submit" > Add </button>
 </p>
-
-<br /><br />
+<br/><br/>
 	</div>
 </div>
-
-</form:form>
-
-<form:form method="post" action="add_more_item" modelAttribute="purchase">
-<p class="w3-center" align="left">
-<button class="w3-button w3-section w3-blue w3-ripple"> Add more items </button>
-</p>
 </form:form>
 
 </body>
+   <jsp:include page="footer.jsp"/>
 </html>

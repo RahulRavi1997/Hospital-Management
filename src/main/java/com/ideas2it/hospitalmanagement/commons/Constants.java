@@ -355,5 +355,31 @@ public final class Constants {
 
    public static final String ITEM_MASTER = "itemMaster";
    public static final String USER_ID = "userId";
+   public static final String MEDICINE_ADDITION_EXCEPTION = 
+            "Error while adding an medicine medicine = %s";
+    public static final String MEDICINE_SEARCH_EXCEPTION = 
+            "Error while searching medicine medicineId = %d";
+    public static final String MEDICINE_DELETE_EXCEPTION = 
+            "Error while deleting medicine medicineId = %d";
+    public static final String MEDICINE_UPDATE_EXCEPTION = 
+            "Error while modifying medicine medicineId = %d";
+    public static final String MEDICINE_DISPLAY_EXCEPTION = 
+            "Error while displaying medicines medicineId = %d";
+    public static final String MEDICINES = "medicines";
+    public static final String MEDICINE = "medicine";
+    public static final String MEDICINE_MAIN_JSP = "medicine_main";
+    public static final String CREATE_MEDICINE_JSP = "create_medicine";
+    public static final String DISPLAY_MEDICINE_JSP = "display_medicine";
+    public static final String UPDATE_MEDICINE_JSP = "update_medicine";
+    public static final String CREATE_MEDICINE_MAPPING = "/create_medicine";
+    public static final String ADD_MEDICINE_MAPPING = "/add_medicine";
+    public static final String DISPLAY_MEDICINE_MAPPING = "/display_medicine"; 
+    public static final String SEARCH_MEDICINE_MAPPING = "/search_medicine";
+    public static final String UPDATE_MEDICINE_MAPPING = "/update_medicine";
+    public static final String MODIFY_MEDICINE_MAPPING = "/modify_medicine";
+    public static final String DELETE_MEDICINE_MAPPING = "/delete_medicine";
+    public static final String RESTORE_MEDICINE_MAPPING = "/restore_medicine";
+  
+    public static final String RESTORE_PURCHASE_MAPPING = "/restore_purchase";
 }
 

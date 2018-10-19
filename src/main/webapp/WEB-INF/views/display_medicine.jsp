@@ -18,7 +18,7 @@ h2 {
   color: white;
 }
 table{ 
-    width: 100%;
+    width: 65%;
     background-color: white;
     border-collapse: collapse;
 }
@@ -46,20 +46,29 @@ button {
 </style>
 </head>
 <body>  
-<div class="topnav">
-
-  <form action="display_item" method="post">
-
-<h2 align="center">Item Management</h2>
+<jsp:include page="header.jsp"/>
+     <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+        <form action="display_medicine" method="post">
 
 <div align="left">
 <button class="btn">Home</button>
 </div>
 </div>
-</form>
+</form>  
+                </li>
+            </ul>
+        </div>    
 
-<h3 class="w3-center" align="center">Item</h3>
-<table>
+  <form action="display_medicine" method="post">
+
+<h2 align="center">Medicine Management</h2>
+
+<h3 class="w3-center" align="center">Medicine</h3>
+<table align="center">
 <tbody>
 <tr>
     <th>ID</th>
@@ -69,13 +78,14 @@ button {
 </tr>
  
 <tr>
-    <td><c:out value="${item.id}"></c:out></td>
-    <td><c:out value="${item.name}"></c:out></td>
-    <td><c:out value="${item.quantity}"></c:out></td>
-    <td><c:out value="${item.amount}"></c:out></td>    
+    <td><c:out value="${medicine.id}"></c:out></td>
+    <td><c:out value="${medicine.name}"></c:out></td>
+    <td><c:out value="${medicine.quantity}"></c:out></td>
+    <td><c:out value="${medicine.amount}"></c:out></td>    
 </tr>
 </tbody>
 </table>
 
 </body>
+   <jsp:include page="footer.jsp"/>
 </html>

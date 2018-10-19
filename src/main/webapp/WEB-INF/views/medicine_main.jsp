@@ -5,7 +5,7 @@
 <html>
   <head>
      <meta charset="UTF-8">
-     <title>Purchase Management</title>
+     <title>Medicine Management</title>
 
      <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -52,17 +52,17 @@ button {
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
-  <a href="purchase_index">Home</a> 
-                    </a>
+                      <a href="medicine_index">Home</a> 
                 </li>
-             <li>
-  <a href="create_purchase"><i class="fa fa-shopping-cart"></i>Order</a> 
+                <li>
+                      <a href="create_medicine">Add Medicine</a> 
                 </li>
             </ul>
         </div>
 
-  <h2 align="center">Purchase Management</h2>
-<form action="search_purchase" method="post">
+  <h2 align="center">Medicine Management</h2>
+  
+<form action="search_medicine" method="post">
  
 <div class="container">
 	<div class="row">
@@ -79,57 +79,58 @@ button {
 
 </form>
 
-<h3 align="center">Purchases</h3>
+<h3 align="center">Medicines</h3>
 <div class="table-responsive">
 <table align="center">
 <tbody>
 <tr>
     <th>ID</th>
-    <th>Dealer Name</th>
-    <th>Date Of Purchase</th>
+    <th>Name</th>
+    <th>Quantity</th>
+    <th>Amount</th>
     <th></th>
     <th></th>
     <th></th>
- 
-</tr>
-<c:forEach var="purchase" items="${purchases}">    
-    <tr>
-    <td>${purchase.id}</td>
-    <td>${purchase.dealerName}</td>
-    <td>${purchase.dateOfPurchase}</td>
 
-   <c:if test="${!purchase.isActive()}">
+</tr>
+<c:forEach var="medicine" items="${medicines}">    
+    <tr>
+    <td>${medicine.id}</td>
+    <td>${medicine.name}</td>
+    <td>${medicine.quantity}</td>
+    <td>${medicine.amount}</td>    
+   <c:if test="${!medicine.isActive()}">
                  <td class="submission" colspan="2"><div align="center">
-                    <form action ="restore_purchase" method="post">
-                      <input type="hidden" name="id" value="${purchase.id}"/>
-                      <button type="submit" class="btn-warning" onclick="return confirm('Are you sure want to restore Purchase :${purchase.id} ?')">restore</button>
+                    <form action ="restore_medicine" method="post">
+                      <input type="hidden" name="id" value="${medicine.id}"/>
+                      <button type="submit" class="btn-warning" onclick= "return confirm('Are you sure want to restore Medicine :${medicine.id} ?')">restore</button>
                     </form>
                   </td>
               </c:if>
-              <c:if test="${purchase.isActive()}">
+              <c:if test="${medicine.isActive()}">
     <td class="submission" colspan="1"><div align="center">
-    <form action ="search_purchase" method="post">
+    <form action ="search_medicine" method="post">
     <button type="submit"  class="btn-success">view</button></td>
-    <input type="hidden" name="id" value=${purchase.id}>
+    <input type="hidden" name="id" value=${medicine.id}>
     </form>
     <td class="submission" colspan="1"><div align="center">
-    <form action ="update_purchase" method="post">
+    <form action ="update_medicine" method="post">
     <button type="submit"  class="btn-success">update</button></td>
-    <input type="hidden" name="id" value=${purchase.id}>
+    <input type="hidden" name="id" value=${medicine.id}>
     </form>
      <td class="submission" colspan="2"><div align="center">
-    <form action ="delete_purchase" method="post">
-    <button type="submit"  class="btn-danger"  onclick= "return confirm('Are you sure want to delete Purchase :${purchase.id} ?')">delete</button></td>
-    <input type="hidden" name="id" value=${purchase.id}>
+    <form action ="delete_medicine" method="post">
+    <button type="submit"  class="btn-danger" onclick= "return confirm('Are you sure want to delete Medicine :${medicine.id} ?')">delete</button></td>
+    <input type="hidden" name="id" value=${medicine.id}>
     </form>
                 </c:if>
-    
+     
 </tr>
 </c:forEach>
 </tbody>
 </table>
 </div>
-   </div>
+     </div>
 </body>
    <jsp:include page="footer.jsp"/>
 </html>

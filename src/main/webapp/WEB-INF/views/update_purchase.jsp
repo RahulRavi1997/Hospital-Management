@@ -7,7 +7,6 @@
 <title>modify</title>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <style>
@@ -32,15 +31,21 @@ button {
      
 <body>
 
-<div class="topnav"> 
+<jsp:include page="header.jsp"/>
+     <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+        <form action="display_purchase" method="post">
+        <div align="left">
+        <button class="btn">Home</button>
+        </div>
+        </form>   
+                </li>
+            </ul>
+        </div>   
 <h2 align="center">Update Purchase</h2>
-
-<form action="display_purchase" method="post">
-<div align="left">
-<button class="btn">Home</button>
-</form>
-</div>
-</div>
 
 <form:form method="post" action="modify_purchase" modelAttribute="purchase">
 
@@ -63,8 +68,28 @@ value= "${purchase.dateOfPurchase}" required="required"/>
         </div>
 
 <div class="clearfix"></div>
+        <h3>Medicines</h3> 
+
+<c:forEach items="${purchase.listOfMedicines}" varStatus="vs">
+
+<div class="clearfix"></div>
+
+<form:hidden path="listOfMedicines[${vs.index}].active" value="1"/>
+
+<div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+<form:label path="listOfMedicines[${vs.index}].medicineName">Medicine Name</form:label>
+        <form:input id="searchMedicine" placeholder="Medicine Name" type="text" path="listOfMedicines[${vs.index}].medicineName"  required="required"/>                    
+                </div>
+    
+<div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+<form:label  path="listOfMedicines[${vs.index}].quantity">Quantity</form:label>
+                    <form:input placeholder="Quantity" type="number" path="listOfMedicines[${vs.index}].quantity"  required="required"/>
+                  </div>
+
+</c:forEach>
+<div class="clearfix"></div>
 <p class="w3-center" align="left">
-<button class="w3-button w3-section w3-blue w3-ripple" onclick="Success();"> Update </button>
+<button class="w3-button w3-section w3-blue w3-ripple"> Update </button>
 </p>
 <br /><br />
 	</div>
@@ -76,5 +101,6 @@ value= "${purchase.dateOfPurchase}" required="required"/>
 </form>
 
 </body>
+   <jsp:include page="footer.jsp"/>
 </html> 
 

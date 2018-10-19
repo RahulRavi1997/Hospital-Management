@@ -5,14 +5,18 @@
 
 
  <hibernate-mapping>
-  <class name="com.ideas2it.hospitalmanagement.pharmacy.model.PurchaseDetails" table="purchase_details">
-    <id name="id" column = "ID" type="int">
+  <class name="com.ideas2it.hospitalmanagement.purchaseDetails.model.PurchaseDetails" table="purchase_details">
+    <id name="id" column = "ITEM_ID" type="int">
      <generator class="increment"/>   
     </id>
-    <property name="itemName" column="NAME" type="string"></property>
+    <property name="medicineName" column="NAME" type="string"></property>
     <property name="quantity" column="QUANTITY" type="double"></property>
     <property name="active" column="ACTIVE" type="boolean"></property>
-    <property name="purchaseId" column="PURCHASE_ID" type="int"></property>
     
+    <many-to-one name="purchase" class="com.ideas2it.hospitalmanagement.purchase.model.Purchase"
+            fetch="select" cascade="all">
+      <column name="PURCHASE_ID" />
+    </many-to-one>
   </class>
  </hibernate-mapping>
+

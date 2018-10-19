@@ -210,4 +210,42 @@ $(document).ready(function() {
     });
  });
 });
+$(document).ready(function() {
+	   $(function() {
+	       $("#searchMedicine").autocomplete({     
+	           source : function(request, response) {
+	             $.ajax({
+	           headers: { 
+	                'Accept': 'application/json',
+	                'Content-Type': 'application/json' 
+	            },
+	                  url : "searchMedicineByName",
+	                  type : "GET",
+	                  data : {
+                       name : request.term
+	                  },
+	                  dataType : "json",
+	                  success : function(data) {
+	           response($.map(data, function (value, key) {
+	               console.log(value);
+                $("#Id").val(value.id);
+                var id = value.id;
+	               return {
+	                   label: value.name,
+	                   value: value.name,
+	               };
+	           }));
+	                  }
+	           });
+	        }
+	    });
+	 });
+	});
+
+function myFunction() {
+    var x = document.getElementById("snackbar");
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 50000);
+} 
+
 

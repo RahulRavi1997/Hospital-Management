@@ -15,10 +15,24 @@
 
   </head>
   <body>
-
+<jsp:include page="header.jsp"/>
+     <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="index">
+                        Home
+                    </a>
+                </li>
+             <li>
+	           <a href="pharmacy">Pharmacy</a>
+                </li>
+            </ul>
+        </div>
 <div class="topnav">
 <h2 align="center">Pharmacy</h2>
-<form action="display_item" method="post">
+<form action="display_medicine" method="post">
 <div align="center">
 <button class="btn" style="margin-bottom:10px">Items</button>
 </div>
@@ -33,4 +47,5 @@
 </div>
 
 </body>
+   <jsp:include page="footer.jsp"/>
 </html>
