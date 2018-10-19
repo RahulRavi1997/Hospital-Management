@@ -10,7 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ideas2it.hospitalmanagement.commons.Constants;
-import com.ideas2it.hospitalmanagement.logger.Logger;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.itemMaster.model.ItemMaster;
 import com.ideas2it.hospitalmanagement.itemMaster.service.ItemMasterService;
@@ -53,7 +52,6 @@ public class ItemMasterController {
 			List<ItemMaster> allItems = itemMasterService.retrieveAllItems();
 			return new ModelAndView(Constants.DISPLAY_ITEMS, Constants.ALL_ITEMS, allItems);
 		} catch (ApplicationException e) {
-			Logger.error(e);
 			return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE, Constants.ITEM_DISPLAY_EXCEPTION);
 		}
 	}
@@ -70,7 +68,6 @@ public class ItemMasterController {
 	 */
 	@RequestMapping(value = Constants.CREATE_ITEM_MASTER, method = RequestMethod.GET)
 	private ModelAndView redirectToCreateItem() {
-
 		ItemMaster itemMaster = new ItemMaster();
 		return new ModelAndView(ADD_ITEM_JSP, Constants.ITEM_MASTER, itemMaster);
 	}
@@ -94,9 +91,8 @@ public class ItemMasterController {
 			model = viewAllItemMaster();
 			return model;
 		} catch (ApplicationException e) {
-			Logger.error(e);
 			return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
-					String.format(Constants.ITEM_ADDITION_EXCEPTION, item.getId()));
+					    String.format(Constants.ITEM_ADDITION_EXCEPTION, item.getId()));
 		}
 
 	}
@@ -118,9 +114,8 @@ public class ItemMasterController {
 		try {
 			return new ModelAndView(Constants.ADD_ITEMS, Constants.ITEM_MASTER, itemMasterService.retrieveItemByName(id));
 		} catch (ApplicationException e) {
-			Logger.error(e);
 			return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
-					String.format(Constants.ITEM_EDIT_EXCEPTION, id));
+					                            String.format(Constants.ITEM_EDIT_EXCEPTION, id));
 		}
 	}
 
@@ -143,9 +138,8 @@ public class ItemMasterController {
 			model = viewAllItemMaster();
 			return model;
 		} catch (ApplicationException e) {
-			Logger.error(e);
 			return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
-					String.format(Constants.ITEM_EDIT_EXCEPTION, item.getId()));
+					                 String.format(Constants.ITEM_EDIT_EXCEPTION, item.getId()));
 		}
 
 	}

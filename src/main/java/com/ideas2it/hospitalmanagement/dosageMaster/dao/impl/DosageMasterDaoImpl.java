@@ -33,7 +33,7 @@ public class DosageMasterDaoImpl extends GenericDao implements DosageMasterDao {
 		try {
 			return GenericDao.save(dosage).getDosageId();
 		} catch (ApplicationException e) {
-			Logger.error(INSERT_ERROR_INFO, e);
+			Logger.error(INSERT_ERROR_INFO+dosage, e);
 			throw new ApplicationException(e);
 		}
 	}
@@ -53,7 +53,7 @@ public class DosageMasterDaoImpl extends GenericDao implements DosageMasterDao {
 		try {
 			return GenericDao.get(DosageMaster.class, dosageId);
 		} catch (ApplicationException e) {
-			Logger.error(SEARCH_ERROR_INFO, e);
+			Logger.error(SEARCH_ERROR_INFO + dosageId, e);
 			throw new ApplicationException(e);
 		}
 	}

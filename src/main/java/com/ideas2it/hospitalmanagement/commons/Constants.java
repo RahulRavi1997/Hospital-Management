@@ -348,13 +348,7 @@ public final class Constants {
 
 	public static final String DISPLAY_VISIT = "displayVisit";
 
-
-
-
-
-
-
-	public static final String IN_PATIENT = "In Patient";
+    public static final String IN_PATIENT = "In Patient";
 
 	public static final String ADD_MESSAGE = "addmsg";
 

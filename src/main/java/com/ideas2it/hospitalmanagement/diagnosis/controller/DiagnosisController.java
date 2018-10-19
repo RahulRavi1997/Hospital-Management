@@ -49,9 +49,7 @@ public class DiagnosisController {
 	 */
 	@RequestMapping(value = "/create_diagnosis", method = RequestMethod.POST)
 	private ModelAndView redirectToCreateDiagnosis() {
-
-		Diagnosis diagnosis = new Diagnosis();
-		diagnosis.setVisitId(1);
+        Diagnosis diagnosis = new Diagnosis();
 		diagnosis.setDate(new Date());
 		return new ModelAndView(Constants.CREATE_DIAGNOSIS_JSP, Constants.DIAGNOSIS, diagnosis);
 	}
@@ -74,7 +72,7 @@ public class DiagnosisController {
 			return modelAndView;
 		} catch (ApplicationException e) {
 			return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
-					String.format(Constants.DIAGNOSIS_ADDITION_EXCEPTION, diagnosis.getId()));
+					                                Constants.DIAGNOSIS_ADDITION_EXCEPTION);
 		}
 
 	}
@@ -139,7 +137,7 @@ public class DiagnosisController {
 			return modelAndView;
 		} catch (ApplicationException e) {
             return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
-					String.format(Constants.DIAGNOSIS_EDIT_EXCEPTION, diagnosis.getId()));
+					 String.format(Constants.DIAGNOSIS_EDIT_EXCEPTION, diagnosis.getId()));
 		}
 
 	}

@@ -1,14 +1,5 @@
 package com.ideas2it.hospitalmanagement.prescription.controller;
 
-import com.google.gson.Gson;
-import com.ideas2it.hospitalmanagement.commons.Constants;
-import com.ideas2it.hospitalmanagement.exception.ApplicationException;
-import com.ideas2it.hospitalmanagement.logger.Logger;
-import com.ideas2it.hospitalmanagement.prescription.model.Prescription;
-import com.ideas2it.hospitalmanagement.prescription.service.PrescriptionService;
-import com.ideas2it.hospitalmanagement.prescriptionDetails.model.PrescriptionDetails;
-import com.ideas2it.hospitalmanagement.visit.service.VisitService;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +11,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import com.google.gson.Gson;
+
+import com.ideas2it.hospitalmanagement.commons.Constants;
+import com.ideas2it.hospitalmanagement.exception.ApplicationException;
+import com.ideas2it.hospitalmanagement.prescription.model.Prescription;
+import com.ideas2it.hospitalmanagement.prescription.service.PrescriptionService;
+import com.ideas2it.hospitalmanagement.prescriptionDetails.model.PrescriptionDetails;
+import com.ideas2it.hospitalmanagement.visit.service.VisitService;
 
 /**
  * PrescriptionController
@@ -85,26 +84,6 @@ public class PrescriptionController {
 			return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR, e.getMessage());
 		}
 
-	}
-
-	/**
-	 * <p>
-	 * Used to get all medicine name using ajax call which is used to load
-	 * Prescription form to client View.
-	 * </p>
-	 * 
-	 * @param name Medicine Name.
-	 * @return String it had all medicine which is available.
-	 */
-	@RequestMapping(value = Constants.GET_MEDICINES_MAPPING, produces = { Constants.JSON,
-			Constants.APP }, consumes = Constants.JSON, headers = Constants.JSON_CONFIG, method = RequestMethod.GET)
-	private @ResponseBody String createPrescription(Model model, @RequestParam("search") String name) {
-		try {
-			return new Gson().toJson(prescriptionService.getAllItemsByName(name));
-		} catch (ApplicationException e) {
-			Logger.error(e);
-			return null;
-		}
 	}
 
 	/**
@@ -240,6 +219,25 @@ public class PrescriptionController {
 			return new ModelAndView(Constants.VIEW_VISIT, Constants.PRESCRIPTIONS, prescriptions);
 		} catch (ApplicationException e) {
 			return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR, Constants.PRESCRIPTION_UPDATE_ERROR);
+		}
+	}
+	
+	/**
+	 * <p>
+	 * Used to get all medicine name using ajax call which is used to load
+	 * Prescription form to client View.
+	 * </p>
+	 * 
+	 * @param name Medicine Name.
+	 * @return String it had all medicine which is available.
+	 */
+	@RequestMapping(value = Constants.GET_MEDICINES_MAPPING, produces = { Constants.JSON,
+			Constants.APP }, consumes = Constants.JSON, headers = Constants.JSON_CONFIG, method = RequestMethod.GET)
+	private @ResponseBody String createPrescription(Model model, @RequestParam("search") String name) {
+		try {
+			return new Gson().toJson(prescriptionService.getAllItemsByName(name));
+		} catch (ApplicationException e) {
+			return null;
 		}
 	}
 }

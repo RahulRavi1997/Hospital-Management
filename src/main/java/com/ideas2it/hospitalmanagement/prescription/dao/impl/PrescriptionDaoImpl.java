@@ -48,7 +48,7 @@ public class PrescriptionDaoImpl implements PrescriptionDao {
 		try {
 			return GenericDao.getAllByAttribute(Prescription.class, "visitId", visitId);
 		} catch (ApplicationException e) {
-			Logger.error(DISPLAY_ERROR_INFO, e);
+			Logger.error(DISPLAY_ERROR_INFO+visitId, e);
 			throw new ApplicationException(e);
 		}
 	}
@@ -58,7 +58,7 @@ public class PrescriptionDaoImpl implements PrescriptionDao {
 		try {
 			return GenericDao.get(Prescription.class, prescriptionId);
 		} catch (ApplicationException e) {
-			Logger.error(DISPLAY_ERROR_INFO, e);
+			Logger.error(DISPLAY_ERROR_INFO+prescriptionId, e);
 			throw new ApplicationException(e);
 		}
 	}
