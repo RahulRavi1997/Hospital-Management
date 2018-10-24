@@ -5,6 +5,16 @@ import java.util.ArrayList;
 
 import com.ideas2it.hospitalmanagement.bed.model.Bed;
 
+
+/**
+ * <p>
+ * Consist of all the details regarding the Room which contains Room number and 
+ * status of the Room which represents whether they are allocated, free or under
+ * maintaince.
+ * </p>
+ * @author Harish
+ *
+ */
 public class Room {
 	
 	private Integer roomNumber;

@@ -1,5 +1,13 @@
 package com.ideas2it.hospitalmanagement.bed.commons.constants;
 
+
+/**
+ * Constants Class is used to store all the constants in other parts of the application. It is
+ * created to reduce repeated Strings and code Size.
+ *
+ * @author latheesh
+ * @version 1.0
+ */
 public class BedConstants {
 
 	public static final String VISIT = "Visit "; 
@@ -8,7 +16,7 @@ public class BedConstants {
 	public static final String OCCUPIED = "Occupied"; 
 	public static final String ADMITTED = "Admitted";
 	public static final String AVAILABLE = "Available";
-	public static final String INPATIENT = "InPatient";
+	public static final String INPATIENT = "INPATIENT";
 	public static final String YET_TO_ADMIT = "Yet to Admit";
 	public static final String BEDNUMBER = "bedNumber";
 	public static final String BEDMAINTAINCESUCESSMESSAGE =

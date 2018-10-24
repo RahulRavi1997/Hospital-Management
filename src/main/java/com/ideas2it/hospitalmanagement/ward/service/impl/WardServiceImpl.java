@@ -15,6 +15,18 @@ import com.ideas2it.hospitalmanagement.ward.model.Ward;
 import com.ideas2it.hospitalmanagement.ward.dao.WardDao;
 import com.ideas2it.hospitalmanagement.ward.service.WardService;
 
+
+/**
+ * WardServiceImpl is the Service class implementing the WardService interface and this
+ * implements all the methods of the interface program.
+ * <p>
+ * It processes all the business logic operations and calls the Dao class to do the data accessing
+ * operations.
+ * </p>
+ *
+ * @author latheesh
+ * @version 1.0
+ */
 public class WardServiceImpl implements WardService {
 	
     private static WardDao wardDao;

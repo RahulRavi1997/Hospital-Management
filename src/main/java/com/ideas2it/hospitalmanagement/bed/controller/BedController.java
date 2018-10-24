@@ -18,7 +18,22 @@ import com.ideas2it.hospitalmanagement.visit.model.Visit;
 import com.ideas2it.hospitalmanagement.ward.commons.constants.WardConstants;
 import com.ideas2it.hospitalmanagement.ward.model.Ward;
 
-
+/**
+ * BedController is the controller class for the bed details, which allows
+ * the application to execute the data manipulation operations of the
+ * bed related Details.
+ * <p>
+ * The Operations that can be done using this application are Adding a
+ * bed allocation Details, Modifying the bed allocation Details, Removing the bed allocation
+ * Details, Searching for a bed related details and Displaying the bed allocation
+ * Details.
+ * </p>
+ * The BedController class is mapped with Controller Annotation of Spring
+ * Framework by which the Class is mapped to the Spring MVC.
+ *
+ * @author    latheesh
+ * @version   1.0
+ */
 @Controller
 public class BedController {
 
@@ -37,8 +52,8 @@ public class BedController {
      * admitPatient method is used to assign a particular patient to a particular
      * bed
      * </p>
-     * @param bedNumber 						Bed Number
-     * @param visitId							Visit Id
+     * @param bedNumber 						Bed Number to be searched
+     * @param visitId							Visit Id to be searched
      * 
      * @return ModelAndView 					Used for displaying the view for the 
      *                               			application user.
@@ -67,8 +82,8 @@ public class BedController {
      * vacatePatient method is used to vacate a particular patient to a particular
      * bed
      * </p>
-     * @param bedNumber 						Bed Number
-     * @param visitId							Visit Id
+     * @param bedNumber 						Bed Number to be searched
+     * @param visitId							Visit Id to be searched
      * 
      * @return ModelAndView 					Used for displaying the view for the 
      *                               			application user.
@@ -98,7 +113,7 @@ public class BedController {
      * given his visitId
      * </p>
      * 
-     * @param visitId							Visit Id
+     * @param visitId							Visit Id to be searched
      * 
      * @return ModelAndView 					Used for displaying the view for the 
      *                               			application user.
@@ -122,8 +137,8 @@ public class BedController {
 	     * dischargePatient method is used to discharge a patient from his assigned
 	     * bed
 	     * </p>
-	     * @param bedNumber 						Bed Number
-	     * @param visitId							Visit Id
+	     * @param bedNumber 						Bed Number to be searched for discharging
+	     * @param visitId							Visit Id to be searched
 	     * 
 	     * @return ModelAndView 					Used for displaying the view for the 
 	     *                               			application user.
@@ -151,7 +166,7 @@ public class BedController {
      * makeBedAvailable method is used to make the bed available for occupying
      * after completing it's maintenance
      * </p>
-     * @param bedNumber 						Bed Number
+     * @param bedNumber 						Bed Number to be searched
      * 
      * @return ModelAndView 					Used for displaying the view for the 
      *                               			application user.
@@ -194,7 +209,7 @@ public class BedController {
      * <p>
      * performBedMaintanence method is used to perform maintenance over a particular bed.
      * </p>
-     * @param bedNumber 						Bed Number
+     * @param bedNumber 						Bed Number to be searched
      * 
      * @return ModelAndView 					Used for displaying the view for the 
      *                               			application user.

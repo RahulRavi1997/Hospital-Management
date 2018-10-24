@@ -7,6 +7,18 @@ import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.visit.model.Visit;
 import com.ideas2it.hospitalmanagement.ward.model.Ward;
 
+
+/**
+ * BedService is the Service interface which is having the several data manipulation methods and
+ * this class does the business logic operations on the bed related Details.
+ * <p>
+ * It has the Implementation class which is performing the business logic operations on the bed
+ * Details.
+ * </p>
+ *
+ * @author latheesh
+ * @version 1.0
+ */
 public interface BedService {
 	
     /**
@@ -15,8 +27,8 @@ public interface BedService {
      * bed
      * </p>
      * 
-     * @param bedNumber 						Bed Number
-     * @param visitId							Visit Id
+     * @param bedNumber 						Bed Number to be searched
+     * @param visitId							Visit Id to be searched
      * 
      * @return boolean 							Indicates whether the patient 
      *											has been admitted or not
@@ -29,9 +41,9 @@ public interface BedService {
      * number
      * </p>
      * 
-     * @param bedNumber 						Bed Number
+     * @param bedNumber 						Bed Number to be searched
      * 
-     * @return Bed 								Bed object
+     * @return Bed 								Bed object of the respective bed number
      */
 	public Bed searchBedByNumber(int bedNumber) throws ApplicationException;
 	
@@ -41,8 +53,8 @@ public interface BedService {
      * bed
      * </p>
      * 
-     * @param bedNumber 						Bed Number
-     * @param visitId							Visit Id
+     * @param bedNumber 						Bed Number to be searched
+     * @param visitId							Visit Id to be searched
      * 
      * @return boolean 							Indicates whether the patient 
      *											has been discharged or not
@@ -54,7 +66,7 @@ public interface BedService {
      * updateBed method is used to update the modified bed in the database.
      * </p>
      * 
-     * @param Bed 								Bed object
+     * @param Bed 								Bed object to be updated
      * 
      * @return boolean 							Indicates whether the bed 
      *											is updated or not
@@ -77,7 +89,7 @@ public interface BedService {
 	 * </p>
 	 * @param  status   						status of the Ward to be searched.
 	 * 
-	 * @return List<Visit>						List of visits
+	 * @return List<Visit>						List of visits with the particular status
 	 */
     public List<Visit> getVisitsByPatientType(String string)throws ApplicationException;
 
@@ -85,9 +97,9 @@ public interface BedService {
 	 * <p>
 	 * searchvisitByNumber is used for searching the visit for the given visit Id.
 	 * </p>
-	 * @param  visitId   						Visit ID
+	 * @param  visitId   						Visit ID to be searched
 	 * 
-	 * @return Visit 							Visit Object
+	 * @return Visit 							Visit Object of the particular id.
 	 */
 	public Visit searchvisitByNumber(int visitId) throws ApplicationException;
 	
@@ -96,9 +108,9 @@ public interface BedService {
 	 * <p>
 	 * searchBedByVisit is used for finding the bed for a given visit.
 	 * </p>
-	 * @param  visit   							Visit object
+	 * @param  visit   							Visit object to be searched
 	 * 
-	 * @return Bed								Bed object
+	 * @return Bed								Bed object of the particular visit.
 	 */
     public Bed searchBedByVisit(Visit visit) throws ApplicationException;
 	
@@ -107,7 +119,7 @@ public interface BedService {
 	 * display all the wards 
 	 * </p>
 	 * @param  status   status of the Ward to be searched.
-	 * @return
+	 * @return          list of wards with the particular status.
 	 * @throws ApplicationException
 	 */
 	public List<Ward> displayAllWards(String status) throws ApplicationException;

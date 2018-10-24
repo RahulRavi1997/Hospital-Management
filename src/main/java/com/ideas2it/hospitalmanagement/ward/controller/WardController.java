@@ -21,6 +21,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 
+
+/**
+ * WardController is the controller class for the ward related details, which allows
+ * the application to execute the data manipulation operations of the
+ * ward related Details.
+ * <p>
+ * The Operations that can be done using this application are Adding a
+ * ward, Modifying the ward, Removing the ward Details, 
+ * Searching for ward and Displaying the ward.
+ * Details.
+ * </p>
+ * The WardController class is mapped with Controller Annotation of Spring
+ * Framework by which the Class is mapped to the Spring MVC.
+ *
+ * @author    latheesh
+ * @version   1.0
+ */
 @Controller
 public class WardController {
 	
@@ -36,7 +53,7 @@ public class WardController {
     }
 
     /**
-     * Display all the wards
+     * Display all the wards to the user allocating a bed or viewing.
      * 
      * @return    redirects to the page which shows all the wards.
      */
@@ -48,7 +65,6 @@ public class WardController {
             mav.addObject(WardConstants.WARD , new Ward());
             mav.addObject(WardConstants.WARDIDS , getWards());
     	} catch(ApplicationException e) {
-    		Logger.error(e);
             ModelAndView errorMav = new ModelAndView(WardConstants.NURSEHOME);
             errorMav.addObject(WardConstants.FAILURE_MESSAGE,e);
             return errorMav;
@@ -57,7 +73,7 @@ public class WardController {
     }
     
     /**
-     * Display all the wards
+     * Display all the wards to the user allocating a bed or viewing.
      * 
      * @return    redirects to the page which shows all the wards.
      */
@@ -74,10 +90,8 @@ public class WardController {
             mav.addObject(WardConstants.WARD , new Ward());
             mav.addObject(WardConstants.WARDIDS , getWards());
     	} catch(ApplicationException e) {
-    		Logger.error(e);
             ModelAndView errorMav = new ModelAndView(WardConstants.NURSEHOME);
             errorMav.addObject(WardConstants.FAILURE_MESSAGE,e);
-
             return errorMav;
     	}
         return mav;
@@ -103,7 +117,6 @@ public class WardController {
           mav.addObject(WardConstants.WARDIDS , getWards());
         } catch(ApplicationException e) {
             ModelAndView errorMav = new ModelAndView(WardConstants.NURSEHOME);
-    		Logger.error(e);
             errorMav.addObject(WardConstants.FAILURE_MESSAGE,e);
             return errorMav;
         }
@@ -114,7 +127,7 @@ public class WardController {
     /**
      * Allows to create a new ward with the specified number of rooms.
      * 
-     * @param ward      Ward Information
+     * @param ward      Ward Information to be added to existing wards.
      * 
      * @param noOfRooms Number to rooms to be created in a ward.
      * 
@@ -166,27 +179,25 @@ public class WardController {
    /**
     * Make a ward status to free after maintaince.  
     *
-    * @param ward  Ward Information
+    * @param ward  Ward Information whose state is changed to be free.
     *
     * @return ModelAndView  redirects to the page which displays all
     *                       the ward details.
     */    @RequestMapping(value="/ChangeWardToFree", method=RequestMethod.POST)
    public ModelAndView ChangeWardToFree(@RequestParam("number")String wardnumber) {
    ModelAndView mav = new ModelAndView("searchWard");
-try {
-Ward ward = new Ward();
-       ward = wardService.searchWard(Integer.parseInt(wardnumber));
-    wardService.changeWardToFree(ward);
-    ward = wardService.searchWard(Integer.parseInt(wardnumber));
+       try {
+           Ward ward = new Ward();
+           ward = wardService.searchWard(Integer.parseInt(wardnumber));
+           wardService.changeWardToFree(ward);
+           ward = wardService.searchWard(Integer.parseInt(wardnumber));
            mav.addObject(WardConstants.WARDNUMBER , Integer.parseInt(wardnumber));
            mav.addObject(WardConstants.WARD , ward);
            mav.addObject(WardConstants.ROOMS, ward.getRooms());
        } catch(ApplicationException e) {
-
             mav.addObject(WardConstants.FAILURE_MESSAGE,e);
        }
-   return mav;
-
+           return mav;
     }
   
     /**
@@ -202,8 +213,7 @@ Ward ward = new Ward();
 		try {
 		    mav.addObject(WardConstants.INPATIENTS, wardService.getVisitsByPatientType("InPatient"));
 		} catch(ApplicationException e) {
-
-                   mav.addObject(WardConstants.FAILURE_MESSAGE,e);
+             mav.addObject(WardConstants.FAILURE_MESSAGE,e);
 		}
 		return mav;
     }
@@ -240,8 +250,6 @@ Ward ward = new Ward();
             mav.addObject(WardConstants.WARD , new Ward());
             mav.addObject(WardConstants.WARDIDS , getWards());
         } catch(ApplicationException e) {
-		    Logger.error(e);
-
             mav.addObject(WardConstants.FAILURE_MESSAGE,e);
         }
         return mav;
@@ -270,8 +278,6 @@ Ward ward = new Ward();
             mav.addObject(WardConstants.WARD , ward);
             mav.addObject(WardConstants.ROOMS, ward.getRooms());
         } catch(ApplicationException e) {
-		    Logger.error(e);
-
             mav.addObject(WardConstants.FAILURE_MESSAGE,e);
         }
         return mav;
@@ -306,8 +312,6 @@ Ward ward = new Ward();
             mav.addObject(WardConstants.WARD , ward);
             mav.addObject(WardConstants.ROOMS, ward.getRooms());
         } catch(ApplicationException e) {
-
-
             mav.addObject(WardConstants.FAILURE_MESSAGE,e);
         }
     return mav;
@@ -331,8 +335,6 @@ Ward ward = new Ward();
             mav.addObject(WardConstants.WARD , new Ward());
             mav.addObject(WardConstants.WARDIDS , getWards());
         } catch(ApplicationException e) {
-
-
             mav.addObject(WardConstants.FAILURE_MESSAGE,e);
         }
 	    return mav;  

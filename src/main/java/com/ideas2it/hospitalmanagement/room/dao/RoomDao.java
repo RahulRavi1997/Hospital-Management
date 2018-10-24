@@ -4,12 +4,21 @@ package com.ideas2it.hospitalmanagement.room.dao;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.room.model.Room;
 import com.ideas2it.hospitalmanagement.ward.model.Ward;
+
+
+
 /**
+ * RoomDao is the DAO interface program which is having the methods that is processing the data
+ * access operations of the room related Details.
  * <p>
- * RoomDAO is an interface which holds methods for creation and updation of rooms.
+ * It is having the implementation classes, which performs the Add,Modify, Remove,Search and Display
+ * the room details.
  * </p>
- * @author Latheesh
+ * This interface has a method to gather details of all the room and its related details that are stored in the
+ * Database.
  *
+ * @author latheesh
+ * @version 1.0
  */
 public interface RoomDao {
       

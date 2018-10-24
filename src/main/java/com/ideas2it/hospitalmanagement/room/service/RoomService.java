@@ -7,6 +7,19 @@ import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.room.model.Room;
 import com.ideas2it.hospitalmanagement.ward.model.Ward;;
 
+
+
+/**
+ * RoomService is the Service interface which is having the several data manipulation methods and
+ * this class does the business logic operations on the room related Details.
+ * <p>
+ * It has the Implementation class which is performing the business logic operations on the bed
+ * Details.
+ * </p>
+ *
+ * @author latheesh
+ * @version 1.0
+ */
 public interface RoomService {
 	
     /**

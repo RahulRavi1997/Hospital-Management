@@ -8,6 +8,18 @@ import com.ideas2it.hospitalmanagement.patient.model.Patient;
 import com.ideas2it.hospitalmanagement.visit.model.Visit;
 import com.ideas2it.hospitalmanagement.ward.model.Ward;
 
+
+/**
+ * WardService is the Service interface which is having the several data manipulation methods and
+ * this class does the business logic operations on the ward related Details.
+ * <p>
+ * It has the Implementation class which is performing the business logic operations on the ward
+ * Details.
+ * </p>
+ *
+ * @author latheesh
+ * @version 1.0
+ */
 public interface WardService {
 	
 	/**

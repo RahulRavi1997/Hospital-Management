@@ -4,6 +4,20 @@ import com.ideas2it.hospitalmanagement.bed.model.Bed;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.visit.model.Visit;
 
+
+/**
+ * BedDao is the DAO interface program which is having the methods that is processing the data
+ * access operations of the bed Details.
+ * <p>
+ * It is having the implementation classes, which performs the Add,Modify, Remove,Search and Display
+ * the bed allocation details.
+ * </p>
+ * This interface has a method to gather details of all the bed and its related details that are stored in the
+ * Database.
+ *
+ * @author latheesh
+ * @version 1.0
+ */
 public interface BedDao {
 
     /**
@@ -12,9 +26,9 @@ public interface BedDao {
      * number
      * </p>
      * 
-     * @param bedNumber 						Bed Number
+     * @param bedNumber 						Bed Number to be searched
      * 
-     * @return Bed 								Bed object
+     * @return Bed 								Bed object of the corresponding bed number 
      */
 	public Bed searchBedByNumber(int bedNumber)throws ApplicationException;
 
@@ -23,7 +37,7 @@ public interface BedDao {
      * updateBed method is used to update the modified bed in the database.
      * </p>
      * 
-     * @param Bed 								Bed object
+     * @param Bed 								Bed object to be updated
      * 
      * @return boolean 							Indicates whether the bed 
      *											is updated or not
@@ -36,7 +50,7 @@ public interface BedDao {
      * with a visit
      * </p>
      * 
-     * @param Bed 								Bed object
+     * @param Bed 								Bed object to be searched.
      * 
      * @return boolean 							Indicates whether the bed 
      *											is updated or not

@@ -20,6 +20,23 @@ import com.ideas2it.hospitalmanagement.room.service.RoomService;
 import com.ideas2it.hospitalmanagement.room.service.impl.RoomServiceImpl;
 import com.ideas2it.hospitalmanagement.ward.commons.constants.WardConstants;
 
+
+/**
+ * RoomController is the controller class for the room related details, which allows
+ * the application to execute the data manipulation operations of the
+ * room related Details.
+ * <p>
+ * The Operations that can be done using this application are Adding a
+ * room, Modifying the room, Removing the room Details, 
+ * Searching for room and Displaying the rooms.
+ * Details.
+ * </p>
+ * The RoomController class is mapped with Controller Annotation of Spring
+ * Framework by which the Class is mapped to the Spring MVC.
+ *
+ * @author    latheesh
+ * @version   1.0
+ */
 @Controller
 public class RoomController{
 
@@ -54,7 +71,6 @@ public class RoomController{
 	        mav.addObject(Constants.ROOM,room);
 	    } catch(ApplicationException e) {
 			mav.addObject(BedConstants.FAIL_MESSAGE,e);  
-  	    	mav.addObject(WardConstants.FAILURE_MESSAGE, WardConstants.FAILURE_MESSAGE);  	  
   	    }
 	    return mav;
 	}
@@ -64,7 +80,7 @@ public class RoomController{
      * Display the patient details who corresponds to the particular bed.
      * </p>
      * 
-     * @param visitId							Visit Id
+     * @param visitId							Visit Id to be searched.
      * 
      * @return ModelAndView 					Used for displaying the view for the 
      *                               			application user.
@@ -81,7 +97,6 @@ public class RoomController{
             mav.addObject(Constants.PATIENTDETAILS , Constants.YES);
             mav.addObject(Constants.BEDDETAILS , bed);
             mav.addObject(Constants.VISITDETAILS , bed.getVisit());
-
 	        mav.addObject(Constants.ROOM,room);
 	        } catch(ApplicationException e) {
 			mav.addObject(BedConstants.FAIL_MESSAGE,e);  
@@ -95,7 +110,7 @@ public class RoomController{
       * Display the patient details who corresponds to the particular bed.
       * </p>
       * 
-      * @param visitId							Visit Id
+      * @param visitId							Visit Id to be searched.
       * 
       * @return ModelAndView 					Used for displaying the view for the 
       *                               			application user.
@@ -103,7 +118,6 @@ public class RoomController{
  	public ModelAndView AddBeds(@RequestParam(Constants.WARDNUMBER) String wardNumber,
  									@RequestParam(Constants.ROOMNUMBER)String roomNumber) {
   		ModelAndView mav = new ModelAndView(Constants.SEARCHROOM);
-
  	    try {
  			 Room room = roomService.searchRoomByNumber(Integer.parseInt(roomNumber));
              room.getBeds().add(new Bed());

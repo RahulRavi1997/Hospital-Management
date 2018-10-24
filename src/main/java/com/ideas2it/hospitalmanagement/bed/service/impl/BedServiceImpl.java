@@ -20,7 +20,17 @@ import com.ideas2it.hospitalmanagement.ward.model.Ward;
 import com.ideas2it.hospitalmanagement.ward.service.WardService;
 
 
-
+/**
+ * BedServiceImpl is the Service class implementing the BedService interface and this
+ * implements all the methods of the interface program.
+ * <p>
+ * It processes all the business logic operations and calls the Dao class to do the data accessing
+ * operations.
+ * </p>
+ *
+ * @author latheesh
+ * @version 1.0
+ */
 public class BedServiceImpl extends GenericDao implements BedService {
 	
 	private static BedDao bedDao;
@@ -68,12 +78,7 @@ public class BedServiceImpl extends GenericDao implements BedService {
 	}
 	
     /**
-     * Allows to create the bed allocation  details with the admit date and
-     * all the necessary details.	
-     * 
-     * @param visit Visit Information
-     * 
-     * @param bed   Bed Informataion
+     * {@inheritDoc}
      */
     private void addBedAllocationDetails(Visit visit, Bed bed) {
     	BedAllocation bedAllocation = new BedAllocation();
@@ -142,12 +147,7 @@ public class BedServiceImpl extends GenericDao implements BedService {
 	}
 	
     /**
-     * Allows to create the bed discharge  details with the discharge date and
-     * all the necessary details.	
-     * 
-     * @param visit Visit Information
-     * 
-     * @param bed   Bed Informataion
+     * {@inheritDoc}
      */
 	private void addBedDischargeDetails(Visit visit, Bed bed) {
 		bed.setVisit(null);

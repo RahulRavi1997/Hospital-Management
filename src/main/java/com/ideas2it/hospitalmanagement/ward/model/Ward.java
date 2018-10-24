@@ -6,6 +6,17 @@ import java.util.List;
 import com.ideas2it.hospitalmanagement.bed.model.Bed;
 import com.ideas2it.hospitalmanagement.room.model.Room;
 
+
+
+/**
+ * <p>
+ * Consist of all the details regarding the ward which contains ward number and 
+ * status of the ward which represents whether they are allocated, free or under
+ * maintaince.
+ * </p>
+ * @author Harish
+ *
+ */
 public class Ward {
 	
 	private String name;
