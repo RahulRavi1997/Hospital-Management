@@ -70,8 +70,26 @@ public interface MedicineService {
      */
     public Medicine searchMedicine(int medicineId) throws ApplicationException;
     
+    /**
+     * <p>
+     * This method is used to restore the medicine 
+     * and return its details from the database.
+     * </p>
+     *
+     * @param medicineId Id of the medicine.
+     *
+     * @return true if medicine is restored.
+     */
 	public boolean restoreMedicine(int id) throws ApplicationException;
 
+    /**
+     * <p>
+     * This method is used to retrieve the medicines from the master medicine
+     * details in the database.
+     * </p>
+     *
+     * @return Medicine medicine Details.
+     */
     public List<Medicine> retrieveMedicinesByName(String name) throws ApplicationException;
   
 }

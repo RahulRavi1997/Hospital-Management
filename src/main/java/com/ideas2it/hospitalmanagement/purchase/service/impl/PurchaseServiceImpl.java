@@ -75,6 +75,9 @@ public class PurchaseServiceImpl implements PurchaseService {
    		return purchaseDao.restorePurchase(purchase);
    	}
 
+    /**
+   	 *  {@inheritDoc}
+   	 */
     public boolean updateMedicine(PurchaseDetails purchaseDetails) throws ApplicationException {
         double quantity = 0;
         String name = purchaseDetails.getMedicineName();

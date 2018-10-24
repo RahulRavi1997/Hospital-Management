@@ -29,5 +29,8 @@
    <mapping resource="ward.hbm.xml"/>
    <mapping resource="bed.hbm.xml"/>
    <mapping resource="room.hbm.xml"/>
+   <mapping resource="Medicine.hbm.xml"/>
+   <mapping resource="Purchase.hbm.xml"/>
+   <mapping resource="PurchaseDetails.hbm.xml"/>
 </session-factory>
 </hibernate-configuration>
