@@ -26,8 +26,6 @@ import com.ideas2it.hospitalmanagement.commons.Constants;
 import com.ideas2it.hospitalmanagement.commons.enums.Role;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.logger.Logger;
-import com.ideas2it.hospitalmanagement.visit.service.VisitService;
-import com.ideas2it.hospitalmanagement.visit.service.impl.VisitServiceImpl;
 import com.ideas2it.hospitalmanagement.user.model.User;
 import com.ideas2it.hospitalmanagement.user.service.UserService;
 
@@ -55,15 +53,7 @@ public class UserController {
         return this.userService;
     }
 
-    private VisitService visitService = null;
 
-    public void setVisitService(VisitService visitService) {
-        this.visitService = visitService;
-    }
-
-    public VisitService getVisitService() {
-        return this.visitService;
-    }
 
     /**
      * This Method is used to obtain the user Credentials during login and create a new Session.
@@ -178,7 +168,7 @@ public class UserController {
         } else if (authorities.iterator().next().toString().equals(Constants.NURSE_ROLE)) {
             session.setAttribute(Constants.ROLE, Constants.NURSE_INDEX);
             try {
-                session.setAttribute("inpatients",visitService.getVisitsByPatientType("InPatient"));
+                session.setAttribute("inpatients", userService.getAllVisitsByPatientType("InPatient"));
             } catch (ApplicationException e){
                 return  Constants.LOGIN_JSP;
             }

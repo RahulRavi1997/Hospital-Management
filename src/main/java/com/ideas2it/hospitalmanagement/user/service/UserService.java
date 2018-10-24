@@ -4,6 +4,9 @@ import java.util.List;
 
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.user.model.User;
+import com.ideas2it.hospitalmanagement.visit.model.Visit;
+
+
 
 /**
  * </p>
@@ -141,5 +144,19 @@ public interface UserService {
      *                              displaying all users.
      */
     public List<User> retrieveUsersByQuery(String query, String role) throws ApplicationException;
+
+
+
+    /**
+     * <p>
+     * This Method is used to retrieve all the visits based on the status.
+     * </p>
+     * 
+     * @param  status   status of the patients to be searched
+     * @return users A list of user Objects returned with the required set of Users.
+     * @throws ApplicationException An exception created for catching exceptions that occur while
+     *                              displaying all users.
+     */
+    public List<Visit> getAllVisitsByPatientType(String status) throws ApplicationException;
 
 }
