@@ -29,8 +29,11 @@
             <a href="createPatient">Create Patient</a>
           </li>
           <li>
-            <a href="displayPatients">Display Patients</a>
+            <a style=" color : white" href="displayPatients">Display Patients</a>
           </li>
+          <li>
+            <a href="DisplayAllWards">Display Wards</a><br>
+            </li>
         </ul>
       </div>
       <div id="page-content-wrapper">

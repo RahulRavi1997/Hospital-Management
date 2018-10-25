@@ -26,6 +26,13 @@ button{
     padding: 0;
 
 }
+
+li{
+    margin-left: 108px
+    
+}
+
+
 #snackbar {
     visibility: hidden;
     min-width: 250px;

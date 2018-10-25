@@ -14,22 +14,48 @@
       <jsp:include page="header.jsp"/>
       <div id="wrapper">
          <!-- Sidebar -->
-         <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
- 				<ul class="sidebar-nav">
-               <li class="sidebar-brand highlight">
-                  <a href="index">
-                  Home
-                  </a>
+
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav" style = "display: inline-flex; font-size:16px; color: white">
+                <li class="sidebar-brand highlight">
+                    <a href="index">
+                        Home
+                    </a>
+                </li>
+
+<c:if test="${role == 'Admin'}">
+                <li>
+             <a href="createUser">Create User </a> 
+                </li>
                <li>
-                  <a href="DisplayAllWards">View Wards</a> 
-               </li>
-                <c:if test="${role == 'Nurse'}">
+	           <a href="displayUsers">Display Users</a>
+                </li>
+                <li>
+              <a href="createPhysician">Create Physician</a> 
+                </li>
+                <li>
+	           <a href="displayPhysicians">Display Physicians</a>
+                </li>
+
+<li>
+<a href="DisplayAllWards">Display Wards</a><br>
+</li>
+</c:if>
+<c:if test="${role == 'Nurse'}">
+  <li>
+                    <a href="index">
+                        Home
+                    </a>
+                </li>
                <li>
                	  <a href="nurseHome">Display In Patients</a>
                </li></c:if>
             </ul>
-         </div>
+        </div>
+
+           
+                
+           
          <!-- /#sidebar-wrapper -->
          <!-- Page Content -->
          <div id="page-content-wrapper">

@@ -67,7 +67,8 @@ public final class Constants {
     public static final String NUMBER_OF_USERS = "numberOfUsers";
     public static final String USER_DISPLAY_JSP = "DisplayUsers";
     public static final String QUERY = "query";
-
+ 
+    public static final String YET_TO_ADMIT = "Yet To Visit";
     public static final String SEARCH_PATIENT_BY_NAME = "/searchPatientByName";
     public static final String SEARCH_VISIT_BY_PATIENTID = "/searchVisitByPatientId";
     public static final String SEARCH_VISIT_FOR_PATIENT = "/searchVisitForPatient";

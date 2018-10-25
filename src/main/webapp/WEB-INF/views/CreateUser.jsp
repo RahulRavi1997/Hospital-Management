@@ -30,6 +30,9 @@
           <li>
             <a href="displayPhysicians">Display Physician</a>
           </li>
+          <li>
+            <a href="DisplayAllWards">Display Wards</a><br>
+            </li>
         </ul>
       </div>
       <!-- /#sidebar-wrapper -->

@@ -69,7 +69,9 @@ $(document).ready(function(){
          <!-- Sidebar -->
          <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
-               <li class="sidebar-brand highlight">
+               <li class="sidebar-brand highlight" style="
+               color: white;
+             font-size: 16px;">
                   <a href="index">
                   Home
                   </a>

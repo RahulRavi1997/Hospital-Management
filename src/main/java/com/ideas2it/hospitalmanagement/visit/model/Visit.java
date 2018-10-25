@@ -26,7 +26,7 @@ public class Visit {
     private Patient patient;
     private Physician physician;
 	private String patientType;
-	private String patientStatus;
+	private String patientStatus = "Yet To Admit";
 	
     public String getPatientStatus() {
 		return patientStatus;

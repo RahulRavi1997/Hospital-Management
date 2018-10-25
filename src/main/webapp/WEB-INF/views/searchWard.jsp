@@ -13,21 +13,45 @@
       <jsp:include page="header.jsp"/>
       <div id="wrapper">
          <!-- Sidebar -->
-         <div id="sidebar-wrapper">
- <ul class="sidebar-nav">
-               <li class="sidebar-brand highlight">
-                  <a href="index">
-                  Home
-                  </a>
-               </li>
+		 <div id="sidebar-wrapper">
+            <ul class="sidebar-nav" style=" display: inline-flex;
+            font-size: 16px;">
+                <li class="sidebar-brand highlight">
+                    <a  style=" color : white"href="index">
+                        Home
+                    </a>
+				</li>
+				<c:if test="${role == 'Admin'}">
+
+                <li>
+             <a style=" color : white" href="createUser">Create User </a> 
+                </li>
                <li>
-                  <a href="DisplayAllWards">View Wards</a> 
-               </li>
-                <c:if test="${role == 'Nurse'}">
-               <li>
-               	  <a href="nurseHome">Display In Patients</a>
-               </li></c:if>
+	           <a style=" color : white" href="displayUsers">Display Users</a>
+                </li>
+                <li>
+              <a style=" color : white" href="createPhysician">Create Physician</a> 
+                </li>
+                <li>
+	           <a style=" color : white" href="displayPhysicians">Display Physicians</a>
+				</li>
+			</c:if>
+
+<li>
+<a style=" color : white" href="DisplayAllWards">Display Wards</a><br>
+</li>
+<c:if test="${role == 'Nurse'}">
+    <li>
+          <a href="nurseHome">Display In Patients</a>
+	</li>
+</c:if>
             </ul>
+        </div>
+
+           
+                 
+               
+          
          </div>
          <!-- /#sidebar-wrapper -->
          <!-- Page Content -->
