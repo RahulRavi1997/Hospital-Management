@@ -8,6 +8,7 @@ import com.ideas2it.hospitalmanagement.visit.model.Visit;
 
 
 
+
 /**
  * </p>
  * UserServiceImpl is a Service-class used to provide logic to User operations. All the methods in
@@ -144,6 +145,7 @@ public interface UserService {
      *                              displaying all users.
      */
     public List<User> retrieveUsersByQuery(String query, String role) throws ApplicationException;
+
 
 
 

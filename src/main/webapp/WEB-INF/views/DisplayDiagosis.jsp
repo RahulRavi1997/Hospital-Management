@@ -16,7 +16,11 @@
 	<br>
 	<jsp:include page="Header.jsp" />
 	<div class="row">
+<<<<<<< HEAD
 		<form:form commandName="diagnosis" action = "displayVisits" >
+=======
+		<form:form commandName="diagnosis" action = "index" >
+>>>>>>> 1146a4ff88dc08992293823ca57a4a2c1b635bea
 			<form:input path="id" type="hidden" />
 			<div class="col-sm-4">
 			</div>

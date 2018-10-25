@@ -38,7 +38,7 @@ public class DiagnosisServiceImplementation implements DiagnosisService {
 	/**
 	 * {@inheritDoc}
 	 */
-	public boolean createDiagnosis(Diagnosis diagnosis) throws ApplicationException {
+	public boolean addDiagnosis(Diagnosis diagnosis) throws ApplicationException {
 		return diagnosisDao.insertDiagnosis(diagnosis);
 	}
 

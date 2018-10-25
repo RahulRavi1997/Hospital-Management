@@ -46,6 +46,7 @@ button {
 </style>
 </head>
 <body>  
+    <jsp:include page="Access.jsp"/>
 <jsp:include page="header.jsp"/>
      <div id="wrapper">
         <!-- Sidebar -->
@@ -60,6 +61,21 @@ button {
 </div>
 </form>  
                 </li>
+          <li>
+            <a href="createUser">Create User </a> 
+          </li>
+          <li>
+            <a href="displayUsers">Display Users</a>
+          </li>
+          <li>
+            <a href="createPhysician">Create Physician</a> 
+          </li>
+          <li>
+            <a href="displayPhysicians">Display Physicians</a>
+          </li>
+          <li>
+            <a href="pharmacy">Pharmacy</a>
+          </li>
             </ul>
         </div>    
 

@@ -28,14 +28,12 @@ public interface DiagnosisDao {
 	 * else returns false.
 	 * </p>
 	 *
-	 * @param diagnosis
-	 *            an Diagnosis object consisting of the details of the new diagnosis
-	 *            provided by the user.
+	 * @param diagnosis an Diagnosis object consisting of the details of the new
+	 *                  diagnosis provided by the user.
 	 * @return Boolean a boolean indicating the id of the Diagnosis that is
 	 *         inserted.
-	 * @throws ApplicationException
-	 *             An exception created for catching exceptions that occur while
-	 *             adding an diagnosis.
+	 * @throws ApplicationException An exception created for catching exceptions
+	 *                              that occur while adding an diagnosis.
 	 */
 	public boolean insertDiagnosis(Diagnosis diagnosis) throws ApplicationException;
 
@@ -46,9 +44,8 @@ public interface DiagnosisDao {
 	 * </p>
 	 *
 	 * @return diagnosis an Arraylist consisting of all the diagnosis is returned.
-	 * @throws ApplicationException
-	 *             An exception created for catching exceptions that occur while
-	 *             displaying all diagnosis.
+	 * @throws ApplicationException An exception created for catching exceptions
+	 *                              that occur while displaying all diagnosis.
 	 */
 	public List<Diagnosis> fetchAllDiagnosis() throws ApplicationException;;
 
@@ -58,13 +55,12 @@ public interface DiagnosisDao {
 	 * the entry is modified, else returns false.
 	 * <p>
 	 *
-	 * @param diagnosis
-	 *            an Diagnosis object is passed with the details to be updated.
+	 * @param diagnosis an Diagnosis object is passed with the details to be
+	 *                  updated.
 	 * @return boolean a boolean value is returned whether the operation is
 	 *         successful or not.
-	 * @throws ApplicationException
-	 *             An exception created for catching exceptions that occur while
-	 *             updating an diagnosis.
+	 * @throws ApplicationException An exception created for catching exceptions
+	 *                              that occur while updating an diagnosis.
 	 */
 	public boolean updateDiagnosis(Diagnosis diagnosis) throws ApplicationException;
 
@@ -76,9 +72,8 @@ public interface DiagnosisDao {
 	 *
 	 * @return diagnosis an Arraylist consisting of all the diagnosis for a specific
 	 *         date is returned.
-	 * @throws ApplicationException
-	 *             An exception created for catching exceptions that occur while
-	 *             displaying all diagnosis.
+	 * @throws ApplicationException An exception created for catching exceptions
+	 *                              that occur while displaying all diagnosis.
 	 */
 
 	public List<Diagnosis> fetchDiagnosisByDate(Date date, int patientId) throws ApplicationException;
@@ -89,12 +84,11 @@ public interface DiagnosisDao {
 	 * help of its Id
 	 * </p>
 	 *
-	 * @param id
-	 *            The ID of the diagnosis
+	 * @param id The ID of the diagnosis
 	 * @return Diagnosis a diagnosis object that matches the ID
-	 * @throws ApplicationException
-	 *             A Custom Exception created for catching exceptions that occur
-	 *             while retrieving a diagnosis.
+	 * @throws ApplicationException A Custom Exception created for catching
+	 *                              exceptions that occur while retrieving a
+	 *                              diagnosis.
 	 */
 	public Diagnosis searchDiagnosisById(int id) throws ApplicationException;
 
@@ -104,12 +98,11 @@ public interface DiagnosisDao {
 	 * help of its VisitId
 	 * </p>
 	 *
-	 * @param id
-	 *            The VisitId of the patient
+	 * @param id The VisitId of the patient
 	 * @return List a Diagnosis List that matches the Visit ID
-	 * @throws ApplicationException
-	 *             A Custom Exception created for catching exceptions that occur
-	 *             while retrieving a diagnosis.
+	 * @throws ApplicationException A Custom Exception created for catching
+	 *                              exceptions that occur while retrieving a
+	 *                              diagnosis.
 	 */
 	public List<Diagnosis> fetchDiagnosisByVisit(int visitId) throws ApplicationException;
 }

@@ -2,18 +2,16 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
 <head>
-<link href='https://fonts.googleapis.com/css?family=Righteous'
-	rel='stylesheet'>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link href="http://cdn.phpoll.com/css/animate.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="/static/css/app.css" />
-<style>
-#snackbar {
+	<link href='https://fonts.googleapis.com/css?family=Righteous' rel='stylesheet'>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link href="http://cdn.phpoll.com/css/animate.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/static/css/app.css" />
+	<style>
+		#snackbar {
 	visibility: hidden;
 	min-width: 250px;
 	margin-left: -125px;
@@ -148,24 +146,24 @@ to {
 }
 </style>
 </head>
+
 <body>
 	<jsp:include page="header.jsp" />${sessionScope.id}
 	<div class="left_div">
-		<form action="/physicianVisit" method = "get">
+		<form action="/physicianVisit" method="get">
 			<input type="hidden" name="id" value=${sessionScope.id}>
-		<button class="btn btn-success"> Display Visits </button>
+			<button class="btn btn-success"> Display Visits </button>
 		</form>
 		<c:if test="${visits.size() == 0 }">
 			<div class="row">
 				<div class="col-sm-2"></div>
 				<div class="col-sm-4">
-					<img 
-						src="https://lh3.googleusercontent.com/-PTH5AmaGw6o/W5DCxX6xZ9I/AAAAAAAAACE/kDeOnh2-sRwncQh3cvs94UteY8-id2K6QCL0BGAYYCw/h450/Layer%2B0.png" />
+					<img src="https://lh3.googleusercontent.com/-PTH5AmaGw6o/W5DCxX6xZ9I/AAAAAAAAACE/kDeOnh2-sRwncQh3cvs94UteY8-id2K6QCL0BGAYYCw/h450/Layer%2B0.png" />
 				</div>
 			</div>
 		</c:if>
-	<input id="myInput" type="text" placeholder="Search..">
-		 <div style="overflow-x: auto;" class="w3-container animated flipInX">
+		<input id="myInput" type="text" placeholder="Search..">
+		<div style="overflow-x: auto;" class="w3-container animated flipInX">
 			<c:choose>
 				<c:when test="${not empty visits}">
 					<div class="row">
@@ -174,9 +172,7 @@ to {
 							<h3 style="color: white">Patients</h3>
 						</div>
 					</div>
-					<table id="myTable"
-						class="w3-table-all w3-hoverable ui-widget ui-widget-content"
-						id="resizable">
+					<table id="myTable" class="w3-table-all w3-hoverable ui-widget ui-widget-content" id="resizable">
 						<thead>
 							<br>
 							<tr class="ui-widget-header">
@@ -193,30 +189,30 @@ to {
 						</thead>
 						<tbody>
 							<c:forEach items="${visits}" var="visit">
-								<tr id ="mycontent">
+								<tr id="mycontent">
 									<td>${visit.id}</td>
 									<td>${visit.admitDate}</td>
 									<td>${visit.dischargeDate}</td>
 									<td>${visit.patient.id}</td>
 									<td>${visit.patientType}</td>
 									<td>
-									    <c:if test ="${visit.patientType=='Out Patient'}">
-										<form action="/createPrescription" method="post">
-											<input type="hidden" name="visitId" value="${visit.id}">
-											<input type="hidden" name="visitType" value="${visit.patientType}">
-											<button class="btn btn-primary Out" type="submit">
-												<i class="fa fa-plus"></i>&nbsp;Add Prescription
-											</button>
-										</form>
+										<c:if test="${visit.patientType=='Out Patient'}">
+											<form action="/createPrescription" method="post">
+												<input type="hidden" name="visitId" value="${visit.id}">
+												<input type="hidden" name="visitType" value="${visit.patientType}">
+												<button class="btn btn-primary Out" type="submit">
+													<i class="fa fa-plus"></i>&nbsp;Add Prescription
+												</button>
+											</form>
 										</c:if>
-										<c:if test ="${visit.patientType!='Out Patient'}">
-										<form action="/createPrescription" method="post">
-											<input type="hidden" name="visitId" value="${visit.id}">
-											<input type="hidden" name="visitType" value="${visit.patientType}">
-											<button class="btn btn-primary" type="submit">
-												<i class="fa fa-plus"></i>&nbsp;Add Prescription
-											</button>
-										</form>
+										<c:if test="${visit.patientType!='Out Patient'}">
+											<form action="/createPrescription" method="post">
+												<input type="hidden" name="visitId" value="${visit.id}">
+												<input type="hidden" name="visitType" value="${visit.patientType}">
+												<button class="btn btn-primary" type="submit">
+													<i class="fa fa-plus"></i>&nbsp;Add Prescription
+												</button>
+											</form>
 										</c:if>
 									</td>
 									<td>
@@ -229,6 +225,7 @@ to {
 									</td>
 									<td>
 										<form action="/create_diagnosis?id=${prescription.id}" method="post">
+											<input type="hidden" name="visitId" value="${visit.id}">
 											<button class="btn btn-primary" type="submit" />
 											<i class="fa fa-plus"></i>&nbsp;Add Diagnosis
 											</button>
@@ -236,6 +233,7 @@ to {
 									</td>
 									<td>
 										<form action="/viewAllDiagnosis" method="post">
+											<input type="hidden" name="visitId" value="${visit.id}">
 											<button class="btn btn-success" type="submit" />
 											<i class="fa fa-eye"></i>&nbsp;View Diagnosis
 											</button>
@@ -251,10 +249,8 @@ to {
 	</div>
 	<div class="right_div"></div>
 	<div id="id01" class="modal">
-		<form class="modal-content" action="displayVisits" method="get">
-			<button type="submit"
-				onclick="document.getElementById('id01').style.display='none'"
-				class="close" title="Close Modal">&times;</button>
+		<form class="modal-content" action="index" method="get">
+			<button type="submit" onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</button>
 			<div style="height: 400px; overflow: auto;" class="w3-container">
 				<table class="w3-table-all w3-hoverable ui-widget ui-widget-content">
 					<thead>
@@ -272,50 +268,45 @@ to {
 									<td>${prescription.id}</td>
 									<td>${prescription.prescriptionDate}</td>
 									<td>
-										<button type="button"
-											class="w3-button w3-white w3-border w3-border-red w3-round-large view">View</button>
+										<button type="button" class="w3-button w3-white w3-border w3-border-red w3-round-large view">View</button>
 									</td>
-									<td><button type="submit" class="btn btn-info"
-											onclick="this.form.action='editPrescription?id=${prescription.id}';this.form.method='post'">
+									<td><button type="submit" class="btn btn-info" onclick="this.form.action='editPrescription?id=${prescription.id}';this.form.method='post'">
 											<i class="fa fa-edit"></i> &nbsp;Edit
 										</button></td>
 								</tr>
-							<tr class="content">
-								<td colspan="6">
-									<div style="overflow-x: auto;" class="w3-container">
-										<c:choose>
-											<c:when test="${prescription.prescriptionDetails != null}">
-												<h5>Prescritpion Detials</h5>
-												<table
-													class="w3-table-all w3-hoverable ui-widget ui-widget-content"
-													id="choose-address-table">
-													<thead>
-														<tr class="ui-widget-header">
-															<th>ID</th>
-															<th>Medicine Name</th>
-															<th>Dosage</th>
-															<th>Days</th>
-															<th>Quantity</th>
-														</tr>
-													</thead>
-													<tbody>
-														<c:forEach items="${prescription.prescriptionDetails}"
-															var="prescriptionDetails">
-															<tr>
-																<td>${prescriptionDetails.id}</td>
-																<td>${prescriptionDetails.item.itemName}</td>
-																<td>${prescriptionDetails.dosage.dosage}</td>
-																<td>${prescriptionDetails.days}</td>
-																<td>${prescriptionDetails.dosage.quantity}</td>
+								<tr class="content">
+									<td colspan="6">
+										<div style="overflow-x: auto;" class="w3-container">
+											<c:choose>
+												<c:when test="${prescription.prescriptionDetails != null}">
+													<h5>Prescritpion Detials</h5>
+													<table class="w3-table-all w3-hoverable ui-widget ui-widget-content" id="choose-address-table">
+														<thead>
+															<tr class="ui-widget-header">
+																<th>ID</th>
+																<th>Medicine Name</th>
+																<th>Dosage</th>
+																<th>Days</th>
+																<th>Quantity</th>
 															</tr>
-														</c:forEach>
-													</tbody>
-												</table>
-											</c:when>
-										</c:choose>
-										<div>
-								</td>
-							</tr>
+														</thead>
+														<tbody>
+															<c:forEach items="${prescription.prescriptionDetails}" var="prescriptionDetails">
+																<tr>
+																	<td>${prescriptionDetails.id}</td>
+																	<td>${prescriptionDetails.item.itemName}</td>
+																	<td>${prescriptionDetails.dosage.dosage}</td>
+																	<td>${prescriptionDetails.days}</td>
+																	<td>${prescriptionDetails.dosage.quantity}</td>
+																</tr>
+															</c:forEach>
+														</tbody>
+													</table>
+												</c:when>
+											</c:choose>
+											<div>
+									</td>
+								</tr>
 							</div>
 						</c:forEach>
 					</tbody>
@@ -323,42 +314,46 @@ to {
 			</div>
 		</form>
 	</div>
-<div id="snackbar">${message}</div>
+	<div id="snackbar">${message}</div>
 </body>
 <jsp:include page="Footer.jsp" />
+<script src="static/script/jquery.min.js"></script>
 <script>
-<c:choose>
-<c:when test="${prescriptions!=null}">
+
+	<c: choose>
+		<c: when test="${prescriptions != null}">
     window.onload = function() {
-       document.getElementById('id01').style.display='block';
-    }
-</c:when>
-</c:choose>
+			document.getElementById('id01').style.display = 'block';
+		}
+</c: when >
+</c: choose >
 
-$(document).ready(function(){
-    $(".view").click(function(){
-        $(this).closest('tr').next('tr').toggle();
-    });
-});
 
-$(document).ready(function(){
-    $(".Out").click(function(){
-        $(this).css('pointer-events', 'none');
-    });
-});
+		$(document).ready(function () {
+			$(".view").click(function () {
+				$(this).closest('tr').next('tr').toggle();
+			});
+		});
 
-$(document).ready(function(){
-	  $("#myInput").on("keyup", function() {
-	    var value = $(this).val().toLowerCase();
-	    $("#myTable #mycontent").filter(function() {
-	      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-	    });
-	  });
+	$(document).ready(function () {
+		$(".Out").click(function () {
+			$(this).css('pointer-events', 'none');
+		});
 	});
-<c:if test= "${message !=null }">
-var x = document.getElementById("snackbar");
-x.className = "show";
-setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-</c:if>
+
+	$(document).ready(function () {
+		$("#myInput").on("keyup", function () {
+			var value = $(this).val().toLowerCase();
+			$("#myTable #mycontent").filter(function () {
+				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			});
+		});
+	});
+	<c: if test="${message !=null }">
+		var x = document.getElementById("snackbar");
+		x.className = "show";
+setTimeout(function(){x.className = x.className.replace("show", ""); }, 3000);
+</c: if>
 </script>
+
 </html>

@@ -6,6 +6,7 @@ import com.ideas2it.hospitalmanagement.bed.model.Bed;
 import com.ideas2it.hospitalmanagement.visit.model.Visit;
 
 
+
 /**
  * Helps to create a new bed alloction details when a patient is admitted to
  * the bed.It consist of all the bed allocation details which can be used 
@@ -15,15 +16,13 @@ import com.ideas2it.hospitalmanagement.visit.model.Visit;
  * @version 1.0
  */
 public class BedAllocation {
-	
 	private int bedAllocationId;
 	private Bed bed;
 	private Date admitDate;
 	private Date dischargeDate;
 	private Visit visit;
-	private int bedId;
 	private String status;
-	
+
 	public String getStatus() {
 		return status;
 	}
@@ -31,13 +30,6 @@ public class BedAllocation {
 		this.status = status;
 	}
 
-	public int getBedId() {
-		return bedId;
-	}
-	public void setBedId(int bedId) {
-		this.bedId = bedId;
-	}
-	
 	public Bed getBed() {
 		return bed;
 	}
@@ -71,5 +63,4 @@ public class BedAllocation {
 	public void setBedAllocationId(int bedAllocationId) {
 		this.bedAllocationId = bedAllocationId;
 	}
-	
 }

@@ -24,15 +24,13 @@ public interface DiagnosisService {
 	 * user. Returns true if the entry is added successfully, else returns false.
 	 * </p>
 	 *
-	 * @param diagnosis
-	 *            an Diagnosis object containing all the details of the diagnosis to
-	 *            be added.
+	 * @param diagnosis an Diagnosis object containing all the details of the
+	 *                  diagnosis to be added.
 	 * @return Boolean a boolean indicating the id of diagnosis that is added.
-	 * @throws ApplicationException
-	 *             A Custom Exception created for catching exceptions that occur
-	 *             while adding an diagnosis.
+	 * @throws ApplicationException A Custom Exception created for catching
+	 *                              exceptions that occur while adding an diagnosis.
 	 */
-	public boolean createDiagnosis(Diagnosis diagnosis) throws ApplicationException;
+	public boolean addDiagnosis(Diagnosis diagnosis) throws ApplicationException;
 
 	/**
 	 * <p>
@@ -41,9 +39,9 @@ public interface DiagnosisService {
 	 * </p>
 	 *
 	 * @return diagnosis a list consisting of all the diagnosis that are added.
-	 * @throws ApplicationException
-	 *             A Custom Exception created for catching exceptions that occur
-	 *             while retrieving all diagnosis.
+	 * @throws ApplicationException A Custom Exception created for catching
+	 *                              exceptions that occur while retrieving all
+	 *                              diagnosis.
 	 */
 	public List<Diagnosis> retrieveAllDiagnosis() throws ApplicationException;
 
@@ -54,9 +52,10 @@ public interface DiagnosisService {
 	 * </p>
 	 *
 	 * @return diagnosis a list consisting of all the diagnosis that are added.
-	 * @throws ApplicationException
-	 *             A Custom Exception created for catching exceptions that occur
-	 *             while retrieving all diagnosis.
+	 * @return Date Retrieve diagnosis by particular date.
+	 * @throws ApplicationException A Custom Exception created for catching
+	 *                              exceptions that occur while retrieving all
+	 *                              diagnosis.
 	 */
 	public List<Diagnosis> retrieveDiagnosisByDate(Date date, int patientId) throws ApplicationException;
 
@@ -67,14 +66,13 @@ public interface DiagnosisService {
 	 * information is updated, else returns false if the operation fails.
 	 * </p>
 	 *
-	 * @param daignosis
-	 *            an Daignosis object is passed with the id of the old Diagnosis
-	 *            which is used as a reference.
+	 * @param daignosis an Daignosis object is passed with the id of the old
+	 *                  Diagnosis which is used as a reference.
 	 * @return boolean a boolean value is returned whether the operation to modify
 	 *         is successful or not.
-	 * @throws ApplicationException
-	 *             A Custom Exception created for catching exceptions that occur
-	 *             while modifying a diagnosis.
+	 * @throws ApplicationException A Custom Exception created for catching
+	 *                              exceptions that occur while modifying a
+	 *                              diagnosis.
 	 */
 	public boolean modifyDiagnosis(Diagnosis diagnosis) throws ApplicationException;
 
@@ -84,12 +82,11 @@ public interface DiagnosisService {
 	 * help of its Id
 	 * </p>
 	 *
-	 * @param id
-	 *            The ID of the diagnosis
+	 * @param id The ID of the diagnosis
 	 * @return Diagnosis a diagnosis object that matches the ID
-	 * @throws ApplicationException
-	 *             A Custom Exception created for catching exceptions that occur
-	 *             while retrieving a diagnosis.
+	 * @throws ApplicationException A Custom Exception created for catching
+	 *                              exceptions that occur while retrieving a
+	 *                              diagnosis.
 	 */
 	public Diagnosis retrieveDiagnosisById(int id) throws ApplicationException;
 
@@ -99,12 +96,11 @@ public interface DiagnosisService {
 	 * help of its VisitId
 	 * </p>
 	 *
-	 * @param id
-	 *            The VisitId of the patient
+	 * @param id The VisitId of the patient
 	 * @return List a Diagnosis List that matches the Visit ID
-	 * @throws ApplicationException
-	 *             A Custom Exception created for catching exceptions that occur
-	 *             while retrieving a diagnosis.
+	 * @throws ApplicationException A Custom Exception created for catching
+	 *                              exceptions that occur while retrieving a
+	 *                              diagnosis.
 	 */
 	public List<Diagnosis> retrieveDiagnosisByVisit(int visitId) throws ApplicationException;
 

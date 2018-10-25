@@ -1,5 +1,6 @@
 package com.ideas2it.hospitalmanagement.room.common;
 
+
 /**
  * Constants Class is used to store all the constants in other parts of the application. It is
  * created to reduce repeated Strings and code Size.
@@ -7,6 +8,7 @@ package com.ideas2it.hospitalmanagement.room.common;
  * @author latheesh
  * @version 1.0
  */
+
 public class Constants {
     public static final String ROOM_NOT_ADDED = "Room could not be added";
     public static final String ROOM_NOT_UPDATED = "Room could not be updated";

@@ -19,7 +19,6 @@ import com.ideas2it.hospitalmanagement.visit.service.impl.VisitServiceImpl;
 import com.ideas2it.hospitalmanagement.ward.model.Ward;
 import com.ideas2it.hospitalmanagement.ward.service.WardService;
 
-
 /**
  * BedServiceImpl is the Service class implementing the BedService interface and this
  * implements all the methods of the interface program.
@@ -68,7 +67,7 @@ public class BedServiceImpl extends GenericDao implements BedService {
 		    	visit.setDischargeDate(null);
 				visitService.modifyVisit(visit,visit.getPatient().getId(),visit.getPhysician().getId());
         		addBedAllocationDetails(visit, bed);
-				return bedDao.updateBed(bed);
+			    return bedDao.updateBed(bed);
 			} else {
 				return Boolean.FALSE;
 			}
@@ -78,7 +77,12 @@ public class BedServiceImpl extends GenericDao implements BedService {
 	}
 	
     /**
-     * {@inheritDoc}
+     * Allows to create the bed allocation  details with the admit date and
+     * all the necessary details.	
+     * 
+     * @param visit Visit Information
+     * 
+     * @param bed   Bed Informataion
      */
     private void addBedAllocationDetails(Visit visit, Bed bed) {
     	BedAllocation bedAllocation = new BedAllocation();
@@ -94,7 +98,7 @@ public class BedServiceImpl extends GenericDao implements BedService {
 					append(bed.getBedNumber())).toString(),e);
 		}
 	}
-
+ 
     /**
      * {@inheritDoc}
      */
@@ -173,7 +177,7 @@ public class BedServiceImpl extends GenericDao implements BedService {
 		return wardService.displayAllWards(status);
 	}
 	
-	/**
+    /**
 	 *  {@inheritDoc}
 	 */
 	public boolean updateBed(Bed bed) throws ApplicationException {

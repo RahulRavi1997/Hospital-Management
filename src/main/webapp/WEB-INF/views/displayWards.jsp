@@ -51,11 +51,7 @@
                	  <a href="nurseHome">Display In Patients</a>
                </li></c:if>
             </ul>
-        </div>
-
-           
-                
-           
+         </div>
          <!-- /#sidebar-wrapper -->
          <!-- Page Content -->
          <div id="page-content-wrapper">

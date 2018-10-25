@@ -8,7 +8,6 @@ import com.ideas2it.hospitalmanagement.user.dao.UserDao;
 import com.ideas2it.hospitalmanagement.user.model.User;
 import com.ideas2it.hospitalmanagement.user.service.UserService;
 import com.ideas2it.hospitalmanagement.visit.service.VisitService;
-import com.ideas2it.hospitalmanagement.visit.service.impl.VisitServiceImpl;
 import com.ideas2it.hospitalmanagement.visit.model.Visit;
 
 
@@ -25,6 +24,7 @@ import com.ideas2it.hospitalmanagement.visit.model.Visit;
 public class UserServiceImpl implements UserService {
 
     public UserDao userDao = null;
+
     private VisitService visitService = null;
 
     public void setVisitService(VisitService visitService) {
@@ -34,6 +34,7 @@ public class UserServiceImpl implements UserService {
     public VisitService getVisitService() {
         return this.visitService;
     }
+
 
     public void setUserDao(final UserDao userDao) {
         this.userDao = userDao;
@@ -135,12 +136,13 @@ public class UserServiceImpl implements UserService {
     public List<User> retrieveUsersByIds(final Integer[] ids) throws ApplicationException {
         return userDao.getUsersByIds(ids);
     }
-
+    
     /**
      * {@inheritDoc}
      */
     public List<Visit> getAllVisitsByPatientType(String status) throws ApplicationException {
         return visitService.getVisitsByPatientType("InPatient");
     }
+
 
 }

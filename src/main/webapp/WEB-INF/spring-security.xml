@@ -14,6 +14,8 @@
     <csrf disabled="true"/>
     <intercept-url pattern="/" access="permitAll()" />
     <intercept-url pattern="/login" access="permitAll()" />
+    <intercept-url pattern="/signup" access="permitAll()" />
+    <intercept-url pattern="/Login" access="permitAll()" />
     <intercept-url pattern="/logout" access="permitAll()" />
     <intercept-url pattern="/static/**" access="permitAll()" />
     <intercept-url pattern="/.css" access="permitAll()" />
@@ -21,11 +23,56 @@
     <intercept-url pattern="/fonts/" access="permitAll()" />
     <intercept-url pattern="/searchUser" access="permitAll()" />
     <intercept-url pattern="/index"
+
       access="hasAnyRole('ROLE_NURSE', 'ROLE_ADMIN', 'ROLE_RECEPTIONIST', 'ROLE_PHYSICIAN')" />
     <intercept-url pattern="/admin" access="hasAnyRole('ROLE_ADMIN')" />
+    <intercept-url pattern="/Admin" access="hasAnyRole('ROLE_ADMIN')" />
+    <intercept-url pattern="/AddWard" access="hasAnyRole('ROLE_ADMIN', 'ROLE_NURSE')" />
+    <intercept-url pattern="/CreateDiagnosis" access="hasAnyRole('ROLE_ADMIN', 'ROLE_PHYSICIAN')" />
+    <intercept-url pattern="/CreatePatient" access="hasAnyRole('ROLE_ADMIN', 'ROLE_RECEPTIONIST')" />
+    <intercept-url pattern="/create_medicine" access="hasAnyRole('ROLE_ADMIN')" />
+    <intercept-url pattern="/CreatePhysician" access="hasAnyRole('ROLE_ADMIN')" />
+    <intercept-url pattern="/create_prescription" access="hasAnyRole('ROLE_ADMIN', 'ROLE_PHYSICIAN')" />
+    <intercept-url pattern="/CreateUser" access="hasAnyRole('ROLE_ADMIN')" />
+    <intercept-url pattern="/create_purchase" access="hasAnyRole('ROLE_ADMIN')" />
+    <intercept-url pattern="/bed" access="hasAnyRole('ROLE_ADMIN', 'ROLE_NURSE')" />
+    <intercept-url pattern="/DisplayPhysicians" access="hasAnyRole('ROLE_ADMIN', 'ROLE_PHYSICIAN')" />
+    <intercept-url pattern="/CreateVisit" access="hasAnyRole('ROLE_ADMIN', 'ROLE_RECEPTIONIST')" />
+    <intercept-url pattern="/display_medicine" access="hasAnyRole('ROLE_ADMIN')" />
+    <intercept-url pattern="/displayWards" access="hasAnyRole('ROLE_ADMIN', 'ROLE_NURSE')" />
+    <intercept-url pattern="/DisplayAllDiagnosis" access="hasAnyRole('ROLE_ADMIN', 'ROLE_PHYSICIAN')" />
+    <intercept-url pattern="/DisplayDiagnosis" access="hasAnyRole('ROLE_ADMIN', 'ROLE_PHYSICIAN')" />
+    <intercept-url pattern="/DisplayPatients" access="hasAnyRole('ROLE_ADMIN', 'ROLE_RECEPTIONIST')" />
+    <intercept-url pattern="/display_purchase" access="hasAnyRole('ROLE_ADMIN')" />
+    <intercept-url pattern="/DisplayUsers" access="hasAnyRole('ROLE_ADMIN')" />
+    <intercept-url pattern="/nurseHome" access="hasAnyRole('ROLE_ADMIN', 'ROLE_NURSE')" />
+    <intercept-url pattern="/displayVisit" access="hasAnyRole('ROLE_ADMIN', 'ROLE_PHYSICIAN')" />
+    <intercept-url pattern="/DisplayVisit" access="hasAnyRole('ROLE_ADMIN', 'ROLE_RECEPTIONIST')" />
+    <intercept-url pattern="/pharmacy" access="hasAnyRole('ROLE_ADMIN')" />
+    <intercept-url pattern="/update_medicine" access="hasAnyRole('ROLE_ADMIN')" />
+    <intercept-url pattern="/update_purchase" access="hasAnyRole('ROLE_ADMIN')" />
+    <intercept-url pattern="/Nurse" access="hasAnyRole('ROLE_ADMIN', 'ROLE_NURSE')" />
+    <intercept-url pattern="/receptionist" access="hasAnyRole('ROLE_ADMIN', 'ROLE_RECEPTIONIST')" />
+    <intercept-url pattern="/medicine_main" access="hasAnyRole('ROLE_ADMIN')" />
+    <intercept-url pattern="/nurse" access="hasAnyRole('ROLE_ADMIN', 'ROLE_NURSE')" />
+    <intercept-url pattern="/receptionist" access="hasAnyRole('ROLE_ADMIN', 'ROLE_RECEPTIONIST')" />
+    <intercept-url pattern="/purchase_main" access="hasAnyRole('ROLE_ADMIN')" />
+    <intercept-url pattern="/Doctor" access="hasAnyRole('ROLE_ADMIN', 'ROLE_PHYSICIAN')" />
+    <intercept-url pattern="/Receptionist" access="hasAnyRole('ROLE_ADMIN', 'ROLE_RECEPTIONIST')" />
+    <intercept-url pattern="/prescriptionList" access="hasAnyRole('ROLE_ADMIN')" />
+    <intercept-url pattern="/Physician" access="hasAnyRole('ROLE_ADMIN', 'ROLE_PHYSICIAN')" />
+    <intercept-url pattern="/Receptionist_Header" access="hasAnyRole('ROLE_ADMIN', 'ROLE_RECEPTIONIST')" />
+    <intercept-url pattern="/UpdateVisit" access="hasAnyRole('ROLE_ADMIN', 'ROLE_RECEPTIONIST')" />
+    <intercept-url pattern="/SearchPatient" access="hasAnyRole('ROLE_ADMIN', 'ROLE_RECEPTIONIST')" />
+    <intercept-url pattern="/SearchPhysician" access="hasAnyRole('ROLE_ADMIN')" />
+    <intercept-url pattern="/searchRoom" access="hasAnyRole('ROLE_ADMIN', 'ROLE_NURSE')" />
+    <intercept-url pattern="/SearchVisit" access="hasAnyRole('ROLE_ADMIN', 'ROLE_RECEPTIONIST')" />
+    <intercept-url pattern="/searchWard" access="hasAnyRole('ROLE_ADMIN', 'ROLE_NURSE')" />
+    <intercept-url pattern="/Ward" access="hasAnyRole('ROLE_ADMIN', 'ROLE_NURSE')" />
     <intercept-url pattern="/nurse" access="hasAnyRole('ROLE_ADMIN', 'ROLE_NURSE')" />
     <intercept-url pattern="/physician" access="hasAnyRole('ROLE_ADMIN', 'ROLE_PHYSICIAN')" />
     <intercept-url pattern="/receptionist" access="hasAnyRole('ROLE_ADMIN', 'ROLE_RECEPTIONIST')" />
+
     <intercept-url pattern="/**" access="isAuthenticated()" />
     <access-denied-handler error-page="/Access_Denied" />
     <form-login login-page='/login' login-processing-url="/j_spring_security_check"

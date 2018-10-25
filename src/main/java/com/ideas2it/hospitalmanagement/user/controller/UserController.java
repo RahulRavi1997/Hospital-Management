@@ -54,7 +54,6 @@ public class UserController {
     }
 
 
-
     /**
      * This Method is used to obtain the user Credentials during login and create a new Session.
      *
@@ -85,12 +84,15 @@ public class UserController {
                     user.setRole(role);
                 }
                 if (userService.addUser(user)) {
-                    return new ModelAndView(Constants.ADMIN_INDEX, Constants.MESSAGE, Constants.SIGN_UP_SUCCESS_MESSAGE);
-                } else if (null == role) {
-                    return new ModelAndView(Constants.LOGIN, Constants.USER_FAIL, Constants.SIGN_UP_FAIL_MESSAGE);
+                    if (null == role) {
+                        return new ModelAndView(Constants.LOGIN, Constants.MESSAGE, Constants.SIGN_UP_SUCCESS_MESSAGE);
+                    } else {
+                        return new ModelAndView(Constants.ADMIN_INDEX, Constants.MESSAGE, Constants.SIGN_UP_SUCCESS_MESSAGE);
+                    }
                 } else {
-                    return new ModelAndView(Constants.ADMIN_INDEX, Constants.MESSAGE, Constants.SIGN_UP_FAIL_MESSAGE);
+                    return new ModelAndView(Constants.LOGIN, Constants.USER_FAIL, Constants.SIGN_UP_FAIL_MESSAGE);
                 }
+
             }
         } catch (final ApplicationException e) {
             Logger.error(e);

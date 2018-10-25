@@ -247,5 +247,8 @@ function myFunction() {
     x.className = "show";
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 50000);
 } 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 1146a4ff88dc08992293823ca57a4a2c1b635bea

@@ -16,7 +16,6 @@ import com.ideas2it.hospitalmanagement.ward.model.Ward;
 import com.ideas2it.hospitalmanagement.ward.service.WardService;
 import com.ideas2it.hospitalmanagement.ward.service.impl.WardServiceImpl;
 
-
 /**
  * RoomServiceImpl is the Service class implementing the RoomService interface and this
  * implements all the methods of the interface program.
@@ -30,26 +29,26 @@ import com.ideas2it.hospitalmanagement.ward.service.impl.WardServiceImpl;
  */
 public class RoomServiceImpl implements RoomService {
 
-	private static RoomDao roomDao;
-	private static WardService wardService;
-	private static BedService bedService;
-	private static VisitService visitService;
+	private RoomDao roomDao;
+	private WardService wardService;
+	private BedService bedService;
+	private VisitService visitService;
 
-	public static void setVisitService(VisitService visitService) {
-		RoomServiceImpl.visitService = visitService;
+	public void setVisitService(VisitService visitService) {
+		this.visitService = visitService;
 	}
 
 
-	public static void setBedService(BedService bedService) {
-		RoomServiceImpl.bedService = bedService;
+	public void setBedService(BedService bedService) {
+		this.bedService = bedService;
 	}
 	
-	public static void setWardService(WardServiceImpl wardService) {
-		RoomServiceImpl.wardService = wardService;
+	public void setWardService(WardService wardService) {
+		this.wardService = wardService;
 	}
 
-	public static void setRoomDao(RoomDaoImpl roomDao) {
-		RoomServiceImpl.roomDao = roomDao;
+	public void setRoomDao(RoomDao roomDao) {
+		this.roomDao = roomDao;
 	}
     /**
      *  {@inheritDoc}

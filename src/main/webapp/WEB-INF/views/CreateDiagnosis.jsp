@@ -72,7 +72,11 @@ input[type=number]::-webkit-outer-spin-button {
 					<form>
 		            &ensp;&ensp;&ensp;&ensp;&ensp;
 			    	<button type="submit" class="btn btn-danger"
+<<<<<<< HEAD
 						onclick="this.form.action='displayVisits';this.form.method='get'">
+=======
+						onclick="this.form.action='/index';this.form.method='get'">
+>>>>>>> 1146a4ff88dc08992293823ca57a4a2c1b635bea
 						<i class="fa fa-arrow-left" aria-hidden="true"></i>
 </i> &nbsp;Back
                     </button>
@@ -210,4 +214,8 @@ input[type=number]::-webkit-outer-spin-button {
    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 </c:if>
 </script>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> 1146a4ff88dc08992293823ca57a4a2c1b635bea

@@ -14,7 +14,7 @@ public class User {
     private String email;
     private String password;
     private String role;
-    private Boolean active;
+    private boolean active;
 
     public Integer getId() {
         return id;
@@ -48,11 +48,11 @@ public class User {
         this.role = role;
     }
 
-    public Boolean isActive() {
+    public boolean isActive() {
         return active;
     }
 
-    public void setActive(final Boolean active) {
+    public void setActive(final boolean active) {
         this.active = active;
     }
 }

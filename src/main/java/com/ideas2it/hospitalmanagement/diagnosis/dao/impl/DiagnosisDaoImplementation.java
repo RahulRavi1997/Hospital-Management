@@ -28,8 +28,8 @@ import com.ideas2it.hospitalmanagement.logger.Logger;
  */
 public class DiagnosisDaoImplementation extends GenericDao implements DiagnosisDao {
 
-	String DIAGNOSIS_IN_QUERY = "from Diagnosis where visitId in (:id)";
-	String ID = "id";
+	public static final String DIAGNOSIS_IN_QUERY = "from Diagnosis where visitId in (:id)";
+	public static final String ID = "id";
 
 	public DiagnosisDaoImplementation() {
 		super();
@@ -64,7 +64,7 @@ public class DiagnosisDaoImplementation extends GenericDao implements DiagnosisD
 	 * {@inheritDoc}
 	 */
 	public boolean updateDiagnosis(Diagnosis diagnosis) throws ApplicationException {
-        try {
+		try {
 			return super.update(diagnosis);
 		} catch (ApplicationException e) {
 			Logger.error(String.format(Constants.DIAGNOSIS_EDIT_EXCEPTION, diagnosis.getId()), e);
@@ -111,7 +111,7 @@ public class DiagnosisDaoImplementation extends GenericDao implements DiagnosisD
 			return super.get(Diagnosis.class, id);
 		} catch (ApplicationException e) {
 			Logger.error(String.format(Constants.ITEM_SEARCH_EXCEPTION, id), e);
-			throw new ApplicationException(String.format(Constants.ITEM_SEARCH_EXCEPTION, id));
+			throw new ApplicationException(String.format(Constants.ITEM_SEARCH_EXCEPTION, id), e);
 		}
 	}
 

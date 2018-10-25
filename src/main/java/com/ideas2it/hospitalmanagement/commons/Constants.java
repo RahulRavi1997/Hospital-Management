@@ -1,21 +1,21 @@
 package com.ideas2it.hospitalmanagement.commons;
 
 /**
- * Constants Class is used to store all the constants in other parts of the application. It is
- * created to reduce repeated Strings and code Size.
+ * Constants Class is used to store all the constants in other parts of the
+ * application. It is created to reduce repeated Strings and code Size.
  *
  * @author Rahul Ravi
  * @version 1.0
  */
 public final class Constants {
 
-    private Constants() {
-    }
+	private Constants() {
+	}
 
-    public static final String DISPLAY_PHYSICIANS_BY_SPECIALISATIONS_MAPPING = "/displayPhysiciansBySpecialisation";
-    public static final String SPECIALISATION_NAME = "specialisationName";
-    public static final String LOGOUT_PATH = "/logout";
-    public static final String ID_NOT_NULL = "Enter valid id please!";
+	public static final String DISPLAY_PHYSICIANS_BY_SPECIALISATIONS_MAPPING = "/displayPhysiciansBySpecialisation";
+	public static final String SPECIALISATION_NAME = "specialisationName";
+	public static final String LOGOUT_PATH = "/logout";
+	public static final String ID_NOT_NULL = "Enter valid id please!";
 
 	public static final String CLIENT_UNIQUE_KEY_EXCEPTION = "Email-%s already exists! \nError while adding client\n";
 
@@ -41,90 +41,85 @@ public final class Constants {
 	// String to display when removing employee is successful
 	public static final String ENTRY_REMOVED = "Entry Removed";
 
-    public static final String UPDATE_VISIT_JSP = "UpdateVisit";
-    public static final int SESSION_ACTIVE_INTERVAL = 30 * 60;
-    public static final String SEARCH_USER_MAPPING = "/searchUser";
+	public static final String UPDATE_VISIT_JSP = "UpdateVisit";
+	public static final int SESSION_ACTIVE_INTERVAL = 30 * 60;
+	public static final String SEARCH_USER_MAPPING = "/searchUser";
 
-    public static final String JSON_TYPE = "application/json";
-    public static final String XML_TYPE = "application/xml";
-    public static final String FORM_HEADER = "content-type=application/x-www-form-urlencoded";
-    public static final String DISPLAY_USERS_MAPPING = "displayUserAutocomplete";
-    public static final String INDEX_MAPPING = "/index";
-    public static final String ADMIN_INDEX = "Admin";
-    public static final String PHYSICIAN_INDEX = "displayVisit";
-    public static final String NURSE_INDEX = "nurseHome";
-    public static final String RECEPTIONIST_INDEX = "Receptionist";
-    public static final String ACCESS_DENIED_JSP = "AccessDenied";
-    public static final Object ADMIN_ROLE = "ROLE_ADMIN";
-    public static final Object PHYSICIAN_ROLE = "ROLE_PHYSICIAN";
-    public static final Object NURSE_ROLE = "ROLE_NURSE";
-    public static final Object RECEPTIONIST_ROLE = "ROLE_RECEPTIONIST";
-    public static final String ACCESS_DENIED_MAPPING = "/Access_Denied";
-    public static final String LOGOUT_SUCCESS_MAPPING = "/logoutSuccessful";
-    public static final String EMPTY_URI = "/";
-    public static final String CREATE_USER_MAPPING = "/createUser";
-    public static final String ROLES = "roles";
-    public static final String NUMBER_OF_USERS = "numberOfUsers";
-    public static final String USER_DISPLAY_JSP = "DisplayUsers";
-    public static final String QUERY = "query";
- 
-    public static final String YET_TO_ADMIT = "Yet To Visit";
-    public static final String SEARCH_PATIENT_BY_NAME = "/searchPatientByName";
-    public static final String SEARCH_VISIT_BY_PATIENTID = "/searchVisitByPatientId";
-    public static final String SEARCH_VISIT_FOR_PATIENT = "/searchVisitForPatient";
-
-    public static final String TYPES = "types";
-    public static final String SPECIALISATIONS = "specialisations";
-    public static final String GENDERS = "genders";
-    public static final String JSON_FORMAT = "application/json";
-    public static final String XML_FORMAT = "application/xml";
-    public static final String JSON_HEADERS = "content-type=application/x-www-form-urlencoded";
-    public static final String INVALID_TYPE = "Invalid type: ";
-    public static final String INVALID_GENDER = "Invalid Gender: ";
-    public static final String PERCENTAGE = "%";
-    public static final String INVALID_ROLE = "Invalid role: ";
-    public static final String INVALID_SPECIALISATION = "Invalid specialisation: ";
-    public static final String PATIENT_INACTIVE = "PatientInActive";
-    public static final String PATIENT_INACTIVE_MESSAGE= "Patient is Not Active. Visit Cannot be Created";
-    public static final String ITEM_DELETE_EXCEPTION = 
-            "Error while deleting item itemId = %d";
-    public static final String ITEM_UPDATE_EXCEPTION = 
-            "Error while modifying item itemId = %d";
-    public static final String ITEMS = "items";
-    public static final String ITEM_MAIN_JSP = "item_main";
-    public static final String DISPLAY_ITEM_JSP = "display_item";
-    public static final String UPDATE_ITEM_JSP = "update_item";
-    public static final String CREATE_ITEM_MAPPING = "/create_item";
-    public static final String DISPLAY_ITEM_MAPPING = "/display_item"; 
-    public static final String SEARCH_ITEM_MAPPING = "/search_item";
-    public static final String MODIFY_ITEM_MAPPING = "/modify_item";
-    public static final String DELETE_ITEM_MAPPING = "/delete_item";
-    
-    public static final String PURCHASE_ADDITION_EXCEPTION = 
-            "Error while adding an purchase purchase = %s";
-    public static final String PURCHASE_SEARCH_EXCEPTION = 
-            "Error while searching purchase purchaseId = %d";
-    public static final String PURCHASE_DELETE_EXCEPTION = 
-            "Error while deleting purchase purchaseId = %d";
-    public static final String PURCHASE_UPDATE_EXCEPTION = 
-            "Error while modifying purchase purchaseId = %d";
-    public static final String PURCHASE_DISPLAY_EXCEPTION = 
-            "Error while displaying items purchaseId = %d";
-    public static final String PURCHASES = "purchases";
-    public static final String PURCHASE = "purchase";
-    public static final String PURCHASE_MAIN_JSP = "purchase_main";
-    public static final String CREATE_PURCHASE_JSP = "create_purchase";
-    public static final String DISPLAY_PURCHASE_JSP = "display_purchase";
-    public static final String UPDATE_PURCHASE_JSP = "update_purchase";
-    public static final String CREATE_PURCHASE_MAPPING = "/create_purchase";
-    public static final String ADD_PURCHASE_MAPPING = "/add_purchase";
-    public static final String DISPLAY_PURCHASE_MAPPING = "/display_purchase"; 
-    public static final String SEARCH_PURCHASE_MAPPING = "/search_purchase";
-    public static final String UPDATE_PURCHASE_MAPPING = "/update_purchase";
-    public static final String MODIFY_PURCHASE_MAPPING = "/modify_purchase";
-    public static final String DELETE_PURCHASE_MAPPING = "/delete_purchase";   
-	// String to display when employee removal is not successful
+	public static final String JSON_TYPE = "application/json";
+	public static final String XML_TYPE = "application/xml";
+	public static final String FORM_HEADER = "content-type=application/x-www-form-urlencoded";
+	public static final String DISPLAY_USERS_MAPPING = "displayUserAutocomplete";
+	public static final String INDEX_MAPPING = "/index";
+	public static final String ADMIN_INDEX = "Admin";
+	public static final String PHYSICIAN_INDEX = "displayVisit";
+	public static final String NURSE_INDEX = "nurseHome";
+	public static final String RECEPTIONIST_INDEX = "Receptionist";
+	public static final String ACCESS_DENIED_JSP = "AccessDenied";
+	public static final Object ADMIN_ROLE = "ROLE_ADMIN";
+	public static final Object PHYSICIAN_ROLE = "ROLE_PHYSICIAN";
+	public static final Object NURSE_ROLE = "ROLE_NURSE";
+	public static final Object RECEPTIONIST_ROLE = "ROLE_RECEPTIONIST";
+	public static final String ACCESS_DENIED_MAPPING = "/Access_Denied";
+	public static final String LOGOUT_SUCCESS_MAPPING = "/logoutSuccessful";
+	public static final String EMPTY_URI = "/";
+	public static final String CREATE_USER_MAPPING = "/createUser";
+	public static final String ROLES = "roles";
+	public static final String NUMBER_OF_USERS = "numberOfUsers";
+	public static final String USER_DISPLAY_JSP = "DisplayUsers";
+	public static final String QUERY = "query";
+	public static final String YET_TO_ADMIT = "Yet To Visit";
+	public static final String SEARCH_PATIENT_BY_NAME = "/searchPatientByName";
+	public static final String SEARCH_VISIT_BY_PATIENTID = "/searchVisitByPatientId";
+	public static final String SEARCH_VISIT_FOR_PATIENT = "/searchVisitForPatient";
+	public static final String TYPES = "types";
+	public static final String SPECIALISATIONS = "specialisations";
+	public static final String GENDERS = "genders";
+	public static final String JSON_FORMAT = "application/json";
+	public static final String XML_FORMAT = "application/xml";
+	public static final String JSON_HEADERS = "content-type=application/x-www-form-urlencoded";
+	public static final String INVALID_TYPE = "Invalid type: ";
+	public static final String INVALID_GENDER = "Invalid Gender: ";
+	public static final String PERCENTAGE = "%";
+	public static final String INVALID_ROLE = "Invalid role: ";
+	public static final String INVALID_SPECIALISATION = "Invalid specialisation: ";
+	public static final String PATIENT_INACTIVE = "PatientInActive";
+	public static final String PATIENT_INACTIVE_MESSAGE = "Patient is Not Active. Visit Cannot be Created";
+	public static final String ITEM_DELETE_EXCEPTION = "Error while deleting item itemId = %d";
+	public static final String ITEM_UPDATE_EXCEPTION = "Error while modifying item itemId = %d";
+	public static final String ITEMS = "items";
+	public static final String ITEM_MAIN_JSP = "item_main";
+	public static final String DISPLAY_ITEM_JSP = "display_item";
+	public static final String UPDATE_ITEM_JSP = "update_item";
+	public static final String CREATE_ITEM_MAPPING = "/create_item";
+	public static final String DISPLAY_ITEM_MAPPING = "/display_item";
+	public static final String SEARCH_ITEM_MAPPING = "/search_item";
+	public static final String MODIFY_ITEM_MAPPING = "/modify_item";
+	public static final String DELETE_ITEM_MAPPING = "/delete_item";
+	public static final String PURCHASE_ADDITION_EXCEPTION = "Error while adding an purchase purchase = %s";
+	public static final String PURCHASE_SEARCH_EXCEPTION = "Error while searching purchase purchaseId = %d";
+	public static final String PURCHASE_DELETE_EXCEPTION = "Error while deleting purchase purchaseId = %d";
+	public static final String PURCHASE_UPDATE_EXCEPTION = "Error while modifying purchase purchaseId = %d";
+	public static final String PURCHASE_DISPLAY_EXCEPTION = "Error while displaying items purchaseId = %d";
+	public static final String PURCHASES = "purchases";
+	public static final String PURCHASE = "purchase";
+	public static final String PURCHASE_MAIN_JSP = "purchase_main";
+	public static final String CREATE_PURCHASE_JSP = "create_purchase";
+	public static final String DISPLAY_PURCHASE_JSP = "display_purchase";
+	public static final String UPDATE_PURCHASE_JSP = "update_purchase";
+	public static final String CREATE_PURCHASE_MAPPING = "/create_purchase";
+	public static final String ADD_PURCHASE_MAPPING = "/add_purchase";
+	public static final String DISPLAY_PURCHASE_MAPPING = "/display_purchase";
+	public static final String SEARCH_PURCHASE_MAPPING = "/search_purchase";
+	public static final String UPDATE_PURCHASE_MAPPING = "/update_purchase";
+	public static final String MODIFY_PURCHASE_MAPPING = "/modify_purchase";
+	public static final String DELETE_PURCHASE_MAPPING = "/delete_purchase";
 	public static final String REMOVAL_FAILED = "Removal Failed. Check ID.";
+	public static final String DISPLAY_PATIENT_JSP = "DisplayPatients";
+	public static final String PHYSICIAN_VISITS = "/physicianVisit";
+	public static final String PHYSICIAN_DISPLAY_VISIT_JSP = "displayVisit";
+	public static final String USER_EMAIL = "UserEmail";
+
+	public static final String RESTORE_USER_MAPPING = "/restoreUser";
 
 	public static final String EDIT_FAILED = "Modification Failed. Check ID.";
 
@@ -139,36 +134,29 @@ public final class Constants {
 
 	// String to display when no entries are found
 	public static final String EMPTY = "No entries found";
-        public static final String PHYSICIAN_DISPLAY_VISIT_JSP ="displayVisit";
-        public static final String PHYSICIAN_VISITS ="/physicianVisit";
 
-   public static final String USER_ID = "userId";
-   public static final String MEDICINE_ADDITION_EXCEPTION = 
-            "Error while adding an medicine medicine = %s";
-    public static final String MEDICINE_SEARCH_EXCEPTION = 
-            "Error while searching medicine medicineId = %d";
-    public static final String MEDICINE_DELETE_EXCEPTION = 
-            "Error while deleting medicine medicineId = %d";
-    public static final String MEDICINE_UPDATE_EXCEPTION = 
-            "Error while modifying medicine medicineId = %d";
-    public static final String MEDICINE_DISPLAY_EXCEPTION = 
-            "Error while displaying medicines medicineId = %d";
-    public static final String MEDICINES = "medicines";
-    public static final String MEDICINE = "medicine";
-    public static final String MEDICINE_MAIN_JSP = "medicine_main";
-    public static final String CREATE_MEDICINE_JSP = "create_medicine";
-    public static final String DISPLAY_MEDICINE_JSP = "display_medicine";
-    public static final String UPDATE_MEDICINE_JSP = "update_medicine";
-    public static final String CREATE_MEDICINE_MAPPING = "/create_medicine";
-    public static final String ADD_MEDICINE_MAPPING = "/add_medicine";
-    public static final String DISPLAY_MEDICINE_MAPPING = "/display_medicine"; 
-    public static final String SEARCH_MEDICINE_MAPPING = "/search_medicine";
-    public static final String UPDATE_MEDICINE_MAPPING = "/update_medicine";
-    public static final String MODIFY_MEDICINE_MAPPING = "/modify_medicine";
-    public static final String DELETE_MEDICINE_MAPPING = "/delete_medicine";
-    public static final String RESTORE_MEDICINE_MAPPING = "/restore_medicine";
-  
-    public static final String RESTORE_PURCHASE_MAPPING = "/restore_purchase";
+	public static final String USER_ID = "userId";
+	public static final String MEDICINE_ADDITION_EXCEPTION = "Error while adding an medicine medicine = %s";
+	public static final String MEDICINE_SEARCH_EXCEPTION = "Error while searching medicine medicineId = %d";
+	public static final String MEDICINE_DELETE_EXCEPTION = "Error while deleting medicine medicineId = %d";
+	public static final String MEDICINE_UPDATE_EXCEPTION = "Error while modifying medicine medicineId = %d";
+	public static final String MEDICINE_DISPLAY_EXCEPTION = "Error while displaying medicines medicineId = %d";
+	public static final String MEDICINES = "medicines";
+	public static final String MEDICINE = "medicine";
+	public static final String MEDICINE_MAIN_JSP = "medicine_main";
+	public static final String CREATE_MEDICINE_JSP = "create_medicine";
+	public static final String DISPLAY_MEDICINE_JSP = "display_medicine";
+	public static final String UPDATE_MEDICINE_JSP = "update_medicine";
+	public static final String CREATE_MEDICINE_MAPPING = "/create_medicine";
+	public static final String ADD_MEDICINE_MAPPING = "/add_medicine";
+	public static final String DISPLAY_MEDICINE_MAPPING = "/display_medicine";
+	public static final String SEARCH_MEDICINE_MAPPING = "/search_medicine";
+	public static final String UPDATE_MEDICINE_MAPPING = "/update_medicine";
+	public static final String MODIFY_MEDICINE_MAPPING = "/modify_medicine";
+	public static final String DELETE_MEDICINE_MAPPING = "/delete_medicine";
+	public static final String RESTORE_MEDICINE_MAPPING = "/restore_medicine";
+
+	public static final String RESTORE_PURCHASE_MAPPING = "/restore_purchase";
 
 	public static final String LOGGER_PROPERTIES_LOCATION = "log4j.xml";
 	public static final String HIBERNATE_CONFIG_FILE = "hibernate.cfg.xml";
@@ -251,21 +239,19 @@ public final class Constants {
 	public static final String PHYSICIAN_DELETE_SUCCESS_MESSAGE = "Physician deleted Successfully";
 	public static final String PHYSICIAN_UPDATE_SUCCESS_MESSAGE = "Physician Updated Successfully";
 
-	public static final String CREATE_PATIENT = "/createpatient";
-	public static final String ADD_PATIENT = "/addpatient";
-	public static final String MODIFY_PATIENT = "/modifypatient";
-	public static final String UPDATE_PATIENT = "/updatepatient";
-	public static final String DELETE_PATIENT = "/deletepatient";
-	public static final String SEARCH_PATIENT = "/searchpatient";
-	public static final String DISPLAY_PATIENTS = "/displaypatients";
-	public static final String ACTIVATE_PATIENT = "/activatepatient";
+	public static final String CREATE_PATIENT = "/createPatient";
+	public static final String ADD_PATIENT = "/addPatient";
+	public static final String MODIFY_PATIENT = "/modifyPatient";
+	public static final String UPDATE_PATIENT = "/updatePatient";
+	public static final String DELETE_PATIENT = "/deletePatient";
+	public static final String SEARCH_PATIENT = "/searchPatient";
+	public static final String DISPLAY_PATIENTS = "/displayPatients";
+	public static final String ACTIVATE_PATIENT = "/activatePatient";
 
 	public static final String PATIENT = "/patient";
 	public static final String PATIENTS = "/patients";
 	public static final String CREATE_PATIENT_JSP = "CreatePatient";
 	public static final String SEARCH_PATIENT_JSP = "SearchPatient";
-
-	public static final String DISPLAY_PATIENT_JSP = "DisplayPatient";
 
 	public static final String PATIENT_ADD_FAILED = "Patient Addition Failed";
 	public static final String PATIENT_UPDATE_FAILED = "Patient Updation Failed";
@@ -316,7 +302,8 @@ public final class Constants {
 	public static final String VISITS = "/visits";
 	public static final String CREATE_VISIT_JSP = "CreateVisit";
 	public static final String SEARCH_VISIT_JSP = "SearchVisit";
-	public static final String DISPLAY_VISIT_JSP = "displayVisit";
+
+	public static final String DISPLAY_VISIT_JSP = "DisplayVisit";
 
 	public static final String VISIT_ADD_FAILED = "Visit Addition Failed";
 	public static final String VISIT_UPDATE_FAILED = "Visit Updation Failed";
@@ -334,11 +321,9 @@ public final class Constants {
 	public static final String VISIT_OBJECT = "visit";
 	public static final String VISIT_OBJECTS = "visits";
 
-	public static final String USER_EMAIL = "";
-
 	public static final String DISPLAY_USER_MAPPING = "/displayUsers";
 	public static final String USER_DISPLAY_EXCEPTION = "Error while displaying users\n";
-	public static final String RESTORE_USER_MAPPING = "/restoreUsers";
+
 	public static final String ACTIVE = "active";
 	public static final String USERS = "users";
 	public static final String DISPLAY_USERS_JSP = "DisplayUsers";
@@ -374,7 +359,6 @@ public final class Constants {
 	public static final String ALL_ITEMS = "allItems";
 
 	public static final String ADD_ITEMS = "addItemsMaster";
-  
 
 	public static final String CREATE_DOSAGE_MAPPING = "/addosage";
 
@@ -392,17 +376,13 @@ public final class Constants {
 	public static final String DISPLAY_DOSAGE_MAPPING = "/displayDosage";
 
 	public static final String GET_ALL_DOSAGE = "/getAllDosage";
-	
-	public static final String DOSAGE_ADD_ERROR ="Error occured while adding adding dosage";
-	
-	public static final String PRESCRIPTION_SUCCESS="Prescribed Successfully...";
-	
-	public static final String DOSAGE_DISPLAY_ERROR ="Error occured while adding adding dosage";
-	
-	
-	
 
-	
+	public static final String DOSAGE_ADD_ERROR = "Error occured while adding adding dosage";
+
+	public static final String PRESCRIPTION_SUCCESS = "Prescribed Successfully...";
+
+	public static final String DOSAGE_DISPLAY_ERROR = "Error occured while adding adding dosage";
+
 	public static final String CREATE_DOSAGE = "/createDosage";
 	public static final String DOSAGE_URL = "/getDosage";
 	public static final String UPDATE_DOSAGE_URL = "/updateDosage";
@@ -416,20 +396,18 @@ public final class Constants {
 	public static final String APP = "application/xml";
 	public static final String JSON_CONFIG = "content-type=application/x-www-form-urlencoded";
 
-	public static final String DOSAGE_UPDATE_ERROR ="Error occured while updating dosage";
-	
+	public static final String DOSAGE_UPDATE_ERROR = "Error occured while updating dosage";
 
 	public static final String VIEW_ITEMS = "viewItems";
 
 	public static final String CREATE_ITEM = "create_item";
 
-    public static final String EDIT_ITEM_MAPPING = "/edit_item";
+	public static final String EDIT_ITEM_MAPPING = "/edit_item";
 
 	public static final String DISPLAY_ALL_ITEMS = "displayAllItems";
 
 	public static final String DISPLAY_ITEM = "allItems";
 
-	
 	public static final String CREATE_PRESCRIPTION_MAPPING = "/createPrescription";
 
 	public static final String VISIT_ID = "visitId";
@@ -462,22 +440,18 @@ public final class Constants {
 
 	public static final String DISPLAY_VISIT = "displayVisit";
 
-    public static final String IN_PATIENT = "In Patient";
+	public static final String IN_PATIENT = "In Patient";
 
 	public static final String ADD_MESSAGE = "addmsg";
 
-
-
-	public static final String INDEX = "index";
-
-
+	public static final String INDEX = "pharmacy";
 
 	public static final String CREATE_ERROR = "Already Prescribed...";
 
 	public static final String PRESCRIPTION_DISPLAY_ERROR = "Error occured while display Prescription";
 
 	public static final String PRESCRIPTION_UPDATE_ERROR = "Error occured while updating Prescription";
-
-
+	
+	public static final String SEARCH_PATIENT_BYNAME="/searchPatientByName";
 
 }

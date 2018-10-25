@@ -42,7 +42,7 @@ public class MedicineController {
      */  
     @RequestMapping(value="/pharmacy", method=RequestMethod.GET)
     private ModelAndView main() {
-         return new ModelAndView("index");
+         return new ModelAndView("pharmacy");
     }
 
     /**
@@ -50,7 +50,7 @@ public class MedicineController {
      */
     @RequestMapping(value="/medicine_index", method=RequestMethod.GET)
     private ModelAndView back() {
-         return new ModelAndView("index");
+         return new ModelAndView("pharmacy");
     }
 
     /**

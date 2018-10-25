@@ -3,6 +3,8 @@ package com.ideas2it.hospitalmanagement.patient.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.ideas2it.hospitalmanagement.address.model.Address;
 import com.ideas2it.hospitalmanagement.commons.Constants;
 import com.ideas2it.hospitalmanagement.commons.enums.Gender;
@@ -208,11 +210,12 @@ public class PatientController {
      */
     @RequestMapping(value = Constants.SEARCH_PATIENT, method = {RequestMethod.POST
         ,RequestMethod.GET})
-    public ModelAndView searchPatient(@RequestParam(Constants.ID)
-            Integer patientId) {
+    public ModelAndView searchPatient(@RequestParam(Constants.ID) 
+        Integer patientId, HttpSession session) {
 
         try {
             Patient patient = patientService.getPatientById(patientId);
+            session.setAttribute(Constants.PATIENT_OBJECT, patient);
             return new ModelAndView(Constants.SEARCH_PATIENT_JSP, Constants.
             	PATIENT_OBJECT, patient);
         } catch (ApplicationException e) {
@@ -277,18 +280,4 @@ public class PatientController {
         }
     }
 
-    @RequestMapping(value="/searchPatientByName", produces={"application/json",
-            "application/xml"},consumes="application/json",headers = "content-type=application/x-www-form-urlencoded",
-             method = RequestMethod.GET)
-    @ResponseBody
-    public String searchPatientByName(@RequestParam("name") String name) {
-    	String searchedPatients = null;
-    	try {
-            List<Patient> patients = patientService.retrievePatientsByName(name);
-            
-        } catch (ApplicationException e) {
-            Logger.error(e);
-        }
-        return searchedPatients;
-    }
 }

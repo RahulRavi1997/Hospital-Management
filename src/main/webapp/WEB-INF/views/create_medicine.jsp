@@ -44,6 +44,24 @@ button {
         </div>
         </form>   
                 </li>
+          <li>
+            <a href="createUser">Create User </a> 
+          </li>
+          <li>
+            <a href="displayUsers">Display Users</a>
+          </li>
+          <li>
+            <a href="createPhysician">Create Physician</a> 
+          </li>
+          <li>
+            <a href="displayPhysicians">Display Physicians</a>
+          </li>
+          <li>
+            <a href="pharmacy">Pharmacy</a>
+          </li>
+<li>
+<a href="DisplayAllWards">Display Wards</a><br>
+</li>
             </ul>
         </div>    
 <h2 align="center">Medicine Management</h2>

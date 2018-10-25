@@ -8,13 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ideas2it.hospitalmanagement.commons.Constants;
 import com.ideas2it.hospitalmanagement.diagnosis.model.Diagnosis;
 import com.ideas2it.hospitalmanagement.diagnosis.service.DiagnosisService;
-import com.ideas2it.hospitalmanagement.logger.Logger;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 
 /**
@@ -28,13 +27,11 @@ import com.ideas2it.hospitalmanagement.exception.ApplicationException;
  */
 @Controller
 public class DiagnosisController {
-	public static final String CREATE_DIAGNOSIS_MAPPING = "/create_diagnosis";
 
+	public static final String CREATE_DIAGNOSIS_MAPPING = "/create_diagnosis";
 	public static final String VIEW_ALL_DIAGNOSIS_MAPPING = "/viewAllDiagnosis";
 	public static final String EDIT_DIAGNOSIS_MAPPING = "/edit_diagnosis";
-
 	public static final String DISPLAY_ALL_DIAGNOSIS = "DisplayAllDiagnosis";
-
 	public static final String DIAGNOSIS = "Diagnosis";
 
 	private DiagnosisService diagnosisService = null;
@@ -51,17 +48,16 @@ public class DiagnosisController {
 	 * This Method is used to redirect user to the webpage with the form used to
 	 * create and add a new Diagnosis.
 	 *
-	 * @param model
-	 *            a Model object which is used to add the diagnosis information as
-	 *            an attribute to the view Layer.
+	 * @param visitId visit Id of particular diagnosis.
+	 * @param model   A Model object which is used to add the diagnosis information
+	 *                as an attribute to the view Layer.
 	 * @return modelAndView a ModelAndView object which is used to add attributes to
 	 *         a model and redirect it to a view such as a jsp page.
 	 */
 	@RequestMapping(value = CREATE_DIAGNOSIS_MAPPING, method = RequestMethod.POST)
-	private ModelAndView redirectToCreateDiagnosis() {
-
+	private ModelAndView redirectToCreateDiagnosis(@RequestParam(Constants.VISIT_ID) Integer visitId) {
 		Diagnosis diagnosis = new Diagnosis();
-		diagnosis.setVisitId(1);
+		diagnosis.setVisitId(visitId);
 		diagnosis.setDate(new Date());
 		return new ModelAndView(Constants.CREATE_DIAGNOSIS_JSP, Constants.DIAGNOSIS, diagnosis);
 	}
@@ -69,26 +65,25 @@ public class DiagnosisController {
 	/**
 	 * This Method is used to add a new diagnosis after obtaining all the details
 	 * from the doctor. Redirects to error page if any error occurs.
-	 *
-	 * @param diagnosis
-	 *            an Diagnnosis object with all the diagnosis information to be
-	 *            added.
+	 * 
+	 * @param diagnosis an Diagnnosis object with all the diagnosis information to
+	 *                  be added
+	 * @param Model     Object is uesd to send data to client View.
+	 * 
 	 * @return modelAndView a ModelAndView object which is used to add attributes to
 	 *         a model and redirect it to a view such as a jsp page.
 	 */
 	@RequestMapping(value = Constants.ADD_DIAGNOSIS_MAPPING, method = RequestMethod.POST)
 	private ModelAndView createDiagnosis(@ModelAttribute Diagnosis diagnosis, Model model) {
-		ModelAndView modelAndView = redirectToCreateDiagnosis();
+		ModelAndView modelAndView = new ModelAndView("displayVisit");
 		try {
-			diagnosisService.createDiagnosis(diagnosis);
+			diagnosisService.addDiagnosis(diagnosis);
 			model.addAttribute(Constants.MESSAGE, Constants.DIAGONSIS_ADD_SUCCESS_MESSAGE);
 			return modelAndView;
 		} catch (ApplicationException e) {
-			Logger.error(e);
 			return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
-					String.format(Constants.DIAGNOSIS_ADDITION_EXCEPTION, diagnosis.getId()));
+					Constants.DIAGNOSIS_ADDITION_EXCEPTION);
 		}
-
 	}
 
 	/**
@@ -97,14 +92,12 @@ public class DiagnosisController {
 	 * @return modelAndView a ModelAndView object which is used to add the list as
 	 *         attributes
 	 */
-	@RequestMapping(value = VIEW_ALL_DIAGNOSIS_MAPPING, method = RequestMethod.POST)
-	public ModelAndView viewAllDiagnosis() {
+	@RequestMapping(value = "/viewAllDiagnosis", method = RequestMethod.POST)
+	public ModelAndView viewAllDiagnosis(@RequestParam(Constants.VISIT_ID) Integer visitId) {
 		try {
-			List<Diagnosis> diagnosis = diagnosisService.retrieveDiagnosisByVisit(1);
-			System.out.println(diagnosis);
-			return new ModelAndView(DISPLAY_ALL_DIAGNOSIS, DIAGNOSIS, diagnosis);
+			List<Diagnosis> diagnosis = diagnosisService.retrieveDiagnosisByVisit(visitId);
+			return new ModelAndView("DisplayAllDiagnosis", "diagnosis", diagnosis);
 		} catch (ApplicationException e) {
-			Logger.error(e);
 			return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE, Constants.ITEM_DISPLAY_EXCEPTION);
 		}
 	}
@@ -114,20 +107,17 @@ public class DiagnosisController {
 	 * Method to update existing diagnosis Details. Returns true if the entry is
 	 * modified successfully, else returns false if the entry is not found.
 	 * </p>
-	 *
-	 * @param id
-	 *            an Integer indicating the id of the diagnosis information to be
-	 *            modified.
+	 * 
+	 * @param id an Integer indicating the Visit id of the to be modified.
 	 * @return modelAndView a ModelAndView object which is used to add attributes to
 	 *         a model and redirect it to a view such as a jsp page.
 	 */
-	@RequestMapping(value = EDIT_DIAGNOSIS_MAPPING, method = RequestMethod.POST)
+	@RequestMapping(value = "/edit_diagnosis", method = RequestMethod.POST)
 	private ModelAndView redirectToEditDiagnosis(@RequestParam(Constants.ID) int id) {
 		try {
 			return new ModelAndView(Constants.CREATE_DIAGNOSIS_JSP, Constants.DIAGNOSIS,
 					diagnosisService.retrieveDiagnosisById(id));
 		} catch (ApplicationException e) {
-			Logger.error(e);
 			return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
 					String.format(Constants.DIAGNOSIS_EDIT_EXCEPTION, id));
 		}
@@ -139,9 +129,9 @@ public class DiagnosisController {
 	 * Method to save the updated diagnosis Details to Database. Returns true if the
 	 * entry is modified successfully, else returns false if the entry is not found.
 	 * </p>
-	 *
-	 * @param a
-	 *            modified Diagnosis object to be saved.
+	 * 
+	 * @param Model     Object is used to send data to client View.
+	 * @param Diagnosis a modified Diagnosis object to be saved.
 	 * @return modelAndView a ModelAndView object which is used to list all
 	 *         diagnosis in a list
 	 */
@@ -151,13 +141,11 @@ public class DiagnosisController {
 		try {
 			diagnosisService.modifyDiagnosis(diagnosis);
 			model.addAttribute(Constants.MESSAGE, Constants.DIAGNOSIS_UPDATE_SUCCESS_MESSAGE);
-			modelAndView = viewAllDiagnosis();
+			modelAndView = viewAllDiagnosis(diagnosis.getVisitId());
 			return modelAndView;
 		} catch (ApplicationException e) {
-			Logger.error(e);
 			return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,
 					String.format(Constants.DIAGNOSIS_EDIT_EXCEPTION, diagnosis.getId()));
 		}
-
 	}
 }

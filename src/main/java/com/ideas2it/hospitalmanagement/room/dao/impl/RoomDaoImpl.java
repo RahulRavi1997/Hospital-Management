@@ -7,7 +7,6 @@ import com.ideas2it.hospitalmanagement.room.common.Constants;
 import com.ideas2it.hospitalmanagement.room.dao.RoomDao;
 import com.ideas2it.hospitalmanagement.room.model.Room;
 
-
 /**
  * RoomDaoImpl is the dao class implements the RoomDao interface and
  * it is processing all the interface methods and this class is having its own

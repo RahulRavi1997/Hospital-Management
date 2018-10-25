@@ -94,7 +94,7 @@
 
     <bean id="bedServiceImpl" class="com.ideas2it.hospitalmanagement.bed.service.impl.BedServiceImpl" >
         <property name="bedDao" ref="bedDaoImpl" />
-                 <property name="visitService" ref="visitServiceImpl" />
+        <property name="visitService" ref="visitServiceImpl" />
         
          <property name="wardService" ref="wardServiceImpl" />
     </bean>

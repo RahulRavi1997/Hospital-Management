@@ -43,7 +43,8 @@ button {
 </style>
 </head>
 <body>  
-<jsp:include page="header.jsp"/>
+    <jsp:include page="Access.jsp"/>
+<jsp:include page="Header.jsp"/>
      <div id="wrapper">
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
@@ -54,9 +55,23 @@ button {
 <div align="left">
 <button class="btn">Home</button>
 </div>
-</div>
 </form>  
                 </li>
+          <li>
+            <a href="createUser">Create User </a> 
+          </li>
+          <li>
+            <a href="displayUsers">Display Users</a>
+          </li>
+          <li>
+            <a href="createPhysician">Create Physician</a> 
+          </li>
+          <li>
+            <a href="displayPhysicians">Display Physicians</a>
+          </li>
+          <li>
+            <a href="pharmacy">Pharmacy</a>
+          </li>
             </ul>
         </div>    
 
@@ -101,8 +116,8 @@ button {
 </tr>
 
 </c:forEach>
-
+</table>
 
 </body>
-   <jsp:include page="footer.jsp"/>
+   <jsp:include page="Footer.jsp"/>
 </html>

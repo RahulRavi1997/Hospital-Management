@@ -11,14 +11,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import com.google.gson.Gson;
 
+import com.google.gson.Gson;
 import com.ideas2it.hospitalmanagement.commons.Constants;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.prescription.model.Prescription;
 import com.ideas2it.hospitalmanagement.prescription.service.PrescriptionService;
 import com.ideas2it.hospitalmanagement.prescriptionDetails.model.PrescriptionDetails;
-import com.ideas2it.hospitalmanagement.visit.service.VisitService;
 
 /**
  * PrescriptionController
@@ -34,8 +33,6 @@ public class PrescriptionController {
 
     private PrescriptionService prescriptionService;
 
-	private VisitService visitService;
-
 	public PrescriptionService getPrescriptionService() {
 		return prescriptionService;
 	}
@@ -44,13 +41,6 @@ public class PrescriptionController {
 		this.prescriptionService = prescriptionService;
 	}
 
-	public VisitService getVisitService() {
-		return visitService;
-	}
-
-	public void setVisitService(VisitService visitService) {
-		this.visitService = visitService;
-	}
 
 	/**
 	 * <p>
@@ -68,7 +58,7 @@ public class PrescriptionController {
 		try {
 			if (visitType.equals(Constants.OUT_PATIENT) && prescriptionService.fetchPrescriptionsByVisitId(visitId).size() != 0) {
 				modelAndView = new ModelAndView(Constants.DISPLAY_VISIT);
-				modelAndView.addObject(Constants.VISITS, visitService.getVisits());
+				// modelAndView.addObject(Constants.VISITS, visitService.getVisits());
 				modelAndView.addObject(Constants.MESSAGE, Constants.CREATE_ERROR);
 				return modelAndView;
 			} else {
@@ -129,7 +119,7 @@ public class PrescriptionController {
 				model.addAttribute(Constants.ADD_MESSAGE, Constants.PRESCRIPTION_SUCCESS);
 				return modalAndView;
 			} else {
-				modalAndView.addObject(Constants.VISITS, visitService.getVisits());
+				// modalAndView.addObject(Constants.VISITS, visitService.getVisits());
 				modalAndView.addObject(Constants.MESSAGE, Constants.CREATE_ERROR);
 				return modalAndView;
 			}

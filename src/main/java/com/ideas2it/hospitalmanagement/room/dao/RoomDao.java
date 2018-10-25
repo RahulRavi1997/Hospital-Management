@@ -5,8 +5,6 @@ import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.room.model.Room;
 import com.ideas2it.hospitalmanagement.ward.model.Ward;
 
-
-
 /**
  * RoomDao is the DAO interface program which is having the methods that is processing the data
  * access operations of the room related Details.
