@@ -112,7 +112,6 @@ public class PatientDaoImpl extends GenericDao implements PatientDao {
 		try {
 			return super.getAll(Patient.class);
 		} catch (ApplicationException e) {
-			Logger.error(Constants.PATIENT_DISPLAY_EXCEPTION, e);
 			throw new ApplicationException(Constants.PATIENT_DISPLAY_EXCEPTION, e);
 		}
 	}
@@ -128,20 +127,7 @@ public class PatientDaoImpl extends GenericDao implements PatientDao {
 			query.setParameterList(IDS, ids); 
 			return query.list();
 		} catch (ApplicationException e) {
-			Logger.error(Constants.PATIENT_DISPLAY_EXCEPTION, e);
-			throw new ApplicationException(Constants.PATIENT_DISPLAY_EXCEPTION, e);
-		}
-	}
-
-    public List<Patient> getPatientsByName(String name) throws ApplicationException {
-
-	    try {
-			Session session = super.getSession();
-			Query query = session.createQuery(PATIENTS_IN_NAMES);
-			query.setParameter(NAME, name+"%"); 
-			return query.list();
-		} catch (ApplicationException e) {
-			Logger.error(Constants.PATIENT_DISPLAY_EXCEPTION, e);
+			Logger.error(String.format(Constants.PATIENT_DISPLAY_EXCEPTION,ids), e);
 			throw new ApplicationException(Constants.PATIENT_DISPLAY_EXCEPTION, e);
 		}
 	}

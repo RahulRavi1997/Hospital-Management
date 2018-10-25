@@ -12,9 +12,8 @@ import com.ideas2it.hospitalmanagement.visit.model.Visit;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
- * Patient class is the Patient class is having the getters and setter methods
- * which is used to get the values from the user. This class acts as an Model
- * for the Patient Details.
+ * Patient class is the Patient class which contains the Patient Details. 
+ * These Patient Credentials is used and the Details about the patient health can be maintained.
  *
  * @author  Arul Murugan
  * @version 1.0

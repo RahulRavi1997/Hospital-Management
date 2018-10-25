@@ -86,7 +86,6 @@ public class VisitDaoImpl extends GenericDao implements VisitDao {
         try {
             return super.getAll(Visit.class);
         } catch (final ApplicationException e) {
-            Logger.error(Constants.VISIT_DISPLAY_EXCEPTION, e);
             throw new ApplicationException(Constants.VISIT_DISPLAY_EXCEPTION, e);
         }
     }
@@ -103,7 +102,7 @@ public class VisitDaoImpl extends GenericDao implements VisitDao {
             query.setParameterList(IDS, ids);
             return query.list();
         } catch (final ApplicationException e) {
-            Logger.error(Constants.VISIT_DISPLAY_EXCEPTION, e);
+            Logger.error(String.format(Constants.VISIT_DISPLAY_EXCEPTION,ids), e);
             throw new ApplicationException(Constants.VISIT_DISPLAY_EXCEPTION, e);
         } finally {
             GenericDao.close(session);
@@ -139,7 +138,7 @@ public class VisitDaoImpl extends GenericDao implements VisitDao {
 		try {
             return super.getAll(Visit.class);
 		} catch (ApplicationException e) {
-			Logger.error(Constants.VISIT_DISPLAY_EXCEPTION, e);
+			Logger.error(String.format(Constants.VISIT_DISPLAY_BY_PATIENT_TYPE,patientType), e);
 			throw new ApplicationException(Constants.VISIT_DISPLAY_EXCEPTION, e);
 		}
 	}
@@ -155,7 +154,7 @@ public class VisitDaoImpl extends GenericDao implements VisitDao {
             query.setParameter(DATE, java.time.LocalDate.now());
             return (Visit) query.uniqueResult();
         } catch (final ApplicationException e) {
-            Logger.error(Constants.VISIT_DISPLAY_EXCEPTION, e);
+            Logger.error(String.format(Constants.VISIT_DISPLAY_BY_PATIENT_ID_EXCEPTION,patientId), e);
             throw new ApplicationException(Constants.VISIT_DISPLAY_EXCEPTION, e);
         } finally {
             GenericDao.close(session);

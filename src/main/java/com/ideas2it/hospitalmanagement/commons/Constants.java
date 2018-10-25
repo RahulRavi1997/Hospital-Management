@@ -264,7 +264,7 @@ public final class Constants {
 	public static final String PATIENT_SEARCH_EXCEPTION = "Error while searching patient id %d\n";
 	public static final String PATIENT_DELETE_EXCEPTION = "Error while deleting patient id %d\n";
 	public static final String PATIENT_EDIT_EXCEPTION = "Error while modifying patient id %d\n";
-	public static final String PATIENT_DISPLAY_EXCEPTION = "Error while displaying patients\n";
+	public static final String PATIENT_DISPLAY_EXCEPTION = "Error while displaying patients by ids:%d\n";
 	public static final String PATIENT_RESTORE_EXCEPTION = "Error while restoring patient id %d\n";
 	public static final String PATIENT_OBJECT = "patient";
 
@@ -316,7 +316,9 @@ public final class Constants {
 	public static final String VISIT_SEARCH_EXCEPTION = "Error while searching visit id %d\n";
 	public static final String VISIT_DELETE_EXCEPTION = "Error while deleting visit id %d\n";
 	public static final String VISIT_EDIT_EXCEPTION = "Error while modifying visit id %d\n";
-	public static final String VISIT_DISPLAY_EXCEPTION = "Error while displaying visits\n";
+	public static final String VISIT_DISPLAY_EXCEPTION = "Error while displaying visits of Ids %d\n";
+	public static final String VISIT_DISPLAY_BY_PATIENT_TYPE = "Error while displaying visit of Patient Type:%s";
+	public static final String VISIT_DISPLAY_BY_PATIENT_ID_EXCEPTION = "Error while displaying visit of Patient Id:%d";
 	public static final String VISIT_RESTORE_EXCEPTION = "Error while restoring visit id %d\n";
 	public static final String VISIT_OBJECT = "visit";
 	public static final String VISIT_OBJECTS = "visits";

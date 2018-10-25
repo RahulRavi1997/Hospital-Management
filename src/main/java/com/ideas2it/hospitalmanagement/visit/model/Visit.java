@@ -8,9 +8,8 @@ import com.ideas2it.hospitalmanagement.patient.model.Patient;
 import com.ideas2it.hospitalmanagement.physician.model.Physician;
 
 /**
- * Visit class is the Entity class is having the getters and setter methods
- * which monitors Patient Visit to the Hospital.This class acts as an Model
- * for the Visit Details of an Patient.
+ * Visit class is the model class which monitors Patient Visit to the Hospital.
+ * An Visit Object is Created Each time when Patient Visits the Hospital.
  *
  * @author  Arul Murugan
  * @version 1.0

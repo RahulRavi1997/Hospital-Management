@@ -93,10 +93,4 @@ public class PatientServiceImpl implements PatientService {
         return patientDao.getPatientsByIds(ids);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public List<Patient> retrievePatientsByName(final String name) throws ApplicationException {
-        return patientDao.getPatientsByName(name);
-    }
 }

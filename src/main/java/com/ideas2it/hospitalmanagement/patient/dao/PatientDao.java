@@ -101,16 +101,4 @@ public interface PatientDao {
      *                              displaying all Patients.
      */
     public List<Patient> getPatientsByIds(Integer[] ids) throws ApplicationException;
-
-    /**
-     * <p>
-     * This Method is used to obtain an List of all selected Patients by Name.
-     * </p>
-     *
-     * @param name an String value from which alike patients name is fetched from the Database.
-     * @return List of Patient which matches the given String name.
-     * @throws ApplicationException An exception created for catching exceptions that occur while
-     *                              displaying all Patients.
-     */
-    public List<Patient> getPatientsByName(String name) throws ApplicationException;
 }

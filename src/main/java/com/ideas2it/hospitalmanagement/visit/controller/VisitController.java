@@ -88,7 +88,6 @@ public class VisitController {
             visitService.addVisit(visit, patientId, physicianId);
             return new ModelAndView(Constants.SEARCH_VISIT_JSP, Constants.VISIT_OBJECT, visit);
         } catch (final ApplicationException e) {
-            Logger.error(e);
             return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE, Constants.VISIT_ADD_FAILED);
         }
     }
@@ -116,7 +115,6 @@ public class VisitController {
             model.addAttribute(Constants.SPECIALISATIONS, Specialisation.values());
             return new ModelAndView(Constants.UPDATE_VISIT_JSP, Constants.VISIT_OBJECT, visit);
         } catch (final ApplicationException e) {
-            Logger.error(e);
             return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE, Constants.VISIT_SEARCH_FAILED);
         }
     }
@@ -141,7 +139,6 @@ public class VisitController {
             visitService.modifyVisit(visit, patientId, physicianId);
             return new ModelAndView(Constants.SEARCH_VISIT_JSP, Constants.VISIT_OBJECT, visit);
         } catch (final ApplicationException e) {
-            Logger.error(e);
             return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE, Constants.VISIT_UPDATE_FAILED);
         }
     }
@@ -169,7 +166,6 @@ public class VisitController {
             session.setAttribute(Constants.PATIENT_OBJECT, visit.getPatient());
             return new ModelAndView(Constants.SEARCH_VISIT_JSP, Constants.VISIT_OBJECT, visit);
         } catch (final ApplicationException e) {
-            Logger.error(e);
             return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE, Constants.VISIT_SEARCH_FAILED);
         }
     }
@@ -191,7 +187,6 @@ public class VisitController {
             final List<Visit> visits = visitService.getVisits();
             return new ModelAndView(Constants.DISPLAY_VISIT_JSP, Constants.VISIT_OBJECTS, visits);
         } catch (final ApplicationException e) {
-            Logger.error(e);
             return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE, Constants.VISIT_DISPLAY_FAILED);
         }
     }
@@ -214,7 +209,6 @@ public class VisitController {
             final List<Visit> visits = visitService.getVisitsByPhysicianId(physicianId);
             return new ModelAndView(Constants.PHYSICIAN_DISPLAY_VISIT_JSP, Constants.VISIT_OBJECTS, visits);
         } catch (final ApplicationException e) {
-            Logger.error(e);
             return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE, Constants.VISIT_DISPLAY_FAILED);
         }
     }
@@ -255,7 +249,6 @@ public class VisitController {
                 return getVisitDetailsFromUser(model);
             }
         } catch (final ApplicationException e) {
-            Logger.error(e);
             return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE, Constants.VISIT_SEARCH_FAILED);
         }
     }
@@ -288,7 +281,6 @@ public class VisitController {
                 return getVisitDetailsFromUser(model);
             }
         } catch (final ApplicationException e) {
-            Logger.error(e);
             return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE, Constants.VISIT_SEARCH_FAILED);
         }
     }
