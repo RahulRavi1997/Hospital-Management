@@ -15,9 +15,9 @@
 
   </head>
   <body>
-<jsp:include page="header.jsp"/>
+<jsp:include page="Header.jsp"/>
+    <jsp:include page="Access.jsp"/>
      <div id="wrapper">
-        <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
@@ -25,6 +25,19 @@
                         Home
                     </a>
                 </li>
+          <li>
+            <a href="createUser">Create User </a> 
+          </li>
+          <li>
+            <a href="displayUsers">Display Users</a>
+          </li>
+          <li>
+            <a href="createPhysician">Create Physician</a> 
+          </li>
+          <li>
+            <a href="displayPhysicians">Display Physicians</a>
+          </li>
+
              <li>
 	           <a href="pharmacy">Pharmacy</a>
                 </li>

@@ -16,7 +16,7 @@
 	<br>
 	<jsp:include page="Header.jsp" />
 	<div class="row">
-		<form:form commandName="diagnosis" action = "displayVisits" >
+		<form:form commandName="diagnosis" action = "index" >
 			<form:input path="id" type="hidden" />
 			<div class="col-sm-4">
 			</div>

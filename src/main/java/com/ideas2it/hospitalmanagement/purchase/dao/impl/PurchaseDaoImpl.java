@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ideas2it.hospitalmanagement.commons.Constants;
 import com.ideas2it.hospitalmanagement.purchase.dao.PurchaseDao;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
+import com.ideas2it.hospitalmanagement.logger.Logger;
 import com.ideas2it.hospitalmanagement.medicine.model.Medicine;
 import com.ideas2it.hospitalmanagement.purchase.model.Purchase;
 import com.ideas2it.hospitalmanagement.purchaseDetails.model.PurchaseDetails;
@@ -39,6 +40,8 @@ public class PurchaseDaoImpl extends GenericDao implements PurchaseDao {
         try {
 			return (null != super.save(purchase));
         } catch (ApplicationException e) {
+            Logger.error(String.format
+                (Constants.PURCHASE_ADDITION_EXCEPTION, purchase.getId()), e);
             throw new ApplicationException(String.format
                 (Constants.PURCHASE_ADDITION_EXCEPTION, purchase.getId()), e);            
         }
@@ -51,6 +54,8 @@ public class PurchaseDaoImpl extends GenericDao implements PurchaseDao {
     	try {
 			return super.update(purchase);
         } catch (ApplicationException e) {
+            Logger.error(String.format
+                (Constants.PURCHASE_UPDATE_EXCEPTION, purchase.getId()), e);
             throw new ApplicationException(String.format
                 (Constants.PURCHASE_UPDATE_EXCEPTION, purchase.getId()), e);
         }
@@ -71,6 +76,7 @@ public class PurchaseDaoImpl extends GenericDao implements PurchaseDao {
     	try {
 			return super.getAll(Purchase.class);
         } catch (ApplicationException e) {
+            Logger.error(e);
             throw new ApplicationException(e);
         } 
     }
@@ -82,6 +88,8 @@ public class PurchaseDaoImpl extends GenericDao implements PurchaseDao {
     	try {
 			return super.get(Purchase.class, purchaseId);
         } catch (ApplicationException e) {
+            Logger.error(String.format
+                (Constants.PURCHASE_SEARCH_EXCEPTION, purchaseId), e);
             throw new ApplicationException(String.format
                 (Constants.PURCHASE_SEARCH_EXCEPTION, purchaseId), e);
         }
@@ -96,6 +104,9 @@ public class PurchaseDaoImpl extends GenericDao implements PurchaseDao {
 		return updatePurchase(purchase);
 	}
 
+    /**
+	 *  {@inheritDoc}
+	 */
     public boolean updateMedicine(PurchaseDetails purchaseDetails, double quantity) throws ApplicationException {
         try {
 			Session session = super.getSession();
@@ -114,7 +125,8 @@ public class PurchaseDaoImpl extends GenericDao implements PurchaseDao {
                 return false;
             }
         } catch (ApplicationException e) {
-			throw new ApplicationException(Constants.MEDICINE_DISPLAY_EXCEPTION, e);
+            Logger.error(Constants.MEDICINE_UPDATE_EXCEPTION, e);
+			throw new ApplicationException(Constants.MEDICINE_UPDATE_EXCEPTION, e);
 		}
 	}
 }

@@ -7,7 +7,7 @@
     <span class="icon-bar"></span>
     </button>
     <form action="searchPatient" method="POST"><input type="hidden" name="id" value="${sessionScope.patient.id}"/>
-      <a class="navbar-brand" href="#"><button class="button-as-link" type=submit>${sessionScope.patient.id}</button></a>
+      <a class="navbar-brand" href="#">${sessionScope.patient.id}</a>
     </form>
   </div>
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

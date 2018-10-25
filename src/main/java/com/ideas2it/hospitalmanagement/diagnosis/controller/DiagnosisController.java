@@ -48,8 +48,9 @@ public class DiagnosisController {
 	 *         a model and redirect it to a view such as a jsp page.
 	 */
 	@RequestMapping(value = "/create_diagnosis", method = RequestMethod.POST)
-	private ModelAndView redirectToCreateDiagnosis() {
+	private ModelAndView redirectToCreateDiagnosis(@RequestParam(Constants.VISIT_ID) Integer visitId) {
         Diagnosis diagnosis = new Diagnosis();
+        diagnosis.setVisitId(visitId); 
 		diagnosis.setDate(new Date());
 		return new ModelAndView(Constants.CREATE_DIAGNOSIS_JSP, Constants.DIAGNOSIS, diagnosis);
 	}
@@ -65,9 +66,9 @@ public class DiagnosisController {
 	 */
 	@RequestMapping(value = Constants.ADD_DIAGNOSIS_MAPPING, method = RequestMethod.POST)
 	private ModelAndView createDiagnosis(@ModelAttribute Diagnosis diagnosis, Model model) {
-		ModelAndView modelAndView = redirectToCreateDiagnosis();
+		ModelAndView modelAndView = new ModelAndView("displayVisit");
 		try {
-			diagnosisService.createDiagnosis(diagnosis);
+			diagnosisService.addDiagnosis(diagnosis);
 			model.addAttribute(Constants.MESSAGE, Constants.DIAGONSIS_ADD_SUCCESS_MESSAGE);
 			return modelAndView;
 		} catch (ApplicationException e) {
@@ -84,9 +85,9 @@ public class DiagnosisController {
 	 *         attributes
 	 */
 	@RequestMapping(value = "/viewAllDiagnosis", method = RequestMethod.POST)
-	public ModelAndView viewAllDiagnosis() {
+	public ModelAndView viewAllDiagnosis(@RequestParam(Constants.VISIT_ID) Integer visitId) {
 		try {
-			List<Diagnosis> diagnosis = diagnosisService.retrieveDiagnosisByVisit(1);
+			List<Diagnosis> diagnosis = diagnosisService.retrieveDiagnosisByVisit(visitId);
 			System.out.println(diagnosis);
 			return new ModelAndView("DisplayAllDiagnosis", "diagnosis", diagnosis);
 		} catch (ApplicationException e) {
@@ -133,7 +134,7 @@ public class DiagnosisController {
 		try {
 			diagnosisService.modifyDiagnosis(diagnosis);
 			model.addAttribute(Constants.MESSAGE, Constants.DIAGNOSIS_UPDATE_SUCCESS_MESSAGE);
-			modelAndView = viewAllDiagnosis();
+			modelAndView = viewAllDiagnosis(diagnosis.getVisitId());
 			return modelAndView;
 		} catch (ApplicationException e) {
             return new ModelAndView(Constants.ERROR_JSP, Constants.ERROR_MESSAGE,

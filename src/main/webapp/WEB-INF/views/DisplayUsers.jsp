@@ -79,6 +79,7 @@
                       <tr>
                         <th>ID</th>
                         <th>Email</th>
+                        <th>Role</th>
                         <th>Action</th>
                         <th>Action</th>
                       </tr>
@@ -88,6 +89,7 @@
                         <c:forEach var="user" items="${users}">
                           <td>${user.id}</td>
                           <td>${user.email}</td>
+                          <td>${user.role}</td>
                           <c:if test="${!user.isActive()}">
                             <td colspan="2" class="type">
                               <form action="restoreUser" method="POST">

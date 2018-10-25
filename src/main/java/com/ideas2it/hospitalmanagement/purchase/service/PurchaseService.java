@@ -71,8 +71,26 @@ public interface PurchaseService {
      */
     public Purchase searchPurchase(int purchaseId) throws ApplicationException;
     
+    /**
+     * <p>
+     * This method is used to restore the purchase 
+     * and return its details from the database.
+     * </p>
+     *
+     * @param purchaseId Id of the purchase.
+     *
+     * @return Purchase purchase details.
+     */
    	public boolean restorePurchase(int id) throws ApplicationException;
 
+    /**
+     * <p>
+     * This method is used to update the medicines to the master medicine
+     * details in the database.
+     * </p>
+     *
+     * @return true if purchase is updated.
+     */
     public boolean updateMedicine(PurchaseDetails purchaseDetails) throws ApplicationException;   
 
 }

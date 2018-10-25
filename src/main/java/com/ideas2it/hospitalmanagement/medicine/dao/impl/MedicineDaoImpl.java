@@ -10,6 +10,7 @@ import org.hibernate.criterion.Restrictions;
 import com.ideas2it.hospitalmanagement.commons.Constants;
 import com.ideas2it.hospitalmanagement.medicine.dao.MedicineDao;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
+import com.ideas2it.hospitalmanagement.logger.Logger;
 import com.ideas2it.hospitalmanagement.medicine.model.Medicine;
 import com.ideas2it.hospitalmanagement.genericdao.GenericDao;
 
@@ -39,6 +40,8 @@ public class MedicineDaoImpl extends GenericDao implements MedicineDao {
         try {
 			return (null != super.save(medicine));
         } catch (ApplicationException e) {
+            Logger.error(String.format
+                (Constants.MEDICINE_ADDITION_EXCEPTION, medicine.getId()), e);
             throw new ApplicationException(String.format
                 (Constants.MEDICINE_ADDITION_EXCEPTION, medicine.getId()), e);            
         }
@@ -51,6 +54,8 @@ public class MedicineDaoImpl extends GenericDao implements MedicineDao {
         try {
 			return super.update(medicine);
         } catch (ApplicationException e) {
+            Logger.error(String.format
+                (Constants.MEDICINE_UPDATE_EXCEPTION, medicine.getId()), e);
             throw new ApplicationException(String.format
                 (Constants.MEDICINE_UPDATE_EXCEPTION, medicine.getId()), e);
         }
@@ -71,6 +76,7 @@ public class MedicineDaoImpl extends GenericDao implements MedicineDao {
         try {
 			return super.getAll(Medicine.class);
         } catch (ApplicationException e) {
+            Logger.error(e);
             throw new ApplicationException(e);
         } 
     }
@@ -82,6 +88,8 @@ public class MedicineDaoImpl extends GenericDao implements MedicineDao {
         try {
 			return super.get(Medicine.class, medicineId);
         } catch (ApplicationException e) {
+            Logger.error(String.format
+                (Constants.MEDICINE_SEARCH_EXCEPTION, medicineId), e);
             throw new ApplicationException(String.format
                 (Constants.MEDICINE_SEARCH_EXCEPTION, medicineId), e);
         }
@@ -103,6 +111,7 @@ public class MedicineDaoImpl extends GenericDao implements MedicineDao {
 			query.setParameter(NAME, name+"%");
 			return query.list();
 		} catch (ApplicationException e) {
+            Logger.error(Constants.MEDICINE_DISPLAY_EXCEPTION, e);
 			throw new ApplicationException(Constants.MEDICINE_DISPLAY_EXCEPTION, e);
 		}
 	}

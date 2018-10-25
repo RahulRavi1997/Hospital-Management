@@ -1,5 +1,6 @@
 package com.ideas2it.hospitalmanagement.commons;
 
+
 /**
  * Constants Class is used to store all the constants in other parts of the application. It is
  * created to reduce repeated Strings and code Size.
@@ -255,14 +256,14 @@ public final class Constants {
 	public static final String PHYSICIAN_DELETE_SUCCESS_MESSAGE = "Physician deleted Successfully";
 	public static final String PHYSICIAN_UPDATE_SUCCESS_MESSAGE = "Physician Updated Successfully";
 
-	public static final String CREATE_PATIENT = "/createpatient";
-	public static final String ADD_PATIENT = "/addpatient";
-	public static final String MODIFY_PATIENT = "/modifypatient";
-	public static final String UPDATE_PATIENT = "/updatepatient";
-	public static final String DELETE_PATIENT = "/deletepatient";
-	public static final String SEARCH_PATIENT = "/searchpatient";
-	public static final String DISPLAY_PATIENTS = "/displaypatients";
-	public static final String ACTIVATE_PATIENT = "/activatepatient";
+	public static final String CREATE_PATIENT = "/createPatient";
+	public static final String ADD_PATIENT = "/addPatient";
+	public static final String MODIFY_PATIENT = "/modifyPatient";
+	public static final String UPDATE_PATIENT = "/updatePatient";
+	public static final String DELETE_PATIENT = "/deletePatient";
+	public static final String SEARCH_PATIENT = "/searchPatient";
+	public static final String DISPLAY_PATIENTS = "/displayPatients";
+	public static final String ACTIVATE_PATIENT = "/activatePatient";
 
 	public static final String PATIENT = "/patient";
 	public static final String PATIENTS = "/patients";
@@ -319,7 +320,7 @@ public final class Constants {
 	public static final String VISITS = "/visits";
 	public static final String CREATE_VISIT_JSP = "CreateVisit";
 	public static final String SEARCH_VISIT_JSP = "SearchVisit";
-	public static final String DISPLAY_VISIT_JSP = "displayVisit";
+	public static final String DISPLAY_VISIT_JSP = "DisplayVisit";
 
 	public static final String VISIT_ADD_FAILED = "Visit Addition Failed";
 	public static final String VISIT_UPDATE_FAILED = "Visit Updation Failed";
@@ -469,7 +470,7 @@ public final class Constants {
 
 
 
-	public static final String INDEX = "index";
+	public static final String INDEX = "pharmacy";
 
 
 

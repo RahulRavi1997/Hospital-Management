@@ -229,6 +229,7 @@ to {
 									</td>
 									<td>
 										<form action="/create_diagnosis?id=${prescription.id}" method="post">
+                                            <input type="hidden" name="visitId" value="${visit.id}">
 											<button class="btn btn-primary" type="submit" />
 											<i class="fa fa-plus"></i>&nbsp;Add Diagnosis
 											</button>
@@ -236,6 +237,7 @@ to {
 									</td>
 									<td>
 										<form action="/viewAllDiagnosis" method="post">
+	<input type="hidden" name="visitId" value="${visit.id}">
 											<button class="btn btn-success" type="submit" />
 											<i class="fa fa-eye"></i>&nbsp;View Diagnosis
 											</button>
@@ -251,7 +253,7 @@ to {
 	</div>
 	<div class="right_div"></div>
 	<div id="id01" class="modal">
-		<form class="modal-content" action="displayVisits" method="get">
+		<form class="modal-content" action="index" method="get">
 			<button type="submit"
 				onclick="document.getElementById('id01').style.display='none'"
 				class="close" title="Close Modal">&times;</button>
@@ -314,8 +316,8 @@ to {
 											</c:when>
 										</c:choose>
 										<div>
-								</td>
-							</tr>
+                                      </td>
+                                </tr>
 							</div>
 						</c:forEach>
 					</tbody>
@@ -326,7 +328,9 @@ to {
 <div id="snackbar">${message}</div>
 </body>
 <jsp:include page="Footer.jsp" />
+<script src="static/script/jquery.min.js"></script>
 <script>
+
 <c:choose>
 <c:when test="${prescriptions!=null}">
     window.onload = function() {
@@ -335,17 +339,21 @@ to {
 </c:when>
 </c:choose>
 
+
 $(document).ready(function(){
+    console.log("navanee");
     $(".view").click(function(){
         $(this).closest('tr').next('tr').toggle();
     });
 });
+
 
 $(document).ready(function(){
     $(".Out").click(function(){
         $(this).css('pointer-events', 'none');
     });
 });
+
 
 $(document).ready(function(){
 	  $("#myInput").on("keyup", function() {
@@ -355,6 +363,7 @@ $(document).ready(function(){
 	    });
 	  });
 	});
+
 <c:if test= "${message !=null }">
 var x = document.getElementById("snackbar");
 x.className = "show";

@@ -24,7 +24,7 @@ public class Medicine {
     }
     
     public int getId() {
-        return id;
+        return this.id;
     }
  
     public void setName(String name) {
@@ -32,7 +32,7 @@ public class Medicine {
     }
     
     public String getName() {
-        return name;
+        return this.name;
     }
    
     public void setQuantity(Double quantity) {
@@ -40,15 +40,15 @@ public class Medicine {
     }
 
     public double getQuantity() {
-        return quantity;
+        return this.quantity;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
     public Double getAmount() {
-        return amount;
+        return this.amount;
     }
 
     public void setActive(boolean active) {
@@ -56,6 +56,6 @@ public class Medicine {
     }
 
     public boolean isActive() {
-        return active;
+        return this.active;
     }
 } 

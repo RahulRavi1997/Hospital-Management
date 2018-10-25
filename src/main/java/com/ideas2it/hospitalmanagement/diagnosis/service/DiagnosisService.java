@@ -32,7 +32,7 @@ public interface DiagnosisService {
 	 *             A Custom Exception created for catching exceptions that occur
 	 *             while adding an diagnosis.
 	 */
-	public boolean createDiagnosis(Diagnosis diagnosis) throws ApplicationException;
+	public boolean addDiagnosis(Diagnosis diagnosis) throws ApplicationException;
 
 	/**
 	 * <p>

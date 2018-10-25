@@ -32,7 +32,7 @@
 					<form>
 		            &ensp;&ensp;&ensp;&ensp;&ensp;
 			    	<button type="submit" class="btn btn-danger"
-						onclick="this.form.action='displayVisits';this.form.method='get'">
+						onclick="this.form.action='index';this.form.method='get'">
 						<i class="fa fa-arrow-left" aria-hidden="true"></i>
 </i> &nbsp;Back
                     </button>

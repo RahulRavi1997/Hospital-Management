@@ -47,6 +47,7 @@ button {
     cursor: pointer; 
 }
 </style>
+    <jsp:include page="Access.jsp"/>
 <jsp:include page="header.jsp"/>
      <div id="wrapper">
         <div id="sidebar-wrapper">

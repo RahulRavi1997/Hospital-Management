@@ -31,6 +31,7 @@ button {
     cursor: pointer; 
 }
 </style>​
+    <jsp:include page="Access.jsp"/>
 </head>
 <body>
 <script>

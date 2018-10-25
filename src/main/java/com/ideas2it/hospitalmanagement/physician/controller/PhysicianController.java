@@ -254,7 +254,7 @@ public class PhysicianController {
      * @return String a String object which is used to redirect to a view such as a jsp page.
      */
     @RequestMapping(value = Constants.DISPLAY_PHYSICIANS_BY_SPECIALISATIONS_MAPPING, produces = { Constants.JSON_TYPE,
-            Constants.XML_TYPE }, consumes = "application/json", headers = Constants.FORM_HEADER, method = RequestMethod.GET)
+            Constants.XML_TYPE }, consumes = Constants.JSON_TYPE, headers = Constants.FORM_HEADER, method = RequestMethod.GET)
     private @ResponseBody String displayPhysiciansBySpecialisation(Model model,
             @RequestParam(Constants.SPECIALISATION_NAME) String specialisation) {
         try {

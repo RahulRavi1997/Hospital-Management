@@ -178,7 +178,7 @@ input[type=number]::-webkit-outer-spin-button {
 					<form>
 		            &ensp;&ensp;&ensp;&ensp;&ensp;
 			    	<button type="submit" class="btn btn-danger"
-						onclick="this.form.action='displayVisits';this.form.method='get'">
+						onclick="this.form.action='index';this.form.method='get'">
 						<i class="fa fa-trash"></i> &nbsp;Cancel
                     </button>
                     </form>
@@ -193,13 +193,107 @@ input[type=number]::-webkit-outer-spin-button {
 <script src="/static/script/jquery-1.10.2.js"></script>
 <script src="/static/script/bootstrap.min.js"></script>
 <script src="/static/script/jquery-ui.js"></script>
-<script src="static/script/script.js"></script>
-<script src="static/script/script2.js"></script>
 <script>
+
 <c:if test= "${addmsg !=null }">
    var x = document.getElementById("snackbar");
    x.className = "show";
    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 </c:if>
+
+$(document).ready(function(){
+	$("#myInput").on("keyup", function() {
+	    var value = $(this).val().toLowerCase();
+        if($.isNumeric(value)) {
+	      $("#myTable tr").filter(function() {
+	        $(this).toggle($(this).find("td:first").text().toLowerCase().indexOf(value) > -1)
+	       });
+	    } else {
+	      $("#myTable tr").filter(function() {
+	        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	      });
+	    }
+    });
+});
+
+
+
+$(document).ready(function() {
+	   $(function() {
+	       $(".dosage").autocomplete({     
+	           source : function(request, response) { $.ajax({
+	           headers: { 
+	                'Accept': 'application/json',
+	                'Content-Type': 'application/json' 
+	            },
+	                  url  : "/getAllDosage",
+	                  type : "GET",
+	                  data : {
+	                       dosage : this.term
+	                  },
+	                  dataType : "json",
+	                  success : function(data) {
+	                  response($.map(data, function(value, key) {
+	                  console.log(value);
+	                  $(".days").keyup(function () {
+	                	  var dosages = ($(this).closest("tr").find(".dosage").val()).split("-");
+	                	  var count = 0;
+	                	  for (i = 0; i < dosages.length; i++) {
+	                		  count += parseInt(dosages[i]);
+	                      } 
+	                	  console.log($(this).closest('tr').find(".days").val());
+	                	  count = count*parseInt($(this).closest('tr').find(".days").val());
+	                	  console.log(count);
+	                      $(this).closest('tr').find(".dosageQuantity").val(count);
+	                  });
+	                  return {
+	                  label: value.dosage,
+	                  value: value.dosage
+	                  };
+	                  }));
+
+	                 }
+	           });
+	        }
+	    });
+	 });
+	});
+
+
+
+$(document).ready(function() {
+$(function() {
+$(".search").autocomplete({ 
+source : function(request, response) { $.ajax({
+headers: { 
+'Accept': 'application/json',
+'Content-Type': 'application/json' 
+},
+url : "/getAllMedicines",
+type : "GET",
+data : {
+search : this.term
+},
+dataType : "json",
+success : function(data) {
+response($.map(data, function(value, key) {
+console.log(value);
+return {
+label: value.itemName,
+value: value.itemName
+};
+}));
+
+}
+});
+}
+});
+});
+});
+
+
+
+
+
 </script>
 </html>

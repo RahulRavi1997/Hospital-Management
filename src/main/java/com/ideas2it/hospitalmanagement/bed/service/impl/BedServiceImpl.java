@@ -58,6 +58,16 @@ public class BedServiceImpl extends GenericDao implements BedService {
 		    	visit.setDischargeDate(null);
 				visitService.modifyVisit(visit,visit.getPatient().getId(),visit.getPhysician().getId());
         		addBedAllocationDetails(visit, bed);
+				System.out.println("HI");
+				System.out.println("HI");
+				System.out.println("HI");
+				System.out.println("HI");
+				System.out.println("HI");
+				System.out.println("HI");
+				System.out.println("HI");
+				System.out.println("HI");
+				System.out.println("HI");
+
 				return bedDao.updateBed(bed);
 			} else {
 				return Boolean.FALSE;

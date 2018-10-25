@@ -8,6 +8,7 @@
     <i class="fa fa-linkedin w3-hover-opacity"></i> 
   </div>
 </footer>
+
 <script src="static/script/jquery.min.js"></script>
 <script src="/static/script/jquery-1.10.2.js"></script>
 <script src="/static/script/bootstrap.min.js"></script>

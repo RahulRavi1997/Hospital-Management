@@ -32,8 +32,7 @@
           </button>
           <form action="searchPatient" method="POST">
             <input type="hidden" name="id" value="${sessionScope.patient.id}" />
-            <a class="navbar-brand" href="#"><button class="button-as-link"
-              type=submit>${sessionScope.patient.id}</button></a>
+            <a class="navbar-brand" href="#">${sessionScope.patient.id}</a>
           </form>
         </div>
         <div class="collapse navbar-collapse"
@@ -88,6 +87,8 @@
                   </legend>
                   <input type="hidden" name="patientId"
                     value="${sessionScope.patient.id}">
+                  <input type="hidden" name="status"
+                    value="Yet To Admit">
                   <div class="row form-group">
                     <label class="col-sm-2 control-label" for="Specialisation">Specialisation</label>
                     <div class="col-sm-10">
@@ -225,4 +226,5 @@
     </div>
   </body>
   <jsp:include page="Footer.jsp" />
+  <script src>
 </html>

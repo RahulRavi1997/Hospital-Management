@@ -21,8 +21,9 @@ import com.ideas2it.hospitalmanagement.medicine.service.impl.MedicineServiceImpl
 
 /**
  * <p>
- * This class is acts as a controller and perform operations 
- * with the Medicine details.
+ * MedicineController is a Controller Class, which is used to implement data storage and retrieval
+ * operations on Medicine Data.It uses HttpServlets and Spring MVC to be hosted as 
+ * a web Application. 
  * </p>
  *
  * @author Santhosh Kumar
@@ -36,22 +37,45 @@ public class MedicineController {
 	
     private MedicineService medicineService = new MedicineServiceImpl();
 
+    /**
+     * This Method is used to redirect user to the index page. 
+     */  
     @RequestMapping(value="/pharmacy", method=RequestMethod.GET)
     private ModelAndView main() {
-         return new ModelAndView("index");
+         return new ModelAndView("pharmacy");
     }
 
+    /**
+     * This Method is used to redirect user to the index page. 
+     */
     @RequestMapping(value="/medicine_index", method=RequestMethod.GET)
     private ModelAndView back() {
-         return new ModelAndView("index");
+         return new ModelAndView("pharmacy");
     }
 
+    /**
+     * This Method is used to redirect user to the web page with the form used to create and add a new
+     * Medicine.
+     *
+     * @param model a Model object which is used to add the medicine as an attribute to the view Layer.
+     * @return modelAndView a ModelAndView object which is used to add attributes to a model and
+     *         redirect it to a view such as a jsp page.
+     */
     @RequestMapping(value=Constants.CREATE_MEDICINE_MAPPING, method=RequestMethod.GET)
     private ModelAndView createMedicine(Model model) {
         Medicine medicine = new Medicine();
         return new ModelAndView(Constants.CREATE_MEDICINE_JSP, Constants.MEDICINE, medicine);
     }
 
+    /**
+     * This Method is used to add a new Medicine after obtaining all the medicine details from the
+     * user. Redirects to error page if any error occurs, else redirects to display page for the
+     * medicine.
+     *
+     * @param medicine an Medicine object with all the details of the medicine to be added.
+     * @return modelAndView a ModelAndView object which is used to add attributes to a model and
+     *         redirect it to a view such as a jsp page.
+     */
     @RequestMapping(value=Constants.ADD_MEDICINE_MAPPING, method=RequestMethod.POST)
     private ModelAndView addMedicine(@ModelAttribute Medicine medicine) {
         try {
@@ -68,10 +92,12 @@ public class MedicineController {
     }
 
     /**
-     * <p>
-     * This method is used to search the particular medicine
-     * from the medicine list and display his details.
-     * </p>
+     * This Method is used to search for an medicine by the id given by the user. Displays the
+     * medicine's details if there is a match.
+     *
+     * @param id an Integer indicating the id of the medicine to be retrieved.
+     * @return modelAndView a ModelAndView object which is used to add attributes to a model and
+     *         redirect it to a view such as a jsp page.
      */
     @RequestMapping(value=Constants.SEARCH_MEDICINE_MAPPING, method=RequestMethod.POST)
     private ModelAndView searchMedicine(@RequestParam(Constants.ID) int id, Model model) {
@@ -91,10 +117,11 @@ public class MedicineController {
     }
 
     /**
-     * <p>
-     * This method is used to delete all the details of the medicine
-     * from the medicine list.
-     * </p>
+     * This Method is used to remove an existing medicine by Id given by the user.
+     *
+     * @param idToDelete an Integer indicating the id of the medicine to be deleted.
+     * @return modelAndView a ModelAndView object which is used to add attributes to a model and
+     *         redirect it to a view such as a jsp page.
      */
     @RequestMapping(value=Constants.DELETE_MEDICINE_MAPPING, method=RequestMethod.POST)
     private ModelAndView deleteMedicine(@RequestParam(Constants.ID) int id) {
@@ -114,11 +141,12 @@ public class MedicineController {
     }
 
     /**
-     * <p>
-     * This method is used to display the medicine that are available for
-     * medicine detail operations.
-     * </p>
-     */    
+     * This Method is used to display all details of the medicines.
+     * 
+     * @param model a Model object which is used to add the medicine as an attribute to the view Layer.
+     * @return modelAndView a ModelAndView object which is used to add attributes to a model and
+     *         redirect it to a view such as a jsp page.
+     */  
     @RequestMapping(value=Constants.DISPLAY_MEDICINE_MAPPING, method=RequestMethod.POST)
     private ModelAndView displayMedicines(Model model) {
         try {
@@ -134,9 +162,13 @@ public class MedicineController {
 
     /**
      * <p>
-     * This method is used to update the medicine details and send it to
-     * modify it in the list.
+     * Method to update existing medicine Details. Returns true if the entry is modified successfully,
+     * else returns false if the entry is not found.
      * </p>
+     *
+     * @param medicineId an medicine object with the updated details of the medicine.
+     * @return modelAndView a ModelAndView object which is used to add attributes to a model and
+     *         redirect it to a view such as a jsp page.
      */ 
     @RequestMapping(value=Constants.UPDATE_MEDICINE_MAPPING, method=RequestMethod.POST)
     private ModelAndView updateMedicine(@RequestParam(Constants.ID) int id) {
@@ -145,16 +177,21 @@ public class MedicineController {
             return new ModelAndView(Constants.UPDATE_MEDICINE_JSP, Constants.
                 MEDICINE, medicine);
         } catch (ApplicationException e) {
+            Logger.error(e);
             return new ModelAndView(Constants.ERROR);
         }
     }
 
     /**
      * <p>
-     * This method is used to modify the medicine details and
-     * update his details.
+     * Method to update existing Medicine Details. Returns true if the entry is modified successfully,
+     * else returns false if the entry is not found.
      * </p>
-     */  
+     *
+     * @param id an Integer indicating the id of the medicine to be modified.
+     * @return modelAndView a ModelAndView object which is used to add attributes to a model and
+     *         redirect it to a view such as a jsp page.
+     */ 
     @RequestMapping(value=Constants.MODIFY_MEDICINE_MAPPING, method=RequestMethod.POST)
     private ModelAndView modifyMedicine(@ModelAttribute Medicine medicine) {
         try {
@@ -170,6 +207,14 @@ public class MedicineController {
         }
     }
     
+    /**
+     * This Method is used to restore a deleted medicine. Redirects to display all medicines on
+     * successful restoration.
+     *
+     * @param id an Integer indicating the id of the medicine to be restored or reactivated.
+     * @return modelAndView a ModelAndView object which is used to add attributes to a model and
+     *         redirect it to a view such as a jsp page.
+     */
     @RequestMapping(value=Constants.RESTORE_MEDICINE_MAPPING, method=RequestMethod.POST)
     private ModelAndView restoreMedicine(@RequestParam(Constants.ID) int id, Model model) {
         try {
@@ -180,10 +225,18 @@ public class MedicineController {
                 return new ModelAndView(Constants.ERROR);
             }
         } catch (ApplicationException e) {
+            Logger.error(e);
             return new ModelAndView(Constants.ERROR);
         }
     }
 
+    /**
+     * This Method is used to display all details of the medicines IN JSON format.
+     * 
+     * @param model a Model object which is used to add the medicine as an attribute to the
+     * view Layer.
+     * @return String a String object which is used to redirect to a view such as a jsp page.
+     */
     @RequestMapping(value="/searchMedicineByName", produces={"application/json",
         "application/xml"},consumes="application/json",
         headers = "content-type=application/x-www-form-urlencoded", method = RequestMethod.GET)

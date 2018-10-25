@@ -87,7 +87,7 @@ $(document).ready(function(){
 
                      <thead>
                         <tr>
-                           <td> ID </td>
+                           <td> ID  </td>
                            <td>Admit Date</td>
                            <td>Discharge Date</td>
                            <td>Action </td>
@@ -116,7 +116,7 @@ $(document).ready(function(){
                               <c:if test="${inpatient.patientStatus == 'Discharged'}">
                               <button type="button" style="width:55%;" class="btn btn-warning" disabled>Patient Discharged</button>
                               </c:if>
-                              <c:if test="${inpatient.patientStatus == 'Yet to Admit'}"> 
+                              <c:if test="${inpatient.patientStatus == 'Yet To Admit'}"> 
                               <form:form action="admitButton" method="post">
                               <input type="hidden" name="visitId" value="${inpatient.id}"/>
                               
