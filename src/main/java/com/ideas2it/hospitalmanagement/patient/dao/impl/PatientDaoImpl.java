@@ -100,7 +100,7 @@ public class PatientDaoImpl extends GenericDao implements PatientDao {
 		} catch (ApplicationException e) {
 			Logger.error(String.format(Constants.PATIENT_SEARCH_EXCEPTION, patientId), e);
 			throw new ApplicationException(String.format(Constants.PATIENT_SEARCH_EXCEPTION,
-					patientId));
+					patientId),e);
 		}
 	}
 
@@ -128,7 +128,7 @@ public class PatientDaoImpl extends GenericDao implements PatientDao {
 			return query.list();
 		} catch (ApplicationException e) {
 			Logger.error(String.format(Constants.PATIENT_DISPLAY_EXCEPTION,ids), e);
-			throw new ApplicationException(Constants.PATIENT_DISPLAY_EXCEPTION, e);
+			throw new ApplicationException(String.format(Constants.PATIENT_DISPLAY_EXCEPTION,ids), e);
 		}
 	}
 }

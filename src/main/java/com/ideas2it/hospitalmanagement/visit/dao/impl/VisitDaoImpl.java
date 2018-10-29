@@ -74,7 +74,7 @@ public class VisitDaoImpl extends GenericDao implements VisitDao {
             return super.get(Visit.class, visitId);
         } catch (final ApplicationException e) {
             Logger.error(String.format(Constants.VISIT_SEARCH_EXCEPTION, visitId), e);
-            throw new ApplicationException(String.format(Constants.VISIT_SEARCH_EXCEPTION, visitId));
+            throw new ApplicationException(String.format(Constants.VISIT_SEARCH_EXCEPTION, visitId),e);
         }
     }
 
@@ -103,7 +103,7 @@ public class VisitDaoImpl extends GenericDao implements VisitDao {
             return query.list();
         } catch (final ApplicationException e) {
             Logger.error(String.format(Constants.VISIT_DISPLAY_EXCEPTION,ids), e);
-            throw new ApplicationException(Constants.VISIT_DISPLAY_EXCEPTION, e);
+            throw new ApplicationException(String.format(Constants.VISIT_DISPLAY_EXCEPTION,ids), e);
         } finally {
             GenericDao.close(session);
         }
@@ -128,7 +128,7 @@ public class VisitDaoImpl extends GenericDao implements VisitDao {
 
     } catch (final ApplicationException e) {
         Logger.error(String.format(Constants.VISIT_DISPLAY_EXCEPTION, physicianId), e);
-        throw new ApplicationException(String.format(Constants.VISIT_DISPLAY_EXCEPTION, physicianId));
+        throw new ApplicationException(String.format(Constants.VISIT_DISPLAY_EXCEPTION, physicianId),e);
     }
    }
 	/**
@@ -139,7 +139,7 @@ public class VisitDaoImpl extends GenericDao implements VisitDao {
             return super.getAll(Visit.class);
 		} catch (ApplicationException e) {
 			Logger.error(String.format(Constants.VISIT_DISPLAY_BY_PATIENT_TYPE,patientType), e);
-			throw new ApplicationException(Constants.VISIT_DISPLAY_EXCEPTION, e);
+			throw new ApplicationException(String.format(Constants.VISIT_DISPLAY_BY_PATIENT_TYPE,patientType), e);
 		}
 	}
     /**
@@ -155,7 +155,7 @@ public class VisitDaoImpl extends GenericDao implements VisitDao {
             return (Visit) query.uniqueResult();
         } catch (final ApplicationException e) {
             Logger.error(String.format(Constants.VISIT_DISPLAY_BY_PATIENT_ID_EXCEPTION,patientId), e);
-            throw new ApplicationException(Constants.VISIT_DISPLAY_EXCEPTION, e);
+            throw new ApplicationException(String.format(Constants.VISIT_DISPLAY_BY_PATIENT_ID_EXCEPTION,patientId), e);
         } finally {
             GenericDao.close(session);
         }

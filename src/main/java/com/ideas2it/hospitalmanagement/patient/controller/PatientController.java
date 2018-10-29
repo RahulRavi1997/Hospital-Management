@@ -66,7 +66,7 @@ public class PatientController {
         addresses.add(new Address());
         addresses.add(new Address());
         patient.setAddresses(addresses);
-        model.addAttribute("genders",Gender.values());
+        model.addAttribute(Constants.GENDERS,Gender.values());
         return new ModelAndView(Constants.CREATE_PATIENT_JSP, Constants.PATIENT_OBJECT
             , patient);
     }
@@ -120,7 +120,7 @@ public class PatientController {
 
         try {
             Patient patient = patientService.getPatientById(patientId);
-            model.addAttribute("genders",Gender.values());
+            model.addAttribute(Constants.GENDERS,Gender.values());
             return new ModelAndView(Constants.CREATE_PATIENT_JSP, Constants.
             		PATIENT_OBJECT, patient);
         } catch (ApplicationException e) {
@@ -203,7 +203,7 @@ public class PatientController {
      * value as ModelAndView Class Object.
      * </p>
      * @param patientId Integer with patientId value from which the Patient
-     *                   Object is obtained from the Database. import org.springframework.web.bind.annotation.RequestMethod;
+     *                   Object is obtained from the Database.
 
      * @return ModelAndView Object which redirects to the Search Patient Page
      *                      with the Patient Object or to the Error Page.

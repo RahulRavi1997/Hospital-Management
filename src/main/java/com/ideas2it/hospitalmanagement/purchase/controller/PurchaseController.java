@@ -42,11 +42,7 @@ public class PurchaseController {
      */ 
     @RequestMapping(value="/purchase_index", method=RequestMethod.GET)
     private ModelAndView back() {
-<<<<<<< HEAD
          return new ModelAndView("index");
-=======
-         return new ModelAndView("pharmacy");
->>>>>>> 1146a4ff88dc08992293823ca57a4a2c1b635bea
     }
 
     /**

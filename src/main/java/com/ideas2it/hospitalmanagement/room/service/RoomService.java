@@ -6,10 +6,6 @@ import com.ideas2it.hospitalmanagement.bed.model.Bed;
 import com.ideas2it.hospitalmanagement.exception.ApplicationException;
 import com.ideas2it.hospitalmanagement.room.model.Room;
 import com.ideas2it.hospitalmanagement.ward.model.Ward;;
-<<<<<<< HEAD
-
-=======
->>>>>>> 1146a4ff88dc08992293823ca57a4a2c1b635bea
 
 
 /**
